@@ -1,4 +1,4 @@
-package com.example.atv.notgenerator.dao.mapper;
+package com.example.atv.dao.mapper;
 
 
 import java.math.BigInteger;

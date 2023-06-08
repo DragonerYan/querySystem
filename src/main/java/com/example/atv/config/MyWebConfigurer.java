@@ -1,4 +1,4 @@
-package com.example.atv.notgenerator.config;
+package com.example.atv.config;
 
 import org.springframework.stereotype.Component;
 

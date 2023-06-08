@@ -1,13 +1,17 @@
-package com.example.atv.notgenerator.controller;
+package com.example.atv.controller;
 
+import com.example.atv.dao.mapper.AuditService;
 import org.springframework.stereotype.Controller;
-import com.example.atv.notgenerator.dao.mapper.AuditService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigInteger;
 import java.util.*;
 
+/**
+ * 本代码为本人另一个项目中的
+ * 此处用作参考
+ */
 
 @CrossOrigin
 @Controller
@@ -15,7 +19,7 @@ import java.util.*;
 public class SmokeController{
 
     @Autowired(required = false)
-    AuditService auditService;
+    private AuditService auditService;
 
     @ResponseBody
     @RequestMapping(value = "/test", method = RequestMethod.GET)

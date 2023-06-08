@@ -1,19 +1,24 @@
-package com.example.atv.notgenerator.controller;
+package com.example.atv.controller;
 
 import com.alibaba.fastjson.JSON;
 
-import com.example.atv.notgenerator.constant.Result;
-import com.example.atv.generatetor.entity.Community;
-import com.example.atv.generatetor.service.ICommunityBasicService;
+import com.example.atv.constant.Result;
+import com.example.atv.generatetor.entity.*;
+import com.example.atv.generatetor.service.*;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Api(description = "atv接口")
 @Slf4j
 @AllArgsConstructor
 @CrossOrigin
@@ -21,13 +26,12 @@ import java.util.Map;
 @RequestMapping("/api")
 public class MainController {
 
-    private final ICommunityBasicService communityBasicMapper;
-    private final CommunityMapper communityMapper;
-
-    private final CourtBasicMapper courtBasicMapperl;
-    private final IndicatorMapper indicatorMapper;
-    private final IndicatorValueMapper indicatorValueMapper;
-    private UserMapper userMapper;
+    private final ICommunityBasicService iCommunityBasicService;
+    private final ICommunityService iCommunityService;
+    private final ICourtBasicService iCourtBasicService;
+    private final IIndicatorService iIndicatorService;
+    private final IIndicatorValueService iIndicatorValueService;
+    private final IUserService iUserService;
 
 
 
@@ -35,6 +39,7 @@ public class MainController {
      * 测试接口
      * @return string
      */
+    @ApiOperation(value = "测试接口")
     @ResponseBody
     @RequestMapping(value = "/test", method = RequestMethod.GET)
     public String test() {
@@ -47,11 +52,18 @@ public class MainController {
     /**
      * commiunity信息查询
      */
+    @ApiOperation(value = "community列表信息查询接口")
     @ResponseBody
     @RequestMapping(value = "/commiunityInfo", method = RequestMethod.GET)
     public Result commiunityInfo(@RequestParam(name = "communityId",required = false) String communityId) {
 
-        List<Community> communityList=communityMapper.list();
+        List<Community> communityList=new ArrayList<>();
+
+        try{
+            communityList=iCommunityService.list();
+        }catch (Exception e){
+            log.debug(e.getMessage());
+        }
 
         return Result.success(communityList);
     }
@@ -61,17 +73,27 @@ public class MainController {
     /**
      * 社区基本信息查询
      */
+    @ApiOperation(value = "社区基本信息查询")
     @ResponseBody
-    @RequestMapping(value = "/indicatorInfo", method = RequestMethod.GET)
-    public Result indicatorInfo(@RequestParam(name = "indicatorId") String indicatorId) {
+    @RequestMapping(value = "/ommunityBasicInfo", method = RequestMethod.GET)
+    public Result ommunityBasicInfo(@RequestParam(name = "ommunityId",required = false) String ommunityId) {
 
-        Indicator indicator=indicatorMapper.getById(indicatorId);
-        IndicatorValue indicatorValue=indicatorValueMapper.getById(indicatorId);
+        List<CommunityBasic> communityBasicList=iCommunityBasicService.list();
 
-        Map<Object,Object> res=new HashMap<>();
-        res.put("indicator",indicator);
-        res.put("indicatorValue",indicatorValue);
-        return Result.success(res);
+        return Result.success(communityBasicList);
+    }
+
+    /**
+     * 小区基本信息查询
+     */
+    @ApiOperation(value = "社区基本信息查询")
+    @ResponseBody
+    @RequestMapping(value = "/courtBasicInfo", method = RequestMethod.GET)
+    public Result courtBasicInfo(@RequestParam(name = "indicatorId",required = false) String indicatorId) {
+
+        List<CourtBasic> courtBasicList=iCourtBasicService.list();
+
+        return Result.success(courtBasicList);
     }
 
 
@@ -85,7 +107,7 @@ public class MainController {
 
         Community community = JSON.parseObject(JSON.toJSONString(map),Community.class);
         CommunityBasic communityBasic = JSON.parseObject(JSON.toJSONString(map),CommunityBasic.class);
-        communityBasicMapper.save(communityBasic);
+        iCommunityBasicService.save(communityBasic);
 
         CourtBasic courtBasic  = JSON.parseObject(JSON.toJSONString(map),CourtBasic.class);
 
@@ -138,7 +160,7 @@ public class MainController {
             @RequestParam(name = "password") String password
     ) {
         //根据userName查询是否存在
-        User user=userMapper.getById(userName);
+        User user=iUserService.getById(userName);
         if(user==null){
             return Result.fail("用户不存在！");
         }
@@ -163,7 +185,7 @@ public class MainController {
             @RequestParam(name = "password") String password
     ) {
         //根据userName查询是否存在
-        User user=userMapper.getById(userName);
+        User user=iUserService.getById(userName);
         if(user==null){
             return Result.fail("用户不存在！");
         }
@@ -176,7 +198,7 @@ public class MainController {
         user_new.setCommunityId(userName);
         user_new.setPassword(password);
         user_new.setCity(user.getCity());
-        userMapper.updateById(user_new);
+        iUserService.updateById(user_new);
 
         return Result.success("修改成功");
     }

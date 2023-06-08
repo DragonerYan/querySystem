@@ -1,4 +1,4 @@
-package com.example.atv.notgenerator.constant;
+package com.example.atv.constant;
 
 import lombok.Data;
 
