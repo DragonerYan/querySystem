@@ -166,9 +166,9 @@ public class MainController {
         }
 
         User user_new=new User();
-        user_new.setCommunity_id(userName);
+        user_new.setCommunityId(userName);
         user_new.setPassword(password);
-        user_new.setArea(user.getArea());
+        user_new.setCity(user.getCity());
         userMapper.updateById(user_new);
 
         return Result.success("修改成功");
