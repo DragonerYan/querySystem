@@ -1,7 +1,6 @@
-package com.example.smokeManagement.audit.dao.mapper;
+package com.example.atv.notgenerator.dao.mapper;
 
 
-import javax.persistence.criteria.CriteriaBuilder;
 import java.math.BigInteger;
 import java.util.List;
 import java.util.Map;

@@ -1,4 +1,4 @@
-package com.example.smokeManagement.audit.constant;
+package com.example.atv.notgenerator.constant;
 
 import lombok.Data;
 

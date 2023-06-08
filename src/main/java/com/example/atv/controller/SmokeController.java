@@ -1,7 +1,7 @@
-package com.example.smokeManagement.audit.controller;
+package com.example.atv.notgenerator.controller;
 
 import org.springframework.stereotype.Controller;
-import com.example.smokeManagement.audit.dao.mapper.AuditService;
+import com.example.atv.notgenerator.dao.mapper.AuditService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,7 +14,7 @@ import java.util.*;
 @RequestMapping("/oldapi")
 public class SmokeController{
 
-    @Autowired
+    @Autowired(required = false)
     AuditService auditService;
 
     @ResponseBody

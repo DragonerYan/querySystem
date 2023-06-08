@@ -1,7 +1,6 @@
-package com.example.smokeManagement.audit.config;
+package com.example.atv.notgenerator.config;
 
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.CrossOrigin;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletResponse;

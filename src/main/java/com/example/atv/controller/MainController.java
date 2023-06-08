@@ -1,9 +1,12 @@
-package com.example.smokeManagement.audit.controller;
+package com.example.atv.notgenerator.controller;
 
-import com.example.smokeManagement.audit.constant.Result;
-import com.example.smokeManagement.audit.dao.mapper.*;
-import com.example.smokeManagement.audit.entity.*;
+import com.alibaba.fastjson.JSON;
+
+import com.example.atv.notgenerator.constant.Result;
+import com.example.atv.generatetor.entity.Community;
+import com.example.atv.generatetor.service.ICommunityBasicService;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,14 +14,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Slf4j
 @AllArgsConstructor
 @CrossOrigin
 @Controller
 @RequestMapping("/api")
 public class MainController {
 
-    private final CommunityBasicMapper communityBasicMapper;
+    private final ICommunityBasicService communityBasicMapper;
     private final CommunityMapper communityMapper;
+
     private final CourtBasicMapper courtBasicMapperl;
     private final IndicatorMapper indicatorMapper;
     private final IndicatorValueMapper indicatorValueMapper;
@@ -33,28 +38,22 @@ public class MainController {
     @ResponseBody
     @RequestMapping(value = "/test", method = RequestMethod.GET)
     public String test() {
+        log.debug("test-GET:info");
         return "hello world";
     }
 
 
 
     /**
-     * 小区基本信息查询
+     * commiunity信息查询
      */
     @ResponseBody
     @RequestMapping(value = "/commiunityInfo", method = RequestMethod.GET)
-    public Result commiunityInfo(@RequestParam(name = "communityId") String communityId) {
+    public Result commiunityInfo(@RequestParam(name = "communityId",required = false) String communityId) {
 
-        Community community=communityMapper.selectById(communityId);
-        CommunityBasic communityBasic=communityBasicMapper.selectById(communityId);
-        CourtBasic courtBasic=courtBasicMapperl.selectById(communityId);
+        List<Community> communityList=communityMapper.list();
 
-        Map<Object,Object> res=new HashMap<>();
-        res.put("community",community);
-        res.put("communityBasic",communityBasic);
-        res.put("courtBasic",courtBasic);
-
-        return Result.success(res);
+        return Result.success(communityList);
     }
 
 
@@ -66,8 +65,8 @@ public class MainController {
     @RequestMapping(value = "/indicatorInfo", method = RequestMethod.GET)
     public Result indicatorInfo(@RequestParam(name = "indicatorId") String indicatorId) {
 
-        Indicator indicator=indicatorMapper.selectById(indicatorId);
-        IndicatorValue indicatorValue=indicatorValueMapper.selectById(indicatorId);
+        Indicator indicator=indicatorMapper.getById(indicatorId);
+        IndicatorValue indicatorValue=indicatorValueMapper.getById(indicatorId);
 
         Map<Object,Object> res=new HashMap<>();
         res.put("indicator",indicator);
@@ -82,8 +81,16 @@ public class MainController {
      */
     @ResponseBody
     @RequestMapping(value = "/communitySave", method = RequestMethod.POST)
-    public String communitySave() {
-        return "hello world";
+    public Result communitySave(@RequestBody Map map) {
+
+        Community community = JSON.parseObject(JSON.toJSONString(map),Community.class);
+        CommunityBasic communityBasic = JSON.parseObject(JSON.toJSONString(map),CommunityBasic.class);
+        communityBasicMapper.save(communityBasic);
+
+        CourtBasic courtBasic  = JSON.parseObject(JSON.toJSONString(map),CourtBasic.class);
+
+
+        return Result.success();
     }
 
 
@@ -131,7 +138,7 @@ public class MainController {
             @RequestParam(name = "password") String password
     ) {
         //根据userName查询是否存在
-        User user=userMapper.selectById(userName);
+        User user=userMapper.getById(userName);
         if(user==null){
             return Result.fail("用户不存在！");
         }
@@ -156,7 +163,7 @@ public class MainController {
             @RequestParam(name = "password") String password
     ) {
         //根据userName查询是否存在
-        User user=userMapper.selectById(userName);
+        User user=userMapper.getById(userName);
         if(user==null){
             return Result.fail("用户不存在！");
         }
