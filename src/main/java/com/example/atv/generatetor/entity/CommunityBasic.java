@@ -4,7 +4,6 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.time.Year;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -14,7 +13,7 @@ import io.swagger.annotations.ApiModelProperty;
  * </p>
  *
  * @author baomidou
- * @since 2023-06-08
+ * @since 2023-06-09
  */
 @TableName("community_basic")
 @ApiModel(value = "CommunityBasic对象", description = "")
@@ -41,7 +40,7 @@ public class CommunityBasic implements Serializable {
 
     private String userId;
 
-    private Year reportYear;
+    private String reportYear;
 
 
     public String getCommunityId() {
@@ -108,11 +107,11 @@ public class CommunityBasic implements Serializable {
         this.userId = userId;
     }
 
-    public Year getReportYear() {
+    public String getReportYear() {
         return reportYear;
     }
 
-    public void setReportYear(Year reportYear) {
+    public void setReportYear(String reportYear) {
         this.reportYear = reportYear;
     }
 

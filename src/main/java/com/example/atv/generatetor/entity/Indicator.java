@@ -10,7 +10,7 @@ import io.swagger.annotations.ApiModelProperty;
  * </p>
  *
  * @author baomidou
- * @since 2023-06-08
+ * @since 2023-06-09
  */
 @ApiModel(value = "Indicator对象", description = "")
 public class Indicator implements Serializable {

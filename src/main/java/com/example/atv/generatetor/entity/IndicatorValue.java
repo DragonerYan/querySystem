@@ -2,7 +2,6 @@ package com.example.atv.generatetor.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
-import java.time.Year;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -12,7 +11,7 @@ import io.swagger.annotations.ApiModelProperty;
  * </p>
  *
  * @author baomidou
- * @since 2023-06-08
+ * @since 2023-06-09
  */
 @TableName("indicator_value")
 @ApiModel(value = "IndicatorValue对象", description = "")
@@ -36,7 +35,7 @@ public class IndicatorValue implements Serializable {
 
     private Float latitude;
 
-    private Year reportYear;
+    private String reportYear;
 
 
     public String getCommunityId() {
@@ -95,11 +94,11 @@ public class IndicatorValue implements Serializable {
         this.latitude = latitude;
     }
 
-    public Year getReportYear() {
+    public String getReportYear() {
         return reportYear;
     }
 
-    public void setReportYear(Year reportYear) {
+    public void setReportYear(String reportYear) {
         this.reportYear = reportYear;
     }
 

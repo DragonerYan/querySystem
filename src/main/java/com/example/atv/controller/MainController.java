@@ -1,7 +1,6 @@
 package com.example.atv.controller;
 
 import com.alibaba.fastjson.JSON;
-
 import com.example.atv.constant.Result;
 import com.example.atv.generatetor.entity.*;
 import com.example.atv.generatetor.service.*;
@@ -9,12 +8,10 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -75,8 +72,8 @@ public class MainController {
      */
     @ApiOperation(value = "社区基本信息查询")
     @ResponseBody
-    @RequestMapping(value = "/ommunityBasicInfo", method = RequestMethod.GET)
-    public Result ommunityBasicInfo(@RequestParam(name = "ommunityId",required = false) String ommunityId) {
+    @RequestMapping(value = "/communityBasicInfo", method = RequestMethod.GET)
+    public Result communityBasicInfo(@RequestParam(name = "communityId",required = false) String communityId) {
 
         List<CommunityBasic> communityBasicList=iCommunityBasicService.list();
 
@@ -103,38 +100,9 @@ public class MainController {
      */
     @ResponseBody
     @RequestMapping(value = "/communitySave", method = RequestMethod.POST)
-    public Result communitySave(@RequestBody Map map) {
+    public Result communitySave() {
 
-        Community community = JSON.parseObject(JSON.toJSONString(map),Community.class);
-        CommunityBasic communityBasic = JSON.parseObject(JSON.toJSONString(map),CommunityBasic.class);
-        iCommunityBasicService.save(communityBasic);
-
-        CourtBasic courtBasic  = JSON.parseObject(JSON.toJSONString(map),CourtBasic.class);
-
-
-        return Result.success();
-    }
-
-
-
-    /**
-     * 小区具体信息暂存/提交
-     */
-    @ResponseBody
-    @RequestMapping(value = "/communityBaseSave", method = RequestMethod.POST)
-    public String communityBaseSave() {
-        return "hello world";
-    }
-
-
-
-    /**
-     * 社区基本信息暂存/提交
-     */
-    @ResponseBody
-    @RequestMapping(value = "/indicatorSave", method = RequestMethod.POST)
-    public String indicatorSave() {
-        return "hello world";
+        return Result.success("接口未完成");
     }
 
 
@@ -142,11 +110,59 @@ public class MainController {
     /**
      * 社区具体信息暂存/提交
      */
+    @ApiOperation(value = "社区基本信息保存")
+    @ResponseBody
+    @RequestMapping(value = "/communityBaseSave", method = RequestMethod.POST)
+    public Result communityBaseSave(@RequestBody Map map) {
+        CommunityBasic communityBasic = JSON.parseObject(JSON.toJSONString(map),CommunityBasic.class);
+        try{
+            iCommunityBasicService.save(communityBasic);
+            return Result.success("插入成功");
+        }catch (Exception e){
+            log.debug(e.getMessage());
+            return Result.fail(e.getMessage());
+        }
+    }
+
+
+
+    /**
+     * 小区基本信息暂存/提交
+     */
+    @ApiOperation(value = "小区基本信息保存")
+    @ResponseBody
+    @RequestMapping(value = "/courtBasicSave", method = RequestMethod.POST)
+    public Result courtBasicSave(@RequestBody Map map) {
+
+        CourtBasic courtBasic  = JSON.parseObject(JSON.toJSONString(map),CourtBasic.class);
+        try{
+            iCourtBasicService.save(courtBasic);
+            return Result.success("插入成功");
+        }catch (Exception e){
+            log.debug(e.getMessage());
+            return Result.fail(e.getMessage());
+        }
+    }
+
+
+
+    /**
+     * 具体信息暂存/提交
+     */
     @ResponseBody
     @RequestMapping(value = "/indicatorValueSave", method = RequestMethod.POST)
-    public String indicatorValueSave() {
-        return "hello world";
+    public Result indicatorValueSave(@RequestBody Map map) {
+
+        IndicatorValue indicatorValue  = JSON.parseObject(JSON.toJSONString(map),IndicatorValue.class);
+        try{
+            iIndicatorValueService.save(indicatorValue);
+            return Result.success("插入成功");
+        }catch (Exception e){
+            log.debug(e.getMessage());
+            return Result.fail(e.getMessage());
+        }
     }
+
 
 
 
@@ -171,9 +187,7 @@ public class MainController {
         return Result.success("登陆成功");
     }
 
-    /**
-     * 退出登陆
-     */
+
 
     /**
      * 修改密码

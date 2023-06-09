@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
  * </p>
  *
  * @author baomidou
- * @since 2023-06-08
+ * @since 2023-06-09
  */
 @Service
 public class IndicatorValueServiceImpl extends ServiceImpl<IndicatorValueMapper, IndicatorValue> implements IIndicatorValueService {
