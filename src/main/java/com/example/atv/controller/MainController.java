@@ -1,6 +1,8 @@
 package com.example.atv.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.atv.constant.Result;
 import com.example.atv.generatetor.entity.*;
 import com.example.atv.generatetor.service.*;
@@ -116,7 +118,7 @@ public class MainController {
     public Result communityBaseSave(@RequestBody Map map) {
         CommunityBasic communityBasic = JSON.parseObject(JSON.toJSONString(map),CommunityBasic.class);
         try{
-            iCommunityBasicService.save(communityBasic);
+            iCommunityBasicService.saveOrUpdate(communityBasic);
             return Result.success("插入成功");
         }catch (Exception e){
             log.debug(e.getMessage());
@@ -136,7 +138,7 @@ public class MainController {
 
         CourtBasic courtBasic  = JSON.parseObject(JSON.toJSONString(map),CourtBasic.class);
         try{
-            iCourtBasicService.save(courtBasic);
+            iCourtBasicService.saveOrUpdate(courtBasic);
             return Result.success("插入成功");
         }catch (Exception e){
             log.debug(e.getMessage());
@@ -155,7 +157,7 @@ public class MainController {
 
         IndicatorValue indicatorValue  = JSON.parseObject(JSON.toJSONString(map),IndicatorValue.class);
         try{
-            iIndicatorValueService.save(indicatorValue);
+            iIndicatorValueService.saveOrUpdate(indicatorValue);
             return Result.success("插入成功");
         }catch (Exception e){
             log.debug(e.getMessage());
@@ -172,13 +174,21 @@ public class MainController {
     @ResponseBody
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public Result login(
+            @RequestParam(name = "province") String province,
+            @RequestParam(name = "city") String city,
+            @RequestParam(name = "county") String county,
+            @RequestParam(name = "street") String street,
+            @RequestParam(name = "communityId") String communityId,
             @RequestParam(name = "userName") String userName,
             @RequestParam(name = "password") String password
     ) {
         //根据userName查询是否存在
-        User user=iUserService.getById(userName);
+        QueryWrapper<User> wrapper=new QueryWrapper<>();
+        wrapper.eq("province",province).eq("city",city).eq("county",county)
+                .eq("street",street).eq("community_id",communityId).eq("username",userName);
+        User user=iUserService.getOne(wrapper);
         if(user==null){
-            return Result.fail("用户不存在！");
+            return Result.fail("无对应用户存在");
         }
         //查看密码是否匹配
         if(!user.getPassword().equals(password)){
@@ -199,7 +209,9 @@ public class MainController {
             @RequestParam(name = "password") String password
     ) {
         //根据userName查询是否存在
-        User user=iUserService.getById(userName);
+        QueryWrapper<User> wrapper=new QueryWrapper<>();
+        wrapper.eq("userName",userName);
+        User user=iUserService.getOne(wrapper);
         if(user==null){
             return Result.fail("用户不存在！");
         }

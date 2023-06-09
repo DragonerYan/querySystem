@@ -1,5 +1,7 @@
 package com.example.atv.generatetor.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import io.swagger.annotations.ApiModel;
@@ -19,22 +21,30 @@ public class IndicatorValue implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    @TableId("community_id")
     private String communityId;
 
     @ApiModelProperty("可以为空 为空时表示社区")
+    @TableId("court_name")
     private String courtName;
 
+    @TableId("indicator_id")
     private String indicatorId;
 
     @ApiModelProperty("1为是 0为否   具体数值")
+    @TableField("indicator_value")
     private Integer indicatorValue;
 
+    @TableField("meno")
     private String meno;
 
+    @TableField("longitude")
     private Float longitude;
 
+    @TableField("latitude")
     private Float latitude;
 
+    @TableId("report_year")
     private String reportYear;
 
 

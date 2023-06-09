@@ -1,5 +1,8 @@
 package com.example.atv.generatetor.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -12,31 +15,43 @@ import io.swagger.annotations.ApiModelProperty;
  * @author baomidou
  * @since 2023-06-09
  */
+@TableName("community")
 @ApiModel(value = "Community对象", description = "")
 public class Community implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    @TableId("province")
     private String province;
 
+    @TableId("city")
     private String city;
 
+    @TableId("county")
     private String county;
 
+    @TableField("latitude")
     private Float latitude;
 
+    @TableField("longitude")
     private Float longitude;
 
+    @TableId("street")
     private String street;
 
+    @TableField("area")
     private Float area;
 
+    @TableField("county_id")
     private String countyId;
 
+    @TableId("community_id")
     private String communityId;
 
+    @TableField("user_id")
     private String userId;
 
+    @TableField("community_name")
     private String communityName;
 
 

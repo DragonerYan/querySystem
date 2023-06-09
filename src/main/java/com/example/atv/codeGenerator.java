@@ -18,13 +18,19 @@ public class codeGenerator {
                             .outputDir("/Users/yanxinzhao/Desktop/未命名文件夹/smokeManagement/src/main/java/"); // 指定输出目录
                 })
                 .strategyConfig(builder -> {
-                    builder.addInclude("user")
-                            .addInclude("community")
-                            .addInclude("community_basic")
-                            .addInclude("court_basic")
-                            .addInclude("indicator")
-                            .addInclude("indicator_value"); // 设置需要生成的表名
-                }).packageConfig(builder -> {
+                    builder.addInclude("user").entityBuilder().enableTableFieldAnnotation();
+                }).strategyConfig(builder->{
+                    builder.addInclude("community").entityBuilder().enableTableFieldAnnotation();
+                }).strategyConfig(builder->{
+                    builder.addInclude("community_basic").entityBuilder().enableTableFieldAnnotation();
+                }).strategyConfig(builder->{
+                    builder.addInclude("court_basic").entityBuilder().enableTableFieldAnnotation();
+                }).strategyConfig(builder->{
+                    builder.addInclude("indicator").entityBuilder().enableTableFieldAnnotation();
+                }).strategyConfig(builder->{
+                    builder.addInclude("indicator_value").entityBuilder().enableTableFieldAnnotation();;
+                })
+                .packageConfig(builder -> {
                     builder.parent("com.example.atv") // 设置父包名
                             .moduleName("generatetor"); // 设置父包模块名
                             //.pathInfo(Collections.singletonMap(OutputFile.xml, "/Users/yanxinzhao/Desktop/未命名文件夹/smokeManagement/")); // 设置mapperXml生成路径
