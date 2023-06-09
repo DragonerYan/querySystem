@@ -5,7 +5,8 @@ import com.baomidou.mybatisplus.generator.FastAutoGenerator;
 public class codeGenerator {
 
     /**
-     * 程序中并未使用
+     * 程序中并未使用，
+     * 这里用作自动生成generatetor目录下的代码
      * @param args string
      */
     public static void main(String[] args) {

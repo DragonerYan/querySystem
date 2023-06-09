@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 @Api(description = "atv接口")
 @Slf4j
@@ -110,7 +111,7 @@ public class MainController {
 
 
     /**
-     * 社区具体信息暂存/提交
+     * 社区基本信息暂存/提交
      */
     @ApiOperation(value = "社区基本信息保存")
     @ResponseBody
@@ -151,6 +152,7 @@ public class MainController {
     /**
      * 具体信息暂存/提交
      */
+    @ApiOperation(value = "具体信息保存")
     @ResponseBody
     @RequestMapping(value = "/indicatorValueSave", method = RequestMethod.POST)
     public Result indicatorValueSave(@RequestBody Map map) {
@@ -171,6 +173,7 @@ public class MainController {
     /**
      * 登陆
      */
+    @ApiOperation(value = "登陆")
     @ResponseBody
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public Result login(
@@ -202,10 +205,12 @@ public class MainController {
     /**
      * 修改密码
      */
+    @ApiOperation(value = "修改密码")
     @ResponseBody
     @RequestMapping(value = "/updateUserInfo", method = RequestMethod.POST)
     public Result updateUserInfo(
             @RequestParam(name = "userName") String userName,
+            @RequestParam(name = "oldPassword") String oldPassword,
             @RequestParam(name = "password") String password
     ) {
         //根据userName查询是否存在
@@ -215,16 +220,18 @@ public class MainController {
         if(user==null){
             return Result.fail("用户不存在！");
         }
-        //查看密码是否匹配
+        // 检查旧密码是否正确
+        if(!Objects.equals(user.getPassword(), oldPassword)){
+            return Result.fail("旧密码错误！");
+        }
+        //查看新密码和旧密码是否重复
         if(user.getPassword().equals(password)){
             return Result.fail("密码重复");
         }
 
         User user_new=new User();
-        user_new.setCommunityId(userName);
         user_new.setPassword(password);
-        user_new.setCity(user.getCity());
-        iUserService.updateById(user_new);
+        iUserService.update(user_new,wrapper);
 
         return Result.success("修改成功");
     }
