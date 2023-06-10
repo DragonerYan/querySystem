@@ -1,5 +1,6 @@
 package com.example.atv.controller;
 
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.atv.constant.Result;
 import com.example.atv.generatetor.entity.*;
@@ -106,7 +107,18 @@ public class AtvController {
     @RequestMapping(value = "/communityBaseSave", method = RequestMethod.POST)
     public Result communityBaseSave(@RequestBody CommunityBasic communityBasic) {
         try{
-            iCommunityBasicService.saveOrUpdate(communityBasic);
+            //手写保存修改
+            QueryWrapper<CommunityBasic> wrapper=new QueryWrapper<>();
+            wrapper.eq("community_id",communityBasic.getCommunityId())
+                    .eq("report_year",communityBasic.getReportYear());
+            CommunityBasic communityBasic_query=iCommunityBasicService.getOne(wrapper);
+
+            if(communityBasic_query==null){
+                iCommunityBasicService.save(communityBasic);
+            }else{
+                iCommunityBasicService.update(communityBasic,wrapper);
+            }
+
             return Result.success("插入成功");
         }catch (Exception e){
             log.debug(e.getMessage());
@@ -125,7 +137,19 @@ public class AtvController {
     public Result courtBasicSave(@RequestBody CourtBasic courtBasic) {
 
         try{
-            iCourtBasicService.saveOrUpdate(courtBasic);
+
+            //手写保存修改
+            QueryWrapper<CourtBasic> wrapper=new QueryWrapper<>();
+            wrapper.eq("community_id",courtBasic.getCommunityId())
+                    .eq("court_name",courtBasic.getCourtName())
+                    .eq("report_year",courtBasic.getReportYear());
+            CourtBasic courtBasic_query=iCourtBasicService.getOne(wrapper);
+
+            if(courtBasic_query==null){
+                iCourtBasicService.save(courtBasic);
+            }else{
+                iCourtBasicService.update(courtBasic,wrapper);
+            }
             return Result.success("插入成功");
         }catch (Exception e){
             log.debug(e.getMessage());
@@ -143,9 +167,22 @@ public class AtvController {
     @RequestMapping(value = "/indicatorValueSave", method = RequestMethod.POST)
     public Result indicatorValueSave(@RequestBody List<IndicatorValue> indicatorValueList) {
 
-        //IndicatorValue indicatorValue  = JSON.parseObject(JSON.toJSONString(map),IndicatorValue.class);
+
         try{
-            iIndicatorValueService.saveOrUpdateBatch(indicatorValueList);
+            //手写保存修改
+            indicatorValueList.forEach(indicatorValue -> {
+                QueryWrapper<IndicatorValue> wrapper=new QueryWrapper<>();
+                wrapper.eq("community_id",indicatorValue.getCommunityId())
+                        .eq("report_year",indicatorValue.getReportYear())
+                        .eq("court_name",indicatorValue.getCourtName())
+                        .eq("indicator_id",indicatorValue.getIndicatorId());
+                IndicatorValue indicatorValue_query=iIndicatorValueService.getOne(wrapper);
+                if(indicatorValue_query==null){
+                    iIndicatorValueService.save(indicatorValue);
+                }else {
+                    iIndicatorValueService.update(indicatorValue,wrapper);
+                }
+            });
             return Result.success("插入成功");
         }catch (Exception e){
             log.debug(e.getMessage());
