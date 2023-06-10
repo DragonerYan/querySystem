@@ -11,8 +11,8 @@ import org.springframework.stereotype.Service;
  *  服务实现类
  * </p>
  *
- * @author baomidou
- * @since 2023-06-09
+ * @author yxz
+ * @since 2023-06-10
  */
 @Service
 public class CommunityBasicServiceImpl extends ServiceImpl<CommunityBasicMapper, CommunityBasic> implements ICommunityBasicService {

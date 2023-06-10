@@ -10,8 +10,8 @@ import org.springframework.stereotype.Controller;
  *  前端控制器
  * </p>
  *
- * @author baomidou
- * @since 2023-06-09
+ * @author yxz
+ * @since 2023-06-10
  */
 @Controller
 @RequestMapping("/generatetor/user")

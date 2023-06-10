@@ -14,8 +14,8 @@ import io.swagger.annotations.ApiModelProperty;
  * 
  * </p>
  *
- * @author baomidou
- * @since 2023-06-09
+ * @author yxz
+ * @since 2023-06-10
  */
 @TableName("court_basic")
 @ApiModel(value = "CourtBasic对象", description = "")
@@ -101,7 +101,7 @@ public class CourtBasic implements Serializable {
     @TableField("date_time")
     private LocalDateTime dateTime;
 
-    @ApiModelProperty("0为暂存，1为已提交，2为通过，3为不通过")
+    @ApiModelProperty("0为暂存，1为待审核，2为通过，3为不通过")
     @TableField("state")
     private Integer state;
 

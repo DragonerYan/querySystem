@@ -1,7 +1,5 @@
 package com.example.atv.controller;
 
-import com.alibaba.fastjson.JSON;
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.atv.constant.Result;
 import com.example.atv.generatetor.entity.*;
@@ -13,7 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -24,7 +22,7 @@ import java.util.Objects;
 @CrossOrigin
 @Controller
 @RequestMapping("/api")
-public class MainController {
+public class AtvController {
 
     private final ICommunityBasicService iCommunityBasicService;
     private final ICommunityService iCommunityService;
@@ -57,15 +55,16 @@ public class MainController {
     @RequestMapping(value = "/commiunityInfo", method = RequestMethod.GET)
     public Result commiunityInfo(@RequestParam(name = "communityId",required = false) String communityId) {
 
-        List<Community> communityList=new ArrayList<>();
+        List<Community> communityList;
 
         try{
             communityList=iCommunityService.list();
+            return Result.success(communityList);
         }catch (Exception e){
             log.debug(e.getMessage());
+            return Result.fail(e.getMessage());
         }
 
-        return Result.success(communityList);
     }
 
 
@@ -86,7 +85,7 @@ public class MainController {
     /**
      * 小区基本信息查询
      */
-    @ApiOperation(value = "社区基本信息查询")
+    @ApiOperation(value = "小区基本信息查询")
     @ResponseBody
     @RequestMapping(value = "/courtBasicInfo", method = RequestMethod.GET)
     public Result courtBasicInfo(@RequestParam(name = "indicatorId",required = false) String indicatorId) {
@@ -96,17 +95,6 @@ public class MainController {
         return Result.success(courtBasicList);
     }
 
-
-
-    /**
-     * 小区基本信息暂存/提交
-     */
-    @ResponseBody
-    @RequestMapping(value = "/communitySave", method = RequestMethod.POST)
-    public Result communitySave() {
-
-        return Result.success("接口未完成");
-    }
 
 
 
@@ -153,11 +141,11 @@ public class MainController {
     @ApiOperation(value = "具体信息保存")
     @ResponseBody
     @RequestMapping(value = "/indicatorValueSave", method = RequestMethod.POST)
-    public Result indicatorValueSave(@RequestBody IndicatorValue indicatorValue) {
+    public Result indicatorValueSave(@RequestBody List<IndicatorValue> indicatorValueList) {
 
         //IndicatorValue indicatorValue  = JSON.parseObject(JSON.toJSONString(map),IndicatorValue.class);
         try{
-            iIndicatorValueService.saveOrUpdate(indicatorValue);
+            iIndicatorValueService.saveOrUpdateBatch(indicatorValueList);
             return Result.success("插入成功");
         }catch (Exception e){
             log.debug(e.getMessage());
@@ -195,7 +183,10 @@ public class MainController {
         if(!user.getPassword().equals(password)){
             return Result.fail("密码错误！");
         }
-        return Result.success("登陆成功");
+        Map<String,String> map=new HashMap<>();
+        map.put("userId",user.getUserId());
+        map.put("communityId",user.getCommunityId());
+        return Result.success("登陆成功！",map);
     }
 
 

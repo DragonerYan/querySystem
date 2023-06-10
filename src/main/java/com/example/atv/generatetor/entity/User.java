@@ -11,8 +11,8 @@ import io.swagger.annotations.ApiModelProperty;
  * 
  * </p>
  *
- * @author baomidou
- * @since 2023-06-09
+ * @author yxz
+ * @since 2023-06-10
  */
 @TableName("user")
 @ApiModel(value = "User对象", description = "")
@@ -38,14 +38,14 @@ public class User implements Serializable {
     @TableField("community_id")
     private String communityId;
 
-    @TableField("password")
-    private String password;
-
     @TableField("username")
     private String username;
 
+    @TableField("password")
+    private String password;
+
     @TableField("user_id")
-    private Integer userId;
+    private String userId;
 
     @TableField("community_name")
     private String communityName;
@@ -99,14 +99,6 @@ public class User implements Serializable {
         this.communityId = communityId;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public String getUsername() {
         return username;
     }
@@ -115,11 +107,19 @@ public class User implements Serializable {
         this.username = username;
     }
 
-    public Integer getUserId() {
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 
@@ -140,8 +140,8 @@ public class User implements Serializable {
         ", street=" + street +
         ", countyId=" + countyId +
         ", communityId=" + communityId +
-        ", password=" + password +
         ", username=" + username +
+        ", password=" + password +
         ", userId=" + userId +
         ", communityName=" + communityName +
         "}";

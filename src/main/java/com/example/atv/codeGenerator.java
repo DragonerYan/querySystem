@@ -11,9 +11,9 @@ public class codeGenerator {
      */
     public static void main(String[] args) {
         String url="jdbc:mysql://127.0.0.1:3306/bjtu_atv?useSSL=false&characterEncoding=UTF-8";
-        FastAutoGenerator.create(url, "root", "yxz09179012")
+        FastAutoGenerator.create(url, "root", "st")
                 .globalConfig(builder -> {
-                    builder.author("baomidou") // 设置作者
+                    builder.author("yxz") // 设置作者
                             .enableSwagger() // 开启 swagger 模式
                             .fileOverride() // 覆盖已生成文件
                             .outputDir("/Users/yanxinzhao/Desktop/未命名文件夹/smokeManagement/src/main/java/"); // 指定输出目录
