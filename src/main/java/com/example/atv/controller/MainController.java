@@ -116,8 +116,7 @@ public class MainController {
     @ApiOperation(value = "社区基本信息保存")
     @ResponseBody
     @RequestMapping(value = "/communityBaseSave", method = RequestMethod.POST)
-    public Result communityBaseSave(@RequestBody Map map) {
-        CommunityBasic communityBasic = JSON.parseObject(JSON.toJSONString(map),CommunityBasic.class);
+    public Result communityBaseSave(@RequestBody CommunityBasic communityBasic) {
         try{
             iCommunityBasicService.saveOrUpdate(communityBasic);
             return Result.success("插入成功");
@@ -135,9 +134,8 @@ public class MainController {
     @ApiOperation(value = "小区基本信息保存")
     @ResponseBody
     @RequestMapping(value = "/courtBasicSave", method = RequestMethod.POST)
-    public Result courtBasicSave(@RequestBody Map map) {
+    public Result courtBasicSave(@RequestBody CourtBasic courtBasic) {
 
-        CourtBasic courtBasic  = JSON.parseObject(JSON.toJSONString(map),CourtBasic.class);
         try{
             iCourtBasicService.saveOrUpdate(courtBasic);
             return Result.success("插入成功");
@@ -155,9 +153,9 @@ public class MainController {
     @ApiOperation(value = "具体信息保存")
     @ResponseBody
     @RequestMapping(value = "/indicatorValueSave", method = RequestMethod.POST)
-    public Result indicatorValueSave(@RequestBody Map map) {
+    public Result indicatorValueSave(@RequestBody IndicatorValue indicatorValue) {
 
-        IndicatorValue indicatorValue  = JSON.parseObject(JSON.toJSONString(map),IndicatorValue.class);
+        //IndicatorValue indicatorValue  = JSON.parseObject(JSON.toJSONString(map),IndicatorValue.class);
         try{
             iIndicatorValueService.saveOrUpdate(indicatorValue);
             return Result.success("插入成功");
