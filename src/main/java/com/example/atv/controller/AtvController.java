@@ -113,7 +113,6 @@ public class AtvController {
             if(Objects.equals(courtName, "")){
                 QueryWrapper<CommunityBasic> wrapper_base=new QueryWrapper<>();
                 wrapper_base.eq("community_id",communityId);
-                wrapper_base.eq("court_name",courtName);
                 CommunityBasic communityBasic=iCommunityBasicService.getOne(wrapper_base);
                 map.put("basicInfo",communityBasic);
             }else{
