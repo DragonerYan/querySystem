@@ -96,6 +96,47 @@ public class AtvController {
         return Result.success(courtBasicList);
     }
 
+    /**
+     * 根据community_id或者court_name获取基本信息和详细信息
+     */
+    @ApiOperation(value = "基本和详细信息查询")
+    @ResponseBody
+    @RequestMapping(value = "/allInfo", method = RequestMethod.GET)
+    public Result allInfo(@RequestParam(name = "communityId",required = true) String communityId
+                        ,@RequestParam(name = "courtName",required = true) String courtName) {
+
+        try{
+            Map<Object,Object> map=new HashMap<>();
+
+            //如果courtname=="" 社区信息查询
+            // 否则 小区信息查询
+            if(Objects.equals(courtName, "")){
+                QueryWrapper<CommunityBasic> wrapper_base=new QueryWrapper<>();
+                wrapper_base.eq("community_id",communityId);
+                wrapper_base.eq("court_name",courtName);
+                CommunityBasic communityBasic=iCommunityBasicService.getOne(wrapper_base);
+                map.put("basicInfo",communityBasic);
+            }else{
+                QueryWrapper<CourtBasic> wrapper_base=new QueryWrapper<>();
+                wrapper_base.eq("community_id",communityId);
+                wrapper_base.eq("court_name",courtName);
+                CourtBasic courtBasic=iCourtBasicService.getOne(wrapper_base);
+                map.put("basicInfo",courtBasic);
+            }
+
+            QueryWrapper<IndicatorValue> wrapper_indicator_value=new QueryWrapper<>();
+            wrapper_indicator_value.eq("community_id",communityId);
+            wrapper_indicator_value.eq("court_name",courtName);
+            List<IndicatorValue> indicatorValueList=iIndicatorValueService.list(wrapper_indicator_value);
+
+            map.put("indicatorValueList",indicatorValueList);
+            return Result.success(map);
+
+        }catch (Exception e){
+            return Result.fail(e.getMessage());
+        }
+    }
+
 
 
 
