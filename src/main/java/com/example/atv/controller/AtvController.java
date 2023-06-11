@@ -1,6 +1,5 @@
 package com.example.atv.controller;
 
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.atv.constant.Result;
 import com.example.atv.generatetor.entity.*;
@@ -12,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -155,6 +155,7 @@ public class AtvController {
             CommunityBasic communityBasic_query=iCommunityBasicService.getOne(wrapper);
 
             if(communityBasic_query==null){
+                communityBasic.setDateTime(LocalDateTime.now());
                 iCommunityBasicService.save(communityBasic);
             }else{
                 iCommunityBasicService.update(communityBasic,wrapper);
@@ -187,6 +188,7 @@ public class AtvController {
             CourtBasic courtBasic_query=iCourtBasicService.getOne(wrapper);
 
             if(courtBasic_query==null){
+                courtBasic.setDateTime(LocalDateTime.now());
                 iCourtBasicService.save(courtBasic);
             }else{
                 iCourtBasicService.update(courtBasic,wrapper);
