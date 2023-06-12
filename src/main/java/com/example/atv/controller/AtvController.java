@@ -76,7 +76,13 @@ public class AtvController {
     @ApiOperation(value = "社区基本信息查询")
     @ResponseBody
     @RequestMapping(value = "/communityBasicInfo", method = RequestMethod.GET)
-    public Result communityBasicInfo(@RequestParam(name = "communityId",required = false) String communityId) {
+    public Result communityBasicInfo(@RequestParam(name = "communityId",required = false) String communityId,
+                                     @RequestParam(name = "province",required = false) String province,
+                                     @RequestParam(name = "city",required = false) String city,
+                                     @RequestParam(name = "country",required = false) String country,
+                                     @RequestParam(name = "street",required = false) String street,
+                                     @RequestParam(name = "state",required = false) String state
+                                     ) {
 
         List<CommunityBasic> communityBasicList=iCommunityBasicService.list();
 
@@ -89,7 +95,13 @@ public class AtvController {
     @ApiOperation(value = "小区基本信息查询")
     @ResponseBody
     @RequestMapping(value = "/courtBasicInfo", method = RequestMethod.GET)
-    public Result courtBasicInfo(@RequestParam(name = "indicatorId",required = false) String indicatorId) {
+    public Result courtBasicInfo(@RequestParam(name = "indicatorId",required = false) String indicatorId,
+                                 @RequestParam(name = "province",required = false) String province,
+                                 @RequestParam(name = "city",required = false) String city,
+                                 @RequestParam(name = "country",required = false) String country,
+                                 @RequestParam(name = "street",required = false) String street,
+                                 @RequestParam(name = "state",required = false) String state
+    ) {
 
         List<CourtBasic> courtBasicList=iCourtBasicService.list();
 

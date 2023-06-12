@@ -15,7 +15,7 @@ import io.swagger.annotations.ApiModelProperty;
  * </p>
  *
  * @author yxz
- * @since 2023-06-10
+ * @since 2023-06-12
  */
 @TableName("community_basic")
 @ApiModel(value = "CommunityBasic对象", description = "")
