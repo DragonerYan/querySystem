@@ -1,5 +1,6 @@
 package com.example.atv.controller;
 
+import antlr.StringUtils;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.atv.constant.Result;
 import com.example.atv.generatetor.entity.*;
@@ -81,10 +82,15 @@ public class AtvController {
                                      @RequestParam(name = "city",required = false) String city,
                                      @RequestParam(name = "country",required = false) String country,
                                      @RequestParam(name = "street",required = false) String street,
-                                     @RequestParam(name = "state",required = false) String state
+                                     @RequestParam(name = "state",required = false) String state,
+                                     @RequestParam(name = "userName",required = false) String userName
                                      ) {
 
-        List<CommunityBasic> communityBasicList=iCommunityBasicService.list();
+        QueryWrapper<CommunityBasic> wrapper=new QueryWrapper<>();
+        if(userName!=null && !Objects.equals(userName,"")){
+            wrapper.eq("user_id",userName);
+        }
+        List<CommunityBasic> communityBasicList=iCommunityBasicService.list(wrapper);
 
         return Result.success(communityBasicList);
     }
@@ -100,10 +106,15 @@ public class AtvController {
                                  @RequestParam(name = "city",required = false) String city,
                                  @RequestParam(name = "country",required = false) String country,
                                  @RequestParam(name = "street",required = false) String street,
-                                 @RequestParam(name = "state",required = false) String state
+                                 @RequestParam(name = "state",required = false) String state,
+                                 @RequestParam(name = "userName",required = false) String userName
     ) {
+        QueryWrapper<CourtBasic> wrapper=new QueryWrapper<>();
+        if(userName!=null && !Objects.equals(userName,"")){
+            wrapper.eq("user_id",userName);
+        }
 
-        List<CourtBasic> courtBasicList=iCourtBasicService.list();
+        List<CourtBasic> courtBasicList=iCourtBasicService.list(wrapper);
 
         return Result.success(courtBasicList);
     }
