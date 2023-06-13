@@ -90,6 +90,9 @@ public class AtvController {
         if(userName!=null && !Objects.equals(userName,"")){
             wrapper.eq("user_id",userName);
         }
+        if(communityId!=null && !Objects.equals(communityId,"")){
+            wrapper.eq("community_id",communityId);
+        }
         List<CommunityBasic> communityBasicList=iCommunityBasicService.list(wrapper);
 
         return Result.success(communityBasicList);
@@ -107,11 +110,15 @@ public class AtvController {
                                  @RequestParam(name = "country",required = false) String country,
                                  @RequestParam(name = "street",required = false) String street,
                                  @RequestParam(name = "state",required = false) String state,
-                                 @RequestParam(name = "userName",required = false) String userName
+                                 @RequestParam(name = "userName",required = false) String userName,
+                                 @RequestParam(name = "communityId",required = false) String communityId
     ) {
         QueryWrapper<CourtBasic> wrapper=new QueryWrapper<>();
         if(userName!=null && !Objects.equals(userName,"")){
             wrapper.eq("user_id",userName);
+        }
+        if(communityId!=null && !Objects.equals(communityId,"")){
+            wrapper.eq("community_id",communityId);
         }
 
         List<CourtBasic> courtBasicList=iCourtBasicService.list(wrapper);
