@@ -169,6 +169,7 @@ public class AtvController {
                 communityBasic.setDateTime(LocalDateTime.now());
                 iCommunityBasicService.save(communityBasic);
             }else{
+                communityBasic.setDateTime(communityBasic_query.getDateTime());
                 iCommunityBasicService.update(communityBasic,wrapper);
             }
 
@@ -202,6 +203,7 @@ public class AtvController {
                 courtBasic.setDateTime(LocalDateTime.now());
                 iCourtBasicService.save(courtBasic);
             }else{
+                courtBasic.setDateTime(courtBasic_query.getDateTime());
                 iCourtBasicService.update(courtBasic,wrapper);
             }
             return Result.success("插入成功");
