@@ -3,6 +3,7 @@ package com.example.atv.controller;
 import antlr.StringUtils;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.atv.constant.Result;
+import com.example.atv.dao.mapper.AtvService;
 import com.example.atv.generatetor.entity.*;
 import com.example.atv.generatetor.service.*;
 import io.swagger.annotations.Api;
@@ -17,6 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Api(description = "atv接口")
 @Slf4j
@@ -32,6 +34,7 @@ public class AtvController {
     private final IIndicatorService iIndicatorService;
     private final IIndicatorValueService iIndicatorValueService;
     private final IUserService iUserService;
+    private final AtvService atvService;
 
 
 
@@ -83,16 +86,39 @@ public class AtvController {
                                      @RequestParam(name = "country",required = false) String country,
                                      @RequestParam(name = "street",required = false) String street,
                                      @RequestParam(name = "state",required = false) String state,
-                                     @RequestParam(name = "userName",required = false) String userName
+                                     @RequestParam(name = "userName",required = false) String userName,
+                                     @RequestParam(name = "isPc",required = false) String isPc
                                      ) {
 
         QueryWrapper<CommunityBasic> wrapper=new QueryWrapper<>();
+        if(province!=null && !Objects.equals(province,"")){
+            wrapper.eq("province",province);
+        }
+        if(city!=null && !Objects.equals(city,"")){
+            wrapper.eq("city",city);
+        }
+        if(country!=null && !Objects.equals(country,"")){
+            wrapper.eq("country",country);
+        }
+        if(street!=null && !Objects.equals(street,"")){
+            wrapper.eq("street",street);
+        }
+        if(state!=null && !Objects.equals(state,"")){
+            wrapper.eq("state",state);
+        }
+        //在pc端列表界面增加，状态筛选和排序
+        if(Objects.equals(isPc, "1")){
+            wrapper.ne("state","0");
+            wrapper.lambda().orderByAsc(CommunityBasic::getState);
+        }
+
         if(userName!=null && !Objects.equals(userName,"")){
             wrapper.eq("user_id",userName);
         }
         if(communityId!=null && !Objects.equals(communityId,"")){
             wrapper.eq("community_id",communityId);
         }
+
         List<CommunityBasic> communityBasicList=iCommunityBasicService.list(wrapper);
 
         return Result.success(communityBasicList);
@@ -111,9 +137,33 @@ public class AtvController {
                                  @RequestParam(name = "street",required = false) String street,
                                  @RequestParam(name = "state",required = false) String state,
                                  @RequestParam(name = "userName",required = false) String userName,
-                                 @RequestParam(name = "communityId",required = false) String communityId
+                                 @RequestParam(name = "communityId",required = false) String communityId,
+                                 @RequestParam(name = "isPc",required = false) String isPc
     ) {
         QueryWrapper<CourtBasic> wrapper=new QueryWrapper<>();
+
+        if(province!=null && !Objects.equals(province,"")){
+            wrapper.eq("province",province);
+        }
+        if(city!=null && !Objects.equals(city,"")){
+            wrapper.eq("city",city);
+        }
+        if(country!=null && !Objects.equals(country,"")){
+            wrapper.eq("country",country);
+        }
+        if(street!=null && !Objects.equals(street,"")){
+            wrapper.eq("street",street);
+        }
+        if(state!=null && !Objects.equals(state,"")){
+            wrapper.eq("state",state);
+        }
+
+        //在pc端列表界面增加，状态筛选和排序
+        if(Objects.equals(isPc, "1")){
+            wrapper.ne("state","0");
+            wrapper.lambda().orderByAsc(CourtBasic::getState);
+        }
+
         if(userName!=null && !Objects.equals(userName,"")){
             wrapper.eq("user_id",userName);
         }
@@ -301,6 +351,50 @@ public class AtvController {
     }
 
 
+    /**
+     * 街道填报情况
+     */
+    @ApiOperation(value = "街道填报情况")
+    @ResponseBody
+    @RequestMapping(value = "/streetFillInfo", method = RequestMethod.GET)
+    public Result streetFillInfo(
+            @RequestParam(name = "province",required = false) String province,
+            @RequestParam(name = "city",required = false) String city,
+            @RequestParam(name = "county",required = false) String county
+    ) {
+        Map<String,String> map=new HashMap<>();
+        map.put("county",county);
+        List<Map<String,Object>> res=atvService.streetFillInfo(map);
+        return Result.success("查询成功！",res);
+    }
+
+
+
+    /**
+     * 社区填报情况
+     */
+    @ApiOperation(value = "社区填报情况")
+    @ResponseBody
+    @RequestMapping(value = "/communityFillInfo", method = RequestMethod.GET)
+    public Result communityFillInfo(
+            @RequestParam(name = "province",required = false) String province,
+            @RequestParam(name = "city",required = false) String city,
+            @RequestParam(name = "county",required = false) String county
+    ) {
+        Map<String,String> map=new HashMap<>();
+        map.put("county",county);
+        List<Map<String,Object>> resList=atvService.communityFillInfo(map);
+
+        //拿出结果数据中的street属性，单独去重存取
+        List<Object> streetList=resList.stream().map(x->x.get("street")).distinct().collect(Collectors.toList());
+
+        Map<Object,Object> resMap=new HashMap<>();
+        resMap.put("streetList",streetList);
+        resMap.put("resList",resList);
+        return Result.success("查询成功",resMap);
+    }
+
+
 
     /**
      * 修改密码
@@ -335,6 +429,8 @@ public class AtvController {
 
         return Result.success("修改成功");
     }
+
+
 
 
 }

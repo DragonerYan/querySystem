@@ -15,7 +15,7 @@ import io.swagger.annotations.ApiModelProperty;
  * </p>
  *
  * @author yxz
- * @since 2023-06-12
+ * @since 2023-06-14
  */
 @TableName("community_basic")
 @ApiModel(value = "CommunityBasic对象", description = "")
@@ -52,6 +52,18 @@ public class CommunityBasic implements Serializable {
 
     @TableId("report_year")
     private String reportYear;
+
+    @TableField("province")
+    private String province;
+
+    @TableField("city")
+    private String city;
+
+    @TableField("county")
+    private String county;
+
+    @TableField("street")
+    private String street;
 
 
     public String getCommunityId() {
@@ -126,6 +138,38 @@ public class CommunityBasic implements Serializable {
         this.reportYear = reportYear;
     }
 
+    public String getProvince() {
+        return province;
+    }
+
+    public void setProvince(String province) {
+        this.province = province;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getCounty() {
+        return county;
+    }
+
+    public void setCounty(String county) {
+        this.county = county;
+    }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
     @Override
     public String toString() {
         return "CommunityBasic{" +
@@ -138,6 +182,10 @@ public class CommunityBasic implements Serializable {
         ", dateTime=" + dateTime +
         ", userId=" + userId +
         ", reportYear=" + reportYear +
+        ", province=" + province +
+        ", city=" + city +
+        ", county=" + county +
+        ", street=" + street +
         "}";
     }
 }

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.atv.dao.mapper.AtvService">
+
+    <select id="streetFillInfo" resultType="map" parameterType="map">
+        select table2.street,IFNULL(fill_count,0) as fillCount,all_count as allCount,IFNULL(all_count-fill_count,all_count) as unfillCount from
+            -- 当前区域账号下所有街道，以及街道中已经填报的社区
+            (select community.street,count(*) as fill_count from community,community_basic
+                where community.community_id=community_basic.community_id
+                and community.county=#{county} group by community.street) as table1
+            right join
+            -- 当前区域账号下所有的街道，以及街道中所有的社区
+            (select street,count(*) as all_count from community
+                where community.county=#{county} group by street) as table2
+            on table1.street=table2.street
+    </select>
+
+    <select id="communityFillInfo" resultType="map" parameterType="map">
+        select max(community.street) as street,max(community.community_id) as communityId,
+               community_name as communityName,count(court_name) as courtFillCount
+        from community left join court_basic cb on community.community_id = cb.community_id
+        where community.county=#{county} group by community_name;
+    </select>
+
+
+</mapper>
