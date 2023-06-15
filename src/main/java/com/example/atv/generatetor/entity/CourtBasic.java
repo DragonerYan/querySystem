@@ -81,6 +81,8 @@ public class CourtBasic implements Serializable {
 
     private String reportYear;
 
+    private String communityName;
+
 
     public String getProvince() {
         return province;
@@ -274,6 +276,14 @@ public class CourtBasic implements Serializable {
         this.reportYear = reportYear;
     }
 
+    public String getCommunityName() {
+        return communityName;
+    }
+
+    public void setCommunityName(String communityName) {
+        this.communityName = communityName;
+    }
+
     @Override
     public String toString() {
         return "CourtBasic{" +
@@ -301,6 +311,7 @@ public class CourtBasic implements Serializable {
         ", state=" + state +
         ", userId=" + userId +
         ", reportYear=" + reportYear +
+        ", communityName=" + communityName +
         "}";
     }
 }

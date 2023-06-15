@@ -50,6 +50,8 @@ public class CommunityBasic implements Serializable {
 
     private String street;
 
+    private String communityName;
+
 
     public String getCommunityId() {
         return communityId;
@@ -155,6 +157,14 @@ public class CommunityBasic implements Serializable {
         this.street = street;
     }
 
+    public String getCommunityName() {
+        return communityName;
+    }
+
+    public void setCommunityName(String communityName) {
+        this.communityName = communityName;
+    }
+
     @Override
     public String toString() {
         return "CommunityBasic{" +
@@ -171,6 +181,7 @@ public class CommunityBasic implements Serializable {
         ", city=" + city +
         ", county=" + county +
         ", street=" + street +
+        ", communityName=" + communityName +
         "}";
     }
 }
