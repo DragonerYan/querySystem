@@ -1,7 +1,5 @@
 package com.example.atv.generatetor.entity;
 
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -15,7 +13,7 @@ import io.swagger.annotations.ApiModelProperty;
  * </p>
  *
  * @author yxz
- * @since 2023-06-14
+ * @since 2023-06-15
  */
 @TableName("community_basic")
 @ApiModel(value = "CommunityBasic对象", description = "")
@@ -24,45 +22,32 @@ public class CommunityBasic implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty("面积")
-    @TableId("community_id")
     private String communityId;
 
-    @TableField("area")
     private BigDecimal area;
 
-    @TableField("number_people")
     private Integer numberPeople;
 
-    @TableField("number_court")
     private Integer numberCourt;
 
-    @TableField("number_family")
     private Integer numberFamily;
 
     @ApiModelProperty("0是暂存，1是审核中，2是通过，3是不通过")
-    @TableField("state")
     private Integer state;
 
     @ApiModelProperty("填报时间")
-    @TableField("date_time")
     private LocalDateTime dateTime;
 
-    @TableField("user_id")
     private String userId;
 
-    @TableId("report_year")
     private String reportYear;
 
-    @TableField("province")
     private String province;
 
-    @TableField("city")
     private String city;
 
-    @TableField("county")
     private String county;
 
-    @TableField("street")
     private String street;
 
 

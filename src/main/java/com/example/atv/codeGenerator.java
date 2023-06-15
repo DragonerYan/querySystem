@@ -11,7 +11,7 @@ public class codeGenerator {
      */
     public static void main(String[] args) {
         String url="jdbc:mysql://127.0.0.1:3306/bjtu_atv?useSSL=false&characterEncoding=UTF-8";
-        FastAutoGenerator.create(url, "root", "st")
+        FastAutoGenerator.create(url, "root", "")
                 .globalConfig(builder -> {
                     builder.author("yxz") // 设置作者
                             .enableSwagger() // 开启 swagger 模式
@@ -19,17 +19,17 @@ public class codeGenerator {
                             .outputDir("/Users/yanxinzhao/Desktop/未命名文件夹/smokeManagement/src/main/java/"); // 指定输出目录
                 })
                 .strategyConfig(builder -> {
-                    builder.addInclude("user").entityBuilder().enableTableFieldAnnotation();
+                    builder.addInclude("user");
                 }).strategyConfig(builder->{
-                    builder.addInclude("community").entityBuilder().enableTableFieldAnnotation();
+                    builder.addInclude("community");
                 }).strategyConfig(builder->{
-                    builder.addInclude("community_basic").entityBuilder().enableTableFieldAnnotation();
+                    builder.addInclude("community_basic");
                 }).strategyConfig(builder->{
-                    builder.addInclude("court_basic").entityBuilder().enableTableFieldAnnotation();
+                    builder.addInclude("court_basic");
                 }).strategyConfig(builder->{
-                    builder.addInclude("indicator").entityBuilder().enableTableFieldAnnotation();
+                    builder.addInclude("indicator");
                 }).strategyConfig(builder->{
-                    builder.addInclude("indicator_value").entityBuilder().enableTableFieldAnnotation();;
+                    builder.addInclude("indicator_value");;
                 })
                 .packageConfig(builder -> {
                     builder.parent("com.example.atv") // 设置父包名

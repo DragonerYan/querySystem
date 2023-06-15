@@ -1,8 +1,5 @@
 package com.example.atv.generatetor.entity;
 
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -13,32 +10,25 @@ import io.swagger.annotations.ApiModelProperty;
  * </p>
  *
  * @author yxz
- * @since 2023-06-14
+ * @since 2023-06-15
  */
-@TableName("indicator")
 @ApiModel(value = "Indicator对象", description = "")
 public class Indicator implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty("0表示court 1表示community")
-    @TableField("court_or_community")
     private Integer courtOrCommunity;
 
-    @TableId("indicator_id")
     private String indicatorId;
 
-    @TableField("indicator_name")
     private String indicatorName;
 
-    @TableField("parent_id")
     private String parentId;
 
     @ApiModelProperty("0表示为是否值  1表示为整数值")
-    @TableField("type")
     private Integer type;
 
-    @TableField("liang_gang")
     private String liangGang;
 
 

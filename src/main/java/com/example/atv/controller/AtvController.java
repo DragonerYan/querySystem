@@ -2,9 +2,11 @@ package com.example.atv.controller;
 
 import antlr.StringUtils;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.atv.constant.Result;
 import com.example.atv.dao.mapper.AtvService;
 import com.example.atv.generatetor.entity.*;
+import com.example.atv.generatetor.mapper.CommunityBasicMapper;
 import com.example.atv.generatetor.service.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -87,7 +89,9 @@ public class AtvController {
                                      @RequestParam(name = "street",required = false) String street,
                                      @RequestParam(name = "state",required = false) String state,
                                      @RequestParam(name = "userName",required = false) String userName,
-                                     @RequestParam(name = "isPc",required = false) String isPc
+                                     @RequestParam(name = "isPc",required = false) String isPc,
+                                     @RequestParam(name = "pageSize",required = false,defaultValue = "1000000") Long pageSize,
+                                     @RequestParam(name = "offset",required = false,defaultValue = "1") Long offset
                                      ) {
 
         QueryWrapper<CommunityBasic> wrapper=new QueryWrapper<>();
@@ -106,11 +110,6 @@ public class AtvController {
         if(state!=null && !Objects.equals(state,"")){
             wrapper.eq("state",state);
         }
-        //在pc端列表界面增加，状态筛选和排序
-        if(Objects.equals(isPc, "1")){
-            wrapper.ne("state","0");
-            wrapper.lambda().orderByAsc(CommunityBasic::getState);
-        }
 
         if(userName!=null && !Objects.equals(userName,"")){
             wrapper.eq("user_id",userName);
@@ -119,9 +118,22 @@ public class AtvController {
             wrapper.eq("community_id",communityId);
         }
 
-        List<CommunityBasic> communityBasicList=iCommunityBasicService.list(wrapper);
+        //在pc端列表界面增加，状态筛选和排序
+        if(Objects.equals(isPc, "1")){
+            wrapper.ne("state","0");
+            wrapper.lambda().orderByAsc(CommunityBasic::getState);
+        }
 
-        return Result.success(communityBasicList);
+        //增加分页功能
+        Page<CommunityBasic> page=new Page<>(offset,pageSize);
+        Page<CommunityBasic> communityBasicList=iCommunityBasicService.page(page,wrapper);
+
+        //pc端返回带分页的信息
+        if(Objects.equals(isPc, "1")){
+            return Result.success(communityBasicList);
+        }
+        return Result.success(communityBasicList.getRecords());
+
     }
 
     /**
@@ -138,7 +150,9 @@ public class AtvController {
                                  @RequestParam(name = "state",required = false) String state,
                                  @RequestParam(name = "userName",required = false) String userName,
                                  @RequestParam(name = "communityId",required = false) String communityId,
-                                 @RequestParam(name = "isPc",required = false) String isPc
+                                 @RequestParam(name = "isPc",required = false) String isPc,
+                                 @RequestParam(name = "pageSize",required = false,defaultValue = "1000000") Long pageSize,
+                                 @RequestParam(name = "offset",required = false,defaultValue = "1") Long offset
     ) {
         QueryWrapper<CourtBasic> wrapper=new QueryWrapper<>();
 
@@ -158,12 +172,6 @@ public class AtvController {
             wrapper.eq("state",state);
         }
 
-        //在pc端列表界面增加，状态筛选和排序
-        if(Objects.equals(isPc, "1")){
-            wrapper.ne("state","0");
-            wrapper.lambda().orderByAsc(CourtBasic::getState);
-        }
-
         if(userName!=null && !Objects.equals(userName,"")){
             wrapper.eq("user_id",userName);
         }
@@ -171,9 +179,20 @@ public class AtvController {
             wrapper.eq("community_id",communityId);
         }
 
-        List<CourtBasic> courtBasicList=iCourtBasicService.list(wrapper);
+        //在pc端列表界面增加，状态筛选和排序
+        if(Objects.equals(isPc, "1")){
+            wrapper.ne("state","0");
+            wrapper.lambda().orderByAsc(CourtBasic::getState);
+        }
+        //增加分页功能
+        Page<CourtBasic> page=new Page<>(offset,pageSize);
+        Page<CourtBasic> courtBasicList=iCourtBasicService.page(page,wrapper);
 
-        return Result.success(courtBasicList);
+        //pc端返回带分页的信息
+        if(Objects.equals(isPc, "1")){
+            return Result.success(courtBasicList);
+        }
+        return Result.success(courtBasicList.getRecords());
     }
 
     /**

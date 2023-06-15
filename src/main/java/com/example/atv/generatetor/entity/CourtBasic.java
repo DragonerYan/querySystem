@@ -1,7 +1,5 @@
 package com.example.atv.generatetor.entity;
 
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -15,7 +13,7 @@ import io.swagger.annotations.ApiModelProperty;
  * </p>
  *
  * @author yxz
- * @since 2023-06-14
+ * @since 2023-06-15
  */
 @TableName("court_basic")
 @ApiModel(value = "CourtBasic对象", description = "")
@@ -23,92 +21,64 @@ public class CourtBasic implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @TableField("province")
     private String province;
 
-    @TableField("city")
     private String city;
 
-    @TableField("county")
     private String county;
 
-    @TableField("street")
     private String street;
 
-    @TableId("community_id")
     private String communityId;
 
-    @TableId("court_name")
     private String courtName;
 
     @ApiModelProperty("1 商品房，2 保障房，3 历史文化街区，0 其他----")
-    @TableField("court_type")
     private String courtType;
 
     @ApiModelProperty("其他")
-    @TableField("court_type_other")
     private String courtTypeOther;
 
     @ApiModelProperty("建造时间")
-    @TableField("build_time")
     private Integer buildTime;
 
     @ApiModelProperty("1 未开展，2 进行中，3 已完成")
-    @TableField("remodel")
     private String remodel;
 
     @ApiModelProperty("0 有物业 1无物业")
-    @TableField("management")
     private Integer management;
 
     @ApiModelProperty("平方米小区总建筑面积")
-    @TableField("area")
     private BigDecimal area;
 
     @ApiModelProperty("住宅总套数")
-    @TableField("number_department")
     private Integer numberDepartment;
 
     @ApiModelProperty("人数")
-    @TableField("number_people")
     private Integer numberPeople;
 
     @ApiModelProperty("60岁以上常住人口")
-    @TableField("number_over60_people")
     private Integer numberOver60People;
 
     @ApiModelProperty("建筑数量")
-    @TableField("number_building")
     private Integer numberBuilding;
 
-    @ApiModelProperty("1-3层建筑数量")
-    @TableField("number_1_3_building")
     private Integer number13Building;
 
-    @ApiModelProperty("4-6层建筑数量")
-    @TableField("number_4_6_building")
     private Integer number46Building;
 
-    @ApiModelProperty("7-9层建筑数量")
-    @TableField("number_7_9_building")
     private Integer number79Building;
 
-    @ApiModelProperty("10 层以上建筑数量")
-    @TableField("number_over_10_building")
     private Integer numberOver10Building;
 
     @ApiModelProperty("填报时间")
-    @TableField("date_time")
     private LocalDateTime dateTime;
 
     @ApiModelProperty("0为暂存，1为提交，2为通过，3为不通过")
-    @TableField("state")
     private Integer state;
 
-    @TableField("user_id")
     private String userId;
 
-    @TableId("report_year")
     private String reportYear;
 
 
