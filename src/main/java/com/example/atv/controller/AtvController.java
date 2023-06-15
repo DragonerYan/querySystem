@@ -324,18 +324,26 @@ public class AtvController {
     @ResponseBody
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public Result login(
-            @RequestParam(name = "province") String province,
-            @RequestParam(name = "city") String city,
-            @RequestParam(name = "county") String county,
-            @RequestParam(name = "street") String street,
-            @RequestParam(name = "communityId") String communityId,
+            @RequestParam(name = "province",required = false,defaultValue = "") String province,
+            @RequestParam(name = "city",required = false,defaultValue = "-") String city,
+            @RequestParam(name = "county",required = false,defaultValue = "-") String county,
+            @RequestParam(name = "street",required = false,defaultValue = "-") String street,
+            @RequestParam(name = "communityId",required = false) String communityId,
             @RequestParam(name = "userName") String userName,
             @RequestParam(name = "password") String password
     ) {
         //根据userName查询是否存在
         QueryWrapper<User> wrapper=new QueryWrapper<>();
-        wrapper.eq("province",province).eq("city",city).eq("county",county)
-                .eq("street",street).eq("community_id",communityId).eq("username",userName);
+
+        wrapper.eq("province",province);
+        wrapper.eq("city",city);
+        wrapper.eq("county",county);
+        wrapper.eq("street",street);
+//        if(communityId!=null && !Objects.equals(communityId,"")) {
+//            wrapper.eq("community_id",communityId);
+//        }
+        wrapper.eq("username",userName);
+
         User user=iUserService.getOne(wrapper);
         if(user==null){
             return Result.fail("无对应用户存在");
@@ -346,6 +354,7 @@ public class AtvController {
         }
         Map<String,String> map=new HashMap<>();
         map.put("userId",user.getUserId());
+        map.put("userName",user.getUsername());
         map.put("communityId",user.getCommunityId());
         return Result.success("登陆成功！",map);
     }
