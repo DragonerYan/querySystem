@@ -85,7 +85,7 @@ public class AtvController {
     public Result communityBasicInfo(@RequestParam(name = "communityId",required = false) String communityId,
                                      @RequestParam(name = "province",required = false) String province,
                                      @RequestParam(name = "city",required = false) String city,
-                                     @RequestParam(name = "country",required = false) String country,
+                                     @RequestParam(name = "county",required = false) String county,
                                      @RequestParam(name = "street",required = false) String street,
                                      @RequestParam(name = "state",required = false) String state,
                                      @RequestParam(name = "userName",required = false) String userName,
@@ -101,8 +101,8 @@ public class AtvController {
         if(city!=null && !Objects.equals(city,"")){
             wrapper.eq("city",city);
         }
-        if(country!=null && !Objects.equals(country,"")){
-            wrapper.eq("country",country);
+        if(county!=null && !Objects.equals(county,"")){
+            wrapper.eq("county",county);
         }
         if(street!=null && !Objects.equals(street,"")){
             wrapper.eq("street",street);
@@ -145,7 +145,7 @@ public class AtvController {
     public Result courtBasicInfo(@RequestParam(name = "indicatorId",required = false) String indicatorId,
                                  @RequestParam(name = "province",required = false) String province,
                                  @RequestParam(name = "city",required = false) String city,
-                                 @RequestParam(name = "country",required = false) String country,
+                                 @RequestParam(name = "county",required = false) String county,
                                  @RequestParam(name = "street",required = false) String street,
                                  @RequestParam(name = "state",required = false) String state,
                                  @RequestParam(name = "userName",required = false) String userName,
@@ -162,8 +162,8 @@ public class AtvController {
         if(city!=null && !Objects.equals(city,"")){
             wrapper.eq("city",city);
         }
-        if(country!=null && !Objects.equals(country,"")){
-            wrapper.eq("country",country);
+        if(county!=null && !Objects.equals(county,"")){
+            wrapper.eq("county",county);
         }
         if(street!=null && !Objects.equals(street,"")){
             wrapper.eq("street",street);
