@@ -150,6 +150,7 @@ public class AtvController {
                                  @RequestParam(name = "state",required = false) String state,
                                  @RequestParam(name = "userName",required = false) String userName,
                                  @RequestParam(name = "communityId",required = false) String communityId,
+                                 @RequestParam(name = "communityName",required = false) String communityName,
                                  @RequestParam(name = "isPc",required = false) String isPc,
                                  @RequestParam(name = "pageSize",required = false,defaultValue = "1000000") Long pageSize,
                                  @RequestParam(name = "offset",required = false,defaultValue = "1") Long offset
@@ -177,6 +178,9 @@ public class AtvController {
         }
         if(communityId!=null && !Objects.equals(communityId,"")){
             wrapper.eq("community_id",communityId);
+        }
+        if(communityName!=null && !Objects.equals(communityName,"")){
+            wrapper.eq("community_name",communityName);
         }
 
         //在pc端列表界面增加，状态筛选和排序
