@@ -13,7 +13,7 @@ import io.swagger.annotations.ApiModelProperty;
  * </p>
  *
  * @author yxz
- * @since 2023-06-15
+ * @since 2023-06-16
  */
 @TableName("court_basic")
 @ApiModel(value = "CourtBasic对象", description = "")
@@ -82,6 +82,8 @@ public class CourtBasic implements Serializable {
     private String reportYear;
 
     private String communityName;
+
+    private String reviewComment;
 
 
     public String getProvince() {
@@ -284,6 +286,14 @@ public class CourtBasic implements Serializable {
         this.communityName = communityName;
     }
 
+    public String getReviewComment() {
+        return reviewComment;
+    }
+
+    public void setReviewComment(String reviewComment) {
+        this.reviewComment = reviewComment;
+    }
+
     @Override
     public String toString() {
         return "CourtBasic{" +
@@ -312,6 +322,7 @@ public class CourtBasic implements Serializable {
         ", userId=" + userId +
         ", reportYear=" + reportYear +
         ", communityName=" + communityName +
+        ", reviewComment=" + reviewComment +
         "}";
     }
 }
