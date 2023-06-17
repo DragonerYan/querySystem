@@ -58,30 +58,44 @@ export const selectArr=[
 	
 ]
 
+export const babyQuestion=[
+	{
+		value:"1",
+		text:"存在对婴幼儿早期发展指导等照护服务不到位的问题"
+	}
+]
+
+export const kindergarten=[
+	{
+		value:"1",
+		text:"存在普惠性学前教育服务不到位的问题"
+	}
+]
+
 export const healthyArr=[
 	{
 		value:"3.1.1.3.1",
-		text:"生活照料"
+		text:"生活照料服务不健全"
 	},
 	{
 		value:"3.1.1.3.2",
-		text:"康复护理"
+		text:"康复护理服务不健全"
 	},
 	{
 		value:"3.1.1.3.3",
-		text:"助餐助行"
+		text:"助餐助行服务不健全"
 	},
 	{
 		value:"3.1.1.3.4",
-		text:"上门照护"
+		text:"上门照护服务不健全"
 	},
 	{
 		value:"3.1.1.3.5",
-		text:"文化娱乐"
+		text:"文化娱乐服务不健全"
 	},
 	{
 		value:"3.1.1.3.6",
-		text:"其他"
+		text:"其他问题"
 	},
 	
 ]
@@ -92,38 +106,47 @@ export const parking=[
 	
 	{
 		value:"3.1.5.2.1",
-		text:"占用消防通道"
+		text:"停车占用消防通道"
 	},
 	{
 		value:"3.1.5.2.2",
-		text:"其他"
+		text:"其他问题"
 	},
 ]
 export const energy=[
 	
 	{
-		value:"3.1.6.2.1",
-		text:"存在的消防安全隐患"
+		value:"1",
+		text:"充电桩在安装、使用、运维过程中存在问题"
 	},
-	{
-		value:"3.1.6.2.2",
-		text:"其他"
-	},
+	
 ]
 export const equipment=[
 	
 	{
 		value:"3.2.7.3.1",
-		text:"儿童娱乐"
+		text:"儿童娱乐设施不足或破损"
 	},
 	{
 		value:"3.2.7.3.2",
-		text:"老年活动"
+		text:"老年活动设施不足或破损"
 	},
 	{
 		value:"3.2.7.3.3",
-		text:"体育健身"
+		text:"体育健身设施不足或破损"
 	},
+	{
+		value:"3.2.7.3.4",
+		text:"不符合无障碍设计要求"
+	},
+	{
+		value:"3.2.7.3.5",
+		text:"场地存在私搭乱建问题"
+	},	
+	{
+		value:"3.2.7.3.6",
+		text:"其他问题"
+	},	
 ]
 export const sidewalk=[
 	
@@ -141,19 +164,23 @@ export const sidewalk=[
 	},
 	{
 		value:"3.2.8.1.4",
-		text:"铺装不防滑 "
+		text:"夜间照明不足"
 	},
 	{
 		value:"3.2.8.1.5",
-		text:"不能联贯住宅和各类服务设施"
+		text:"铺装不防滑 "
 	},
 	{
 		value:"3.2.8.1.6",
-		text:"不符合无障碍设计要求"
+		text:"不能联贯住宅和各类服务设施"
 	},
 	{
 		value:"3.2.8.1.7",
-		text:"其他"
+		text:"不符合无障碍设计要求"
+	},
+	{
+		value:"3.2.8.1.8",
+		text:"其他问题"
 	},
 	
 	
@@ -171,7 +198,7 @@ export const rubbish=[
 	},
 	{
 		value:"3.2.9.1.3",
-		text:"其他"
+		text:"其他问题"
 	},
 ]
 
@@ -199,7 +226,7 @@ export const property=[
 	},
 	{
 		value:"3.3.10.1.6",
-		text:"其他"
+		text:"其他问题"
 	},
 ]
 
@@ -216,30 +243,21 @@ export const pwisdom=[
 	},
 	{
 		value:"3.3.11.1.3",
-		text:"其他"
+		text:"其他问题"
 	},
 ]
 export const hwisdom=[
 	{
 		value:"3.3.11.2.1",
-		text:"智慧社区综合信息平台建设"
+		text:"智慧社区综合信息平台建设不足"
 	},
 	{
 		value:"3.3.11.2.2",
-		text:"社区政务服务、公共服务等数字生活场景应用"
+		text:"公共服务信息化建设不足"
 	},
 	{
 		value:"3.3.11.2.3",
-		text:"智慧电网、水网、气网和热网布局建设"
-	},
-	{
-		value:"3.3.11.2.4",
-		text:"智能感知设施建设"
-	},
-	
-	{
-		value:"3.3.11.2.5",
-		text:"其他"
+		text:"其他问题"
 	},
 ]
 
@@ -248,11 +266,16 @@ export const hwisdom=[
 export const allIndicatorValue={
 	'3.1.1.3':[...healthyArr],
 	'3.1.5.2':[...parking],
-	'3.1.6.2':[...energy],
 	'3.2.7.3':[...equipment],
 	'3.2.8.1':[...sidewalk],
 	'3.2.9.1':[...rubbish],
 	'3.3.10.1':[...property],
 	'3.3.11.1':[...pwisdom],
-	'3.3.11.2':[...hwisdom]
+	'3.3.11.2':[...hwisdom],
+	
+}
+export const specificIndicatorValue={
+	'3.1.2.3':'3.1.2.3.1',
+	'3.1.3.3':'3.1.3.3.1',
+	'3.1.6.2':'3.1.6.2.1',
 }
