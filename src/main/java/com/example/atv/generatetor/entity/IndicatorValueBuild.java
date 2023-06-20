@@ -40,7 +40,7 @@ public class IndicatorValueBuild implements Serializable {
 
     private String photoPath;
 
-    private String describe;
+    private String description;
 
 
     public String getCommunityId() {
@@ -123,12 +123,12 @@ public class IndicatorValueBuild implements Serializable {
         this.photoPath = photoPath;
     }
 
-    public String getDescribe() {
-        return describe;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDescribe(String describe) {
-        this.describe = describe;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @Override
@@ -144,7 +144,7 @@ public class IndicatorValueBuild implements Serializable {
         ", reportYear=" + reportYear +
         ", buildNumber=" + buildNumber +
         ", photoPath=" + photoPath +
-        ", describe=" + describe +
+        ", description=" + description +
         "}";
     }
 }
