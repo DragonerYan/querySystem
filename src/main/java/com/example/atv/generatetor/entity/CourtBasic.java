@@ -13,7 +13,7 @@ import io.swagger.annotations.ApiModelProperty;
  * </p>
  *
  * @author yxz
- * @since 2023-06-16
+ * @since 2023-06-20
  */
 @TableName("court_basic")
 @ApiModel(value = "CourtBasic对象", description = "")
@@ -63,12 +63,16 @@ public class CourtBasic implements Serializable {
     @ApiModelProperty("建筑数量")
     private Integer numberBuilding;
 
+    @ApiModelProperty("1-3层建筑数量")
     private Integer number13Building;
 
+    @ApiModelProperty("4-6层建筑数量")
     private Integer number46Building;
 
+    @ApiModelProperty("7-9层建筑数量")
     private Integer number79Building;
 
+    @ApiModelProperty("10 层以上建筑数量")
     private Integer numberOver10Building;
 
     @ApiModelProperty("填报时间")

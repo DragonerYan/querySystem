@@ -1,6 +1,9 @@
 package com.example.atv.controller;
 
 import antlr.StringUtils;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.TypeReference;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.atv.constant.Result;
@@ -14,6 +17,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.spring.web.json.Json;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
@@ -36,6 +40,8 @@ public class AtvController {
     private final IIndicatorService iIndicatorService;
     private final IIndicatorValueService iIndicatorValueService;
     private final IUserService iUserService;
+    private final IBuildBasicService iBuildBasicService;
+    private final IIndicatorValueBuildService iIndicatorValueBuildService;
     private final AtvService atvService;
 
 
@@ -200,6 +206,73 @@ public class AtvController {
     }
 
     /**
+     * 楼栋基本信息查询
+     */
+    @ApiOperation(value = "楼栋基本信息查询")
+    @ResponseBody
+    @RequestMapping(value = "/buildBasicInfo", method = RequestMethod.GET)
+    public Result buildBasicInfo(@RequestParam(name = "courtName",required = false) String courtName,
+                                 @RequestParam(name = "province",required = false) String province,
+                                 @RequestParam(name = "city",required = false) String city,
+                                 @RequestParam(name = "county",required = false) String county,
+                                 @RequestParam(name = "street",required = false) String street,
+                                 @RequestParam(name = "state",required = false) String state,
+                                 @RequestParam(name = "userName",required = false) String userName,
+                                 @RequestParam(name = "communityId",required = false) String communityId,
+                                 @RequestParam(name = "communityName",required = false) String communityName,
+                                 @RequestParam(name = "isPc",required = false) String isPc,
+                                 @RequestParam(name = "pageSize",required = false,defaultValue = "1000000") Long pageSize,
+                                 @RequestParam(name = "offset",required = false,defaultValue = "1") Long offset
+    ) {
+        QueryWrapper<BuildBasic> wrapper=new QueryWrapper<>();
+
+        if(province!=null && !Objects.equals(province,"")){
+            wrapper.eq("court_name",courtName);
+        }
+
+        if(province!=null && !Objects.equals(province,"")){
+            wrapper.eq("province",province);
+        }
+        if(city!=null && !Objects.equals(city,"")){
+            wrapper.eq("city",city);
+        }
+        if(county!=null && !Objects.equals(county,"")){
+            wrapper.eq("county",county);
+        }
+        if(street!=null && !Objects.equals(street,"")){
+            wrapper.eq("street",street);
+        }
+        if(state!=null && !Objects.equals(state,"")){
+            wrapper.eq("state",state);
+        }
+
+        if(userName!=null && !Objects.equals(userName,"")){
+            wrapper.eq("user_id",userName);
+        }
+        if(communityId!=null && !Objects.equals(communityId,"")){
+            wrapper.eq("community_id",communityId);
+        }
+        if(communityName!=null && !Objects.equals(communityName,"")){
+            wrapper.eq("community_name",communityName);
+        }
+
+        //在pc端列表界面增加，状态筛选和排序
+        if(Objects.equals(isPc, "1")){
+            wrapper.ne("state","0");
+            wrapper.lambda().orderByAsc(BuildBasic::getState);
+        }
+        //增加分页功能
+        Page<BuildBasic> page=new Page<>(offset,pageSize);
+        Page<BuildBasic> buildBasicList=iBuildBasicService.page(page,wrapper);
+
+        //pc端返回带分页的信息
+        if(Objects.equals(isPc, "1")){
+            return Result.success(buildBasicList);
+        }
+        return Result.success(buildBasicList.getRecords());
+    }
+
+    /**
      * 根据community_id或者court_name获取基本信息和详细信息
      */
     @ApiOperation(value = "基本和详细信息查询")
@@ -304,6 +377,83 @@ public class AtvController {
         }
     }
 
+    /**
+     * 楼栋基本信息暂存/提交
+     */
+    @ApiOperation(value = "楼栋基本信息暂存/提交")
+    @ResponseBody
+    @RequestMapping(value = "/buildBasicSave", method = RequestMethod.POST)
+    public Result buildBasicSave(@RequestBody BuildBasic buildBasic) {
+
+        try{
+
+            //手写保存修改
+            QueryWrapper<BuildBasic> wrapper=new QueryWrapper<>();
+            wrapper.eq("community_id",buildBasic.getCommunityId())
+                    .eq("court_name",buildBasic.getCourtName())
+                    .eq("report_year",buildBasic.getReportYear())
+                    .eq("build_number",buildBasic.getBuildNumber());
+            BuildBasic buildBasic_query=iBuildBasicService.getOne(wrapper);
+
+            if(buildBasic_query==null){
+                buildBasic.setDateTime(LocalDateTime.now());
+                iBuildBasicService.save(buildBasic);
+            }else{
+                buildBasic.setDateTime(buildBasic_query.getDateTime());
+                iBuildBasicService.update(buildBasic,wrapper);
+            }
+            return Result.success("插入成功");
+        }catch (Exception e){
+            log.debug(e.getMessage());
+            return Result.fail(e.getMessage());
+        }
+    }
+
+    /**
+     * 楼栋具体信息暂存/提交
+     */
+    @ApiOperation(value = "楼栋具体信息保存")
+    @ResponseBody
+    @RequestMapping(value = "/indicatorValueBuildSave", method = RequestMethod.POST)
+    public Result indicatorValueBuildSave(@RequestBody List<IndicatorValueBuild> indicatorValueBuildList) {
+
+
+        try{
+            //手写保存修改
+            indicatorValueBuildList.forEach(indicatorValueBuild -> {
+                QueryWrapper<IndicatorValueBuild> wrapper=new QueryWrapper<>();
+                wrapper.eq("community_id",indicatorValueBuild.getCommunityId())
+                        .eq("report_year",indicatorValueBuild.getReportYear())
+                        .eq("court_name",indicatorValueBuild.getCourtName())
+                        .eq("build_number",indicatorValueBuild.getBuildNumber())
+                        .eq("indicator_id",indicatorValueBuild.getIndicatorId());
+                IndicatorValueBuild indicatorValueBuild_query=iIndicatorValueBuildService.getOne(wrapper);
+                if(indicatorValueBuild_query==null){
+                    iIndicatorValueBuildService.save(indicatorValueBuild);
+                }else {
+                    iIndicatorValueBuildService.update(indicatorValueBuild,wrapper);
+                }
+            });
+            //更新小区详细信息数据
+
+            //根据所属小区名，按照按照指标分组，对楼栋的个数进行计数
+            Map<String,String> map=new HashMap<>();
+            map.put("communityId",indicatorValueBuildList.get(0).getCommunityId());
+            map.put("courtName",indicatorValueBuildList.get(0).getCourtName());
+            map.put("reportYear",indicatorValueBuildList.get(0).getReportYear());
+            List<Map<String,Object>> buildSum=atvService.buildSum(map);
+
+            List<IndicatorValue> indicatorValueList= JSON.parseObject(JSON.toJSONString(buildSum), new TypeReference<List<IndicatorValue>>() {});
+
+            //调用社区和小区详细信息保存接口
+            indicatorValueSave(indicatorValueList);
+
+            return Result.success("插入成功");
+        }catch (Exception e){
+            log.debug(e.getMessage());
+            return Result.fail(e.getMessage());
+        }
+    }
 
 
     /**

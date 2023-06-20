@@ -1,6 +1,6 @@
 package com.example.atv.generatetor.mapper;
 
-import com.example.atv.generatetor.entity.CommunityBasic;
+import com.example.atv.generatetor.entity.IndicatorValueBuild;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @author yxz
  * @since 2023-06-20
  */
-public interface CommunityBasicMapper extends BaseMapper<CommunityBasic> {
+public interface IndicatorValueBuildMapper extends BaseMapper<IndicatorValueBuild> {
 
 }

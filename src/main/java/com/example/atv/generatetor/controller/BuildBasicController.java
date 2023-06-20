@@ -14,8 +14,8 @@ import org.springframework.stereotype.Controller;
  * @since 2023-06-20
  */
 @Controller
-@RequestMapping("/generatetor/communityBasic")
-public class CommunityBasicController {
+@RequestMapping("/generatetor/buildBasic")
+public class BuildBasicController {
 
 }
 

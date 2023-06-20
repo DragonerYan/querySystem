@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * </p>
  *
  * @author yxz
- * @since 2023-06-16
+ * @since 2023-06-20
  */
 public interface CommunityMapper extends BaseMapper<Community> {
 

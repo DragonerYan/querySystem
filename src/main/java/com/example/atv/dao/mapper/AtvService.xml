@@ -22,5 +22,12 @@
         where community.county=#{county} group by community.community_name;
     </select>
 
+    <select id="buildSum" resultType="map" parameterType="map">
+        select max(community_id),max(court_name), indicator_id,count(build_number) as indicator_value,
+               max(meno),max(report_year),'' as longittude,'' as latitude
+        from indicator_value_build
+        where court_name=#{courtName} and community_id=#{communityId} and report_year=#{reportYear} group by indicator_id;
+    </select>
+
 
 </mapper>

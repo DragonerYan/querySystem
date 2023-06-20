@@ -7,4 +7,6 @@ public interface AtvService {
     List<Map<String, Object>> streetFillInfo(Map map);
 
     List<Map<String, Object>> communityFillInfo(Map map);
+
+    List<Map<String,Object>> buildSum(Map map);
 }

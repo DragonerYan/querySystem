@@ -1,6 +1,6 @@
 package com.example.atv.generatetor.service;
 
-import com.example.atv.generatetor.entity.CommunityBasic;
+import com.example.atv.generatetor.entity.IndicatorValueBuild;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @author yxz
  * @since 2023-06-20
  */
-public interface ICommunityBasicService extends IService<CommunityBasic> {
+public interface IIndicatorValueBuildService extends IService<IndicatorValueBuild> {
 
 }

@@ -10,7 +10,7 @@ import io.swagger.annotations.ApiModelProperty;
  * </p>
  *
  * @author yxz
- * @since 2023-06-16
+ * @since 2023-06-20
  */
 @ApiModel(value = "Community对象", description = "")
 public class Community implements Serializable {

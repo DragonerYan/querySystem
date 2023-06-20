@@ -30,6 +30,10 @@ public class codeGenerator {
                     builder.addInclude("indicator");
                 }).strategyConfig(builder->{
                     builder.addInclude("indicator_value");;
+                }).strategyConfig(builder->{
+                    builder.addInclude("indicator_value_build");
+                }).strategyConfig(builder->{
+                    builder.addInclude("build_basic");
                 })
                 .packageConfig(builder -> {
                     builder.parent("com.example.atv") // 设置父包名

@@ -13,9 +13,9 @@ import io.swagger.annotations.ApiModelProperty;
  * @author yxz
  * @since 2023-06-20
  */
-@TableName("indicator_value")
-@ApiModel(value = "IndicatorValue对象", description = "")
-public class IndicatorValue implements Serializable {
+@TableName("indicator_value_build")
+@ApiModel(value = "IndicatorValueBuild对象", description = "")
+public class IndicatorValueBuild implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -35,6 +35,12 @@ public class IndicatorValue implements Serializable {
     private Float latitude;
 
     private String reportYear;
+
+    private String buildNumber;
+
+    private String photoPath;
+
+    private String describe;
 
 
     public String getCommunityId() {
@@ -101,9 +107,33 @@ public class IndicatorValue implements Serializable {
         this.reportYear = reportYear;
     }
 
+    public String getBuildNumber() {
+        return buildNumber;
+    }
+
+    public void setBuildNumber(String buildNumber) {
+        this.buildNumber = buildNumber;
+    }
+
+    public String getPhotoPath() {
+        return photoPath;
+    }
+
+    public void setPhotoPath(String photoPath) {
+        this.photoPath = photoPath;
+    }
+
+    public String getDescribe() {
+        return describe;
+    }
+
+    public void setDescribe(String describe) {
+        this.describe = describe;
+    }
+
     @Override
     public String toString() {
-        return "IndicatorValue{" +
+        return "IndicatorValueBuild{" +
         "communityId=" + communityId +
         ", courtName=" + courtName +
         ", indicatorId=" + indicatorId +
@@ -112,6 +142,9 @@ public class IndicatorValue implements Serializable {
         ", longitude=" + longitude +
         ", latitude=" + latitude +
         ", reportYear=" + reportYear +
+        ", buildNumber=" + buildNumber +
+        ", photoPath=" + photoPath +
+        ", describe=" + describe +
         "}";
     }
 }

@@ -13,7 +13,7 @@ import io.swagger.annotations.ApiModelProperty;
  * </p>
  *
  * @author yxz
- * @since 2023-06-16
+ * @since 2023-06-20
  */
 @TableName("community_basic")
 @ApiModel(value = "CommunityBasic对象", description = "")
@@ -21,7 +21,6 @@ public class CommunityBasic implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty("面积")
     private String communityId;
 
     private BigDecimal area;
