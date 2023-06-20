@@ -313,6 +313,37 @@ public class AtvController {
     }
 
 
+    /**
+     * 小区出现问题楼栋查询
+     */
+    @ApiOperation(value = "小区出现问题楼栋查询")
+    @ResponseBody
+    @RequestMapping(value = "/problemBuildInfo", method = RequestMethod.GET)
+    public Result problemBuildInfo(@RequestParam(name = "communityId",required = true) String communityId
+            ,@RequestParam(name = "courtName",required = true) String courtName) {
+
+        try{
+            Map<String,Object> resMap=new HashMap<>();
+
+            for(int i=1;i<10;i++){
+                String preStr="2."+i;
+                QueryWrapper<IndicatorValueBuild> wrapper=new QueryWrapper<>();
+                wrapper.eq("community_id",communityId);
+                wrapper.eq("court_name",courtName);
+                wrapper.likeRight("indicator_id",preStr);
+                List<IndicatorValueBuild> indicatorValueBuildList=iIndicatorValueBuildService.list(wrapper);
+                long m=indicatorValueBuildList.stream().map(IndicatorValueBuild::getBuildNumber).distinct().count();
+                resMap.put(preStr,m);
+            }
+
+            return Result.success(resMap);
+
+        }catch (Exception e){
+            return Result.fail(e.getMessage());
+        }
+    }
+
+
 
 
     /**
