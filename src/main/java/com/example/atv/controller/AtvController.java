@@ -17,8 +17,15 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import springfox.documentation.spring.web.json.Json;
 
+import javax.sql.rowset.serial.SerialBlob;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.sql.Blob;
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
@@ -643,6 +650,57 @@ public class AtvController {
         return Result.success("修改成功");
     }
 
+    /**
+     * 图片上传
+     */
+    @ApiOperation(value = "图片上传")
+    @ResponseBody
+    @RequestMapping(value = "/uploadImg", method = RequestMethod.POST)
+    public Result uploadImg(
+            @RequestParam(name = "buildNumber") String buildNumber,
+            @RequestParam(name = "indicatorId") String indicatorId,
+            @RequestParam(name = "courtName") String courtName,
+            @RequestParam(name = "communityId") String communityId,
+            @RequestParam("file") MultipartFile file
+    ) throws IOException, SQLException {
+        byte[] bytes = file.getBytes();
+        Blob blob = new SerialBlob(bytes);
+
+        IndicatorValueBuild indicatorValueBuild=new IndicatorValueBuild();
+        indicatorValueBuild.setBuildNumber(buildNumber);
+        indicatorValueBuild.setIndicatorId(indicatorId);
+        indicatorValueBuild.setCourtName(courtName);
+        indicatorValueBuild.setCommunityId(communityId);
+        indicatorValueBuild.setPhotoFile(blob);
+
+        iIndicatorValueBuildService.save(indicatorValueBuild);
+
+        return Result.success("修改成功");
+    }
+
+    /**
+     * 图片获取
+     */
+    @ApiOperation(value = "图片获取")
+    @ResponseBody
+    @RequestMapping(value = "/downloadImg", method = RequestMethod.POST)
+    public Result downloadImg(
+            @RequestParam(name = "buildNumber") String buildNumber,
+            @RequestParam(name = "indicatorId") String indicatorId,
+            @RequestParam(name = "courtName") String courtName,
+            @RequestParam(name = "communityId") String communityId,
+            @RequestParam("file") MultipartFile file
+    ) throws IOException, SQLException {
+
+        QueryWrapper<IndicatorValueBuild> wrapper=new QueryWrapper<>();
+        wrapper.eq("build_num",buildNumber);
+        wrapper.eq("indicator_id",indicatorId);
+        wrapper.eq("court_name",courtName);
+        wrapper.eq("community_id",communityId);
+        IndicatorValueBuild indicatorValueBuild=iIndicatorValueBuildService.getOne(wrapper);
+
+        return Result.success("查询成功",indicatorValueBuild);
+    }
 
 
 
