@@ -421,25 +421,26 @@ public class AtvController {
     @ApiOperation(value = "楼栋基本信息暂存/提交")
     @ResponseBody
     @RequestMapping(value = "/buildBasicSave", method = RequestMethod.POST)
-    public Result buildBasicSave(@RequestBody BuildBasic buildBasic) {
+    public Result buildBasicSave(@RequestBody List<BuildBasic> buildBasicList) {
 
         try{
+            buildBasicList.forEach(buildBasic -> {
+                QueryWrapper<BuildBasic> wrapper=new QueryWrapper<>();
+                wrapper.eq("community_id",buildBasic.getCommunityId())
+                        .eq("court_name",buildBasic.getCourtName())
+                        .eq("report_year",buildBasic.getReportYear())
+                        .eq("build_number",buildBasic.getBuildNumber());
+                BuildBasic buildBasic_query=iBuildBasicService.getOne(wrapper);
 
+                if(buildBasic_query==null){
+                    buildBasic.setDateTime(LocalDateTime.now());
+                    iBuildBasicService.save(buildBasic);
+                }else{
+                    buildBasic.setDateTime(buildBasic_query.getDateTime());
+                    iBuildBasicService.update(buildBasic,wrapper);
+                }
+            });
             //手写保存修改
-            QueryWrapper<BuildBasic> wrapper=new QueryWrapper<>();
-            wrapper.eq("community_id",buildBasic.getCommunityId())
-                    .eq("court_name",buildBasic.getCourtName())
-                    .eq("report_year",buildBasic.getReportYear())
-                    .eq("build_number",buildBasic.getBuildNumber());
-            BuildBasic buildBasic_query=iBuildBasicService.getOne(wrapper);
-
-            if(buildBasic_query==null){
-                buildBasic.setDateTime(LocalDateTime.now());
-                iBuildBasicService.save(buildBasic);
-            }else{
-                buildBasic.setDateTime(buildBasic_query.getDateTime());
-                iBuildBasicService.update(buildBasic,wrapper);
-            }
             return Result.success("插入成功");
         }catch (Exception e){
             log.debug(e.getMessage());
