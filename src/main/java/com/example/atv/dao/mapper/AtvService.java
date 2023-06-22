@@ -9,4 +9,6 @@ public interface AtvService {
     List<Map<String, Object>> communityFillInfo(Map map);
 
     List<Map<String,Object>> buildSum(Map map);
+
+    void uploadImg(Map  map);
 }

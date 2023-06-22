@@ -680,6 +680,34 @@ public class AtvController {
     }
 
     /**
+     * 图片上传-手写
+     */
+    @ApiOperation(value = "图片上传-手写")
+    @ResponseBody
+    @RequestMapping(value = "/uploadImgHand", method = RequestMethod.POST)
+    public Result uploadImgHand(
+            @RequestParam(name = "buildNumber") String buildNumber,
+            @RequestParam(name = "indicatorId") String indicatorId,
+            @RequestParam(name = "courtName") String courtName,
+            @RequestParam(name = "communityId") String communityId,
+            @RequestParam("file") MultipartFile file
+    ) throws IOException, SQLException {
+        byte[] bytes = file.getBytes();
+        Blob blob = new SerialBlob(bytes);
+
+        Map<String,Object> map=new HashMap<>();
+        map.put("build_number",buildNumber);
+        map.put("indicator_id",indicatorId);
+        map.put("court_name",courtName);
+        map.put("community_id",communityId);
+        map.put("photo_file",blob);
+
+        atvService.uploadImg(map);
+
+        return Result.success("修改成功");
+    }
+
+    /**
      * 图片获取
      */
     @ApiOperation(value = "图片获取")

@@ -29,5 +29,10 @@
         where court_name=#{courtName} and community_id=#{communityId} and report_year=#{reportYear} group by indicator_id;
     </select>
 
+    <insert id="uploadImg"  parameterType="map">
+        insert into indicator_value_build(build_number,indicator_id,court_name,community_id,photo_file)
+        values (#{build_number},#{indicator_id},#{court_name},#{community_id},#{photo_file})
+    </insert>
+
 
 </mapper>
