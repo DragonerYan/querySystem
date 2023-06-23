@@ -707,22 +707,44 @@ public class AtvController {
         return Result.success("修改成功");
     }
 
+
+    /**
+     * 图片获取-手动
+     */
+    @ApiOperation(value = "图片获取-手动")
+    @ResponseBody
+    @RequestMapping(value = "/downloadImgHand", method = RequestMethod.GET)
+    public Result downloadImgHand(
+            @RequestParam(name = "buildNumber") String buildNumber,
+            @RequestParam(name = "indicatorId") String indicatorId,
+            @RequestParam(name = "courtName") String courtName,
+            @RequestParam(name = "communityId") String communityId
+    ) throws IOException, SQLException {
+
+        Map<String,Object> map=new HashMap<>();
+        map.put("build_number",buildNumber);
+        map.put("indicator_id",indicatorId);
+        map.put("court_name",courtName);
+        map.put("community_id",communityId);
+        Map<String,Object> resmap=atvService.downloadImg(map);
+
+        return Result.success("查询成功",resmap);
+    }
     /**
      * 图片获取
      */
     @ApiOperation(value = "图片获取")
     @ResponseBody
-    @RequestMapping(value = "/downloadImg", method = RequestMethod.POST)
+    @RequestMapping(value = "/downloadImg", method = RequestMethod.GET)
     public Result downloadImg(
             @RequestParam(name = "buildNumber") String buildNumber,
             @RequestParam(name = "indicatorId") String indicatorId,
             @RequestParam(name = "courtName") String courtName,
-            @RequestParam(name = "communityId") String communityId,
-            @RequestParam("file") MultipartFile file
+            @RequestParam(name = "communityId") String communityId
     ) throws IOException, SQLException {
 
         QueryWrapper<IndicatorValueBuild> wrapper=new QueryWrapper<>();
-        wrapper.eq("build_num",buildNumber);
+        wrapper.eq("build_number",buildNumber);
         wrapper.eq("indicator_id",indicatorId);
         wrapper.eq("court_name",courtName);
         wrapper.eq("community_id",communityId);
