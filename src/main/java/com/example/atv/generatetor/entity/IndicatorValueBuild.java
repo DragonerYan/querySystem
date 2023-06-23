@@ -2,7 +2,6 @@ package com.example.atv.generatetor.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
-import java.sql.Blob;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -12,7 +11,7 @@ import io.swagger.annotations.ApiModelProperty;
  * </p>
  *
  * @author yxz
- * @since 2023-06-20
+ * @since 2023-06-23
  */
 @TableName("indicator_value_build")
 @ApiModel(value = "IndicatorValueBuild对象", description = "")
@@ -42,8 +41,6 @@ public class IndicatorValueBuild implements Serializable {
     private String photoPath;
 
     private String description;
-
-    private Blob photoFile;
 
 
     public String getCommunityId() {
@@ -134,14 +131,6 @@ public class IndicatorValueBuild implements Serializable {
         this.description = description;
     }
 
-    public Blob getPhotoFile() {
-        return photoFile;
-    }
-
-    public void setPhotoFile(Blob photoFile) {
-        this.photoFile = photoFile;
-    }
-
     @Override
     public String toString() {
         return "IndicatorValueBuild{" +
@@ -156,7 +145,6 @@ public class IndicatorValueBuild implements Serializable {
         ", buildNumber=" + buildNumber +
         ", photoPath=" + photoPath +
         ", description=" + description +
-        ", photoFile=" + photoFile +
         "}";
     }
 }

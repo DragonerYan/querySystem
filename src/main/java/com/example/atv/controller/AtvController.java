@@ -282,7 +282,7 @@ public class AtvController {
     /**
      * 根据community_id或者court_name获取基本信息和详细信息
      */
-    @ApiOperation(value = "基本和详细信息查询")
+    @ApiOperation(value = "社区和小区基本和详细信息查询")
     @ResponseBody
     @RequestMapping(value = "/allInfo", method = RequestMethod.GET)
     public Result allInfo(@RequestParam(name = "communityId",required = true) String communityId
@@ -318,6 +318,39 @@ public class AtvController {
             return Result.fail(e.getMessage());
         }
     }
+    /**
+     * 楼栋基本信息和详细信息
+     */
+    @ApiOperation(value = "楼栋基本信息和详细信息")
+    @ResponseBody
+    @RequestMapping(value = "/buildInfo", method = RequestMethod.GET)
+    public Result allInfo(@RequestParam(name = "communityId",required = true) String communityId
+            ,@RequestParam(name = "courtName",required = true) String courtName
+            ,@RequestParam(name = "buildNumber",required = true) String buildNumber) {
+
+        try{
+            Map<Object,Object> map=new HashMap<>();
+
+            QueryWrapper<BuildBasic> wrapper_base=new QueryWrapper<>();
+            wrapper_base.eq("community_id",communityId);
+            wrapper_base.eq("court_name",courtName);
+            wrapper_base.eq("build_number",buildNumber);
+            BuildBasic buildBasic=iBuildBasicService.getOne(wrapper_base);
+            map.put("basicInfo",buildBasic);
+
+
+            QueryWrapper<IndicatorValueBuild> wrapper_indicator_value=new QueryWrapper<>();
+            wrapper_indicator_value.eq("community_id",communityId);
+            wrapper_indicator_value.eq("court_name",courtName);
+            List<IndicatorValueBuild> indicatorValueBuildList=iIndicatorValueBuildService.list(wrapper_indicator_value);
+
+            map.put("indicatorValueList",indicatorValueBuildList);
+            return Result.success(map);
+
+        }catch (Exception e){
+            return Result.fail(e.getMessage());
+        }
+    }
 
 
     /**
@@ -331,16 +364,40 @@ public class AtvController {
 
         try{
             Map<String,Object> resMap=new HashMap<>();
+            QueryWrapper<IndicatorValueBuild> wrapper=new QueryWrapper<>();
+            wrapper.eq("community_id",communityId);
+            wrapper.eq("court_name",courtName);
 
-            for(int i=1;i<10;i++){
+            //因为数据固定，这里使用固定序号进行处理
+            for(int i=1;i<=10;i++){
                 String preStr="2."+i;
-                QueryWrapper<IndicatorValueBuild> wrapper=new QueryWrapper<>();
-                wrapper.eq("community_id",communityId);
-                wrapper.eq("court_name",courtName);
-                wrapper.likeRight("indicator_id",preStr);
-                List<IndicatorValueBuild> indicatorValueBuildList=iIndicatorValueBuildService.list(wrapper);
-                long m=indicatorValueBuildList.stream().map(IndicatorValueBuild::getBuildNumber).distinct().count();
-                resMap.put(preStr,m);
+                Map<String,Object> map=new HashMap<>();
+                switch (i){
+                    case 1:
+                    case 10:
+                        map=solveProblemBuildUtil(wrapper,preStr,4);
+                        break;
+                    case 2:
+                    case 9:
+                        map=solveProblemBuildUtil(wrapper,preStr,0);
+                        break;
+                    case 3:
+                        map=solveProblemBuildUtil(wrapper,preStr,7);
+                        break;
+                    case 4:
+                        map=solveProblemBuildUtil(wrapper,preStr,5);
+                        break;
+                    case 5:
+                    case 7:
+                        map=solveProblemBuildUtil(wrapper,preStr,2);
+                        break;
+                    case 6:
+                    case 8:
+                        map=solveProblemBuildUtil(wrapper,preStr,3);
+                        break;
+                    default:
+                }
+                resMap.putAll(map);
             }
 
             return Result.success(resMap);
@@ -348,6 +405,23 @@ public class AtvController {
         }catch (Exception e){
             return Result.fail(e.getMessage());
         }
+    }
+    Map<String,Object> solveProblemBuildUtil(QueryWrapper<IndicatorValueBuild> wrapper,String preStr,int count){
+        Map<String,Object> resMap=new HashMap<>();
+        for(int i=0;i<=count;i++){
+            String str=preStr;
+            QueryWrapper<IndicatorValueBuild> wrapper_new=new QueryWrapper<>();
+            wrapper_new=wrapper.clone();
+            //0的话代表高级目录，其余代表下面的子目录
+            if(i!=0){
+                str=str+"."+i;
+            }
+            wrapper_new.likeRight("indicator_id",str);
+            List<IndicatorValueBuild> indicatorValueBuildList=iIndicatorValueBuildService.list(wrapper_new);
+            long m=indicatorValueBuildList.stream().map(IndicatorValueBuild::getBuildNumber).distinct().count();
+            resMap.put(str,m);
+        }
+        return resMap;
     }
 
 
@@ -651,33 +725,6 @@ public class AtvController {
         return Result.success("修改成功");
     }
 
-    /**
-     * 图片上传
-     */
-    @ApiOperation(value = "图片上传")
-    @ResponseBody
-    @RequestMapping(value = "/uploadImg", method = RequestMethod.POST)
-    public Result uploadImg(
-            @RequestParam(name = "buildNumber") String buildNumber,
-            @RequestParam(name = "indicatorId") String indicatorId,
-            @RequestParam(name = "courtName") String courtName,
-            @RequestParam(name = "communityId") String communityId,
-            @RequestParam("file") MultipartFile file
-    ) throws IOException, SQLException {
-        byte[] bytes = file.getBytes();
-        Blob blob = new SerialBlob(bytes);
-
-        IndicatorValueBuild indicatorValueBuild=new IndicatorValueBuild();
-        indicatorValueBuild.setBuildNumber(buildNumber);
-        indicatorValueBuild.setIndicatorId(indicatorId);
-        indicatorValueBuild.setCourtName(courtName);
-        indicatorValueBuild.setCommunityId(communityId);
-        indicatorValueBuild.setPhotoFile(blob);
-
-        iIndicatorValueBuildService.save(indicatorValueBuild);
-
-        return Result.success("修改成功");
-    }
 
     /**
      * 图片上传-手写
@@ -690,6 +737,7 @@ public class AtvController {
             @RequestParam(name = "indicatorId") String indicatorId,
             @RequestParam(name = "courtName") String courtName,
             @RequestParam(name = "communityId") String communityId,
+            @RequestParam(name = "photoPath") String photoPath,
             @RequestParam("file") MultipartFile file
     ) throws IOException, SQLException {
         byte[] bytes = file.getBytes();
@@ -700,6 +748,7 @@ public class AtvController {
         map.put("indicator_id",indicatorId);
         map.put("court_name",courtName);
         map.put("community_id",communityId);
+        map.put("photo_path",photoPath);
         map.put("photo_file",blob);
 
         atvService.uploadImg(map);
@@ -726,32 +775,11 @@ public class AtvController {
         map.put("indicator_id",indicatorId);
         map.put("court_name",courtName);
         map.put("community_id",communityId);
-        Map<String,Object> resmap=atvService.downloadImg(map);
+        List<Map<String,Object>> resmap=atvService.downloadImg(map);
 
         return Result.success("查询成功",resmap);
     }
-    /**
-     * 图片获取
-     */
-    @ApiOperation(value = "图片获取")
-    @ResponseBody
-    @RequestMapping(value = "/downloadImg", method = RequestMethod.GET)
-    public Result downloadImg(
-            @RequestParam(name = "buildNumber") String buildNumber,
-            @RequestParam(name = "indicatorId") String indicatorId,
-            @RequestParam(name = "courtName") String courtName,
-            @RequestParam(name = "communityId") String communityId
-    ) throws IOException, SQLException {
 
-        QueryWrapper<IndicatorValueBuild> wrapper=new QueryWrapper<>();
-        wrapper.eq("build_number",buildNumber);
-        wrapper.eq("indicator_id",indicatorId);
-        wrapper.eq("court_name",courtName);
-        wrapper.eq("community_id",communityId);
-        IndicatorValueBuild indicatorValueBuild=iIndicatorValueBuildService.getOne(wrapper);
-
-        return Result.success("查询成功",indicatorValueBuild);
-    }
 
 
 

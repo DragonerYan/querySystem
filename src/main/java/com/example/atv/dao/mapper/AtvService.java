@@ -11,5 +11,5 @@ public interface AtvService {
     List<Map<String,Object>> buildSum(Map map);
 
     void uploadImg(Map  map);
-    Map<String,Object> downloadImg(Map  map);
+    List<Map<String,Object>> downloadImg(Map  map);
 }

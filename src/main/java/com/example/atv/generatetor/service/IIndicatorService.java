@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * </p>
  *
  * @author yxz
- * @since 2023-06-20
+ * @since 2023-06-23
  */
 public interface IIndicatorService extends IService<Indicator> {
 

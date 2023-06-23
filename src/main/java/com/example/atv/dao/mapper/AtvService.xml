@@ -30,13 +30,13 @@
     </select>
 
     <insert id="uploadImg"  parameterType="map">
-        insert into indicator_value_build(build_number,indicator_id,court_name,community_id,photo_file)
-        values (#{build_number},#{indicator_id},#{court_name},#{community_id},#{photo_file})
+        insert into build_photo(build_number,indicator_id,court_name,community_id,photo_file,photo_path)
+        values (#{build_number},#{indicator_id},#{court_name},#{community_id},#{photo_file},#{photo_path})
     </insert>
 
     <select id="downloadImg" resultType="map"  parameterType="map">
-        SELECT community_id,court_name,indicator_id,indicator_value,meno,longitude,latitude,report_year,build_number,photo_path,description,photo_file
-        FROM indicator_value_build WHERE (build_number = #{build_number} AND indicator_id = #{indicator_id}
+        SELECT community_id,court_name,indicator_id,build_number,photo_path,description,photo_file
+        FROM build_photo WHERE (build_number = #{build_number} AND indicator_id = #{indicator_id}
             AND court_name = #{court_name} AND community_id = #{community_id})
     </select>
 
