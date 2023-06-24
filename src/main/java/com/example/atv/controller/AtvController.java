@@ -346,6 +346,7 @@ public class AtvController {
             QueryWrapper<IndicatorValueBuild> wrapper_indicator_value=new QueryWrapper<>();
             wrapper_indicator_value.eq("community_id",communityId);
             wrapper_indicator_value.eq("court_name",courtName);
+            wrapper_indicator_value.eq("build_number",buildNumber);
             List<IndicatorValueBuild> indicatorValueBuildList=iIndicatorValueBuildService.list(wrapper_indicator_value);
 
             map.put("indicatorValueList",indicatorValueBuildList);
