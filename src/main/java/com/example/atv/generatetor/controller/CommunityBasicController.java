@@ -11,7 +11,7 @@ import org.springframework.stereotype.Controller;
  * </p>
  *
  * @author yxz
- * @since 2023-06-23
+ * @since 2023-06-24
  */
 @Controller
 @RequestMapping("/generatetor/communityBasic")

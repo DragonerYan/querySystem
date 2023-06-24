@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * </p>
  *
  * @author yxz
- * @since 2023-06-23
+ * @since 2023-06-24
  */
 public interface IndicatorValueMapper extends BaseMapper<IndicatorValue> {
 

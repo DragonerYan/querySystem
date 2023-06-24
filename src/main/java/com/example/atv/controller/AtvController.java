@@ -367,6 +367,7 @@ public class AtvController {
             QueryWrapper<IndicatorValueBuild> wrapper=new QueryWrapper<>();
             wrapper.eq("community_id",communityId);
             wrapper.eq("court_name",courtName);
+            wrapper.eq("indicator_value",1);
 
             //因为数据固定，这里使用固定序号进行处理
             for(int i=1;i<=10;i++){
@@ -416,7 +417,13 @@ public class AtvController {
             if(i!=0){
                 str=str+"."+i;
             }
-            wrapper_new.likeRight("indicator_id",str);
+            //在进行2.1数量时候，可能和2.10下面的所属问题进行混淆，所以这里在当是2.1高级目录的时候使用2.1.进行左匹配
+            if(Objects.equals(preStr, "2.1") && i==0){
+                wrapper_new.likeRight("indicator_id",str+".");
+            }else{
+                wrapper_new.likeRight("indicator_id",str);
+            }
+
             List<IndicatorValueBuild> indicatorValueBuildList=iIndicatorValueBuildService.list(wrapper_new);
             long m=indicatorValueBuildList.stream().map(IndicatorValueBuild::getBuildNumber).distinct().count();
             resMap.put(str,m);
