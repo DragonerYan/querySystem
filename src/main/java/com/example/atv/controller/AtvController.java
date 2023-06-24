@@ -228,6 +228,7 @@ public class AtvController {
                                  @RequestParam(name = "communityId",required = false) String communityId,
                                  @RequestParam(name = "communityName",required = false) String communityName,
                                  @RequestParam(name = "isPc",required = false) String isPc,
+                                 @RequestParam(name = "problemState",required = false) String problemState,
                                  @RequestParam(name = "pageSize",required = false,defaultValue = "1000000") Long pageSize,
                                  @RequestParam(name = "offset",required = false,defaultValue = "1") Long offset
     ) {
@@ -261,6 +262,9 @@ public class AtvController {
         }
         if(communityName!=null && !Objects.equals(communityName,"")){
             wrapper.eq("community_name",communityName);
+        }
+        if(problemState!=null && !Objects.equals(problemState,"")){
+            wrapper.eq("problem_state",problemState);
         }
 
         //在pc端列表界面增加，状态筛选和排序
