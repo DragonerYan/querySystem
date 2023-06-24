@@ -234,7 +234,7 @@ public class AtvController {
     ) {
         QueryWrapper<BuildBasic> wrapper=new QueryWrapper<>();
 
-        if(province!=null && !Objects.equals(province,"")){
+        if(courtName!=null && !Objects.equals(courtName,"")){
             wrapper.eq("court_name",courtName);
         }
 
@@ -380,6 +380,7 @@ public class AtvController {
                 switch (i){
                     case 1:
                     case 10:
+                    case 8:
                         map=solveProblemBuildUtil(wrapper,preStr,4);
                         break;
                     case 2:
@@ -397,7 +398,6 @@ public class AtvController {
                         map=solveProblemBuildUtil(wrapper,preStr,2);
                         break;
                     case 6:
-                    case 8:
                         map=solveProblemBuildUtil(wrapper,preStr,3);
                         break;
                     default:
