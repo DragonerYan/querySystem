@@ -1,55 +1,61 @@
 package com.example.atv.controller;
 
-import antlr.StringUtils;
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.TypeReference;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.atv.constant.Result;
 import com.example.atv.dao.mapper.AtvService;
 import com.example.atv.generatetor.entity.*;
-import com.example.atv.generatetor.mapper.CommunityBasicMapper;
 import com.example.atv.generatetor.service.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import springfox.documentation.spring.web.json.Json;
 
 import javax.sql.rowset.serial.SerialBlob;
-import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Api(description = "atv接口")
 @Slf4j
-@AllArgsConstructor
 @CrossOrigin
 @Controller
 @RequestMapping("/api")
 public class AtvController {
 
-    private final ICommunityBasicService iCommunityBasicService;
-    private final ICommunityService iCommunityService;
-    private final ICourtBasicService iCourtBasicService;
-    private final IIndicatorService iIndicatorService;
-    private final IIndicatorValueService iIndicatorValueService;
-    private final IUserService iUserService;
-    private final IBuildBasicService iBuildBasicService;
-    private final IIndicatorValueBuildService iIndicatorValueBuildService;
-    private final AtvService atvService;
+    @Autowired
+    private  ICommunityBasicService iCommunityBasicService;
+    @Autowired
+    private ICommunityService iCommunityService;
+    @Autowired
+    private ICourtBasicService iCourtBasicService;
+    @Autowired
+    private IIndicatorService iIndicatorService;
+    @Autowired
+    private IIndicatorValueService iIndicatorValueService;
+    @Autowired
+    private IUserService iUserService;
+    @Autowired
+    private IBuildBasicService iBuildBasicService;
+    @Autowired
+    private IIndicatorValueBuildService iIndicatorValueBuildService;
+
+    @Autowired(required = false)
+    private AtvService atvService;
+
+    @Value("${imgPath}")
+    private  String imgBasePath;
 
 
 
@@ -755,17 +761,78 @@ public class AtvController {
         byte[] bytes = file.getBytes();
         Blob blob = new SerialBlob(bytes);
 
+        String photoId= UUID.randomUUID().toString();
         Map<String,Object> map=new HashMap<>();
         map.put("build_number",buildNumber);
         map.put("indicator_id",indicatorId);
         map.put("court_name",courtName);
         map.put("community_id",communityId);
         map.put("photo_path",photoPath);
+        map.put("photo_id",photoId);
         map.put("photo_file",blob);
 
         atvService.uploadImg(map);
 
         return Result.success("修改成功");
+    }
+
+    /**
+     * 图片上传-保存到后台服务器
+     */
+    @ApiOperation(value = "图片上传-保存到后台服务器")
+    @ResponseBody
+    @RequestMapping(value = "/uploadImageLocal",method = RequestMethod.POST)
+    public String uploadImageLocal(@RequestParam("file") MultipartFile file,
+                                   @RequestParam(name = "buildNumber") String buildNumber,
+                                   @RequestParam(name = "indicatorId") String indicatorId,
+                                   @RequestParam(name = "courtName") String courtName,
+                                   @RequestParam(name = "communityId") String communityId,
+                                   @RequestParam(name = "photoPath") String photoPath) {
+
+        String photoId= UUID.randomUUID().toString();
+        //图片保存路径
+
+        String savePath = imgBasePath+"smokeManagement/img/"+photoId+".jpg";
+
+        System.out.println(savePath);
+
+        File saveFile = new File(savePath);
+
+        try {
+            file.transferTo(saveFile);
+            //将临时存储的文件移动到真实存储路径下
+            Map<String,Object> map=new HashMap<>();
+            map.put("photo_id",photoId);
+            map.put("build_number",buildNumber);
+            map.put("indicator_id",indicatorId);
+            map.put("court_name",courtName);
+            map.put("community_id",communityId);
+            map.put("photo_path",savePath);
+            map.put("photo_file","");
+
+            atvService.uploadImg(map);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return savePath;
+    }
+
+    /**
+     * 图片删除-手动
+     */
+    @ApiOperation(value = "图片删除-手动")
+    @ResponseBody
+    @RequestMapping(value = "/deleteImgHand", method = RequestMethod.GET)
+    public Result deleteImgHand(
+            @RequestParam(name = "photoId") String photoId
+    ) throws IOException, SQLException {
+
+        Map<String,Object> map=new HashMap<>();
+        map.put("photo_id",photoId);
+        atvService.deleteImg(map);
+
+        return Result.success("删除成功");
     }
 
 
