@@ -11,7 +11,7 @@ import io.swagger.annotations.ApiModelProperty;
  * </p>
  *
  * @author yxz
- * @since 2023-06-24
+ * @since 2023-06-25
  */
 @TableName("indicator_value_build")
 @ApiModel(value = "IndicatorValueBuild对象", description = "")
@@ -41,6 +41,8 @@ public class IndicatorValueBuild implements Serializable {
     private String photoPath;
 
     private String description;
+
+    private String location;
 
 
     public String getCommunityId() {
@@ -131,6 +133,14 @@ public class IndicatorValueBuild implements Serializable {
         this.description = description;
     }
 
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
     @Override
     public String toString() {
         return "IndicatorValueBuild{" +
@@ -145,6 +155,7 @@ public class IndicatorValueBuild implements Serializable {
         ", buildNumber=" + buildNumber +
         ", photoPath=" + photoPath +
         ", description=" + description +
+        ", location=" + location +
         "}";
     }
 }

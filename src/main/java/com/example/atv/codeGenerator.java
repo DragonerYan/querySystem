@@ -16,7 +16,7 @@ public class codeGenerator {
                     builder.author("yxz") // 设置作者
                             .enableSwagger() // 开启 swagger 模式
                             .fileOverride() // 覆盖已生成文件
-                            .outputDir("/Users/yanxinzhao/Desktop/未命名文件夹/smokeManagement/src/main/java/"); // 指定输出目录
+                            .outputDir("/Users/yanxinzhao/Desktop/atv-qu/smokeManagement/src/main/java/"); // 指定输出目录
                 })
                 .strategyConfig(builder -> {
                     builder.addInclude("user");
