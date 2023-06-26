@@ -1,0 +1,113 @@
+
+.form-data{
+	&::v-deep{
+		.uni-forms-item__content {
+			display: flex;
+			align-items: center;
+			text {
+				margin-left: 10rpx;
+			}
+		}
+		.uni-forms-item.is-direction-top .uni-forms-item__label{
+			align-items: flex-start;
+			height: auto;
+		}
+		 .checklist-group .checklist-box{
+			 align-items: flex-start !important;
+		 }
+		 .checkbox__inner,.radio__inner{
+			 margin-top: 7rpx;
+		 }
+			
+		.checklist-text,.uni-forms-item__label,.uni-forms-item__content,input,input::placeholder{
+			font-size: 32rpx !important;
+			line-height: 48rpx !important;
+		}
+		.uni-forms-item__label{
+			font-weight: 500;
+			font-size: 34rpx !important;
+		}
+		.uni-card__header-content-title,.uni-section__content-title,.card-title{
+			font-size: 38rpx !important;
+			font-weight: 600;
+			&.uni-ellipsis{
+				overflow:visible;
+				white-space:wrap;
+			}
+		}
+		.form-card{
+			margin-bottom: 32rpx !important;
+		}
+		.card-title{
+			padding: 10px ;
+			display: flex;
+			justify-content: space-between;
+			align-items:center;
+			border-bottom: 1px #EBEEF5 solid;
+		}
+		.other_form_item {
+			.uni-forms-item__content {
+				display: block;
+				.checklist-group{
+					flex-direction: column;
+				}
+			}
+		}
+		.no-label_form_item{
+			.uni-forms-item__label {
+				display: none;
+			}
+		}
+		.child_form_item{
+			margin-bottom: 0 !important;
+		}
+		
+	}
+}
+.form-box {
+		position: relative;
+		height: fit-content;
+		padding: 32rpx;
+		&.mask {
+			background-color: transparent;
+
+			&::v-deep {
+				.uni-forms-item .is-required {
+					display: none;
+				}
+				.uni-easyinput,.checklist-group,.form-picker{
+					filter: grayscale(100%);
+					position: relative;
+					&:after {
+						content: '';
+						position: absolute;
+						top: 0;
+						left: 0;
+						height: 100%;
+						width: 100%;
+						z-index: 10;
+						background-color: transparent;
+					}
+					
+				}
+			}
+
+		
+			.btns {
+				display: none;
+			}
+		}
+		.submit {
+			margin-top: 30rpx;
+		}
+		
+		.btns {
+			display: flex;
+			margin-right: -32rpx;
+		
+			&>* {
+				margin-right: 32rpx;
+			}
+		}
+		
+	}
