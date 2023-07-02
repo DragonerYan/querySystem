@@ -815,7 +815,7 @@ public class AtvController {
             e.printStackTrace();
         }
 
-        return savePath;
+        return photoId;
     }
 
     /**
