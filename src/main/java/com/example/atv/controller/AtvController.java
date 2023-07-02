@@ -643,7 +643,7 @@ public class AtvController {
         wrapper.eq("city",city);
         wrapper.eq("county",county);
         wrapper.eq("street",street);
-//        if(communityId!=null && !Objects.equals(communityId,"")) {
+//        if(communityId!=null && !Objects.å(communityId,"")) {
 //            wrapper.eq("community_id",communityId);
 //        }
         wrapper.eq("username",userName);
@@ -792,7 +792,7 @@ public class AtvController {
         String photoId= UUID.randomUUID().toString();
         //图片保存路径
 
-        String savePath = imgBasePath+"smokeManagement/img/"+photoId+".jpg";
+        String savePath = imgBasePath+photoId+".jpg";
 
         System.out.println(savePath);
 
