@@ -57,6 +57,8 @@ public class AtvController {
     @Value("${imgPath}")
     private  String imgBasePath;
 
+    @Value("${imgHost}")
+    private String imgHost;
 
 
     /**
@@ -782,7 +784,7 @@ public class AtvController {
     @ApiOperation(value = "图片上传-保存到后台服务器")
     @ResponseBody
     @RequestMapping(value = "/uploadImageLocal",method = RequestMethod.POST)
-    public String uploadImageLocal(@RequestParam("file") MultipartFile file,
+    public Result uploadImageLocal(@RequestParam("file") MultipartFile file,
                                    @RequestParam(name = "buildNumber") String buildNumber,
                                    @RequestParam(name = "indicatorId") String indicatorId,
                                    @RequestParam(name = "courtName") String courtName,
@@ -807,7 +809,7 @@ public class AtvController {
             map.put("indicator_id",indicatorId);
             map.put("court_name",courtName);
             map.put("community_id",communityId);
-            map.put("photo_path",savePath);
+            map.put("photo_path",imgHost+savePath);
             map.put("photo_file","");
 
             atvService.uploadImg(map);
@@ -815,7 +817,10 @@ public class AtvController {
             e.printStackTrace();
         }
 
-        return photoId;
+        Map<String,String> map=new HashMap<>();
+        map.put("photoId",photoId);
+        map.put("photoPath",imgHost+savePath);
+        return Result.success("sucess",map);
     }
 
     /**
