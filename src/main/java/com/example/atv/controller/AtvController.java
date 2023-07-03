@@ -809,7 +809,7 @@ public class AtvController {
             map.put("indicator_id",indicatorId);
             map.put("court_name",courtName);
             map.put("community_id",communityId);
-            map.put("photo_path",imgHost+savePath);
+            map.put("photo_path",imgHost+photoId+".jpg");
             map.put("photo_file","");
 
             atvService.uploadImg(map);
@@ -819,8 +819,8 @@ public class AtvController {
 
         Map<String,String> map=new HashMap<>();
         map.put("photoId",photoId);
-        map.put("photoPath",imgHost+savePath);
-        return Result.success("sucess",map);
+        map.put("photoPath",imgHost+photoId+".jpg");
+        return Result.success("success",map);
     }
 
     /**
