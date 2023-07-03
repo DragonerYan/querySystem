@@ -819,7 +819,7 @@ public class AtvController {
 
         Map<String,String> map=new HashMap<>();
         map.put("photoId",photoId);
-        map.put("photoPath",imgHost+photoId+".jpg");
+        map.put("photoPath",photoId+".jpg");
         return Result.success("success",map);
     }
 
