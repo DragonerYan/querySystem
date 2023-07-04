@@ -13,7 +13,7 @@ import io.swagger.annotations.ApiModelProperty;
  * </p>
  *
  * @author yxz
- * @since 2023-06-25
+ * @since 2023-07-04
  */
 @TableName("community_basic")
 @ApiModel(value = "CommunityBasic对象", description = "")
@@ -52,6 +52,15 @@ public class CommunityBasic implements Serializable {
     private String communityName;
 
     private String reviewComment;
+
+    @ApiModelProperty("常住人口年龄构成：0-3岁（含3岁）（宁波）")
+    private Integer age03;
+
+    @ApiModelProperty("60岁及以上（宁波）")
+    private Integer age60;
+
+    @ApiModelProperty("65岁及以上（宁波）")
+    private Integer age65;
 
 
     public String getCommunityId() {
@@ -174,6 +183,30 @@ public class CommunityBasic implements Serializable {
         this.reviewComment = reviewComment;
     }
 
+    public Integer getAge03() {
+        return age03;
+    }
+
+    public void setAge03(Integer age03) {
+        this.age03 = age03;
+    }
+
+    public Integer getAge60() {
+        return age60;
+    }
+
+    public void setAge60(Integer age60) {
+        this.age60 = age60;
+    }
+
+    public Integer getAge65() {
+        return age65;
+    }
+
+    public void setAge65(Integer age65) {
+        this.age65 = age65;
+    }
+
     @Override
     public String toString() {
         return "CommunityBasic{" +
@@ -192,6 +225,9 @@ public class CommunityBasic implements Serializable {
         ", street=" + street +
         ", communityName=" + communityName +
         ", reviewComment=" + reviewComment +
+        ", age03=" + age03 +
+        ", age60=" + age60 +
+        ", age65=" + age65 +
         "}";
     }
 }

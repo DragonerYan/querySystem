@@ -13,7 +13,7 @@ import io.swagger.annotations.ApiModelProperty;
  * </p>
  *
  * @author yxz
- * @since 2023-06-25
+ * @since 2023-07-04
  */
 @TableName("court_basic")
 @ApiModel(value = "CourtBasic对象", description = "")
@@ -48,7 +48,6 @@ public class CourtBasic implements Serializable {
     @ApiModelProperty("0 有物业 1无物业")
     private Integer management;
 
-    @ApiModelProperty("平方米小区总建筑面积")
     private BigDecimal area;
 
     @ApiModelProperty("住宅总套数")
@@ -74,6 +73,12 @@ public class CourtBasic implements Serializable {
 
     @ApiModelProperty("10 层以上建筑数量")
     private Integer numberOver10Building;
+
+    @ApiModelProperty("10-17 层以上建筑数量(宁波)")
+    private Integer number1017Building;
+
+    @ApiModelProperty("18 层以上建筑数量(宁波)")
+    private Integer numberOver18Building;
 
     @ApiModelProperty("填报时间")
     private LocalDateTime dateTime;
@@ -250,6 +255,22 @@ public class CourtBasic implements Serializable {
         this.numberOver10Building = numberOver10Building;
     }
 
+    public Integer getNumber1017Building() {
+        return number1017Building;
+    }
+
+    public void setNumber1017Building(Integer number1017Building) {
+        this.number1017Building = number1017Building;
+    }
+
+    public Integer getNumberOver18Building() {
+        return numberOver18Building;
+    }
+
+    public void setNumberOver18Building(Integer numberOver18Building) {
+        this.numberOver18Building = numberOver18Building;
+    }
+
     public LocalDateTime getDateTime() {
         return dateTime;
     }
@@ -321,6 +342,8 @@ public class CourtBasic implements Serializable {
         ", number46Building=" + number46Building +
         ", number79Building=" + number79Building +
         ", numberOver10Building=" + numberOver10Building +
+        ", number1017Building=" + number1017Building +
+        ", numberOver18Building=" + numberOver18Building +
         ", dateTime=" + dateTime +
         ", state=" + state +
         ", userId=" + userId +
