@@ -139,11 +139,12 @@ public class AtvController {
             wrapper.eq("community_id",communityId);
         }
 
-        //在pc端列表界面增加，状态筛选和排序
-        if(Objects.equals(isPc, "1")){
-            wrapper.ne("state","0");
-            wrapper.lambda().orderByAsc(CommunityBasic::getState);
-        }
+        wrapper.lambda().orderByAsc(CommunityBasic::getState);
+//        //在pc端列表界面增加，状态筛选和排序
+//        if(Objects.equals(isPc, "1")){
+//            wrapper.ne("state","0");
+//
+//        }
 
         //增加分页功能
         Page<CommunityBasic> page=new Page<>(offset,pageSize);
@@ -204,11 +205,12 @@ public class AtvController {
             wrapper.eq("community_name",communityName);
         }
 
-        //在pc端列表界面增加，状态筛选和排序
-        if(Objects.equals(isPc, "1")){
-            wrapper.ne("state","0");
-            wrapper.lambda().orderByAsc(CourtBasic::getState);
-        }
+        wrapper.lambda().orderByAsc(CourtBasic::getState);
+//        //在pc端列表界面增加，状态筛选和排序
+//        if(Objects.equals(isPc, "1")){
+//            wrapper.ne("state","0");
+//
+//        }
         //增加分页功能
         Page<CourtBasic> page=new Page<>(offset,pageSize);
         Page<CourtBasic> courtBasicList=iCourtBasicService.page(page,wrapper);
@@ -275,11 +277,12 @@ public class AtvController {
             wrapper.eq("problem_state",problemState);
         }
 
-        //在pc端列表界面增加，状态筛选和排序
-        if(Objects.equals(isPc, "1")){
-            wrapper.ne("state","0");
-            wrapper.lambda().orderByAsc(BuildBasic::getState);
-        }
+        wrapper.lambda().orderByAsc(BuildBasic::getState);
+//        //在pc端列表界面增加，状态筛选和排序
+//        if(Objects.equals(isPc, "1")){
+//            wrapper.ne("state","0");
+//
+//        }
         //增加分页功能
         Page<BuildBasic> page=new Page<>(offset,pageSize);
         Page<BuildBasic> buildBasicList=iBuildBasicService.page(page,wrapper);
