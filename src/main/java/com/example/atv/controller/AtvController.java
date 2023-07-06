@@ -645,9 +645,9 @@ public class AtvController {
         wrapper.eq("city",city);
         wrapper.eq("county",county);
         wrapper.eq("street",street);
-//        if(communityId!=null && !Objects.å(communityId,"")) {
-//            wrapper.eq("community_id",communityId);
-//        }
+        if(communityId!=null && !Objects.equals(communityId,"")) {
+            wrapper.eq("community_id",communityId);
+        }
         wrapper.eq("username",userName);
 
         User user=iUserService.getOne(wrapper);
