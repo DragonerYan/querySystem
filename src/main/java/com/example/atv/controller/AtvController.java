@@ -8,6 +8,7 @@ import com.example.atv.constant.Result;
 import com.example.atv.dao.mapper.AtvService;
 import com.example.atv.generatetor.entity.*;
 import com.example.atv.generatetor.service.*;
+import com.example.atv.util.MD5Util;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
@@ -641,6 +642,7 @@ public class AtvController {
             @RequestParam(name = "userName") String userName,
             @RequestParam(name = "password") String password
     ) {
+
         //根据userName查询是否存在
         QueryWrapper<User> wrapper=new QueryWrapper<>();
 
@@ -658,7 +660,8 @@ public class AtvController {
             return Result.fail("无对应用户存在");
         }
         //查看密码是否匹配
-        if(!user.getPassword().equals(password)){
+        String password_true=MD5Util.string2MD5(user.getPassword());
+        if(!password_true.equals(password)){
             return Result.fail("密码错误！");
         }
         Map<String,String> map=new HashMap<>();
