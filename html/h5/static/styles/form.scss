@@ -1,6 +1,13 @@
 
 .form-data{
 	&::v-deep{
+		.uni-forms-item{
+			.uni-forms-item {
+				&:last-of-type{
+					margin-bottom: 0;
+				}
+			}
+		}
 		.uni-forms-item__content {
 			display: flex;
 			align-items: center;
@@ -12,12 +19,6 @@
 			align-items: flex-start;
 			height: auto;
 		}
-		 .checklist-group .checklist-box{
-			 align-items: flex-start !important;
-		 }
-		 .checkbox__inner,.radio__inner{
-			 margin-top: 7rpx;
-		 }
 			
 		.checklist-text,.uni-forms-item__label,.uni-forms-item__content,input,input::placeholder{
 			font-size: 32rpx !important;
@@ -27,12 +28,20 @@
 			font-weight: 500;
 			font-size: 34rpx !important;
 		}
-		.uni-card__header-content-title,.uni-section__content-title,.card-title{
+		.uni-section__content-title{
 			font-size: 38rpx !important;
 			font-weight: 600;
 			&.uni-ellipsis{
 				overflow:visible;
 				white-space:wrap;
+			}
+		}
+		.uni-card__header-content-title,.card-title{
+			font-size: 36rpx !important;
+			font-weight: 600;
+			&.uni-ellipsis{
+				overflow:visible !important;
+				white-space:wrap !important;
 			}
 		}
 		.form-card{
@@ -45,22 +54,60 @@
 			align-items:center;
 			border-bottom: 1px #EBEEF5 solid;
 		}
-		.other_form_item {
-			.uni-forms-item__content {
-				display: block;
-				.checklist-group{
-					flex-direction: column;
+		// .other_form_item {
+		// 	.uni-forms-item__content {
+		// 		display: block;
+		// 		.checklist-group{
+		// 			flex-direction: column;
+		// 		}
+		// 	}
+		// }
+		// .has_child_form_item{
+		// 	.uni-forms-item__content {
+		// 		display: block;
+		// 	}
+		// }
+			
+		.no_texarea_form_item.uni-forms-item{
+				flex-direction: row !important;
+				margin-bottom: 10px;
+				align-items: center;
+				.is-required {
+					display: none;
 				}
+				.uni-forms-item__label {
+					width: initial !important;
+					margin-right: 12rpx;
+					font-size: 32rpx !important;
+					padding: 0;
+				}
+			.uni-forms-item__content {
+				display:flex;
 			}
 		}
+		.suffix{
+			flex-shrink: 0;
+		}
+	.child-form-rows{
+		flex-direction: row !important;
+		.uni-forms-item__label {
+			width: fit-content !important; 
+			align-items: center !important;
+		}
+	}
+	.child-form-item{
+		.uni-forms-item__label {
+			font-size: 32rpx !important;
+		}
+	}
 		.no-label_form_item{
 			.uni-forms-item__label {
 				display: none;
 			}
 		}
-		.child_form_item{
-			margin-bottom: 0 !important;
-		}
+		// .child_form_item{
+		// 	margin-bottom: 0 !important;
+		// }
 		
 	}
 }
@@ -75,7 +122,7 @@
 				.uni-forms-item .is-required {
 					display: none;
 				}
-				.uni-easyinput,.checklist-group,.form-picker{
+				.uni-easyinput,.checklist-group,.form-picker,.checkbox-group{
 					filter: grayscale(100%);
 					position: relative;
 					&:after {

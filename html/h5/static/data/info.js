@@ -12,7 +12,7 @@ export const houerType = [{
 	},
 	{
 		value: "0",
-		text: "其他"
+		text: "其他",
 	},
 ]
 const currentYear = new Date().getFullYear();
@@ -58,12 +58,14 @@ export const selectArr = [{
 
 export const babyQuestion = [{
 	value: "1",
-	text: "存在对婴幼儿早期发展指导等照护服务不到位的问题"
+	text: "存在对婴幼儿早期发展指导等照护服务不到位的问题",
+	slot:"detail"
 }]
 
 export const kindergarten = [{
 	value: "1",
-	text: "存在普惠性学前教育服务不到位的问题"
+	text: "存在普惠性学前教育服务不到位的问题",
+	slot:"detail"
 }]
 
 export const healthyArr = [{
@@ -88,7 +90,8 @@ export const healthyArr = [{
 	},
 	{
 		value: "3.1.1.3.6",
-		text: "其他问题"
+		text: "其他问题",
+		slot:'other'
 	},
 
 ]
@@ -103,14 +106,16 @@ export const parking = [
 	},
 	{
 		value: "3.1.5.2.2",
-		text: "其他问题"
+		text: "其他问题",
+		slot:'other'
 	},
 ]
 export const energy = [
 
 	{
 		value: "1",
-		text: "充电桩在安装、使用、运维过程中存在问题"
+		text: "充电桩在安装、使用、运维过程中存在问题",
+		slot:"detail"
 	},
 
 ]
@@ -138,7 +143,8 @@ export const equipment = [
 	},
 	{
 		value: "3.2.7.3.6",
-		text: "其他问题"
+		text: "其他问题",
+		slot:'other'
 	},
 ]
 export const sidewalk = [
@@ -173,7 +179,8 @@ export const sidewalk = [
 	},
 	{
 		value: "3.2.8.1.8",
-		text: "其他问题"
+		text: "其他问题",
+		slot:'other'
 	},
 
 
@@ -191,7 +198,8 @@ export const rubbish = [
 	},
 	{
 		value: "3.2.9.1.3",
-		text: "其他问题"
+		text: "其他问题",
+		slot:'other'
 	},
 ]
 
@@ -219,7 +227,8 @@ export const property = [
 	},
 	{
 		value: "3.3.10.1.6",
-		text: "其他问题"
+		text: "其他问题",
+		slot:'other'
 	},
 ]
 
@@ -236,7 +245,8 @@ export const pwisdom = [
 	},
 	{
 		value: "3.3.11.1.3",
-		text: "其他问题"
+		text: "其他问题",
+		slot:'other'
 	},
 ]
 export const hwisdom = [{
@@ -249,7 +259,8 @@ export const hwisdom = [{
 	},
 	{
 		value: "3.3.11.2.3",
-		text: "其他问题"
+		text: "其他问题",
+		slot:'other'
 	},
 ]
 
@@ -264,7 +275,6 @@ export const allIndicatorValue = {
 	'3.3.10.1': [...property],
 	'3.3.11.1': [...pwisdom],
 	'3.3.11.2': [...hwisdom],
-
 }
 export const specificIndicatorValue = {
 	'3.1.2.3': '3.1.2.3.1',
