@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * </p>
  *
  * @author yxz
- * @since 2023-07-06
+ * @since 2023-07-07
  */
 public interface ICommunityBasicService extends IService<CommunityBasic> {
 
