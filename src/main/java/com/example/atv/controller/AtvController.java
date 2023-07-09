@@ -522,6 +522,15 @@ public class AtvController {
     public Result buildBasicSave(@RequestBody List<BuildBasic> buildBasicList) {
 
         try{
+
+            //先对一个小区中的全部数据进行删除
+            QueryWrapper<BuildBasic> wrapper_delete=new QueryWrapper<>();
+            wrapper_delete.eq("community_id",buildBasicList.get(0).getCommunityId())
+                            .eq("court_name",buildBasicList.get(0).getCourtName())
+                            .eq("report_year",buildBasicList.get(0).getReportYear());
+            iBuildBasicService.removeById(wrapper_delete);
+
+            //然后对数据进行新增
             buildBasicList.forEach(buildBasic -> {
                 QueryWrapper<BuildBasic> wrapper=new QueryWrapper<>();
                 wrapper.eq("community_id",buildBasic.getCommunityId())
