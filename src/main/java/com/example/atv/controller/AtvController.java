@@ -528,7 +528,11 @@ public class AtvController {
             wrapper_delete.eq("community_id",buildBasicList.get(0).getCommunityId())
                             .eq("court_name",buildBasicList.get(0).getCourtName())
                             .eq("report_year",buildBasicList.get(0).getReportYear());
-            iBuildBasicService.removeById(wrapper_delete);
+            BuildBasic buildBasic_del=new BuildBasic();
+            buildBasic_del.setCommunityId(buildBasicList.get(0).getCommunityId());
+            buildBasic_del.setCourtName(buildBasicList.get(0).getCourtName());
+            buildBasic_del.setReportYear(buildBasicList.get(0).getReportYear());
+            iBuildBasicService.remove(wrapper_delete);
 
             //然后对数据进行新增
             buildBasicList.forEach(buildBasic -> {
