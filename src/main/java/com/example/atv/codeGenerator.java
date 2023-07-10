@@ -11,7 +11,7 @@ public class codeGenerator {
      */
     public static void main(String[] args) {
         String url="jdbc:mysql://127.0.0.1:3306/bjtu_atv?useSSL=false&characterEncoding=UTF-8";
-        FastAutoGenerator.create(url, "root", "")
+        FastAutoGenerator.create(url, "root", "yxz09179012")
                 .globalConfig(builder -> {
                     builder.author("yxz") // 设置作者
                             .enableSwagger() // 开启 swagger 模式
