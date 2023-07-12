@@ -1,15 +1,23 @@
 package com.example.atv.controller;
 
+import com.alibaba.excel.EasyExcel;
+import com.alibaba.excel.ExcelWriter;
+import com.alibaba.excel.write.builder.ExcelWriterBuilder;
+import com.alibaba.excel.write.builder.ExcelWriterSheetBuilder;
+import com.alibaba.excel.write.metadata.WriteSheet;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.example.atv.constant.ModelOfExcel;
 import com.example.atv.constant.Result;
 import com.example.atv.dao.mapper.AtvService;
 import com.example.atv.generatetor.entity.*;
 import com.example.atv.generatetor.service.*;
 import com.example.atv.util.MD5Util;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,6 +27,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.sql.rowset.serial.SerialBlob;
 import java.io.File;
 import java.io.IOException;
@@ -727,6 +736,163 @@ public class AtvController {
         resMap.put("resList",resList);
         return Result.success("查询成功",resMap);
     }
+
+    /**
+     * excel导出功能
+     */
+    @ApiOperation(value = "excel导出功能")
+    @ResponseBody
+    @RequestMapping(value = "/getExcel", method = RequestMethod.POST)
+    public void getExcel(HttpServletResponse response,
+            @RequestParam(name = "province",required = false) String province
+            ,@RequestParam(name = "city",required = false) String city
+            ,@RequestParam(name = "county",required = false) String county
+            ,@RequestParam(name = "street",required = false) String street
+            ,@RequestParam(name = "communityId",required = false) String communityId
+            ,@RequestParam(name = "courtName",required = false) String courtName
+            ,@RequestParam(name = "buildNumber",required = false) String buildNumber
+            ,@RequestParam(name = "type",required = false) String type
+    ) throws IOException {
+
+        //查询基本信息
+        QueryWrapper wrapper_basic=new QueryWrapper<>();
+        if(province!=null && !"".equals(province)){
+            wrapper_basic.eq("province",province);
+        }
+        if(city!=null && !"".equals(city)){
+            wrapper_basic.eq("city",city);
+        }
+        if(county!=null && !"".equals(county)){
+            wrapper_basic.eq("county",county);
+        }
+        if(street!=null && !"".equals(street)){
+            wrapper_basic.eq("street",street);
+        }
+        if(buildNumber!=null && !"".equals(buildNumber)){
+            wrapper_basic.eq("build_number",buildNumber);
+        }
+        if(courtName!=null && !"".equals(courtName)){
+            wrapper_basic.eq("court_name",courtName);
+        }
+        if(communityId!=null && !"".equals(communityId)){
+            wrapper_basic.eq("community_id",communityId);
+        }
+
+        List<Map<String,Object>> fillDatas=new ArrayList<>();
+        switch (type){
+            case "community":
+                fillDatas=initCommunityData(wrapper_basic); break;
+            case "court":
+                fillDatas=initCourtData(wrapper_basic); break;
+            default:
+                fillDatas=initBuildData(wrapper_basic);break;
+
+        }
+
+        //设置响应头部信息，格式为附件，文件名为expert.xlsx
+        response.setContentType("application/vnd.ms-excel");
+        response.setHeader("Content-Disposition","attachment; filename=" + "testexcel.xlsx");
+        // 加载模板
+        String templateFile=type+"_export.xlsx" ;
+        // 生成工作簿对象
+        ExcelWriterBuilder workBookWriter = EasyExcel.write(response.getOutputStream())
+                .withTemplate(templateFile);
+        // 创建工作表对象
+        ExcelWriterSheetBuilder sheet = workBookWriter.sheet();
+        // 填充数据，doXxx会在读写结束后自动关闭流
+        sheet.doFill(fillDatas);
+
+    }
+
+    /**
+     * 初始化楼栋导出信息
+     */
+    private List<Map<String,Object>> initBuildData(QueryWrapper<BuildBasic> wrapper_basic) {
+
+        List<Map<String,Object>> fillDatas = new ArrayList<>();
+
+        List<BuildBasic> buildBasicList=iBuildBasicService.list(wrapper_basic);
+
+        //添加详细信息
+        buildBasicList.forEach(buildBasic -> {
+            Map<String,Object> fillData = new HashMap<>();
+            QueryWrapper<IndicatorValueBuild> wrapper_indicator=new QueryWrapper<>();
+            wrapper_indicator.eq("community_id",buildBasic.getCommunityId());
+            wrapper_indicator.eq("court_name",buildBasic.getCourtName());
+            wrapper_indicator.eq("build_number",buildBasic.getBuildNumber());
+            List<IndicatorValueBuild> indicatorValueBuildList=iIndicatorValueBuildService.list(wrapper_indicator);
+
+            fillData.put("community_name",buildBasic.getCommunityName());
+            fillData.put("court_name",buildBasic.getCourtName());
+            fillData.put("build_number",buildBasic.getBuildNumber());
+            indicatorValueBuildList.forEach(indicatorValueBuild -> {
+                fillData.put(indicatorValueBuild.getIndicatorId(),indicatorValueBuild.getIndicatorValue());
+            });
+
+
+            fillDatas.add(fillData);
+        });
+
+        return fillDatas;
+    }
+
+    /**
+     * 初始化小区导出信息
+     */
+    private List<Map<String,Object>> initCourtData(QueryWrapper<CourtBasic> wrapper_basic) {
+
+        List<Map<String,Object>> fillDatas = new ArrayList<>();
+
+        List<CourtBasic> buildBasicList=iCourtBasicService.list(wrapper_basic);
+
+        //添加详细信息
+        buildBasicList.forEach(buildBasic -> {
+            Map<String,Object> fillData = new HashMap<>();
+            QueryWrapper<IndicatorValue> wrapper_indicator=new QueryWrapper<>();
+            wrapper_indicator.eq("community_id",buildBasic.getCommunityId());
+            wrapper_indicator.eq("court_name",buildBasic.getCourtName());
+            List<IndicatorValue> indicatorValueBuildList=iIndicatorValueService.list(wrapper_indicator);
+
+            fillData.put("community_name",buildBasic.getCommunityName());
+            fillData.put("court_name",buildBasic.getCourtName());
+            indicatorValueBuildList.forEach(indicatorValueBuild -> {
+                fillData.put(indicatorValueBuild.getIndicatorId(),indicatorValueBuild.getIndicatorValue());
+            });
+
+
+            fillDatas.add(fillData);
+        });
+
+        return fillDatas;
+    }
+
+    /**
+     * 初始化社区导出信息
+     */
+    private List<Map<String,Object>> initCommunityData(QueryWrapper<CommunityBasic> wrapper_basic) {
+
+        List<Map<String,Object>> fillDatas = new ArrayList<>();
+
+        List<CommunityBasic> buildBasicList=iCommunityBasicService.list(wrapper_basic);
+
+        //添加详细信息
+        buildBasicList.forEach(buildBasic -> {
+            Map<String,Object> fillData = new HashMap<>();
+            QueryWrapper<IndicatorValue> wrapper_indicator=new QueryWrapper<>();
+            wrapper_indicator.eq("community_id",buildBasic.getCommunityId());
+            List<IndicatorValue> indicatorValueBuildList=iIndicatorValueService.list(wrapper_indicator);
+
+            fillData.put("community_name",buildBasic.getCommunityName());
+            indicatorValueBuildList.forEach(indicatorValueBuild -> {
+                fillData.put(indicatorValueBuild.getIndicatorId(),indicatorValueBuild.getIndicatorValue());
+            });
+            fillDatas.add(fillData);
+        });
+
+        return fillDatas;
+    }
+
+
 
 
 

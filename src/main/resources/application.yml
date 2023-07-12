@@ -42,4 +42,4 @@ logging:
 imgPath: /home/img/
   
 ## linux-imgHost
-imgHost: https://tjm.caupdcloud.com/img/
+imgHost: http://tjm.caupdcloud.com/img/
