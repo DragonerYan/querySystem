@@ -654,7 +654,7 @@ public class AtvController {
      */
     @ApiOperation(value = "登陆")
     @ResponseBody
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
     public Result login(
             @RequestParam(name = "province",required = false,defaultValue = "") String province,
             @RequestParam(name = "city",required = false,defaultValue = "-") String city,
