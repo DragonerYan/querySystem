@@ -778,20 +778,24 @@ public class AtvController {
             wrapper_basic.eq("community_id",communityId);
         }
 
-        List<Map<String,Object>> fillDatas=new ArrayList<>();
+        List<Map<String,Object>> fillDatas;
+        String excelName;
         switch (type){
             case "community":
+                excelName="communityExcel";
                 fillDatas=initCommunityData(wrapper_basic); break;
             case "court":
+                excelName="courtExcel";
                 fillDatas=initCourtData(wrapper_basic); break;
             default:
+                excelName="buildExcel";
                 fillDatas=initBuildData(wrapper_basic);break;
 
         }
 
         //设置响应头部信息，格式为附件，文件名为expert.xlsx
         response.setContentType("application/vnd.ms-excel");
-        response.setHeader("Content-Disposition","attachment; filename=" + "testexcel.xlsx");
+        response.setHeader("Content-Disposition","attachment; filename=" + excelName+".xlsx");
         // 加载模板
         String templateFile=type+"_export.xlsx" ;
         // 生成工作簿对象
@@ -880,6 +884,7 @@ public class AtvController {
 
             QueryWrapper<IndicatorValue> wrapper_indicator=new QueryWrapper<>();
             wrapper_indicator.eq("community_id",communityBasic.getCommunityId());
+            wrapper_indicator.eq("court_name","");
             List<IndicatorValue> indicatorValueBuildList=iIndicatorValueService.list(wrapper_indicator);
 
             // 实体类转换为Map
