@@ -843,18 +843,19 @@ public class AtvController {
 
         List<Map<String,Object>> fillDatas = new ArrayList<>();
 
-        List<CourtBasic> buildBasicList=iCourtBasicService.list(wrapper_basic);
+        List<CourtBasic> courtBasicList=iCourtBasicService.list(wrapper_basic);
 
         //添加详细信息
-        buildBasicList.forEach(buildBasic -> {
-            Map<String,Object> fillData = new HashMap<>();
+        courtBasicList.forEach(courtBasic -> {
+
             QueryWrapper<IndicatorValue> wrapper_indicator=new QueryWrapper<>();
-            wrapper_indicator.eq("community_id",buildBasic.getCommunityId());
-            wrapper_indicator.eq("court_name",buildBasic.getCourtName());
+            wrapper_indicator.eq("community_id",courtBasic.getCommunityId());
+            wrapper_indicator.eq("court_name",courtBasic.getCourtName());
             List<IndicatorValue> indicatorValueBuildList=iIndicatorValueService.list(wrapper_indicator);
 
-            fillData.put("community_name",buildBasic.getCommunityName());
-            fillData.put("court_name",buildBasic.getCourtName());
+            // 实体类转换为Map
+            Map<String,Object> fillData = JSON.parseObject(JSON.toJSONString(courtBasic), Map.class);
+
             indicatorValueBuildList.forEach(indicatorValueBuild -> {
                 fillData.put(indicatorValueBuild.getIndicatorId(),indicatorValueBuild.getIndicatorValue());
             });
@@ -873,16 +874,18 @@ public class AtvController {
 
         List<Map<String,Object>> fillDatas = new ArrayList<>();
 
-        List<CommunityBasic> buildBasicList=iCommunityBasicService.list(wrapper_basic);
+        List<CommunityBasic> communityBasicList=iCommunityBasicService.list(wrapper_basic);
 
         //添加详细信息
-        buildBasicList.forEach(buildBasic -> {
-            Map<String,Object> fillData = new HashMap<>();
+        communityBasicList.forEach(communityBasic -> {
+
             QueryWrapper<IndicatorValue> wrapper_indicator=new QueryWrapper<>();
-            wrapper_indicator.eq("community_id",buildBasic.getCommunityId());
+            wrapper_indicator.eq("community_id",communityBasic.getCommunityId());
             List<IndicatorValue> indicatorValueBuildList=iIndicatorValueService.list(wrapper_indicator);
 
-            fillData.put("community_name",buildBasic.getCommunityName());
+            // 实体类转换为Map
+            Map<String,Object> fillData = JSON.parseObject(JSON.toJSONString(communityBasic), Map.class);
+
             indicatorValueBuildList.forEach(indicatorValueBuild -> {
                 fillData.put(indicatorValueBuild.getIndicatorId(),indicatorValueBuild.getIndicatorValue());
             });
