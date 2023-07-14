@@ -815,16 +815,15 @@ public class AtvController {
 
         //添加详细信息
         buildBasicList.forEach(buildBasic -> {
-            Map<String,Object> fillData = new HashMap<>();
             QueryWrapper<IndicatorValueBuild> wrapper_indicator=new QueryWrapper<>();
             wrapper_indicator.eq("community_id",buildBasic.getCommunityId());
             wrapper_indicator.eq("court_name",buildBasic.getCourtName());
             wrapper_indicator.eq("build_number",buildBasic.getBuildNumber());
             List<IndicatorValueBuild> indicatorValueBuildList=iIndicatorValueBuildService.list(wrapper_indicator);
 
-            fillData.put("community_name",buildBasic.getCommunityName());
-            fillData.put("court_name",buildBasic.getCourtName());
-            fillData.put("build_number",buildBasic.getBuildNumber());
+            // 实体类转换为Map
+            Map<String,Object> fillData = JSON.parseObject(JSON.toJSONString(buildBasic), Map.class);
+
             indicatorValueBuildList.forEach(indicatorValueBuild -> {
                 fillData.put(indicatorValueBuild.getIndicatorId(),indicatorValueBuild.getIndicatorValue());
             });
