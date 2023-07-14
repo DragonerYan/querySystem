@@ -798,6 +798,10 @@ public class AtvController {
         response.setHeader("Content-Disposition","attachment; filename=" + excelName+".xlsx");
         // 加载模板
         String templateFile=type+"_export.xlsx" ;
+
+        if(Objects.equals(city, "宁波市")){
+            templateFile=type+"_export_nb.xlsx" ;
+        }
         // 生成工作簿对象
         ExcelWriterBuilder workBookWriter = EasyExcel.write(response.getOutputStream())
                 .withTemplate(templateFile);
