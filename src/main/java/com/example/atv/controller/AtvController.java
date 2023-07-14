@@ -802,6 +802,7 @@ public class AtvController {
         if(Objects.equals(city, "宁波市")){
             templateFile=type+"_export_nb.xlsx" ;
         }
+        templateFile="/home/querySystem/"+templateFile;
         // 生成工作簿对象
         ExcelWriterBuilder workBookWriter = EasyExcel.write(response.getOutputStream())
                 .withTemplate(templateFile);
