@@ -25,6 +25,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.rowset.serial.SerialBlob;
 import java.io.File;
@@ -827,13 +828,14 @@ public class AtvController {
                 templateFile=type+"_export_nb.xlsx" ;
             }
             templateFile="/home/querySystem/"+templateFile;
-
+            ServletOutputStream outputStream=response.getOutputStream();
             // 使用 EasyExcel 构造 ExcelWriter
-            final ExcelWriter writer = EasyExcel.write(response.getOutputStream())
+            final ExcelWriter writer = EasyExcel.write(outputStream)
                     .withTemplate(templateFile).build();
             // 使用 EasyExcel 构造 WriteSheet
             final WriteSheet sheet =  EasyExcel.writerSheet().build();
             writer.fill(fillDatas, sheet);
+            outputStream.flush();
             writer.finish();
 
 
