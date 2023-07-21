@@ -1,8 +1,10 @@
 package com.example.atv.controller;
 
 import com.alibaba.excel.EasyExcel;
+import com.alibaba.excel.ExcelWriter;
 import com.alibaba.excel.write.builder.ExcelWriterBuilder;
 import com.alibaba.excel.write.builder.ExcelWriterSheetBuilder;
+import com.alibaba.excel.write.metadata.WriteSheet;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -17,6 +19,8 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -823,13 +827,23 @@ public class AtvController {
                 templateFile=type+"_export_nb.xlsx" ;
             }
             templateFile="/home/querySystem/"+templateFile;
-            // 生成工作簿对象
-            ExcelWriterBuilder workBookWriter = EasyExcel.write(response.getOutputStream())
-                    .withTemplate(templateFile);
-            // 创建工作表对象
-            ExcelWriterSheetBuilder sheet = workBookWriter.sheet();
-            // 填充数据，doXxx会在读写结束后自动关闭流
-            sheet.doFill(fillDatas);
+
+            // 使用 EasyExcel 构造 ExcelWriter
+            final ExcelWriter writer = EasyExcel.write(response.getOutputStream())
+                    .withTemplate(templateFile).build();
+            // 使用 EasyExcel 构造 WriteSheet
+            final WriteSheet sheet =  EasyExcel.writerSheet().build();
+            writer.fill(fillDatas, sheet);
+            writer.finish();
+
+
+//            // 生成工作簿对象
+//            ExcelWriterBuilder workBookWriter = EasyExcel.write(response.getOutputStream())
+//                    .withTemplate(templateFile);
+//            // 创建工作表对象
+//            ExcelWriterSheetBuilder sheet = workBookWriter.sheet();
+//            // 填充数据，doXxx会在读写结束后自动关闭流
+//            sheet.doFill(fillDatas);
         }catch (Exception e){
             log.debug(e.getMessage());
         }
