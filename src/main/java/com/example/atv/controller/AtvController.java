@@ -1,25 +1,19 @@
 package com.example.atv.controller;
 
 import com.alibaba.excel.EasyExcel;
-import com.alibaba.excel.ExcelWriter;
 import com.alibaba.excel.write.builder.ExcelWriterBuilder;
 import com.alibaba.excel.write.builder.ExcelWriterSheetBuilder;
-import com.alibaba.excel.write.metadata.WriteSheet;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.example.atv.constant.ModelOfExcel;
 import com.example.atv.constant.Result;
 import com.example.atv.dao.mapper.AtvService;
 import com.example.atv.generatetor.entity.*;
 import com.example.atv.generatetor.service.*;
 import com.example.atv.util.MD5Util;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiOperation;
-import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -35,6 +29,9 @@ import java.sql.Blob;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.*;
+import java.util.concurrent.LinkedBlockingDeque;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 @Api(description = "atv接口")
@@ -523,6 +520,39 @@ public class AtvController {
     }
 
     /**
+     * 楼栋基本信息删除
+     */
+    @ApiOperation(value = "楼栋基本信息删除")
+    @ResponseBody
+    @RequestMapping(value = "/deleteBuildBasic", method = RequestMethod.GET)
+    public Result deleteBuildBasic(@RequestParam(name = "communityId",required = false) String communityId,
+                                   @RequestParam(name = "courtName",required = false) String courtName,
+                                   @RequestParam(name = "buildNumber",required = false) String buildNumber,
+                                   @RequestParam(name = "reportYear",required = false) String reportYear
+                                   ) {
+        try {
+
+
+
+            QueryWrapper<BuildBasic> wrapper_delete=new QueryWrapper<>();
+            wrapper_delete.eq("community_id",communityId)
+                    .eq("court_name",courtName)
+                    .eq("report_year",reportYear)
+                    .eq("build_number",buildNumber);
+            List<BuildBasic> list=iBuildBasicService.list(wrapper_delete);
+            if(list.size()==0){
+                return Result.fail("数据并未在数据库保存");
+            }
+
+            iBuildBasicService.remove(wrapper_delete);
+            return Result.success("删除成功");
+        }catch (Exception e){
+            log.debug(e.getMessage());
+            return Result.fail("删除失败");
+        }
+    }
+
+    /**
      * 楼栋基本信息暂存/提交
      */
     @ApiOperation(value = "楼栋基本信息暂存/提交")
@@ -531,17 +561,6 @@ public class AtvController {
     public Result buildBasicSave(@RequestBody List<BuildBasic> buildBasicList) {
 
         try{
-
-            //先对一个小区中的全部数据进行删除
-            QueryWrapper<BuildBasic> wrapper_delete=new QueryWrapper<>();
-            wrapper_delete.eq("community_id",buildBasicList.get(0).getCommunityId())
-                            .eq("court_name",buildBasicList.get(0).getCourtName())
-                            .eq("report_year",buildBasicList.get(0).getReportYear());
-            BuildBasic buildBasic_del=new BuildBasic();
-            buildBasic_del.setCommunityId(buildBasicList.get(0).getCommunityId());
-            buildBasic_del.setCourtName(buildBasicList.get(0).getCourtName());
-            buildBasic_del.setReportYear(buildBasicList.get(0).getReportYear());
-            iBuildBasicService.remove(wrapper_delete);
 
             //然后对数据进行新增
             buildBasicList.forEach(buildBasic -> {
@@ -754,62 +773,67 @@ public class AtvController {
             ,@RequestParam(name = "type",required = false) String type
     ) throws IOException {
 
-        //查询基本信息
-        QueryWrapper wrapper_basic=new QueryWrapper<>();
-        if(province!=null && !"".equals(province)){
-            wrapper_basic.eq("province",province);
-        }
-        if(city!=null && !"".equals(city)){
-            wrapper_basic.eq("city",city);
-        }
-        if(county!=null && !"".equals(county)){
-            wrapper_basic.eq("county",county);
-        }
-        if(street!=null && !"".equals(street)){
-            wrapper_basic.eq("street",street);
-        }
-        if(buildNumber!=null && !"".equals(buildNumber)){
-            wrapper_basic.eq("build_number",buildNumber);
-        }
-        if(courtName!=null && !"".equals(courtName)){
-            wrapper_basic.eq("court_name",courtName);
-        }
-        if(communityId!=null && !"".equals(communityId)){
-            wrapper_basic.eq("community_id",communityId);
+        try {
+            //查询基本信息
+            QueryWrapper wrapper_basic=new QueryWrapper<>();
+            if(province!=null && !"".equals(province)){
+                wrapper_basic.eq("province",province);
+            }
+            if(city!=null && !"".equals(city)){
+                wrapper_basic.eq("city",city);
+            }
+            if(county!=null && !"".equals(county)){
+                wrapper_basic.eq("county",county);
+            }
+            if(street!=null && !"".equals(street)){
+                wrapper_basic.eq("street",street);
+            }
+            if(buildNumber!=null && !"".equals(buildNumber)){
+                wrapper_basic.eq("build_number",buildNumber);
+            }
+            if(courtName!=null && !"".equals(courtName)){
+                wrapper_basic.eq("court_name",courtName);
+            }
+            if(communityId!=null && !"".equals(communityId)){
+                wrapper_basic.eq("community_id",communityId);
+            }
+
+            List<Map<String,Object>> fillDatas;
+            String excelName;
+            switch (type){
+                case "community":
+                    excelName="communityExcel";
+                    fillDatas=initCommunityData(wrapper_basic); break;
+                case "court":
+                    excelName="courtExcel";
+                    fillDatas=initCourtData(wrapper_basic); break;
+                default:
+                    excelName="buildExcel";
+                    fillDatas=initBuildData(wrapper_basic);break;
+
+            }
+
+            //设置响应头部信息，格式为附件，文件名为expert.xlsx
+            response.setContentType("application/vnd.ms-excel");
+            response.setHeader("Content-Disposition","attachment; filename=" + excelName+".xlsx");
+            // 加载模板
+            String templateFile=type+"_export.xlsx" ;
+
+            if(Objects.equals(city, "宁波市")){
+                templateFile=type+"_export_nb.xlsx" ;
+            }
+            templateFile="/home/querySystem/"+templateFile;
+            // 生成工作簿对象
+            ExcelWriterBuilder workBookWriter = EasyExcel.write(response.getOutputStream())
+                    .withTemplate(templateFile);
+            // 创建工作表对象
+            ExcelWriterSheetBuilder sheet = workBookWriter.sheet();
+            // 填充数据，doXxx会在读写结束后自动关闭流
+            sheet.doFill(fillDatas);
+        }catch (Exception e){
+            log.debug(e.getMessage());
         }
 
-        List<Map<String,Object>> fillDatas;
-        String excelName;
-        switch (type){
-            case "community":
-                excelName="communityExcel";
-                fillDatas=initCommunityData(wrapper_basic); break;
-            case "court":
-                excelName="courtExcel";
-                fillDatas=initCourtData(wrapper_basic); break;
-            default:
-                excelName="buildExcel";
-                fillDatas=initBuildData(wrapper_basic);break;
-
-        }
-
-        //设置响应头部信息，格式为附件，文件名为expert.xlsx
-        response.setContentType("application/vnd.ms-excel");
-        response.setHeader("Content-Disposition","attachment; filename=" + excelName+".xlsx");
-        // 加载模板
-        String templateFile=type+"_export.xlsx" ;
-
-        if(Objects.equals(city, "宁波市")){
-            templateFile=type+"_export_nb.xlsx" ;
-        }
-        templateFile="/home/querySystem/"+templateFile;
-        // 生成工作簿对象
-        ExcelWriterBuilder workBookWriter = EasyExcel.write(response.getOutputStream())
-                .withTemplate(templateFile);
-        // 创建工作表对象
-        ExcelWriterSheetBuilder sheet = workBookWriter.sheet();
-        // 填充数据，doXxx会在读写结束后自动关闭流
-        sheet.doFill(fillDatas);
 
     }
 
