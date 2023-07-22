@@ -775,6 +775,7 @@ public class AtvController {
             ,@RequestParam(name = "communityId",required = false) String communityId
             ,@RequestParam(name = "courtName",required = false) String courtName
             ,@RequestParam(name = "buildNumber",required = false) String buildNumber
+            ,@RequestParam(name = "state",required = false) String state
             ,@RequestParam(name = "type",required = false) String type
     ) throws IOException {
 
@@ -801,6 +802,9 @@ public class AtvController {
             }
             if(communityId!=null && !"".equals(communityId)){
                 wrapper_basic.eq("community_id",communityId);
+            }
+            if(state!=null && !"".equals(state)){
+                wrapper_basic.eq("state",state);
             }
 
             List<Map<String,Object>> fillDatas;
