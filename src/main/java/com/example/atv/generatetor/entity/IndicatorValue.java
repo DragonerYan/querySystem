@@ -11,7 +11,7 @@ import io.swagger.annotations.ApiModelProperty;
  * </p>
  *
  * @author yxz
- * @since 2023-07-10
+ * @since 2023-07-29
  */
 @TableName("indicator_value")
 @ApiModel(value = "IndicatorValue对象", description = "")
@@ -26,7 +26,7 @@ public class IndicatorValue implements Serializable {
 
     private String indicatorId;
 
-    private Integer indicatorValue;
+    private String indicatorValue;
 
     private String meno;
 
@@ -63,11 +63,11 @@ public class IndicatorValue implements Serializable {
         this.indicatorId = indicatorId;
     }
 
-    public Integer getIndicatorValue() {
+    public String getIndicatorValue() {
         return indicatorValue;
     }
 
-    public void setIndicatorValue(Integer indicatorValue) {
+    public void setIndicatorValue(String indicatorValue) {
         this.indicatorValue = indicatorValue;
     }
 

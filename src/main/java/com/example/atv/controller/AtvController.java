@@ -5,10 +5,13 @@ import com.alibaba.excel.ExcelWriter;
 import com.alibaba.excel.write.builder.ExcelWriterBuilder;
 import com.alibaba.excel.write.builder.ExcelWriterSheetBuilder;
 import com.alibaba.excel.write.metadata.WriteSheet;
+import com.alibaba.excel.write.metadata.fill.FillConfig;
+import com.alibaba.excel.write.style.column.LongestMatchColumnWidthStyleStrategy;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.example.atv.constant.ModelOfExcel;
 import com.example.atv.constant.Result;
 import com.example.atv.dao.mapper.AtvService;
 import com.example.atv.generatetor.entity.*;
@@ -19,8 +22,7 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
+import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -34,9 +36,6 @@ import java.sql.Blob;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.*;
-import java.util.concurrent.LinkedBlockingDeque;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 @Api(description = "atv接口")
@@ -843,16 +842,37 @@ public class AtvController {
             writer.finish();
 
 
-//            // 生成工作簿对象
-//            ExcelWriterBuilder workBookWriter = EasyExcel.write(response.getOutputStream())
-//                    .withTemplate(templateFile);
-//            // 创建工作表对象
-//            ExcelWriterSheetBuilder sheet = workBookWriter.sheet();
-//            // 填充数据，doXxx会在读写结束后自动关闭流
-//            sheet.doFill(fillDatas);
         }catch (Exception e){
             log.debug(e.getMessage());
         }
+
+
+    }
+    @ApiOperation(value = "手动excel导出功能")
+    @ResponseBody
+    @RequestMapping(value = "/Excel", method = RequestMethod.POST)
+    void handExport(HttpServletResponse response) throws IOException {
+        List<ModelOfExcel> list=new ArrayList<>();
+        ModelOfExcel modelOfExcel=new ModelOfExcel();
+        modelOfExcel.setAge(1);
+        modelOfExcel.setSex("n");
+        ModelOfExcel modelOfExcel1=new ModelOfExcel();
+        modelOfExcel1.setAge(1);
+        modelOfExcel1.setSex("n");
+        modelOfExcel1.setName("m");
+        list.add(modelOfExcel);
+        list.add(modelOfExcel1);
+        response.addHeader("Content-Disposition", "attachment;filename=t.xlsx" );
+        response.setContentType("application/vnd.ms-excel");
+        // 输出 Excel
+        ServletOutputStream out = response.getOutputStream();
+        ExcelWriterBuilder writeWork = EasyExcel.write(out, ModelOfExcel.class);
+        //4、创建表格
+        ExcelWriterSheetBuilder sheet = writeWork.sheet();
+        //6、写入数据到表格中
+        sheet.doWrite(list);
+        out.close();
+
 
 
     }

@@ -1,432 +1,164 @@
-2023-07-21 22-14-00.423 INFO [main] c.e.atv.SmokeManagementApplication [StartupInfoLogger.java : 55] Starting SmokeManagementApplication using Java 1.8.0_352 on yanxinzhaodeMacBook-Pro.local with PID 55242 (/Users/yanxinzhao/Desktop/atv-qu/smokeManagement/target/classes started by yanxinzhao in /Users/yanxinzhao/Desktop/atv-qu/smokeManagement)
-2023-07-21 22-14-00.424 DEBUG [main] c.e.atv.SmokeManagementApplication [StartupInfoLogger.java : 56] Running with Spring Boot v2.7.4, Spring v5.3.23
-2023-07-21 22-14-00.425 INFO [main] c.e.atv.SmokeManagementApplication [SpringApplication.java : 634] No active profile set, falling back to 1 default profile: "default"
-2023-07-21 22-14-01.114 INFO [main] o.a.coyote.http11.Http11NioProtocol [DirectJDKLog.java : 173] Initializing ProtocolHandler ["http-nio-80"]
-2023-07-21 22-14-01.115 INFO [main] o.a.catalina.core.StandardService [DirectJDKLog.java : 173] Starting service [Tomcat]
-2023-07-21 22-14-01.115 INFO [main] o.a.catalina.core.StandardEngine [DirectJDKLog.java : 173] Starting Servlet engine: [Apache Tomcat/9.0.65]
-2023-07-21 22-14-01.165 INFO [main] o.a.c.c.C.[Tomcat].[localhost].[/] [DirectJDKLog.java : 173] Initializing Spring embedded WebApplicationContext
-2023-07-21 22-14-01.236 INFO [main] com.zaxxer.hikari.HikariDataSource [HikariDataSource.java : 110] HikariPool-1 - Starting...
-2023-07-21 22-14-01.368 INFO [main] com.zaxxer.hikari.HikariDataSource [HikariDataSource.java : 123] HikariPool-1 - Start completed.
-2023-07-21 22-14-01.393 INFO [main] o.h.jpa.internal.util.LogHelper [LogHelper.java : 31] HHH000204: Processing PersistenceUnitInfo [name: default]
-2023-07-21 22-14-01.415 INFO [main] org.hibernate.Version [Version.java : 44] HHH000412: Hibernate ORM core version 5.6.11.Final
-2023-07-21 22-14-01.481 INFO [main] o.h.annotations.common.Version [JavaReflectionManager.java : 56] HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
-2023-07-21 22-14-01.534 INFO [main] org.hibernate.dialect.Dialect [Dialect.java : 175] HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
-2023-07-21 22-14-01.610 INFO [main] o.h.e.t.j.p.i.JtaPlatformInitiator [JtaPlatformInitiator.java : 52] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2023-07-21 22-14-01.691 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.CommunityBasic".
-2023-07-21 22-14-01.693 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.CommunityBasic ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
-2023-07-21 22-14-01.769 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.Community".
-2023-07-21 22-14-01.769 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.Community ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
-2023-07-21 22-14-01.792 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.CourtBasic".
-2023-07-21 22-14-01.792 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.CourtBasic ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
-2023-07-21 22-14-01.811 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.Indicator".
-2023-07-21 22-14-01.811 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.Indicator ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
-2023-07-21 22-14-01.827 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.IndicatorValue".
-2023-07-21 22-14-01.827 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.IndicatorValue ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
-2023-07-21 22-14-01.842 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.User".
-2023-07-21 22-14-01.842 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.User ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
-2023-07-21 22-14-01.856 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.BuildBasic".
-2023-07-21 22-14-01.857 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.BuildBasic ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
-2023-07-21 22-14-01.871 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.IndicatorValueBuild".
-2023-07-21 22-14-01.871 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.IndicatorValueBuild ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
-2023-07-21 22-14-01.991 WARN [main] o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration [JpaBaseConfiguration.java : 219] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2023-07-21 22-14-02.070 INFO [main] s.d.s.w.PropertySourcedRequestMappingHandlerMapping [PropertySourcedRequestMappingHandlerMapping.java : 69] Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
-2023-07-21 22-14-02.221 INFO [main] o.a.coyote.http11.Http11NioProtocol [DirectJDKLog.java : 173] Starting ProtocolHandler ["http-nio-80"]
-2023-07-21 22-14-02.238 INFO [main] s.d.s.w.p.DocumentationPluginsBootstrapper [DocumentationPluginsBootstrapper.java : 160] Context refreshed
-2023-07-21 22-14-02.246 INFO [main] s.d.s.w.p.DocumentationPluginsBootstrapper [DocumentationPluginsBootstrapper.java : 163] Found 1 custom documentation plugin(s)
-2023-07-21 22-14-02.261 INFO [main] s.d.s.w.s.ApiListingReferenceScanner [ApiListingReferenceScanner.java : 41] Scanning for api listing references
-2023-07-21 22-14-02.321 INFO [main] s.d.s.w.r.o.CachingOperationNameGenerator [CachingOperationNameGenerator.java : 40] Generating unique operation named: allInfoUsingGET_1
-2023-07-21 22-14-02.382 INFO [main] c.e.atv.SmokeManagementApplication [StartupInfoLogger.java : 61] Started SmokeManagementApplication in 2.198 seconds (JVM running for 2.756)
-2023-07-21 22-14-10.718 INFO [http-nio-80-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/] [DirectJDKLog.java : 173] Initializing Spring DispatcherServlet 'dispatcherServlet'
-2023-07-21 22-14-11.005 DEBUG [http-nio-80-exec-1] c.e.a.g.m.CommunityMapper.selectList [BaseJdbcLogger.java : 137] ==>  Preparing: SELECT province,city,county,latitude,longitude,street,area,county_id,community_id,user_id,community_name FROM community
-2023-07-21 22-14-11.017 DEBUG [http-nio-80-exec-1] c.e.a.g.m.CommunityMapper.selectList [BaseJdbcLogger.java : 137] ==> Parameters: 
-2023-07-21 22-14-11.407 DEBUG [http-nio-80-exec-1] c.e.a.g.m.CommunityMapper.selectList [BaseJdbcLogger.java : 137] <==      Total: 36943
-2023-07-21 22-17-04.482 INFO [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource [HikariDataSource.java : 350] HikariPool-1 - Shutdown initiated...
-2023-07-21 22-17-04.486 INFO [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource [HikariDataSource.java : 352] HikariPool-1 - Shutdown completed.
-2023-07-21 22-17-07.059 INFO [main] c.e.atv.SmokeManagementApplication [StartupInfoLogger.java : 55] Starting SmokeManagementApplication using Java 1.8.0_352 on yanxinzhaodeMacBook-Pro.local with PID 55574 (/Users/yanxinzhao/Desktop/atv-qu/smokeManagement/target/classes started by yanxinzhao in /Users/yanxinzhao/Desktop/atv-qu/smokeManagement)
-2023-07-21 22-17-07.060 DEBUG [main] c.e.atv.SmokeManagementApplication [StartupInfoLogger.java : 56] Running with Spring Boot v2.7.4, Spring v5.3.23
-2023-07-21 22-17-07.061 INFO [main] c.e.atv.SmokeManagementApplication [SpringApplication.java : 634] No active profile set, falling back to 1 default profile: "default"
-2023-07-21 22-17-07.729 INFO [main] o.a.coyote.http11.Http11NioProtocol [DirectJDKLog.java : 173] Initializing ProtocolHandler ["http-nio-80"]
-2023-07-21 22-17-07.729 INFO [main] o.a.catalina.core.StandardService [DirectJDKLog.java : 173] Starting service [Tomcat]
-2023-07-21 22-17-07.729 INFO [main] o.a.catalina.core.StandardEngine [DirectJDKLog.java : 173] Starting Servlet engine: [Apache Tomcat/9.0.65]
-2023-07-21 22-17-07.778 INFO [main] o.a.c.c.C.[Tomcat].[localhost].[/] [DirectJDKLog.java : 173] Initializing Spring embedded WebApplicationContext
-2023-07-21 22-17-07.850 INFO [main] com.zaxxer.hikari.HikariDataSource [HikariDataSource.java : 110] HikariPool-1 - Starting...
-2023-07-21 22-17-07.986 INFO [main] com.zaxxer.hikari.HikariDataSource [HikariDataSource.java : 123] HikariPool-1 - Start completed.
-2023-07-21 22-17-08.008 INFO [main] o.h.jpa.internal.util.LogHelper [LogHelper.java : 31] HHH000204: Processing PersistenceUnitInfo [name: default]
-2023-07-21 22-17-08.029 INFO [main] org.hibernate.Version [Version.java : 44] HHH000412: Hibernate ORM core version 5.6.11.Final
-2023-07-21 22-17-08.084 INFO [main] o.h.annotations.common.Version [JavaReflectionManager.java : 56] HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
-2023-07-21 22-17-08.132 INFO [main] org.hibernate.dialect.Dialect [Dialect.java : 175] HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
-2023-07-21 22-17-08.200 INFO [main] o.h.e.t.j.p.i.JtaPlatformInitiator [JtaPlatformInitiator.java : 52] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2023-07-21 22-17-08.278 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.CommunityBasic".
-2023-07-21 22-17-08.280 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.CommunityBasic ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
-2023-07-21 22-17-08.364 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.Community".
-2023-07-21 22-17-08.364 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.Community ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
-2023-07-21 22-17-08.385 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.CourtBasic".
-2023-07-21 22-17-08.385 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.CourtBasic ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
-2023-07-21 22-17-08.404 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.Indicator".
-2023-07-21 22-17-08.404 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.Indicator ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
-2023-07-21 22-17-08.419 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.IndicatorValue".
-2023-07-21 22-17-08.419 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.IndicatorValue ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
-2023-07-21 22-17-08.433 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.User".
-2023-07-21 22-17-08.434 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.User ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
-2023-07-21 22-17-08.448 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.BuildBasic".
-2023-07-21 22-17-08.448 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.BuildBasic ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
-2023-07-21 22-17-08.462 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.IndicatorValueBuild".
-2023-07-21 22-17-08.462 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.IndicatorValueBuild ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
-2023-07-21 22-17-08.579 WARN [main] o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration [JpaBaseConfiguration.java : 219] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2023-07-21 22-17-08.655 INFO [main] s.d.s.w.PropertySourcedRequestMappingHandlerMapping [PropertySourcedRequestMappingHandlerMapping.java : 69] Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
-2023-07-21 22-17-08.801 INFO [main] o.a.coyote.http11.Http11NioProtocol [DirectJDKLog.java : 173] Starting ProtocolHandler ["http-nio-80"]
-2023-07-21 22-17-08.813 INFO [main] s.d.s.w.p.DocumentationPluginsBootstrapper [DocumentationPluginsBootstrapper.java : 160] Context refreshed
-2023-07-21 22-17-08.821 INFO [main] s.d.s.w.p.DocumentationPluginsBootstrapper [DocumentationPluginsBootstrapper.java : 163] Found 1 custom documentation plugin(s)
-2023-07-21 22-17-08.837 INFO [main] s.d.s.w.s.ApiListingReferenceScanner [ApiListingReferenceScanner.java : 41] Scanning for api listing references
-2023-07-21 22-17-08.902 INFO [main] s.d.s.w.r.o.CachingOperationNameGenerator [CachingOperationNameGenerator.java : 40] Generating unique operation named: allInfoUsingGET_1
-2023-07-21 22-17-08.962 INFO [main] c.e.atv.SmokeManagementApplication [StartupInfoLogger.java : 61] Started SmokeManagementApplication in 2.101 seconds (JVM running for 2.888)
-2023-07-21 23-12-18.138 INFO [main] c.e.atv.SmokeManagementApplication [StartupInfoLogger.java : 55] Starting SmokeManagementApplication using Java 1.8.0_352 on yanxinzhaodeMacBook-Pro.local with PID 62210 (/Users/yanxinzhao/Desktop/atv-qu/smokeManagement/target/classes started by yanxinzhao in /Users/yanxinzhao/Desktop/atv-qu/smokeManagement)
-2023-07-21 23-12-18.140 DEBUG [main] c.e.atv.SmokeManagementApplication [StartupInfoLogger.java : 56] Running with Spring Boot v2.7.4, Spring v5.3.23
-2023-07-21 23-12-18.141 INFO [main] c.e.atv.SmokeManagementApplication [SpringApplication.java : 634] No active profile set, falling back to 1 default profile: "default"
-2023-07-21 23-12-18.872 INFO [main] o.a.coyote.http11.Http11NioProtocol [DirectJDKLog.java : 173] Initializing ProtocolHandler ["http-nio-80"]
-2023-07-21 23-12-18.873 INFO [main] o.a.catalina.core.StandardService [DirectJDKLog.java : 173] Starting service [Tomcat]
-2023-07-21 23-12-18.873 INFO [main] o.a.catalina.core.StandardEngine [DirectJDKLog.java : 173] Starting Servlet engine: [Apache Tomcat/9.0.65]
-2023-07-21 23-12-18.926 INFO [main] o.a.c.c.C.[Tomcat].[localhost].[/] [DirectJDKLog.java : 173] Initializing Spring embedded WebApplicationContext
-2023-07-21 23-12-19.005 INFO [main] com.zaxxer.hikari.HikariDataSource [HikariDataSource.java : 110] HikariPool-1 - Starting...
-2023-07-21 23-12-19.151 INFO [main] com.zaxxer.hikari.HikariDataSource [HikariDataSource.java : 123] HikariPool-1 - Start completed.
-2023-07-21 23-12-19.180 INFO [main] o.h.jpa.internal.util.LogHelper [LogHelper.java : 31] HHH000204: Processing PersistenceUnitInfo [name: default]
-2023-07-21 23-12-19.209 INFO [main] org.hibernate.Version [Version.java : 44] HHH000412: Hibernate ORM core version 5.6.11.Final
-2023-07-21 23-12-19.283 INFO [main] o.h.annotations.common.Version [JavaReflectionManager.java : 56] HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
-2023-07-21 23-12-19.339 INFO [main] org.hibernate.dialect.Dialect [Dialect.java : 175] HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
-2023-07-21 23-12-19.418 INFO [main] o.h.e.t.j.p.i.JtaPlatformInitiator [JtaPlatformInitiator.java : 52] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2023-07-21 23-12-19.499 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.CommunityBasic".
-2023-07-21 23-12-19.502 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.CommunityBasic ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
-2023-07-21 23-12-19.577 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.Community".
-2023-07-21 23-12-19.577 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.Community ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
-2023-07-21 23-12-19.600 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.CourtBasic".
-2023-07-21 23-12-19.601 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.CourtBasic ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
-2023-07-21 23-12-19.620 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.Indicator".
-2023-07-21 23-12-19.621 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.Indicator ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
-2023-07-21 23-12-19.637 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.IndicatorValue".
-2023-07-21 23-12-19.637 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.IndicatorValue ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
-2023-07-21 23-12-19.653 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.User".
-2023-07-21 23-12-19.653 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.User ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
-2023-07-21 23-12-19.669 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.BuildBasic".
-2023-07-21 23-12-19.669 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.BuildBasic ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
-2023-07-21 23-12-19.684 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.IndicatorValueBuild".
-2023-07-21 23-12-19.684 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.IndicatorValueBuild ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
-2023-07-21 23-12-19.823 WARN [main] o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration [JpaBaseConfiguration.java : 219] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2023-07-21 23-12-19.905 INFO [main] s.d.s.w.PropertySourcedRequestMappingHandlerMapping [PropertySourcedRequestMappingHandlerMapping.java : 69] Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
-2023-07-21 23-12-20.062 INFO [main] o.a.coyote.http11.Http11NioProtocol [DirectJDKLog.java : 173] Starting ProtocolHandler ["http-nio-80"]
-2023-07-21 23-12-20.075 INFO [main] s.d.s.w.p.DocumentationPluginsBootstrapper [DocumentationPluginsBootstrapper.java : 160] Context refreshed
-2023-07-21 23-12-20.085 INFO [main] s.d.s.w.p.DocumentationPluginsBootstrapper [DocumentationPluginsBootstrapper.java : 163] Found 1 custom documentation plugin(s)
-2023-07-21 23-12-20.100 INFO [main] s.d.s.w.s.ApiListingReferenceScanner [ApiListingReferenceScanner.java : 41] Scanning for api listing references
-2023-07-21 23-12-20.161 INFO [main] s.d.s.w.r.o.CachingOperationNameGenerator [CachingOperationNameGenerator.java : 40] Generating unique operation named: allInfoUsingGET_1
-2023-07-21 23-12-20.223 INFO [main] c.e.atv.SmokeManagementApplication [StartupInfoLogger.java : 61] Started SmokeManagementApplication in 2.309 seconds (JVM running for 2.744)
-2023-07-21 23-12-30.091 INFO [http-nio-80-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/] [DirectJDKLog.java : 173] Initializing Spring DispatcherServlet 'dispatcherServlet'
-2023-07-21 23-13-28.073 DEBUG [http-nio-80-exec-8] c.e.a.g.m.B.selectList [BaseJdbcLogger.java : 137] ==>  Preparing: SELECT province,city,county,street,community_id,court_name,build_number,build_time,number_people,number_over60_people,units_number,number_department,date_time,state,user_id,report_year,community_name,review_comment,problem_state FROM build_basic WHERE (build_number = ? AND court_name = ? AND community_id = ?)
-2023-07-21 23-13-28.085 DEBUG [http-nio-80-exec-8] c.e.a.g.m.B.selectList [BaseJdbcLogger.java : 137] ==> Parameters: string(String), string(String), string(String)
-2023-07-21 23-13-28.095 DEBUG [http-nio-80-exec-8] c.e.a.g.m.B.selectList [BaseJdbcLogger.java : 137] <==      Total: 1
-2023-07-21 23-13-28.099 DEBUG [http-nio-80-exec-8] c.e.a.g.m.I.selectList [BaseJdbcLogger.java : 137] ==>  Preparing: SELECT community_id,court_name,indicator_id,indicator_value,meno,longitude,latitude,report_year,build_number,photo_path,description,location FROM indicator_value_build WHERE (community_id = ? AND court_name = ? AND build_number = ?)
-2023-07-21 23-13-28.099 DEBUG [http-nio-80-exec-8] c.e.a.g.m.I.selectList [BaseJdbcLogger.java : 137] ==> Parameters: string(String), string(String), string(String)
-2023-07-21 23-13-28.103 DEBUG [http-nio-80-exec-8] c.e.a.g.m.I.selectList [BaseJdbcLogger.java : 137] <==      Total: 3
-2023-07-21 23-23-10.400 INFO [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource [HikariDataSource.java : 350] HikariPool-1 - Shutdown initiated...
-2023-07-21 23-23-10.404 INFO [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource [HikariDataSource.java : 352] HikariPool-1 - Shutdown completed.
-2023-07-21 23-23-13.539 INFO [main] c.e.atv.SmokeManagementApplication [StartupInfoLogger.java : 55] Starting SmokeManagementApplication using Java 1.8.0_352 on yanxinzhaodeMacBook-Pro.local with PID 63352 (/Users/yanxinzhao/Desktop/atv-qu/smokeManagement/target/classes started by yanxinzhao in /Users/yanxinzhao/Desktop/atv-qu/smokeManagement)
-2023-07-21 23-23-13.540 DEBUG [main] c.e.atv.SmokeManagementApplication [StartupInfoLogger.java : 56] Running with Spring Boot v2.7.4, Spring v5.3.23
-2023-07-21 23-23-13.540 INFO [main] c.e.atv.SmokeManagementApplication [SpringApplication.java : 634] No active profile set, falling back to 1 default profile: "default"
-2023-07-21 23-23-14.223 INFO [main] o.a.coyote.http11.Http11NioProtocol [DirectJDKLog.java : 173] Initializing ProtocolHandler ["http-nio-80"]
-2023-07-21 23-23-14.223 INFO [main] o.a.catalina.core.StandardService [DirectJDKLog.java : 173] Starting service [Tomcat]
-2023-07-21 23-23-14.223 INFO [main] o.a.catalina.core.StandardEngine [DirectJDKLog.java : 173] Starting Servlet engine: [Apache Tomcat/9.0.65]
-2023-07-21 23-23-14.273 INFO [main] o.a.c.c.C.[Tomcat].[localhost].[/] [DirectJDKLog.java : 173] Initializing Spring embedded WebApplicationContext
-2023-07-21 23-23-14.341 INFO [main] com.zaxxer.hikari.HikariDataSource [HikariDataSource.java : 110] HikariPool-1 - Starting...
-2023-07-21 23-23-14.476 INFO [main] com.zaxxer.hikari.HikariDataSource [HikariDataSource.java : 123] HikariPool-1 - Start completed.
-2023-07-21 23-23-14.499 INFO [main] o.h.jpa.internal.util.LogHelper [LogHelper.java : 31] HHH000204: Processing PersistenceUnitInfo [name: default]
-2023-07-21 23-23-14.520 INFO [main] org.hibernate.Version [Version.java : 44] HHH000412: Hibernate ORM core version 5.6.11.Final
-2023-07-21 23-23-14.580 INFO [main] o.h.annotations.common.Version [JavaReflectionManager.java : 56] HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
-2023-07-21 23-23-14.629 INFO [main] org.hibernate.dialect.Dialect [Dialect.java : 175] HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
-2023-07-21 23-23-14.698 INFO [main] o.h.e.t.j.p.i.JtaPlatformInitiator [JtaPlatformInitiator.java : 52] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2023-07-21 23-23-14.775 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.CommunityBasic".
-2023-07-21 23-23-14.778 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.CommunityBasic ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
-2023-07-21 23-23-14.853 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.Community".
-2023-07-21 23-23-14.853 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.Community ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
-2023-07-21 23-23-14.877 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.CourtBasic".
-2023-07-21 23-23-14.877 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.CourtBasic ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
-2023-07-21 23-23-14.895 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.Indicator".
-2023-07-21 23-23-14.896 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.Indicator ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
-2023-07-21 23-23-14.911 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.IndicatorValue".
-2023-07-21 23-23-14.912 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.IndicatorValue ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
-2023-07-21 23-23-14.926 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.User".
-2023-07-21 23-23-14.926 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.User ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
-2023-07-21 23-23-14.946 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.BuildBasic".
-2023-07-21 23-23-14.946 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.BuildBasic ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
-2023-07-21 23-23-14.960 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.IndicatorValueBuild".
-2023-07-21 23-23-14.960 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.IndicatorValueBuild ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
-2023-07-21 23-23-15.081 WARN [main] o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration [JpaBaseConfiguration.java : 219] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2023-07-21 23-23-15.156 INFO [main] s.d.s.w.PropertySourcedRequestMappingHandlerMapping [PropertySourcedRequestMappingHandlerMapping.java : 69] Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
-2023-07-21 23-23-15.312 INFO [main] o.a.coyote.http11.Http11NioProtocol [DirectJDKLog.java : 173] Starting ProtocolHandler ["http-nio-80"]
-2023-07-21 23-23-15.327 INFO [main] s.d.s.w.p.DocumentationPluginsBootstrapper [DocumentationPluginsBootstrapper.java : 160] Context refreshed
-2023-07-21 23-23-15.336 INFO [main] s.d.s.w.p.DocumentationPluginsBootstrapper [DocumentationPluginsBootstrapper.java : 163] Found 1 custom documentation plugin(s)
-2023-07-21 23-23-15.351 INFO [main] s.d.s.w.s.ApiListingReferenceScanner [ApiListingReferenceScanner.java : 41] Scanning for api listing references
-2023-07-21 23-23-15.408 INFO [main] s.d.s.w.r.o.CachingOperationNameGenerator [CachingOperationNameGenerator.java : 40] Generating unique operation named: allInfoUsingGET_1
-2023-07-21 23-23-15.466 INFO [main] c.e.atv.SmokeManagementApplication [StartupInfoLogger.java : 61] Started SmokeManagementApplication in 2.109 seconds (JVM running for 2.629)
-2023-07-21 23-23-20.515 INFO [http-nio-80-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/] [DirectJDKLog.java : 173] Initializing Spring DispatcherServlet 'dispatcherServlet'
-2023-07-21 23-23-20.599 DEBUG [http-nio-80-exec-1] c.e.a.g.m.B.selectList [BaseJdbcLogger.java : 137] ==>  Preparing: SELECT province,city,county,street,community_id,court_name,build_number,build_time,number_people,number_over60_people,units_number,number_department,date_time,state,user_id,report_year,community_name,review_comment,problem_state FROM build_basic WHERE (build_number = ? AND court_name = ? AND community_id = ?)
-2023-07-21 23-23-20.609 DEBUG [http-nio-80-exec-1] c.e.a.g.m.B.selectList [BaseJdbcLogger.java : 137] ==> Parameters: string(String), string(String), string(String)
-2023-07-21 23-23-20.617 DEBUG [http-nio-80-exec-1] c.e.a.g.m.B.selectList [BaseJdbcLogger.java : 137] <==      Total: 1
-2023-07-21 23-23-20.621 DEBUG [http-nio-80-exec-1] c.e.a.g.m.I.selectList [BaseJdbcLogger.java : 137] ==>  Preparing: SELECT community_id,court_name,indicator_id,indicator_value,meno,longitude,latitude,report_year,build_number,photo_path,description,location FROM indicator_value_build WHERE (community_id = ? AND court_name = ? AND build_number = ?)
-2023-07-21 23-23-20.621 DEBUG [http-nio-80-exec-1] c.e.a.g.m.I.selectList [BaseJdbcLogger.java : 137] ==> Parameters: string(String), string(String), string(String)
-2023-07-21 23-23-20.624 DEBUG [http-nio-80-exec-1] c.e.a.g.m.I.selectList [BaseJdbcLogger.java : 137] <==      Total: 3
-2023-07-21 23-23-20.742 DEBUG [http-nio-80-exec-1] c.e.atv.controller.AtvController [AtvController.java : 849] class path resource [build_export.xlsx] cannot be opened because it does not exist
-2023-07-21 23-24-52.345 INFO [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource [HikariDataSource.java : 350] HikariPool-1 - Shutdown initiated...
-2023-07-21 23-24-52.349 INFO [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource [HikariDataSource.java : 352] HikariPool-1 - Shutdown completed.
-2023-07-21 23-24-54.385 INFO [main] c.e.atv.SmokeManagementApplication [StartupInfoLogger.java : 55] Starting SmokeManagementApplication using Java 1.8.0_352 on yanxinzhaodeMacBook-Pro.local with PID 63527 (/Users/yanxinzhao/Desktop/atv-qu/smokeManagement/target/classes started by yanxinzhao in /Users/yanxinzhao/Desktop/atv-qu/smokeManagement)
-2023-07-21 23-24-54.386 DEBUG [main] c.e.atv.SmokeManagementApplication [StartupInfoLogger.java : 56] Running with Spring Boot v2.7.4, Spring v5.3.23
-2023-07-21 23-24-54.386 INFO [main] c.e.atv.SmokeManagementApplication [SpringApplication.java : 634] No active profile set, falling back to 1 default profile: "default"
-2023-07-21 23-24-55.087 INFO [main] o.a.coyote.http11.Http11NioProtocol [DirectJDKLog.java : 173] Initializing ProtocolHandler ["http-nio-80"]
-2023-07-21 23-24-55.088 INFO [main] o.a.catalina.core.StandardService [DirectJDKLog.java : 173] Starting service [Tomcat]
-2023-07-21 23-24-55.088 INFO [main] o.a.catalina.core.StandardEngine [DirectJDKLog.java : 173] Starting Servlet engine: [Apache Tomcat/9.0.65]
-2023-07-21 23-24-55.139 INFO [main] o.a.c.c.C.[Tomcat].[localhost].[/] [DirectJDKLog.java : 173] Initializing Spring embedded WebApplicationContext
-2023-07-21 23-24-55.215 INFO [main] com.zaxxer.hikari.HikariDataSource [HikariDataSource.java : 110] HikariPool-1 - Starting...
-2023-07-21 23-24-55.347 INFO [main] com.zaxxer.hikari.HikariDataSource [HikariDataSource.java : 123] HikariPool-1 - Start completed.
-2023-07-21 23-24-55.371 INFO [main] o.h.jpa.internal.util.LogHelper [LogHelper.java : 31] HHH000204: Processing PersistenceUnitInfo [name: default]
-2023-07-21 23-24-55.392 INFO [main] org.hibernate.Version [Version.java : 44] HHH000412: Hibernate ORM core version 5.6.11.Final
-2023-07-21 23-24-55.453 INFO [main] o.h.annotations.common.Version [JavaReflectionManager.java : 56] HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
-2023-07-21 23-24-55.504 INFO [main] org.hibernate.dialect.Dialect [Dialect.java : 175] HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
-2023-07-21 23-24-55.576 INFO [main] o.h.e.t.j.p.i.JtaPlatformInitiator [JtaPlatformInitiator.java : 52] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2023-07-21 23-24-55.655 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.CommunityBasic".
-2023-07-21 23-24-55.657 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.CommunityBasic ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
-2023-07-21 23-24-55.735 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.Community".
-2023-07-21 23-24-55.736 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.Community ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
-2023-07-21 23-24-55.758 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.CourtBasic".
-2023-07-21 23-24-55.759 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.CourtBasic ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
-2023-07-21 23-24-55.778 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.Indicator".
-2023-07-21 23-24-55.779 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.Indicator ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
-2023-07-21 23-24-55.794 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.IndicatorValue".
-2023-07-21 23-24-55.794 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.IndicatorValue ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
-2023-07-21 23-24-55.809 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.User".
-2023-07-21 23-24-55.809 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.User ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
-2023-07-21 23-24-55.825 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.BuildBasic".
-2023-07-21 23-24-55.825 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.BuildBasic ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
-2023-07-21 23-24-55.839 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.IndicatorValueBuild".
-2023-07-21 23-24-55.840 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.IndicatorValueBuild ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
-2023-07-21 23-24-55.960 WARN [main] o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration [JpaBaseConfiguration.java : 219] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2023-07-21 23-24-56.039 INFO [main] s.d.s.w.PropertySourcedRequestMappingHandlerMapping [PropertySourcedRequestMappingHandlerMapping.java : 69] Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
-2023-07-21 23-24-56.199 INFO [main] o.a.coyote.http11.Http11NioProtocol [DirectJDKLog.java : 173] Starting ProtocolHandler ["http-nio-80"]
-2023-07-21 23-24-56.210 INFO [main] s.d.s.w.p.DocumentationPluginsBootstrapper [DocumentationPluginsBootstrapper.java : 160] Context refreshed
-2023-07-21 23-24-56.218 INFO [main] s.d.s.w.p.DocumentationPluginsBootstrapper [DocumentationPluginsBootstrapper.java : 163] Found 1 custom documentation plugin(s)
-2023-07-21 23-24-56.233 INFO [main] s.d.s.w.s.ApiListingReferenceScanner [ApiListingReferenceScanner.java : 41] Scanning for api listing references
-2023-07-21 23-24-56.292 INFO [main] s.d.s.w.r.o.CachingOperationNameGenerator [CachingOperationNameGenerator.java : 40] Generating unique operation named: allInfoUsingGET_1
-2023-07-21 23-24-56.352 INFO [main] c.e.atv.SmokeManagementApplication [StartupInfoLogger.java : 61] Started SmokeManagementApplication in 2.218 seconds (JVM running for 2.885)
-2023-07-21 23-25-03.439 INFO [http-nio-80-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/] [DirectJDKLog.java : 173] Initializing Spring DispatcherServlet 'dispatcherServlet'
-2023-07-21 23-25-03.535 DEBUG [http-nio-80-exec-1] c.e.a.g.m.B.selectList [BaseJdbcLogger.java : 137] ==>  Preparing: SELECT province,city,county,street,community_id,court_name,build_number,build_time,number_people,number_over60_people,units_number,number_department,date_time,state,user_id,report_year,community_name,review_comment,problem_state FROM build_basic WHERE (build_number = ? AND court_name = ? AND community_id = ?)
-2023-07-21 23-25-03.544 DEBUG [http-nio-80-exec-1] c.e.a.g.m.B.selectList [BaseJdbcLogger.java : 137] ==> Parameters: string(String), string(String), string(String)
-2023-07-21 23-25-03.553 DEBUG [http-nio-80-exec-1] c.e.a.g.m.B.selectList [BaseJdbcLogger.java : 137] <==      Total: 1
-2023-07-21 23-25-03.557 DEBUG [http-nio-80-exec-1] c.e.a.g.m.I.selectList [BaseJdbcLogger.java : 137] ==>  Preparing: SELECT community_id,court_name,indicator_id,indicator_value,meno,longitude,latitude,report_year,build_number,photo_path,description,location FROM indicator_value_build WHERE (community_id = ? AND court_name = ? AND build_number = ?)
-2023-07-21 23-25-03.557 DEBUG [http-nio-80-exec-1] c.e.a.g.m.I.selectList [BaseJdbcLogger.java : 137] ==> Parameters: string(String), string(String), string(String)
-2023-07-21 23-25-03.559 DEBUG [http-nio-80-exec-1] c.e.a.g.m.I.selectList [BaseJdbcLogger.java : 137] <==      Total: 3
-2023-07-21 23-29-23.349 INFO [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource [HikariDataSource.java : 350] HikariPool-1 - Shutdown initiated...
-2023-07-21 23-29-23.353 INFO [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource [HikariDataSource.java : 352] HikariPool-1 - Shutdown completed.
-2023-07-21 23-29-26.611 INFO [main] c.e.atv.SmokeManagementApplication [StartupInfoLogger.java : 55] Starting SmokeManagementApplication using Java 1.8.0_352 on yanxinzhaodeMacBook-Pro.local with PID 64085 (/Users/yanxinzhao/Desktop/atv-qu/smokeManagement/target/classes started by yanxinzhao in /Users/yanxinzhao/Desktop/atv-qu/smokeManagement)
-2023-07-21 23-29-26.615 DEBUG [main] c.e.atv.SmokeManagementApplication [StartupInfoLogger.java : 56] Running with Spring Boot v2.7.4, Spring v5.3.23
-2023-07-21 23-29-26.616 INFO [main] c.e.atv.SmokeManagementApplication [SpringApplication.java : 634] No active profile set, falling back to 1 default profile: "default"
-2023-07-21 23-29-27.596 INFO [main] o.a.coyote.http11.Http11NioProtocol [DirectJDKLog.java : 173] Initializing ProtocolHandler ["http-nio-80"]
-2023-07-21 23-29-27.597 INFO [main] o.a.catalina.core.StandardService [DirectJDKLog.java : 173] Starting service [Tomcat]
-2023-07-21 23-29-27.597 INFO [main] o.a.catalina.core.StandardEngine [DirectJDKLog.java : 173] Starting Servlet engine: [Apache Tomcat/9.0.65]
-2023-07-21 23-29-27.649 INFO [main] o.a.c.c.C.[Tomcat].[localhost].[/] [DirectJDKLog.java : 173] Initializing Spring embedded WebApplicationContext
-2023-07-21 23-29-27.720 INFO [main] com.zaxxer.hikari.HikariDataSource [HikariDataSource.java : 110] HikariPool-1 - Starting...
-2023-07-21 23-29-27.851 INFO [main] com.zaxxer.hikari.HikariDataSource [HikariDataSource.java : 123] HikariPool-1 - Start completed.
-2023-07-21 23-29-27.873 INFO [main] o.h.jpa.internal.util.LogHelper [LogHelper.java : 31] HHH000204: Processing PersistenceUnitInfo [name: default]
-2023-07-21 23-29-27.894 INFO [main] org.hibernate.Version [Version.java : 44] HHH000412: Hibernate ORM core version 5.6.11.Final
-2023-07-21 23-29-27.953 INFO [main] o.h.annotations.common.Version [JavaReflectionManager.java : 56] HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
-2023-07-21 23-29-28.002 INFO [main] org.hibernate.dialect.Dialect [Dialect.java : 175] HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
-2023-07-21 23-29-28.071 INFO [main] o.h.e.t.j.p.i.JtaPlatformInitiator [JtaPlatformInitiator.java : 52] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2023-07-21 23-29-28.147 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.CommunityBasic".
-2023-07-21 23-29-28.150 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.CommunityBasic ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
-2023-07-21 23-29-28.217 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.Community".
-2023-07-21 23-29-28.217 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.Community ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
-2023-07-21 23-29-28.240 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.CourtBasic".
-2023-07-21 23-29-28.241 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.CourtBasic ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
-2023-07-21 23-29-28.260 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.Indicator".
-2023-07-21 23-29-28.261 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.Indicator ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
-2023-07-21 23-29-28.275 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.IndicatorValue".
-2023-07-21 23-29-28.276 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.IndicatorValue ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
-2023-07-21 23-29-28.291 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.User".
-2023-07-21 23-29-28.291 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.User ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
-2023-07-21 23-29-28.305 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.BuildBasic".
-2023-07-21 23-29-28.305 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.BuildBasic ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
-2023-07-21 23-29-28.321 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.IndicatorValueBuild".
-2023-07-21 23-29-28.321 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.IndicatorValueBuild ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
-2023-07-21 23-29-28.448 WARN [main] o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration [JpaBaseConfiguration.java : 219] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2023-07-21 23-29-28.525 INFO [main] s.d.s.w.PropertySourcedRequestMappingHandlerMapping [PropertySourcedRequestMappingHandlerMapping.java : 69] Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
-2023-07-21 23-29-28.671 INFO [main] o.a.coyote.http11.Http11NioProtocol [DirectJDKLog.java : 173] Starting ProtocolHandler ["http-nio-80"]
-2023-07-21 23-29-28.682 INFO [main] s.d.s.w.p.DocumentationPluginsBootstrapper [DocumentationPluginsBootstrapper.java : 160] Context refreshed
-2023-07-21 23-29-28.691 INFO [main] s.d.s.w.p.DocumentationPluginsBootstrapper [DocumentationPluginsBootstrapper.java : 163] Found 1 custom documentation plugin(s)
-2023-07-21 23-29-28.705 INFO [main] s.d.s.w.s.ApiListingReferenceScanner [ApiListingReferenceScanner.java : 41] Scanning for api listing references
-2023-07-21 23-29-28.764 INFO [main] s.d.s.w.r.o.CachingOperationNameGenerator [CachingOperationNameGenerator.java : 40] Generating unique operation named: allInfoUsingGET_1
-2023-07-21 23-29-28.824 INFO [main] c.e.atv.SmokeManagementApplication [StartupInfoLogger.java : 61] Started SmokeManagementApplication in 2.493 seconds (JVM running for 2.981)
-2023-07-21 23-29-38.181 INFO [http-nio-80-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/] [DirectJDKLog.java : 173] Initializing Spring DispatcherServlet 'dispatcherServlet'
-2023-07-21 23-29-38.292 DEBUG [http-nio-80-exec-1] c.e.a.g.m.B.selectList [BaseJdbcLogger.java : 137] ==>  Preparing: SELECT province,city,county,street,community_id,court_name,build_number,build_time,number_people,number_over60_people,units_number,number_department,date_time,state,user_id,report_year,community_name,review_comment,problem_state FROM build_basic WHERE (build_number = ? AND court_name = ? AND community_id = ?)
-2023-07-21 23-29-38.302 DEBUG [http-nio-80-exec-1] c.e.a.g.m.B.selectList [BaseJdbcLogger.java : 137] ==> Parameters: string(String), string(String), string(String)
-2023-07-21 23-29-38.311 DEBUG [http-nio-80-exec-1] c.e.a.g.m.B.selectList [BaseJdbcLogger.java : 137] <==      Total: 1
-2023-07-21 23-29-38.316 DEBUG [http-nio-80-exec-1] c.e.a.g.m.I.selectList [BaseJdbcLogger.java : 137] ==>  Preparing: SELECT community_id,court_name,indicator_id,indicator_value,meno,longitude,latitude,report_year,build_number,photo_path,description,location FROM indicator_value_build WHERE (community_id = ? AND court_name = ? AND build_number = ?)
-2023-07-21 23-29-38.316 DEBUG [http-nio-80-exec-1] c.e.a.g.m.I.selectList [BaseJdbcLogger.java : 137] ==> Parameters: string(String), string(String), string(String)
-2023-07-21 23-29-38.318 DEBUG [http-nio-80-exec-1] c.e.a.g.m.I.selectList [BaseJdbcLogger.java : 137] <==      Total: 3
-2023-07-21 23-31-21.922 DEBUG [http-nio-80-exec-3] c.e.a.g.m.B.selectList [BaseJdbcLogger.java : 137] ==>  Preparing: SELECT province,city,county,street,community_id,court_name,build_number,build_time,number_people,number_over60_people,units_number,number_department,date_time,state,user_id,report_year,community_name,review_comment,problem_state FROM build_basic WHERE (build_number = ? AND court_name = ? AND community_id = ?)
-2023-07-21 23-31-21.925 DEBUG [http-nio-80-exec-3] c.e.a.g.m.B.selectList [BaseJdbcLogger.java : 137] ==> Parameters: string(String), string(String), string(String)
-2023-07-21 23-31-21.930 DEBUG [http-nio-80-exec-3] c.e.a.g.m.B.selectList [BaseJdbcLogger.java : 137] <==      Total: 1
-2023-07-21 23-31-21.932 DEBUG [http-nio-80-exec-3] c.e.a.g.m.I.selectList [BaseJdbcLogger.java : 137] ==>  Preparing: SELECT community_id,court_name,indicator_id,indicator_value,meno,longitude,latitude,report_year,build_number,photo_path,description,location FROM indicator_value_build WHERE (community_id = ? AND court_name = ? AND build_number = ?)
-2023-07-21 23-31-21.932 DEBUG [http-nio-80-exec-3] c.e.a.g.m.I.selectList [BaseJdbcLogger.java : 137] ==> Parameters: string(String), string(String), string(String)
-2023-07-21 23-31-21.934 DEBUG [http-nio-80-exec-3] c.e.a.g.m.I.selectList [BaseJdbcLogger.java : 137] <==      Total: 3
-2023-07-21 23-31-59.353 DEBUG [http-nio-80-exec-4] c.e.a.g.m.B.selectList [BaseJdbcLogger.java : 137] ==>  Preparing: SELECT province,city,county,street,community_id,court_name,build_number,build_time,number_people,number_over60_people,units_number,number_department,date_time,state,user_id,report_year,community_name,review_comment,problem_state FROM build_basic WHERE (court_name = ? AND community_id = ?)
-2023-07-21 23-31-59.357 DEBUG [http-nio-80-exec-4] c.e.a.g.m.B.selectList [BaseJdbcLogger.java : 137] ==> Parameters: string(String), string(String)
-2023-07-21 23-31-59.362 DEBUG [http-nio-80-exec-4] c.e.a.g.m.B.selectList [BaseJdbcLogger.java : 137] <==      Total: 2
-2023-07-21 23-31-59.363 DEBUG [http-nio-80-exec-4] c.e.a.g.m.I.selectList [BaseJdbcLogger.java : 137] ==>  Preparing: SELECT community_id,court_name,indicator_id,indicator_value,meno,longitude,latitude,report_year,build_number,photo_path,description,location FROM indicator_value_build WHERE (community_id = ? AND court_name = ? AND build_number = ?)
-2023-07-21 23-31-59.365 DEBUG [http-nio-80-exec-4] c.e.a.g.m.I.selectList [BaseJdbcLogger.java : 137] ==> Parameters: string(String), string(String), string(String)
-2023-07-21 23-31-59.367 DEBUG [http-nio-80-exec-4] c.e.a.g.m.I.selectList [BaseJdbcLogger.java : 137] <==      Total: 3
-2023-07-21 23-31-59.369 DEBUG [http-nio-80-exec-4] c.e.a.g.m.I.selectList [BaseJdbcLogger.java : 137] ==>  Preparing: SELECT community_id,court_name,indicator_id,indicator_value,meno,longitude,latitude,report_year,build_number,photo_path,description,location FROM indicator_value_build WHERE (community_id = ? AND court_name = ? AND build_number = ?)
-2023-07-21 23-31-59.369 DEBUG [http-nio-80-exec-4] c.e.a.g.m.I.selectList [BaseJdbcLogger.java : 137] ==> Parameters: string(String), string(String), string1(String)
-2023-07-21 23-31-59.370 DEBUG [http-nio-80-exec-4] c.e.a.g.m.I.selectList [BaseJdbcLogger.java : 137] <==      Total: 0
-2023-07-21 23-33-04.674 INFO [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource [HikariDataSource.java : 350] HikariPool-1 - Shutdown initiated...
-2023-07-21 23-33-04.679 INFO [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource [HikariDataSource.java : 352] HikariPool-1 - Shutdown completed.
-2023-07-21 23-33-07.960 INFO [main] c.e.atv.SmokeManagementApplication [StartupInfoLogger.java : 55] Starting SmokeManagementApplication using Java 1.8.0_352 on yanxinzhaodeMacBook-Pro.local with PID 64489 (/Users/yanxinzhao/Desktop/atv-qu/smokeManagement/target/classes started by yanxinzhao in /Users/yanxinzhao/Desktop/atv-qu/smokeManagement)
-2023-07-21 23-33-07.962 DEBUG [main] c.e.atv.SmokeManagementApplication [StartupInfoLogger.java : 56] Running with Spring Boot v2.7.4, Spring v5.3.23
-2023-07-21 23-33-07.962 INFO [main] c.e.atv.SmokeManagementApplication [SpringApplication.java : 634] No active profile set, falling back to 1 default profile: "default"
-2023-07-21 23-33-08.639 INFO [main] o.a.coyote.http11.Http11NioProtocol [DirectJDKLog.java : 173] Initializing ProtocolHandler ["http-nio-80"]
-2023-07-21 23-33-08.639 INFO [main] o.a.catalina.core.StandardService [DirectJDKLog.java : 173] Starting service [Tomcat]
-2023-07-21 23-33-08.639 INFO [main] o.a.catalina.core.StandardEngine [DirectJDKLog.java : 173] Starting Servlet engine: [Apache Tomcat/9.0.65]
-2023-07-21 23-33-08.690 INFO [main] o.a.c.c.C.[Tomcat].[localhost].[/] [DirectJDKLog.java : 173] Initializing Spring embedded WebApplicationContext
-2023-07-21 23-33-08.759 INFO [main] com.zaxxer.hikari.HikariDataSource [HikariDataSource.java : 110] HikariPool-1 - Starting...
-2023-07-21 23-33-08.898 INFO [main] com.zaxxer.hikari.HikariDataSource [HikariDataSource.java : 123] HikariPool-1 - Start completed.
-2023-07-21 23-33-08.921 INFO [main] o.h.jpa.internal.util.LogHelper [LogHelper.java : 31] HHH000204: Processing PersistenceUnitInfo [name: default]
-2023-07-21 23-33-08.943 INFO [main] org.hibernate.Version [Version.java : 44] HHH000412: Hibernate ORM core version 5.6.11.Final
-2023-07-21 23-33-09.003 INFO [main] o.h.annotations.common.Version [JavaReflectionManager.java : 56] HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
-2023-07-21 23-33-09.052 INFO [main] org.hibernate.dialect.Dialect [Dialect.java : 175] HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
-2023-07-21 23-33-09.120 INFO [main] o.h.e.t.j.p.i.JtaPlatformInitiator [JtaPlatformInitiator.java : 52] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2023-07-21 23-33-09.197 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.CommunityBasic".
-2023-07-21 23-33-09.200 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.CommunityBasic ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
-2023-07-21 23-33-09.274 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.Community".
-2023-07-21 23-33-09.274 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.Community ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
-2023-07-21 23-33-09.297 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.CourtBasic".
-2023-07-21 23-33-09.297 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.CourtBasic ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
-2023-07-21 23-33-09.316 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.Indicator".
-2023-07-21 23-33-09.316 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.Indicator ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
-2023-07-21 23-33-09.332 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.IndicatorValue".
-2023-07-21 23-33-09.332 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.IndicatorValue ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
-2023-07-21 23-33-09.348 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.User".
-2023-07-21 23-33-09.348 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.User ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
-2023-07-21 23-33-09.361 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.BuildBasic".
-2023-07-21 23-33-09.362 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.BuildBasic ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
-2023-07-21 23-33-09.375 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.IndicatorValueBuild".
-2023-07-21 23-33-09.375 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.IndicatorValueBuild ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
-2023-07-21 23-33-09.492 WARN [main] o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration [JpaBaseConfiguration.java : 219] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2023-07-21 23-33-09.570 INFO [main] s.d.s.w.PropertySourcedRequestMappingHandlerMapping [PropertySourcedRequestMappingHandlerMapping.java : 69] Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
-2023-07-21 23-33-09.727 INFO [main] o.a.coyote.http11.Http11NioProtocol [DirectJDKLog.java : 173] Starting ProtocolHandler ["http-nio-80"]
-2023-07-21 23-33-09.739 INFO [main] s.d.s.w.p.DocumentationPluginsBootstrapper [DocumentationPluginsBootstrapper.java : 160] Context refreshed
-2023-07-21 23-33-09.747 INFO [main] s.d.s.w.p.DocumentationPluginsBootstrapper [DocumentationPluginsBootstrapper.java : 163] Found 1 custom documentation plugin(s)
-2023-07-21 23-33-09.761 INFO [main] s.d.s.w.s.ApiListingReferenceScanner [ApiListingReferenceScanner.java : 41] Scanning for api listing references
-2023-07-21 23-33-09.818 INFO [main] s.d.s.w.r.o.CachingOperationNameGenerator [CachingOperationNameGenerator.java : 40] Generating unique operation named: allInfoUsingGET_1
-2023-07-21 23-33-09.882 INFO [main] c.e.atv.SmokeManagementApplication [StartupInfoLogger.java : 61] Started SmokeManagementApplication in 2.107 seconds (JVM running for 2.597)
-2023-07-21 23-33-17.999 INFO [http-nio-80-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/] [DirectJDKLog.java : 173] Initializing Spring DispatcherServlet 'dispatcherServlet'
-2023-07-21 23-33-18.106 DEBUG [http-nio-80-exec-1] c.e.a.g.m.B.selectList [BaseJdbcLogger.java : 137] ==>  Preparing: SELECT province,city,county,street,community_id,court_name,build_number,build_time,number_people,number_over60_people,units_number,number_department,date_time,state,user_id,report_year,community_name,review_comment,problem_state FROM build_basic WHERE (court_name = ? AND community_id = ?)
-2023-07-21 23-33-18.116 DEBUG [http-nio-80-exec-1] c.e.a.g.m.B.selectList [BaseJdbcLogger.java : 137] ==> Parameters: string(String), string(String)
-2023-07-21 23-33-18.125 DEBUG [http-nio-80-exec-1] c.e.a.g.m.B.selectList [BaseJdbcLogger.java : 137] <==      Total: 2
-2023-07-21 23-33-18.128 DEBUG [http-nio-80-exec-1] c.e.a.g.m.I.selectList [BaseJdbcLogger.java : 137] ==>  Preparing: SELECT community_id,court_name,indicator_id,indicator_value,meno,longitude,latitude,report_year,build_number,photo_path,description,location FROM indicator_value_build WHERE (community_id = ? AND court_name = ? AND build_number = ?)
-2023-07-21 23-33-18.128 DEBUG [http-nio-80-exec-1] c.e.a.g.m.I.selectList [BaseJdbcLogger.java : 137] ==> Parameters: string(String), string(String), string(String)
-2023-07-21 23-33-18.131 DEBUG [http-nio-80-exec-1] c.e.a.g.m.I.selectList [BaseJdbcLogger.java : 137] <==      Total: 3
-2023-07-21 23-33-18.257 DEBUG [http-nio-80-exec-1] c.e.a.g.m.I.selectList [BaseJdbcLogger.java : 137] ==>  Preparing: SELECT community_id,court_name,indicator_id,indicator_value,meno,longitude,latitude,report_year,build_number,photo_path,description,location FROM indicator_value_build WHERE (community_id = ? AND court_name = ? AND build_number = ?)
-2023-07-21 23-33-18.257 DEBUG [http-nio-80-exec-1] c.e.a.g.m.I.selectList [BaseJdbcLogger.java : 137] ==> Parameters: string(String), string(String), string1(String)
-2023-07-21 23-33-18.261 DEBUG [http-nio-80-exec-1] c.e.a.g.m.I.selectList [BaseJdbcLogger.java : 137] <==      Total: 0
-2023-07-21 23-35-50.914 INFO [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource [HikariDataSource.java : 350] HikariPool-1 - Shutdown initiated...
-2023-07-21 23-35-50.923 INFO [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource [HikariDataSource.java : 352] HikariPool-1 - Shutdown completed.
-2023-07-21 23-35-54.184 INFO [main] c.e.atv.SmokeManagementApplication [StartupInfoLogger.java : 55] Starting SmokeManagementApplication using Java 1.8.0_352 on yanxinzhaodeMacBook-Pro.local with PID 64833 (/Users/yanxinzhao/Desktop/atv-qu/smokeManagement/target/classes started by yanxinzhao in /Users/yanxinzhao/Desktop/atv-qu/smokeManagement)
-2023-07-21 23-35-54.185 DEBUG [main] c.e.atv.SmokeManagementApplication [StartupInfoLogger.java : 56] Running with Spring Boot v2.7.4, Spring v5.3.23
-2023-07-21 23-35-54.186 INFO [main] c.e.atv.SmokeManagementApplication [SpringApplication.java : 634] No active profile set, falling back to 1 default profile: "default"
-2023-07-21 23-35-54.876 INFO [main] o.a.coyote.http11.Http11NioProtocol [DirectJDKLog.java : 173] Initializing ProtocolHandler ["http-nio-80"]
-2023-07-21 23-35-54.877 INFO [main] o.a.catalina.core.StandardService [DirectJDKLog.java : 173] Starting service [Tomcat]
-2023-07-21 23-35-54.877 INFO [main] o.a.catalina.core.StandardEngine [DirectJDKLog.java : 173] Starting Servlet engine: [Apache Tomcat/9.0.65]
-2023-07-21 23-35-54.929 INFO [main] o.a.c.c.C.[Tomcat].[localhost].[/] [DirectJDKLog.java : 173] Initializing Spring embedded WebApplicationContext
-2023-07-21 23-35-55.003 INFO [main] com.zaxxer.hikari.HikariDataSource [HikariDataSource.java : 110] HikariPool-1 - Starting...
-2023-07-21 23-35-55.137 INFO [main] com.zaxxer.hikari.HikariDataSource [HikariDataSource.java : 123] HikariPool-1 - Start completed.
-2023-07-21 23-35-55.159 INFO [main] o.h.jpa.internal.util.LogHelper [LogHelper.java : 31] HHH000204: Processing PersistenceUnitInfo [name: default]
-2023-07-21 23-35-55.182 INFO [main] org.hibernate.Version [Version.java : 44] HHH000412: Hibernate ORM core version 5.6.11.Final
-2023-07-21 23-35-55.246 INFO [main] o.h.annotations.common.Version [JavaReflectionManager.java : 56] HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
-2023-07-21 23-35-55.297 INFO [main] org.hibernate.dialect.Dialect [Dialect.java : 175] HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
-2023-07-21 23-35-55.370 INFO [main] o.h.e.t.j.p.i.JtaPlatformInitiator [JtaPlatformInitiator.java : 52] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2023-07-21 23-35-55.451 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.CommunityBasic".
-2023-07-21 23-35-55.454 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.CommunityBasic ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
-2023-07-21 23-35-55.530 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.Community".
-2023-07-21 23-35-55.530 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.Community ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
-2023-07-21 23-35-55.551 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.CourtBasic".
-2023-07-21 23-35-55.551 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.CourtBasic ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
-2023-07-21 23-35-55.569 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.Indicator".
-2023-07-21 23-35-55.569 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.Indicator ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
-2023-07-21 23-35-55.584 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.IndicatorValue".
-2023-07-21 23-35-55.584 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.IndicatorValue ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
-2023-07-21 23-35-55.599 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.User".
-2023-07-21 23-35-55.600 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.User ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
-2023-07-21 23-35-55.614 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.BuildBasic".
-2023-07-21 23-35-55.614 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.BuildBasic ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
-2023-07-21 23-35-55.628 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.IndicatorValueBuild".
-2023-07-21 23-35-55.628 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.IndicatorValueBuild ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
-2023-07-21 23-35-55.755 WARN [main] o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration [JpaBaseConfiguration.java : 219] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2023-07-21 23-35-55.833 INFO [main] s.d.s.w.PropertySourcedRequestMappingHandlerMapping [PropertySourcedRequestMappingHandlerMapping.java : 69] Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
-2023-07-21 23-35-55.991 INFO [main] o.a.coyote.http11.Http11NioProtocol [DirectJDKLog.java : 173] Starting ProtocolHandler ["http-nio-80"]
-2023-07-21 23-35-56.003 INFO [main] s.d.s.w.p.DocumentationPluginsBootstrapper [DocumentationPluginsBootstrapper.java : 160] Context refreshed
-2023-07-21 23-35-56.012 INFO [main] s.d.s.w.p.DocumentationPluginsBootstrapper [DocumentationPluginsBootstrapper.java : 163] Found 1 custom documentation plugin(s)
-2023-07-21 23-35-56.027 INFO [main] s.d.s.w.s.ApiListingReferenceScanner [ApiListingReferenceScanner.java : 41] Scanning for api listing references
-2023-07-21 23-35-56.090 INFO [main] s.d.s.w.r.o.CachingOperationNameGenerator [CachingOperationNameGenerator.java : 40] Generating unique operation named: allInfoUsingGET_1
-2023-07-21 23-35-56.152 INFO [main] c.e.atv.SmokeManagementApplication [StartupInfoLogger.java : 61] Started SmokeManagementApplication in 2.161 seconds (JVM running for 2.707)
-2023-07-21 23-36-36.622 INFO [http-nio-80-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/] [DirectJDKLog.java : 173] Initializing Spring DispatcherServlet 'dispatcherServlet'
-2023-07-21 23-36-36.731 DEBUG [http-nio-80-exec-1] c.e.a.g.m.C.selectList [BaseJdbcLogger.java : 137] ==>  Preparing: SELECT province,city,county,street,community_id,court_name,court_type,court_type_other,build_time,remodel,management,area,number_department,number_people,number_over60_people,number_building,number13_building,number46_building,number79_building,number_over10_building,number1017_building,number_over18_building,date_time,state,user_id,report_year,community_name,review_comment,finish_time FROM court_basic WHERE (court_name = ? AND community_id = ?)
-2023-07-21 23-36-36.741 DEBUG [http-nio-80-exec-1] c.e.a.g.m.C.selectList [BaseJdbcLogger.java : 137] ==> Parameters: string(String), string(String)
-2023-07-21 23-36-36.752 DEBUG [http-nio-80-exec-1] c.e.a.g.m.C.selectList [BaseJdbcLogger.java : 137] <==      Total: 1
-2023-07-21 23-36-36.756 DEBUG [http-nio-80-exec-1] c.e.a.g.m.I.selectList [BaseJdbcLogger.java : 137] ==>  Preparing: SELECT community_id,court_name,indicator_id,indicator_value,meno,longitude,latitude,report_year,location FROM indicator_value WHERE (community_id = ? AND court_name = ?)
-2023-07-21 23-36-36.757 DEBUG [http-nio-80-exec-1] c.e.a.g.m.I.selectList [BaseJdbcLogger.java : 137] ==> Parameters: string(String), string(String)
-2023-07-21 23-36-36.759 DEBUG [http-nio-80-exec-1] c.e.a.g.m.I.selectList [BaseJdbcLogger.java : 137] <==      Total: 3
-2023-07-21 23-37-11.743 DEBUG [http-nio-80-exec-2] c.e.a.g.m.C.selectList [BaseJdbcLogger.java : 137] ==>  Preparing: SELECT community_id,area,number_people,number_court,number_family,state,date_time,user_id,report_year,province,city,county,street,community_name,review_comment,age03,age60,age65 FROM community_basic WHERE (community_id = ?)
-2023-07-21 23-37-11.747 DEBUG [http-nio-80-exec-2] c.e.a.g.m.C.selectList [BaseJdbcLogger.java : 137] ==> Parameters: string(String)
-2023-07-21 23-37-11.751 DEBUG [http-nio-80-exec-2] c.e.a.g.m.C.selectList [BaseJdbcLogger.java : 137] <==      Total: 1
-2023-07-21 23-37-11.754 DEBUG [http-nio-80-exec-2] c.e.a.g.m.I.selectList [BaseJdbcLogger.java : 137] ==>  Preparing: SELECT community_id,court_name,indicator_id,indicator_value,meno,longitude,latitude,report_year,location FROM indicator_value WHERE (community_id = ? AND court_name = ?)
-2023-07-21 23-37-11.754 DEBUG [http-nio-80-exec-2] c.e.a.g.m.I.selectList [BaseJdbcLogger.java : 137] ==> Parameters: string(String), (String)
-2023-07-21 23-37-11.756 DEBUG [http-nio-80-exec-2] c.e.a.g.m.I.selectList [BaseJdbcLogger.java : 137] <==      Total: 1
-2023-07-21 23-57-21.495 INFO [main] c.e.atv.SmokeManagementApplication [StartupInfoLogger.java : 55] Starting SmokeManagementApplication using Java 1.8.0_352 on yanxinzhaodeMacBook-Pro.local with PID 67321 (/Users/yanxinzhao/Desktop/atv-qu/smokeManagement/target/classes started by yanxinzhao in /Users/yanxinzhao/Desktop/atv-qu/smokeManagement)
-2023-07-21 23-57-21.497 DEBUG [main] c.e.atv.SmokeManagementApplication [StartupInfoLogger.java : 56] Running with Spring Boot v2.7.4, Spring v5.3.23
-2023-07-21 23-57-21.497 INFO [main] c.e.atv.SmokeManagementApplication [SpringApplication.java : 634] No active profile set, falling back to 1 default profile: "default"
-2023-07-21 23-57-22.386 INFO [main] o.a.coyote.http11.Http11NioProtocol [DirectJDKLog.java : 173] Initializing ProtocolHandler ["http-nio-80"]
-2023-07-21 23-57-22.386 INFO [main] o.a.catalina.core.StandardService [DirectJDKLog.java : 173] Starting service [Tomcat]
-2023-07-21 23-57-22.387 INFO [main] o.a.catalina.core.StandardEngine [DirectJDKLog.java : 173] Starting Servlet engine: [Apache Tomcat/9.0.65]
-2023-07-21 23-57-22.489 INFO [main] o.a.c.c.C.[Tomcat].[localhost].[/] [DirectJDKLog.java : 173] Initializing Spring embedded WebApplicationContext
-2023-07-21 23-57-22.637 INFO [main] com.zaxxer.hikari.HikariDataSource [HikariDataSource.java : 110] HikariPool-1 - Starting...
-2023-07-21 23-57-22.842 INFO [main] com.zaxxer.hikari.HikariDataSource [HikariDataSource.java : 123] HikariPool-1 - Start completed.
-2023-07-21 23-57-22.870 INFO [main] o.h.jpa.internal.util.LogHelper [LogHelper.java : 31] HHH000204: Processing PersistenceUnitInfo [name: default]
-2023-07-21 23-57-22.899 INFO [main] org.hibernate.Version [Version.java : 44] HHH000412: Hibernate ORM core version 5.6.11.Final
-2023-07-21 23-57-22.972 INFO [main] o.h.annotations.common.Version [JavaReflectionManager.java : 56] HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
-2023-07-21 23-57-23.021 INFO [main] org.hibernate.dialect.Dialect [Dialect.java : 175] HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
-2023-07-21 23-57-23.094 INFO [main] o.h.e.t.j.p.i.JtaPlatformInitiator [JtaPlatformInitiator.java : 52] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2023-07-21 23-57-23.188 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.CommunityBasic".
-2023-07-21 23-57-23.190 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.CommunityBasic ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
-2023-07-21 23-57-23.266 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.Community".
-2023-07-21 23-57-23.266 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.Community ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
-2023-07-21 23-57-23.288 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.CourtBasic".
-2023-07-21 23-57-23.288 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.CourtBasic ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
-2023-07-21 23-57-23.307 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.Indicator".
-2023-07-21 23-57-23.307 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.Indicator ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
-2023-07-21 23-57-23.323 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.IndicatorValue".
-2023-07-21 23-57-23.323 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.IndicatorValue ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
-2023-07-21 23-57-23.337 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.User".
-2023-07-21 23-57-23.338 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.User ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
-2023-07-21 23-57-23.352 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.BuildBasic".
-2023-07-21 23-57-23.352 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.BuildBasic ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
-2023-07-21 23-57-23.366 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.IndicatorValueBuild".
-2023-07-21 23-57-23.366 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.IndicatorValueBuild ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
-2023-07-21 23-57-23.500 WARN [main] o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration [JpaBaseConfiguration.java : 219] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2023-07-21 23-57-23.590 INFO [main] s.d.s.w.PropertySourcedRequestMappingHandlerMapping [PropertySourcedRequestMappingHandlerMapping.java : 69] Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
-2023-07-21 23-57-23.737 INFO [main] o.a.coyote.http11.Http11NioProtocol [DirectJDKLog.java : 173] Starting ProtocolHandler ["http-nio-80"]
-2023-07-21 23-57-23.753 INFO [main] s.d.s.w.p.DocumentationPluginsBootstrapper [DocumentationPluginsBootstrapper.java : 160] Context refreshed
-2023-07-21 23-57-23.764 INFO [main] s.d.s.w.p.DocumentationPluginsBootstrapper [DocumentationPluginsBootstrapper.java : 163] Found 1 custom documentation plugin(s)
-2023-07-21 23-57-23.779 INFO [main] s.d.s.w.s.ApiListingReferenceScanner [ApiListingReferenceScanner.java : 41] Scanning for api listing references
-2023-07-21 23-57-23.848 INFO [main] s.d.s.w.r.o.CachingOperationNameGenerator [CachingOperationNameGenerator.java : 40] Generating unique operation named: allInfoUsingGET_1
-2023-07-21 23-57-23.914 INFO [main] c.e.atv.SmokeManagementApplication [StartupInfoLogger.java : 61] Started SmokeManagementApplication in 2.615 seconds (JVM running for 3.056)
-2023-07-21 23-57-38.241 INFO [http-nio-80-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/] [DirectJDKLog.java : 173] Initializing Spring DispatcherServlet 'dispatcherServlet'
-2023-07-21 23-57-38.351 DEBUG [http-nio-80-exec-1] c.e.a.g.m.C.selectList [BaseJdbcLogger.java : 137] ==>  Preparing: SELECT community_id,area,number_people,number_court,number_family,state,date_time,user_id,report_year,province,city,county,street,community_name,review_comment,age03,age60,age65 FROM community_basic WHERE (community_id = ?)
-2023-07-21 23-57-38.364 DEBUG [http-nio-80-exec-1] c.e.a.g.m.C.selectList [BaseJdbcLogger.java : 137] ==> Parameters: string(String)
-2023-07-21 23-57-38.387 DEBUG [http-nio-80-exec-1] c.e.a.g.m.C.selectList [BaseJdbcLogger.java : 137] <==      Total: 1
-2023-07-21 23-57-38.392 DEBUG [http-nio-80-exec-1] c.e.a.g.m.I.selectList [BaseJdbcLogger.java : 137] ==>  Preparing: SELECT community_id,court_name,indicator_id,indicator_value,meno,longitude,latitude,report_year,location FROM indicator_value WHERE (community_id = ? AND court_name = ?)
-2023-07-21 23-57-38.392 DEBUG [http-nio-80-exec-1] c.e.a.g.m.I.selectList [BaseJdbcLogger.java : 137] ==> Parameters: string(String), (String)
-2023-07-21 23-57-38.393 DEBUG [http-nio-80-exec-1] c.e.a.g.m.I.selectList [BaseJdbcLogger.java : 137] <==      Total: 1
+2023-07-29 00-25-34.538 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=47m1s23ms).
+2023-07-29 00-43-45.280 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=18m10s743ms).
+2023-07-29 01-15-41.171 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=31m55s890ms).
+2023-07-29 01-49-33.182 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=33m52s12ms).
+2023-07-29 01-52-02.987 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m57s798ms).
+2023-07-29 01-54-15.854 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m12s867ms).
+2023-07-29 01-55-34.843 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m18s990ms).
+2023-07-29 01-57-55.214 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m20s370ms).
+2023-07-29 01-59-08.394 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m13s181ms).
+2023-07-29 02-01-00.403 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m52s8ms).
+2023-07-29 02-02-19.349 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m18s947ms).
+2023-07-29 02-04-30.662 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m11s313ms).
+2023-07-29 02-05-47.365 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m16s703ms).
+2023-07-29 02-07-42.983 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m55s617ms).
+2023-07-29 02-09-05.327 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m22s345ms).
+2023-07-29 02-10-56.464 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m51s137ms).
+2023-07-29 02-12-08.256 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m11s792ms).
+2023-07-29 02-13-31.235 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m22s978ms).
+2023-07-29 02-15-41.973 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m10s738ms).
+2023-07-29 02-17-04.048 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m22s75ms).
+2023-07-29 02-19-22.249 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m18s202ms).
+2023-07-29 02-53-01.082 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=33m38s830ms).
+2023-07-29 03-25-31.646 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=32m30s567ms).
+2023-07-29 04-14-34.975 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=49m3s328ms).
+2023-07-29 04-29-57.548 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=15m22s574ms).
+2023-07-29 04-31-18.494 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m20s946ms).
+2023-07-29 04-33-14.848 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m56s353ms).
+2023-07-29 04-35-07.525 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m52s678ms).
+2023-07-29 04-37-10.944 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m3s419ms).
+2023-07-29 04-38-22.871 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m11s926ms).
+2023-07-29 04-54-26.671 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=16m3s801ms).
+2023-07-29 05-45-28.322 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=51m1s651ms).
+2023-07-29 05-48-08.180 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m3s852ms).
+2023-07-29 05-50-17.951 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m9s772ms).
+2023-07-29 05-51-32.290 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m14s338ms).
+2023-07-29 05-53-39.775 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m7s486ms).
+2023-07-29 05-54-48.488 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m8s713ms).
+2023-07-29 05-56-43.280 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m54s792ms).
+2023-07-29 05-57-57.150 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m13s870ms).
+2023-07-29 06-00-03.264 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m6s114ms).
+2023-07-29 06-02-05.197 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m1s932ms).
+2023-07-29 06-03-29.678 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m24s482ms).
+2023-07-29 06-04-41.985 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m12s307ms).
+2023-07-29 06-06-06.743 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m24s758ms).
+2023-07-29 06-07-32.883 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m26s139ms).
+2023-07-29 06-08-42.912 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m10s29ms).
+2023-07-29 06-10-49.266 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m6s355ms).
+2023-07-29 06-12-12.856 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m23s590ms).
+2023-07-29 06-14-22.769 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m9s912ms).
+2023-07-29 06-16-32.271 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m9s503ms).
+2023-07-29 06-17-54.438 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m22s166ms).
+2023-07-29 06-19-12.995 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m18s557ms).
+2023-07-29 07-10-25.384 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=51m12s389ms).
+2023-07-29 07-13-38.134 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=3m12s751ms).
+2023-07-29 07-23-56.669 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=10m18s534ms).
+2023-07-29 07-30-46.389 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=6m49s721ms).
+2023-07-29 07-44-25.023 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=12m26s506ms).
+2023-07-29 07-50-48.675 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=6m23s652ms).
+2023-07-29 07-54-37.894 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=3m49s219ms).
+2023-07-29 07-56-54.237 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m16s343ms).
+2023-07-29 08-14-42.356 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=17m48s118ms).
+2023-07-29 08-16-10.064 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m27s708ms).
+2023-07-29 08-18-45.251 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m35s187ms).
+2023-07-29 08-27-38.318 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=8m53s67ms).
+2023-07-29 08-34-55.634 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=7m17s316ms).
+2023-07-29 08-37-51.495 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m55s862ms).
+2023-07-29 08-40-21.657 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m30s161ms).
+2023-07-29 08-46-27.188 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=6m5s531ms).
+2023-07-29 08-49-13.700 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m46s512ms).
+2023-07-29 09-28-43.386 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=39m29s687ms).
+2023-07-29 09-35-15.807 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=6m32s421ms).
+2023-07-29 09-42-04.273 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=6m48s466ms).
+2023-07-29 09-44-18.414 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m14s140ms).
+2023-07-29 09-51-42.174 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=7m23s761ms).
+2023-07-29 09-54-02.991 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m20s817ms).
+2023-07-29 09-56-54.509 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m21s513ms).
+2023-07-29 09-58-37.591 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m43s82ms).
+2023-07-29 09-59-43.344 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m5s753ms).
+2023-07-29 10-01-14.416 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m31s73ms).
+2023-07-29 10-10-07.235 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=8m11s195ms).
+2023-07-29 10-14-10.041 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=4m2s806ms).
+2023-07-29 10-20-57.137 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=5m30s537ms).
+2023-07-29 10-23-19.081 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m21s945ms).
+2023-07-29 10-54-33.632 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=31m14s550ms).
+2023-07-29 11-12-40.570 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=18m6s938ms).
+2023-07-29 11-14-50.164 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m9s595ms).
+2023-07-29 11-16-43.971 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m53s807ms).
+2023-07-29 11-24-17.213 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=7m33s242ms).
+2023-07-29 12-26-27.959 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h2m10s745ms).
+2023-07-29 12-58-59.442 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=32m31s484ms).
+2023-07-29 13-05-26.505 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=6m27s62ms).
+2023-07-29 13-14-43.498 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=51s743ms).
+2023-07-29 13-24-21.013 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m19s528ms).
+2023-07-29 13-26-29.646 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=56s430ms).
+2023-07-29 13-34-49.407 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=6m59s4ms).
+2023-07-29 13-40-19.456 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=5m30s49ms).
+2023-07-29 13-50-49.920 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=8m52s65ms).
+2023-07-29 14-56-36.308 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h5m46s388ms).
+2023-07-29 15-20-21.341 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=23m45s34ms).
+2023-07-29 16-14-53.988 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=50m32s590ms).
+2023-07-29 17-22-08.942 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h7m14s953ms).
+2023-07-29 18-08-05.849 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=45m56s908ms).
+2023-07-29 19-18-16.692 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h10m10s843ms).
+2023-07-29 20-24-28.803 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h6m12s111ms).
+2023-07-29 21-24-21.535 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=59m52s732ms).
+2023-07-29 21-26-29.570 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m8s34ms).
+2023-07-29 21-28-37.747 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m8s177ms).
+2023-07-29 21-41-39.804 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=13m2s57ms).
+2023-07-29 21-44-37.736 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 780] HikariPool-1 - Retrograde clock change detected (housekeeper delta=27s910ms), soft-evicting connections from pool.
+2023-07-29 22-01-11.300 WARN [main] org.apache.velocity.deprecation [DeprecationAwareExtProperties.java : 62] configuration key 'file.resource.loader.class' has been deprecated in favor of 'resource.loader.file.class'
+2023-07-29 22-01-11.302 WARN [main] org.apache.velocity.deprecation [DeprecationAwareExtProperties.java : 62] configuration key 'file.resource.loader.unicode' has been deprecated in favor of 'resource.loader.file.unicode'
+2023-07-29 22-02-24.874 INFO [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource [HikariDataSource.java : 350] HikariPool-1 - Shutdown initiated...
+2023-07-29 22-02-24.878 INFO [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource [HikariDataSource.java : 352] HikariPool-1 - Shutdown completed.
+2023-07-29 22-02-28.432 INFO [main] c.e.atv.SmokeManagementApplication [StartupInfoLogger.java : 55] Starting SmokeManagementApplication using Java 1.8.0_352 on yanxinzhaodeMBP with PID 53866 (/Users/yanxinzhao/Desktop/atv-qu/smokeManagement/target/classes started by yanxinzhao in /Users/yanxinzhao/Desktop/atv-qu/smokeManagement)
+2023-07-29 22-02-28.434 DEBUG [main] c.e.atv.SmokeManagementApplication [StartupInfoLogger.java : 56] Running with Spring Boot v2.7.4, Spring v5.3.23
+2023-07-29 22-02-28.434 INFO [main] c.e.atv.SmokeManagementApplication [SpringApplication.java : 634] No active profile set, falling back to 1 default profile: "default"
+2023-07-29 22-02-29.160 INFO [main] o.a.coyote.http11.Http11NioProtocol [DirectJDKLog.java : 173] Initializing ProtocolHandler ["http-nio-80"]
+2023-07-29 22-02-29.161 INFO [main] o.a.catalina.core.StandardService [DirectJDKLog.java : 173] Starting service [Tomcat]
+2023-07-29 22-02-29.161 INFO [main] o.a.catalina.core.StandardEngine [DirectJDKLog.java : 173] Starting Servlet engine: [Apache Tomcat/9.0.65]
+2023-07-29 22-02-29.220 INFO [main] o.a.c.c.C.[Tomcat].[localhost].[/] [DirectJDKLog.java : 173] Initializing Spring embedded WebApplicationContext
+2023-07-29 22-02-29.300 INFO [main] com.zaxxer.hikari.HikariDataSource [HikariDataSource.java : 110] HikariPool-1 - Starting...
+2023-07-29 22-02-29.442 INFO [main] com.zaxxer.hikari.HikariDataSource [HikariDataSource.java : 123] HikariPool-1 - Start completed.
+2023-07-29 22-02-29.467 INFO [main] o.h.jpa.internal.util.LogHelper [LogHelper.java : 31] HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-07-29 22-02-29.494 INFO [main] org.hibernate.Version [Version.java : 44] HHH000412: Hibernate ORM core version 5.6.11.Final
+2023-07-29 22-02-29.565 INFO [main] o.h.annotations.common.Version [JavaReflectionManager.java : 56] HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2023-07-29 22-02-29.617 INFO [main] org.hibernate.dialect.Dialect [Dialect.java : 175] HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2023-07-29 22-02-29.695 INFO [main] o.h.e.t.j.p.i.JtaPlatformInitiator [JtaPlatformInitiator.java : 52] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-07-29 22-02-29.781 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.CommunityBasic".
+2023-07-29 22-02-29.789 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.CommunityBasic ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-29 22-02-29.867 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.Community".
+2023-07-29 22-02-29.867 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.Community ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-29 22-02-29.890 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.CourtBasic".
+2023-07-29 22-02-29.890 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.CourtBasic ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-29 22-02-29.908 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.Indicator".
+2023-07-29 22-02-29.909 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.Indicator ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-29 22-02-29.924 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.IndicatorValue".
+2023-07-29 22-02-29.924 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.IndicatorValue ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-29 22-02-29.938 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.User".
+2023-07-29 22-02-29.939 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.User ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-29 22-02-29.953 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.BuildBasic".
+2023-07-29 22-02-29.953 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.BuildBasic ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-29 22-02-29.967 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.IndicatorValueBuild".
+2023-07-29 22-02-29.967 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.IndicatorValueBuild ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-29 22-02-30.092 WARN [main] o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration [JpaBaseConfiguration.java : 219] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-07-29 22-02-30.176 INFO [main] s.d.s.w.PropertySourcedRequestMappingHandlerMapping [PropertySourcedRequestMappingHandlerMapping.java : 69] Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2023-07-29 22-02-30.337 INFO [main] o.a.coyote.http11.Http11NioProtocol [DirectJDKLog.java : 173] Starting ProtocolHandler ["http-nio-80"]
+2023-07-29 22-02-30.349 INFO [main] s.d.s.w.p.DocumentationPluginsBootstrapper [DocumentationPluginsBootstrapper.java : 160] Context refreshed
+2023-07-29 22-02-30.358 INFO [main] s.d.s.w.p.DocumentationPluginsBootstrapper [DocumentationPluginsBootstrapper.java : 163] Found 1 custom documentation plugin(s)
+2023-07-29 22-02-30.373 INFO [main] s.d.s.w.s.ApiListingReferenceScanner [ApiListingReferenceScanner.java : 41] Scanning for api listing references
+2023-07-29 22-02-30.436 INFO [main] s.d.s.w.r.o.CachingOperationNameGenerator [CachingOperationNameGenerator.java : 40] Generating unique operation named: allInfoUsingGET_1
+2023-07-29 22-02-30.497 INFO [main] c.e.atv.SmokeManagementApplication [StartupInfoLogger.java : 61] Started SmokeManagementApplication in 2.268 seconds (JVM running for 2.747)
+2023-07-29 22-02-39.548 INFO [http-nio-80-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/] [DirectJDKLog.java : 173] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-07-29 22-03-27.378 DEBUG [http-nio-80-exec-6] c.e.a.g.m.B.selectList [BaseJdbcLogger.java : 137] ==>  Preparing: SELECT province,city,county,street,community_id,court_name,build_number,build_time,number_people,number_over60_people,units_number,number_department,date_time,state,user_id,report_year,community_name,review_comment,problem_state,buildbasic_state FROM build_basic WHERE (community_id = ? AND court_name = ? AND report_year = ? AND build_number = ?)
+2023-07-29 22-03-27.388 DEBUG [http-nio-80-exec-6] c.e.a.g.m.B.selectList [BaseJdbcLogger.java : 137] ==> Parameters: string(String), string(String), string(String), string(String)
+2023-07-29 22-03-27.397 DEBUG [http-nio-80-exec-6] c.e.a.g.m.B.selectList [BaseJdbcLogger.java : 137] <==      Total: 1
+2023-07-29 22-03-27.402 DEBUG [http-nio-80-exec-6] c.e.a.g.m.BuildBasicMapper.update [BaseJdbcLogger.java : 137] ==>  Preparing: UPDATE build_basic SET province=?, city=?, county=?, street=?, community_id=?, court_name=?, build_number=?, build_time=?, number_people=?, number_over60_people=?, units_number=?, number_department=?, date_time=?, state=?, user_id=?, report_year=?, community_name=?, review_comment=?, problem_state=?, buildbasic_state=? WHERE (community_id = ? AND court_name = ? AND report_year = ? AND build_number = ?)
+2023-07-29 22-03-27.403 DEBUG [http-nio-80-exec-6] c.e.a.g.m.BuildBasicMapper.update [BaseJdbcLogger.java : 137] ==> Parameters: string(String), string(String), string(String), string(String), string(String), string(String), string(String), 0(Integer), 0(Integer), 0(Integer), 0(Integer), 0(Integer), 2023-07-10T21:15:38(LocalDateTime), 0(Integer), string(String), string(String), string(String), string(String), string(String), string(String), string(String), string(String), string(String), string(String)
+2023-07-29 22-03-27.408 DEBUG [http-nio-80-exec-6] c.e.a.g.m.BuildBasicMapper.update [BaseJdbcLogger.java : 137] <==    Updates: 1
+2023-07-29 22-05-29.504 DEBUG [http-nio-80-exec-3] c.e.a.g.m.B.selectList [BaseJdbcLogger.java : 137] ==>  Preparing: SELECT province,city,county,street,community_id,court_name,build_number,build_time,number_people,number_over60_people,units_number,number_department,date_time,state,user_id,report_year,community_name,review_comment,problem_state,buildbasic_state FROM build_basic WHERE (community_id = ? AND court_name = ? AND report_year = ? AND build_number = ?)
+2023-07-29 22-05-29.507 DEBUG [http-nio-80-exec-3] c.e.a.g.m.B.selectList [BaseJdbcLogger.java : 137] ==> Parameters: string(String), string(String), string(String), string1(String)
+2023-07-29 22-05-29.513 DEBUG [http-nio-80-exec-3] c.e.a.g.m.B.selectList [BaseJdbcLogger.java : 137] <==      Total: 1
+2023-07-29 22-05-29.523 DEBUG [http-nio-80-exec-3] c.e.a.g.m.BuildBasicMapper.update [BaseJdbcLogger.java : 137] ==>  Preparing: UPDATE build_basic SET province=?, city=?, county=?, street=?, community_id=?, court_name=?, build_number=?, build_time=?, number_people=?, number_over60_people=?, units_number=?, number_department=?, date_time=?, state=?, user_id=?, report_year=?, community_name=?, review_comment=?, problem_state=?, buildbasic_state=? WHERE (community_id = ? AND court_name = ? AND report_year = ? AND build_number = ?)
+2023-07-29 22-05-29.525 DEBUG [http-nio-80-exec-3] c.e.a.g.m.BuildBasicMapper.update [BaseJdbcLogger.java : 137] ==> Parameters: string(String), string(String), string(String), string(String), string(String), string(String), string1(String), 0(Integer), 0(Integer), 0(Integer), 0(Integer), 0(Integer), 2023-07-21T23:31:15(LocalDateTime), 0(Integer), string(String), string(String), string(String), string(String), string(String), string1(String), string(String), string(String), string(String), string1(String)
+2023-07-29 22-05-29.528 DEBUG [http-nio-80-exec-3] c.e.a.g.m.BuildBasicMapper.update [BaseJdbcLogger.java : 137] <==    Updates: 1

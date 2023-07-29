@@ -11,7 +11,7 @@ import io.swagger.annotations.ApiModelProperty;
  * </p>
  *
  * @author yxz
- * @since 2023-07-10
+ * @since 2023-07-29
  */
 @TableName("indicator_value_build")
 @ApiModel(value = "IndicatorValueBuild对象", description = "")
@@ -21,7 +21,6 @@ public class IndicatorValueBuild implements Serializable {
 
     private String communityId;
 
-    @ApiModelProperty("可以为空 为空时表示社区")
     private String courtName;
 
     private String indicatorId;
