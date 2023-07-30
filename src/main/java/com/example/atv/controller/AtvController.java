@@ -830,7 +830,7 @@ public class AtvController {
             if(Objects.equals(city, "宁波市")){
                 templateFile=type+"_export_nb.xlsx" ;
             }
-            templateFile="/home/querySystem/"+templateFile;
+            //templateFile="/home/querySystem/"+templateFile;
             ServletOutputStream outputStream=response.getOutputStream();
             // 使用 EasyExcel 构造 ExcelWriter
             final ExcelWriter writer = EasyExcel.write(outputStream)
@@ -897,6 +897,15 @@ public class AtvController {
             // 实体类转换为Map
             Map<String,Object> fillData = JSON.parseObject(JSON.toJSONString(buildBasic), Map.class);
 
+            // 先将所有指标信息存进去，所有值均存0
+            QueryWrapper<Indicator> queryWrapper_indicator =new QueryWrapper<>();
+            queryWrapper_indicator.likeRight("indicator_id","2.");
+            List<Indicator> indicatorList=iIndicatorService.list(queryWrapper_indicator);
+            indicatorList.forEach(indicator -> {
+                fillData.put(indicator.getIndicatorId(),0);
+            });
+
+            // 将数据库中记录的数据进行更新
             indicatorValueBuildList.forEach(indicatorValueBuild -> {
                 fillData.put(indicatorValueBuild.getIndicatorId(),indicatorValueBuild.getIndicatorValue());
             });
@@ -928,6 +937,15 @@ public class AtvController {
             // 实体类转换为Map
             Map<String,Object> fillData = JSON.parseObject(JSON.toJSONString(courtBasic), Map.class);
 
+            // 先将所有指标信息存进去，所有值均存0
+            QueryWrapper<Indicator> queryWrapper_indicator =new QueryWrapper<>();
+            queryWrapper_indicator.likeRight("indicator_id","1.11");
+            List<Indicator> indicatorList=iIndicatorService.list(queryWrapper_indicator);
+            indicatorList.forEach(indicator -> {
+                fillData.put(indicator.getIndicatorId(),0);
+            });
+
+            // 将数据库中记录的数据进行更新
             indicatorValueBuildList.forEach(indicatorValueBuild -> {
                 fillData.put(indicatorValueBuild.getIndicatorId(),indicatorValueBuild.getIndicatorValue());
             });
@@ -959,6 +977,14 @@ public class AtvController {
             // 实体类转换为Map
             Map<String,Object> fillData = JSON.parseObject(JSON.toJSONString(communityBasic), Map.class);
 
+            // 先将所有指标信息存进去，所有值均存0
+            QueryWrapper<Indicator> queryWrapper_indicator =new QueryWrapper<>();
+            queryWrapper_indicator.likeRight("indicator_id","3.");
+            List<Indicator> indicatorList=iIndicatorService.list(queryWrapper_indicator);
+            indicatorList.forEach(indicator -> {
+                fillData.put(indicator.getIndicatorId(),0);
+            });
+            // 将数据库中记录的数据进行更新
             indicatorValueBuildList.forEach(indicatorValueBuild -> {
                 fillData.put(indicatorValueBuild.getIndicatorId(),indicatorValueBuild.getIndicatorValue());
             });

@@ -12,7 +12,7 @@ import io.swagger.annotations.ApiModelProperty;
  * </p>
  *
  * @author yxz
- * @since 2023-07-29
+ * @since 2023-07-30
  */
 @TableName("build_basic")
 @ApiModel(value = "BuildBasic对象", description = "")
@@ -64,8 +64,6 @@ public class BuildBasic implements Serializable {
     private String reviewComment;
 
     private String problemState;
-
-    private String buildbasicState;
 
 
     public String getProvince() {
@@ -220,14 +218,6 @@ public class BuildBasic implements Serializable {
         this.problemState = problemState;
     }
 
-    public String getBuildbasicState() {
-        return buildbasicState;
-    }
-
-    public void setBuildbasicState(String buildbasicState) {
-        this.buildbasicState = buildbasicState;
-    }
-
     @Override
     public String toString() {
         return "BuildBasic{" +
@@ -250,7 +240,6 @@ public class BuildBasic implements Serializable {
         ", communityName=" + communityName +
         ", reviewComment=" + reviewComment +
         ", problemState=" + problemState +
-        ", buildbasicState=" + buildbasicState +
         "}";
     }
 }
