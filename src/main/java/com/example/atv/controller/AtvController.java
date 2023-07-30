@@ -902,7 +902,7 @@ public class AtvController {
             queryWrapper_indicator.likeRight("indicator_id","2.");
             List<Indicator> indicatorList=iIndicatorService.list(queryWrapper_indicator);
             indicatorList.forEach(indicator -> {
-                fillData.put(indicator.getIndicatorId(),0);
+                fillData.put(indicator.getIndicatorId().trim(),0);
             });
 
             // 将数据库中记录的数据进行更新
@@ -942,7 +942,7 @@ public class AtvController {
             queryWrapper_indicator.likeRight("indicator_id","1.11");
             List<Indicator> indicatorList=iIndicatorService.list(queryWrapper_indicator);
             indicatorList.forEach(indicator -> {
-                fillData.put(indicator.getIndicatorId(),0);
+                fillData.put(indicator.getIndicatorId().trim(),0);
             });
 
             // 将数据库中记录的数据进行更新
@@ -982,7 +982,7 @@ public class AtvController {
             queryWrapper_indicator.likeRight("indicator_id","3.");
             List<Indicator> indicatorList=iIndicatorService.list(queryWrapper_indicator);
             indicatorList.forEach(indicator -> {
-                fillData.put(indicator.getIndicatorId(),0);
+                fillData.put(indicator.getIndicatorId().trim(),0);
             });
             // 将数据库中记录的数据进行更新
             indicatorValueBuildList.forEach(indicatorValueBuild -> {

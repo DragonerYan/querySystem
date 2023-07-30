@@ -393,3 +393,81 @@
 2023-07-30 19-41-25.237 DEBUG [http-nio-80-exec-1] c.e.a.g.m.IndicatorMapper.selectList [BaseJdbcLogger.java : 137] ==>  Preparing: SELECT court_or_community,indicator_id,indicator_name,parent_id,type,liang_gang FROM indicator WHERE (indicator_id LIKE ?)
 2023-07-30 19-41-25.240 DEBUG [http-nio-80-exec-1] c.e.a.g.m.IndicatorMapper.selectList [BaseJdbcLogger.java : 137] ==> Parameters: 2.%(String)
 2023-07-30 19-41-25.246 DEBUG [http-nio-80-exec-1] c.e.a.g.m.IndicatorMapper.selectList [BaseJdbcLogger.java : 137] <==      Total: 55
+2023-07-30 20-41-56.534 INFO [main] c.e.atv.SmokeManagementApplication [StartupInfoLogger.java : 55] Starting SmokeManagementApplication using Java 1.8.0_352 on yanxinzhaodeMacBook-Pro.local with PID 89129 (/Users/yanxinzhao/Desktop/atv-qu/smokeManagement/target/classes started by yanxinzhao in /Users/yanxinzhao/Desktop/atv-qu/smokeManagement)
+2023-07-30 20-41-56.536 DEBUG [main] c.e.atv.SmokeManagementApplication [StartupInfoLogger.java : 56] Running with Spring Boot v2.7.4, Spring v5.3.23
+2023-07-30 20-41-56.537 INFO [main] c.e.atv.SmokeManagementApplication [SpringApplication.java : 634] No active profile set, falling back to 1 default profile: "default"
+2023-07-30 20-41-57.769 INFO [main] o.a.coyote.http11.Http11NioProtocol [DirectJDKLog.java : 173] Initializing ProtocolHandler ["http-nio-80"]
+2023-07-30 20-41-57.769 INFO [main] o.a.catalina.core.StandardService [DirectJDKLog.java : 173] Starting service [Tomcat]
+2023-07-30 20-41-57.769 INFO [main] o.a.catalina.core.StandardEngine [DirectJDKLog.java : 173] Starting Servlet engine: [Apache Tomcat/9.0.65]
+2023-07-30 20-41-57.829 INFO [main] o.a.c.c.C.[Tomcat].[localhost].[/] [DirectJDKLog.java : 173] Initializing Spring embedded WebApplicationContext
+2023-07-30 20-41-57.917 INFO [main] com.zaxxer.hikari.HikariDataSource [HikariDataSource.java : 110] HikariPool-1 - Starting...
+2023-07-30 20-41-58.068 INFO [main] com.zaxxer.hikari.HikariDataSource [HikariDataSource.java : 123] HikariPool-1 - Start completed.
+2023-07-30 20-41-58.095 INFO [main] o.h.jpa.internal.util.LogHelper [LogHelper.java : 31] HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-07-30 20-41-58.123 INFO [main] org.hibernate.Version [Version.java : 44] HHH000412: Hibernate ORM core version 5.6.11.Final
+2023-07-30 20-41-58.200 INFO [main] o.h.annotations.common.Version [JavaReflectionManager.java : 56] HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2023-07-30 20-41-58.259 INFO [main] org.hibernate.dialect.Dialect [Dialect.java : 175] HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2023-07-30 20-41-58.351 INFO [main] o.h.e.t.j.p.i.JtaPlatformInitiator [JtaPlatformInitiator.java : 52] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-07-30 20-41-58.445 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.CommunityBasic".
+2023-07-30 20-41-58.448 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.CommunityBasic ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-30 20-41-58.526 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.Community".
+2023-07-30 20-41-58.526 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.Community ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-30 20-41-58.549 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.CourtBasic".
+2023-07-30 20-41-58.549 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.CourtBasic ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-30 20-41-58.569 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.Indicator".
+2023-07-30 20-41-58.569 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.Indicator ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-30 20-41-58.584 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.IndicatorValue".
+2023-07-30 20-41-58.584 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.IndicatorValue ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-30 20-41-58.599 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.User".
+2023-07-30 20-41-58.600 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.User ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-30 20-41-58.613 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.BuildBasic".
+2023-07-30 20-41-58.613 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.BuildBasic ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-30 20-41-58.628 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.IndicatorValueBuild".
+2023-07-30 20-41-58.628 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.IndicatorValueBuild ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-07-30 20-41-58.765 WARN [main] o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration [JpaBaseConfiguration.java : 219] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-07-30 20-41-58.867 INFO [main] s.d.s.w.PropertySourcedRequestMappingHandlerMapping [PropertySourcedRequestMappingHandlerMapping.java : 69] Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2023-07-30 20-41-59.021 INFO [main] o.a.coyote.http11.Http11NioProtocol [DirectJDKLog.java : 173] Starting ProtocolHandler ["http-nio-80"]
+2023-07-30 20-41-59.036 INFO [main] s.d.s.w.p.DocumentationPluginsBootstrapper [DocumentationPluginsBootstrapper.java : 160] Context refreshed
+2023-07-30 20-41-59.046 INFO [main] s.d.s.w.p.DocumentationPluginsBootstrapper [DocumentationPluginsBootstrapper.java : 163] Found 1 custom documentation plugin(s)
+2023-07-30 20-41-59.063 INFO [main] s.d.s.w.s.ApiListingReferenceScanner [ApiListingReferenceScanner.java : 41] Scanning for api listing references
+2023-07-30 20-41-59.128 INFO [main] s.d.s.w.r.o.CachingOperationNameGenerator [CachingOperationNameGenerator.java : 40] Generating unique operation named: allInfoUsingGET_1
+2023-07-30 20-41-59.191 INFO [main] c.e.atv.SmokeManagementApplication [StartupInfoLogger.java : 61] Started SmokeManagementApplication in 2.894 seconds (JVM running for 3.358)
+2023-07-30 20-42-13.410 INFO [http-nio-80-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/] [DirectJDKLog.java : 173] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-07-30 20-42-13.876 DEBUG [http-nio-80-exec-1] c.e.a.g.m.B.selectList [BaseJdbcLogger.java : 137] ==>  Preparing: SELECT province,city,county,street,community_id,court_name,build_number,build_time,number_people,number_over60_people,units_number,number_department,date_time,state,user_id,report_year,community_name,review_comment,problem_state FROM build_basic WHERE (court_name = ?)
+2023-07-30 20-42-13.888 DEBUG [http-nio-80-exec-1] c.e.a.g.m.B.selectList [BaseJdbcLogger.java : 137] ==> Parameters: string(String)
+2023-07-30 20-42-13.900 DEBUG [http-nio-80-exec-1] c.e.a.g.m.B.selectList [BaseJdbcLogger.java : 137] <==      Total: 3
+2023-07-30 20-42-13.905 DEBUG [http-nio-80-exec-1] c.e.a.g.m.I.selectList [BaseJdbcLogger.java : 137] ==>  Preparing: SELECT community_id,court_name,indicator_id,indicator_value,meno,longitude,latitude,report_year,build_number,photo_path,description,location FROM indicator_value_build WHERE (community_id = ? AND court_name = ? AND build_number = ?)
+2023-07-30 20-42-13.905 DEBUG [http-nio-80-exec-1] c.e.a.g.m.I.selectList [BaseJdbcLogger.java : 137] ==> Parameters: string(String), string(String), string(String)
+2023-07-30 20-42-13.907 DEBUG [http-nio-80-exec-1] c.e.a.g.m.I.selectList [BaseJdbcLogger.java : 137] <==      Total: 3
+2023-07-30 20-42-13.969 DEBUG [http-nio-80-exec-1] c.e.a.g.m.IndicatorMapper.selectList [BaseJdbcLogger.java : 137] ==>  Preparing: SELECT court_or_community,indicator_id,indicator_name,parent_id,type,liang_gang FROM indicator WHERE (indicator_id LIKE ?)
+2023-07-30 20-42-13.969 DEBUG [http-nio-80-exec-1] c.e.a.g.m.IndicatorMapper.selectList [BaseJdbcLogger.java : 137] ==> Parameters: 2.%(String)
+2023-07-30 20-42-13.976 DEBUG [http-nio-80-exec-1] c.e.a.g.m.IndicatorMapper.selectList [BaseJdbcLogger.java : 137] <==      Total: 55
+2023-07-30 20-42-13.978 DEBUG [http-nio-80-exec-1] c.e.a.g.m.I.selectList [BaseJdbcLogger.java : 137] ==>  Preparing: SELECT community_id,court_name,indicator_id,indicator_value,meno,longitude,latitude,report_year,build_number,photo_path,description,location FROM indicator_value_build WHERE (community_id = ? AND court_name = ? AND build_number = ?)
+2023-07-30 20-42-13.978 DEBUG [http-nio-80-exec-1] c.e.a.g.m.I.selectList [BaseJdbcLogger.java : 137] ==> Parameters: string(String), string(String), string1(String)
+2023-07-30 20-42-13.979 DEBUG [http-nio-80-exec-1] c.e.a.g.m.I.selectList [BaseJdbcLogger.java : 137] <==      Total: 0
+2023-07-30 20-42-13.980 DEBUG [http-nio-80-exec-1] c.e.a.g.m.IndicatorMapper.selectList [BaseJdbcLogger.java : 137] ==>  Preparing: SELECT court_or_community,indicator_id,indicator_name,parent_id,type,liang_gang FROM indicator WHERE (indicator_id LIKE ?)
+2023-07-30 20-42-13.981 DEBUG [http-nio-80-exec-1] c.e.a.g.m.IndicatorMapper.selectList [BaseJdbcLogger.java : 137] ==> Parameters: 2.%(String)
+2023-07-30 20-42-13.983 DEBUG [http-nio-80-exec-1] c.e.a.g.m.IndicatorMapper.selectList [BaseJdbcLogger.java : 137] <==      Total: 55
+2023-07-30 20-42-13.984 DEBUG [http-nio-80-exec-1] c.e.a.g.m.I.selectList [BaseJdbcLogger.java : 137] ==>  Preparing: SELECT community_id,court_name,indicator_id,indicator_value,meno,longitude,latitude,report_year,build_number,photo_path,description,location FROM indicator_value_build WHERE (community_id = ? AND court_name = ? AND build_number = ?)
+2023-07-30 20-42-13.985 DEBUG [http-nio-80-exec-1] c.e.a.g.m.I.selectList [BaseJdbcLogger.java : 137] ==> Parameters: string(String), string(String), string2(String)
+2023-07-30 20-42-13.986 DEBUG [http-nio-80-exec-1] c.e.a.g.m.I.selectList [BaseJdbcLogger.java : 137] <==      Total: 0
+2023-07-30 20-42-13.987 DEBUG [http-nio-80-exec-1] c.e.a.g.m.IndicatorMapper.selectList [BaseJdbcLogger.java : 137] ==>  Preparing: SELECT court_or_community,indicator_id,indicator_name,parent_id,type,liang_gang FROM indicator WHERE (indicator_id LIKE ?)
+2023-07-30 20-42-13.987 DEBUG [http-nio-80-exec-1] c.e.a.g.m.IndicatorMapper.selectList [BaseJdbcLogger.java : 137] ==> Parameters: 2.%(String)
+2023-07-30 20-42-13.990 DEBUG [http-nio-80-exec-1] c.e.a.g.m.IndicatorMapper.selectList [BaseJdbcLogger.java : 137] <==      Total: 55
+2023-07-30 20-42-42.599 DEBUG [http-nio-80-exec-2] c.e.a.g.m.C.selectList [BaseJdbcLogger.java : 137] ==>  Preparing: SELECT province,city,county,street,community_id,court_name,court_type,court_type_other,build_time,remodel,management,area,number_department,number_people,number_over60_people,number_building,number13_building,number46_building,number79_building,number_over10_building,number1017_building,number_over18_building,date_time,state,user_id,report_year,community_name,review_comment,finish_time,buildbasic_state FROM court_basic WHERE (court_name = ?)
+2023-07-30 20-42-42.601 DEBUG [http-nio-80-exec-2] c.e.a.g.m.C.selectList [BaseJdbcLogger.java : 137] ==> Parameters: string(String)
+2023-07-30 20-42-42.605 DEBUG [http-nio-80-exec-2] c.e.a.g.m.C.selectList [BaseJdbcLogger.java : 137] <==      Total: 1
+2023-07-30 20-42-42.610 DEBUG [http-nio-80-exec-2] c.e.a.g.m.I.selectList [BaseJdbcLogger.java : 137] ==>  Preparing: SELECT community_id,court_name,indicator_id,indicator_value,meno,longitude,latitude,report_year,location FROM indicator_value WHERE (community_id = ? AND court_name = ?)
+2023-07-30 20-42-42.611 DEBUG [http-nio-80-exec-2] c.e.a.g.m.I.selectList [BaseJdbcLogger.java : 137] ==> Parameters: string(String), string(String)
+2023-07-30 20-42-42.624 DEBUG [http-nio-80-exec-2] c.e.a.g.m.I.selectList [BaseJdbcLogger.java : 137] <==      Total: 3
+2023-07-30 20-42-42.635 DEBUG [http-nio-80-exec-2] c.e.a.g.m.IndicatorMapper.selectList [BaseJdbcLogger.java : 137] ==>  Preparing: SELECT court_or_community,indicator_id,indicator_name,parent_id,type,liang_gang FROM indicator WHERE (indicator_id LIKE ?)
+2023-07-30 20-42-42.636 DEBUG [http-nio-80-exec-2] c.e.a.g.m.IndicatorMapper.selectList [BaseJdbcLogger.java : 137] ==> Parameters: 1.11%(String)
+2023-07-30 20-42-42.637 DEBUG [http-nio-80-exec-2] c.e.a.g.m.IndicatorMapper.selectList [BaseJdbcLogger.java : 137] <==      Total: 7
+2023-07-30 20-43-12.002 DEBUG [http-nio-80-exec-3] c.e.a.g.m.C.selectList [BaseJdbcLogger.java : 137] ==>  Preparing: SELECT community_id,area,number_people,number_court,number_family,state,date_time,user_id,report_year,province,city,county,street,community_name,review_comment,age03,age60,age65 FROM community_basic WHERE (community_id = ?)
+2023-07-30 20-43-12.004 DEBUG [http-nio-80-exec-3] c.e.a.g.m.C.selectList [BaseJdbcLogger.java : 137] ==> Parameters: string(String)
+2023-07-30 20-43-12.009 DEBUG [http-nio-80-exec-3] c.e.a.g.m.C.selectList [BaseJdbcLogger.java : 137] <==      Total: 1
+2023-07-30 20-43-12.012 DEBUG [http-nio-80-exec-3] c.e.a.g.m.I.selectList [BaseJdbcLogger.java : 137] ==>  Preparing: SELECT community_id,court_name,indicator_id,indicator_value,meno,longitude,latitude,report_year,location FROM indicator_value WHERE (community_id = ? AND court_name = ?)
+2023-07-30 20-43-12.013 DEBUG [http-nio-80-exec-3] c.e.a.g.m.I.selectList [BaseJdbcLogger.java : 137] ==> Parameters: string(String), (String)
+2023-07-30 20-43-12.016 DEBUG [http-nio-80-exec-3] c.e.a.g.m.I.selectList [BaseJdbcLogger.java : 137] <==      Total: 1
+2023-07-30 20-43-12.023 DEBUG [http-nio-80-exec-3] c.e.a.g.m.IndicatorMapper.selectList [BaseJdbcLogger.java : 137] ==>  Preparing: SELECT court_or_community,indicator_id,indicator_name,parent_id,type,liang_gang FROM indicator WHERE (indicator_id LIKE ?)
+2023-07-30 20-43-12.024 DEBUG [http-nio-80-exec-3] c.e.a.g.m.IndicatorMapper.selectList [BaseJdbcLogger.java : 137] ==> Parameters: 3.%(String)
+2023-07-30 20-43-12.029 DEBUG [http-nio-80-exec-3] c.e.a.g.m.IndicatorMapper.selectList [BaseJdbcLogger.java : 137] <==      Total: 123
