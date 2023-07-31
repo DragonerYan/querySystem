@@ -46,4 +46,38 @@
         where photo_id=#{photo_id};
     </delete>
 
+    <select id="initPhotoData" parameterType="map" resultType="map">
+        select bb.province,bb.city,bb.county,bb.street,build_photo.photo_path as photoPath,build_photo.community_id as communityId,
+               build_photo.court_name as courtName,build_photo.build_number as buildNumber,ivb.description,i.indicator_name as indicatorName  from build_photo left join indicator i on build_photo.indicator_id = i.indicator_id
+                                                                                                                  left join indicator_value_build ivb on build_photo.indicator_id = ivb.indicator_id
+            and build_photo.build_number=ivb.build_number
+            and ivb.court_name=build_photo.court_name
+            and ivb.community_id=build_photo.community_id
+                                                                                                                  left join build_basic bb on build_photo.build_number=bb.build_number
+            and bb.court_name=build_photo.court_name
+            and bb.community_id=build_photo.community_id
+        <where>
+            <if test="communityId!=null and communityId!=''">
+                and build_photo.community_id=#{communityId}
+            </if>
+            <if test="courtName!=null and courtName!=''">
+                and build_photo.court_name=#{courtName}
+            </if>
+            <if test="buildNumber!=null and buildNumber!=''">
+                and build_photo.build_number=#{buildNumber}
+            </if>
+        </where>
+    </select>
+    <select id="initLocationData" parameterType="map" resultType="map">
+        select i.indicator_name as indicatorName,indicator_value.location,  community_basic.community_name as communityName
+             ,community_basic.province,community_basic.city,community_basic.county,community_basic.street
+        from indicator_value left join community_basic
+                                       on community_basic.community_id=indicator_value.community_id
+                             left join indicator i on indicator_value.indicator_id = i.indicator_id
+        where court_name=''
+        <if test="communityId!=null and communityId!=''">
+            and indicator_value.community_id=#{communityId}
+        </if>
+    </select>
+
 </mapper>

@@ -13,5 +13,8 @@ public interface AtvService {
     void uploadImg(Map  map);
     List<Map<String,Object>> downloadImg(Map  map);
 
+    List<Map<String,Object>> initPhotoData(Map  map);
+    List<Map<String,Object>> initLocationData(Map  map);
+
     void deleteImg(Map map);
 }

@@ -184,6 +184,7 @@ public class AtvController {
                                  @RequestParam(name = "userName",required = false) String userName,
                                  @RequestParam(name = "communityId",required = false) String communityId,
                                  @RequestParam(name = "communityName",required = false) String communityName,
+                                 @RequestParam(name = "buildbasicState",required = false) String buildbasicState,
                                  @RequestParam(name = "isPc",required = false) String isPc,
                                  @RequestParam(name = "pageSize",required = false,defaultValue = "1000000") Long pageSize,
                                  @RequestParam(name = "offset",required = false,defaultValue = "1") Long offset
@@ -214,6 +215,9 @@ public class AtvController {
         }
         if(communityName!=null && !Objects.equals(communityName,"")){
             wrapper.eq("community_name",communityName);
+        }
+        if(buildbasicState!=null && !Objects.equals(buildbasicState,"")){
+            wrapper.eq("buildbasic_state",buildbasicState);
         }
 
         wrapper.lambda().orderByAsc(CourtBasic::getState);
@@ -807,16 +811,25 @@ public class AtvController {
             }
 
             List<Map<String,Object>> fillDatas;
+            List<Map<String,Object>> photoDatas=new ArrayList<>();
+            List<Map<String,Object>> locationDatas=new ArrayList<>();
             String excelName;
+
+            Map<String,String> map_query=new HashMap<>();
+            map_query.put("communityId",communityId);
+            map_query.put("courtName",courtName);
+            map_query.put("buildNumber",buildNumber);
             switch (type){
                 case "community":
                     excelName="communityExcel";
+                    locationDatas=initLocationData(map_query);
                     fillDatas=initCommunityData(wrapper_basic); break;
                 case "court":
                     excelName="courtExcel";
                     fillDatas=initCourtData(wrapper_basic); break;
                 default:
                     excelName="buildExcel";
+                    photoDatas=initPhotoData(map_query);
                     fillDatas=initBuildData(wrapper_basic);break;
 
             }
@@ -830,14 +843,21 @@ public class AtvController {
             if(Objects.equals(city, "宁波市")){
                 templateFile=type+"_export_nb.xlsx" ;
             }
-            //templateFile="/home/querySystem/"+templateFile;
+            templateFile="/home/querySystem/"+templateFile;
             ServletOutputStream outputStream=response.getOutputStream();
             // 使用 EasyExcel 构造 ExcelWriter
             final ExcelWriter writer = EasyExcel.write(outputStream)
                     .withTemplate(templateFile).build();
             // 使用 EasyExcel 构造 WriteSheet
-            final WriteSheet sheet =  EasyExcel.writerSheet().build();
-            writer.fill(fillDatas, sheet);
+            final WriteSheet sheet0 =  EasyExcel.writerSheet(0).build();
+            final WriteSheet sheet1 =  EasyExcel.writerSheet(1).build();
+            writer.fill(fillDatas, sheet0);
+            if(type.equals("build")){
+                writer.fill(photoDatas, sheet1);
+            }else if(type.equals("community")){
+                writer.fill(locationDatas, sheet1);
+            }
+
             outputStream.flush();
             writer.finish();
 
@@ -848,33 +868,22 @@ public class AtvController {
 
 
     }
-    @ApiOperation(value = "手动excel导出功能")
-    @ResponseBody
-    @RequestMapping(value = "/Excel", method = RequestMethod.POST)
-    void handExport(HttpServletResponse response) throws IOException {
-        List<ModelOfExcel> list=new ArrayList<>();
-        ModelOfExcel modelOfExcel=new ModelOfExcel();
-        modelOfExcel.setAge(1);
-        modelOfExcel.setSex("n");
-        ModelOfExcel modelOfExcel1=new ModelOfExcel();
-        modelOfExcel1.setAge(1);
-        modelOfExcel1.setSex("n");
-        modelOfExcel1.setName("m");
-        list.add(modelOfExcel);
-        list.add(modelOfExcel1);
-        response.addHeader("Content-Disposition", "attachment;filename=t.xlsx" );
-        response.setContentType("application/vnd.ms-excel");
-        // 输出 Excel
-        ServletOutputStream out = response.getOutputStream();
-        ExcelWriterBuilder writeWork = EasyExcel.write(out, ModelOfExcel.class);
-        //4、创建表格
-        ExcelWriterSheetBuilder sheet = writeWork.sheet();
-        //6、写入数据到表格中
-        sheet.doWrite(list);
-        out.close();
 
+    /**
+     * 初始化位置信息
+     */
+    private List<Map<String,Object>> initLocationData(Map<String,String> map){
 
+        return atvService.initLocationData(map);
+    }
 
+    /**
+     * 初始化照片信息
+     */
+    private List<Map<String,Object>> initPhotoData(Map<String,String> map){
+        List<Map<String,Object>> res;
+        res=atvService.initPhotoData(map);
+        return res;
     }
 
     /**
