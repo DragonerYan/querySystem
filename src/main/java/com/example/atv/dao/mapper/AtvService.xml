@@ -86,7 +86,7 @@
         from indicator_value left join community_basic
                                        on community_basic.community_id=indicator_value.community_id
                              left join indicator i on indicator_value.indicator_id = i.indicator_id
-        where indicator_value.court_name=''
+        where indicator_value.court_name='' and indicator_value.location is not null
         <if test="communityId!=null and communityId!=''">
             and indicator_value.community_id=#{communityId}
         </if>

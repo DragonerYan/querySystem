@@ -20,6 +20,7 @@ import com.example.atv.util.MD5Util;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import net.coobird.thumbnailator.Thumbnails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
@@ -1101,8 +1102,15 @@ public class AtvController {
         File saveFile = new File(savePath);
 
         try {
+            //将存储的文件移动到真实存储路径下
             file.transferTo(saveFile);
-            //将临时存储的文件移动到真实存储路径下
+
+            //对图片进行压缩
+            Thumbnails.of(saveFile)
+                    .scale(1f)
+                    .outputQuality(0.1f)
+                    .toFile(saveFile);
+
             Map<String,Object> map=new HashMap<>();
             map.put("photo_id",photoId);
             map.put("build_number",buildNumber);

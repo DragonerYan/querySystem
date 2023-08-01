@@ -636,3 +636,354 @@
 2023-08-01 09-37-08.237 DEBUG [http-nio-80-exec-6] c.e.a.g.m.IndicatorMapper.selectList [BaseJdbcLogger.java : 137] ==>  Preparing: SELECT court_or_community,indicator_id,indicator_name,parent_id,type,liang_gang FROM indicator WHERE (indicator_id LIKE ?)
 2023-08-01 09-37-08.237 DEBUG [http-nio-80-exec-6] c.e.a.g.m.IndicatorMapper.selectList [BaseJdbcLogger.java : 137] ==> Parameters: 3.%(String)
 2023-08-01 09-37-08.246 DEBUG [http-nio-80-exec-6] c.e.a.g.m.IndicatorMapper.selectList [BaseJdbcLogger.java : 137] <==      Total: 123
+2023-08-01 09-50-10.597 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=47s225ms).
+2023-08-01 10-07-16.536 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=17m5s940ms).
+2023-08-01 10-21-28.934 WARN [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=12m42s297ms).
+2023-08-01 10-43-12.227 INFO [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource [HikariDataSource.java : 350] HikariPool-1 - Shutdown initiated...
+2023-08-01 10-43-12.230 INFO [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource [HikariDataSource.java : 352] HikariPool-1 - Shutdown completed.
+2023-08-01 10-43-16.194 INFO [main] c.e.atv.SmokeManagementApplication [StartupInfoLogger.java : 55] Starting SmokeManagementApplication using Java 1.8.0_352 on yanxinzhaodeMacBook-Pro.local with PID 79399 (/Users/yanxinzhao/Desktop/atv-qu/smokeManagement/target/classes started by yanxinzhao in /Users/yanxinzhao/Desktop/atv-qu/smokeManagement)
+2023-08-01 10-43-16.196 DEBUG [main] c.e.atv.SmokeManagementApplication [StartupInfoLogger.java : 56] Running with Spring Boot v2.7.4, Spring v5.3.23
+2023-08-01 10-43-16.196 INFO [main] c.e.atv.SmokeManagementApplication [SpringApplication.java : 634] No active profile set, falling back to 1 default profile: "default"
+2023-08-01 10-43-16.936 INFO [main] o.a.coyote.http11.Http11NioProtocol [DirectJDKLog.java : 173] Initializing ProtocolHandler ["http-nio-80"]
+2023-08-01 10-43-16.937 INFO [main] o.a.catalina.core.StandardService [DirectJDKLog.java : 173] Starting service [Tomcat]
+2023-08-01 10-43-16.937 INFO [main] o.a.catalina.core.StandardEngine [DirectJDKLog.java : 173] Starting Servlet engine: [Apache Tomcat/9.0.65]
+2023-08-01 10-43-16.995 INFO [main] o.a.c.c.C.[Tomcat].[localhost].[/] [DirectJDKLog.java : 173] Initializing Spring embedded WebApplicationContext
+2023-08-01 10-43-17.076 INFO [main] com.zaxxer.hikari.HikariDataSource [HikariDataSource.java : 110] HikariPool-1 - Starting...
+2023-08-01 10-43-18.259 ERROR [main] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 594] HikariPool-1 - Exception during pool initialization.
+java.sql.SQLException: Access denied for user 'root'@'localhost' (using password: YES)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:965)
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3978)
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3914)
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:871)
+	at com.mysql.jdbc.MysqlIO.proceedHandshakeWithPluggableAuthentication(MysqlIO.java:1714)
+	at com.mysql.jdbc.MysqlIO.doHandshake(MysqlIO.java:1224)
+	at com.mysql.jdbc.ConnectionImpl.coreConnect(ConnectionImpl.java:2199)
+	at com.mysql.jdbc.ConnectionImpl.connectOneTryOnly(ConnectionImpl.java:2230)
+	at com.mysql.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:2025)
+	at com.mysql.jdbc.ConnectionImpl.<init>(ConnectionImpl.java:778)
+	at com.mysql.jdbc.JDBC4Connection.<init>(JDBC4Connection.java:47)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+	at com.mysql.jdbc.Util.handleNewInstance(Util.java:425)
+	at com.mysql.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:386)
+	at com.mysql.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:330)
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:138)
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:364)
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:206)
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:476)
+	at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:561)
+	at com.zaxxer.hikari.pool.HikariPool.<init>(HikariPool.java:115)
+	at com.zaxxer.hikari.HikariDataSource.getConnection(HikariDataSource.java:112)
+	at org.springframework.jdbc.datasource.DataSourceUtils.fetchConnection(DataSourceUtils.java:159)
+	at org.springframework.jdbc.datasource.DataSourceUtils.doGetConnection(DataSourceUtils.java:117)
+	at org.springframework.jdbc.datasource.DataSourceUtils.getConnection(DataSourceUtils.java:80)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:330)
+	at org.springframework.boot.jdbc.EmbeddedDatabaseConnection.isEmbedded(EmbeddedDatabaseConnection.java:162)
+	at org.springframework.boot.autoconfigure.orm.jpa.HibernateDefaultDdlAutoProvider.getDefaultDdlAuto(HibernateDefaultDdlAutoProvider.java:42)
+	at org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaConfiguration.lambda$getVendorProperties$1(HibernateJpaConfiguration.java:130)
+	at org.springframework.boot.autoconfigure.orm.jpa.HibernateSettings.getDdlAuto(HibernateSettings.java:41)
+	at org.springframework.boot.autoconfigure.orm.jpa.HibernateProperties.determineDdlAuto(HibernateProperties.java:143)
+	at org.springframework.boot.autoconfigure.orm.jpa.HibernateProperties.getAdditionalProperties(HibernateProperties.java:103)
+	at org.springframework.boot.autoconfigure.orm.jpa.HibernateProperties.determineHibernateProperties(HibernateProperties.java:95)
+	at org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaConfiguration.getVendorProperties(HibernateJpaConfiguration.java:132)
+	at org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration.entityManagerFactory(JpaBaseConfiguration.java:132)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:154)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:653)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:638)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1352)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1195)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:582)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208)
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1154)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:908)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:583)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:147)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:734)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:408)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
+	at com.example.atv.SmokeManagementApplication.main(SmokeManagementApplication.java:17)
+2023-08-01 10-43-18.296 INFO [main] o.h.jpa.internal.util.LogHelper [LogHelper.java : 31] HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-08-01 10-43-18.325 INFO [main] org.hibernate.Version [Version.java : 44] HHH000412: Hibernate ORM core version 5.6.11.Final
+2023-08-01 10-43-18.393 INFO [main] o.h.annotations.common.Version [JavaReflectionManager.java : 56] HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2023-08-01 10-43-18.441 INFO [main] com.zaxxer.hikari.HikariDataSource [HikariDataSource.java : 110] HikariPool-1 - Starting...
+2023-08-01 10-43-19.462 ERROR [main] com.zaxxer.hikari.pool.HikariPool [HikariPool.java : 594] HikariPool-1 - Exception during pool initialization.
+java.sql.SQLException: Access denied for user 'root'@'localhost' (using password: YES)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:965)
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3978)
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3914)
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:871)
+	at com.mysql.jdbc.MysqlIO.proceedHandshakeWithPluggableAuthentication(MysqlIO.java:1714)
+	at com.mysql.jdbc.MysqlIO.doHandshake(MysqlIO.java:1224)
+	at com.mysql.jdbc.ConnectionImpl.coreConnect(ConnectionImpl.java:2199)
+	at com.mysql.jdbc.ConnectionImpl.connectOneTryOnly(ConnectionImpl.java:2230)
+	at com.mysql.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:2025)
+	at com.mysql.jdbc.ConnectionImpl.<init>(ConnectionImpl.java:778)
+	at com.mysql.jdbc.JDBC4Connection.<init>(JDBC4Connection.java:47)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+	at com.mysql.jdbc.Util.handleNewInstance(Util.java:425)
+	at com.mysql.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:386)
+	at com.mysql.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:330)
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:138)
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:364)
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:206)
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:476)
+	at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:561)
+	at com.zaxxer.hikari.pool.HikariPool.<init>(HikariPool.java:115)
+	at com.zaxxer.hikari.HikariDataSource.getConnection(HikariDataSource.java:112)
+	at org.hibernate.engine.jdbc.connections.internal.DatasourceConnectionProviderImpl.getConnection(DatasourceConnectionProviderImpl.java:122)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess.obtainConnection(JdbcEnvironmentInitiator.java:181)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:68)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:35)
+	at org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.initiateService(StandardServiceRegistryImpl.java:101)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.createService(AbstractServiceRegistryImpl.java:263)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:237)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:214)
+	at org.hibernate.id.factory.internal.DefaultIdentifierGeneratorFactory.injectServices(DefaultIdentifierGeneratorFactory.java:175)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.injectDependencies(AbstractServiceRegistryImpl.java:286)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:243)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:214)
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.<init>(InFlightMetadataCollectorImpl.java:173)
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:127)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.metadata(EntityManagerFactoryBuilderImpl.java:1460)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1494)
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:58)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:365)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:409)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:396)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:341)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1863)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1800)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:620)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208)
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1154)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:908)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:583)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:147)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:734)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:408)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
+	at com.example.atv.SmokeManagementApplication.main(SmokeManagementApplication.java:17)
+2023-08-01 10-43-19.464 WARN [main] o.h.e.j.e.i.JdbcEnvironmentInitiator [JdbcEnvironmentInitiator.java : 133] HHH000342: Could not obtain connection to query metadata
+java.sql.SQLException: Access denied for user 'root'@'localhost' (using password: YES)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:965)
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3978)
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3914)
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:871)
+	at com.mysql.jdbc.MysqlIO.proceedHandshakeWithPluggableAuthentication(MysqlIO.java:1714)
+	at com.mysql.jdbc.MysqlIO.doHandshake(MysqlIO.java:1224)
+	at com.mysql.jdbc.ConnectionImpl.coreConnect(ConnectionImpl.java:2199)
+	at com.mysql.jdbc.ConnectionImpl.connectOneTryOnly(ConnectionImpl.java:2230)
+	at com.mysql.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:2025)
+	at com.mysql.jdbc.ConnectionImpl.<init>(ConnectionImpl.java:778)
+	at com.mysql.jdbc.JDBC4Connection.<init>(JDBC4Connection.java:47)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+	at com.mysql.jdbc.Util.handleNewInstance(Util.java:425)
+	at com.mysql.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:386)
+	at com.mysql.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:330)
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:138)
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:364)
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:206)
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:476)
+	at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:561)
+	at com.zaxxer.hikari.pool.HikariPool.<init>(HikariPool.java:115)
+	at com.zaxxer.hikari.HikariDataSource.getConnection(HikariDataSource.java:112)
+	at org.hibernate.engine.jdbc.connections.internal.DatasourceConnectionProviderImpl.getConnection(DatasourceConnectionProviderImpl.java:122)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess.obtainConnection(JdbcEnvironmentInitiator.java:181)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:68)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:35)
+	at org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.initiateService(StandardServiceRegistryImpl.java:101)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.createService(AbstractServiceRegistryImpl.java:263)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:237)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:214)
+	at org.hibernate.id.factory.internal.DefaultIdentifierGeneratorFactory.injectServices(DefaultIdentifierGeneratorFactory.java:175)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.injectDependencies(AbstractServiceRegistryImpl.java:286)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:243)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:214)
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.<init>(InFlightMetadataCollectorImpl.java:173)
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:127)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.metadata(EntityManagerFactoryBuilderImpl.java:1460)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1494)
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:58)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:365)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:409)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:396)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:341)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1863)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1800)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:620)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208)
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1154)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:908)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:583)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:147)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:734)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:408)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
+	at com.example.atv.SmokeManagementApplication.main(SmokeManagementApplication.java:17)
+2023-08-01 10-43-19.466 ERROR [main] o.s.o.j.LocalContainerEntityManagerFactoryBean [AbstractEntityManagerFactoryBean.java : 426] Failed to initialize JPA EntityManagerFactory: Unable to create requested service [org.hibernate.engine.jdbc.env.spi.JdbcEnvironment]
+2023-08-01 10-43-19.469 WARN [main] o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext [AbstractApplicationContext.java : 591] Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Invocation of init method failed; nested exception is org.hibernate.service.spi.ServiceException: Unable to create requested service [org.hibernate.engine.jdbc.env.spi.JdbcEnvironment]
+2023-08-01 10-43-19.473 INFO [main] o.a.catalina.core.StandardService [DirectJDKLog.java : 173] Stopping service [Tomcat]
+2023-08-01 10-43-19.506 ERROR [main] o.s.boot.SpringApplication [SpringApplication.java : 824] Application run failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Invocation of init method failed; nested exception is org.hibernate.service.spi.ServiceException: Unable to create requested service [org.hibernate.engine.jdbc.env.spi.JdbcEnvironment]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1804)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:620)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208)
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1154)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:908)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:583)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:147)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:734)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:408)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
+	at com.example.atv.SmokeManagementApplication.main(SmokeManagementApplication.java:17)
+Caused by: org.hibernate.service.spi.ServiceException: Unable to create requested service [org.hibernate.engine.jdbc.env.spi.JdbcEnvironment]
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.createService(AbstractServiceRegistryImpl.java:275)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:237)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:214)
+	at org.hibernate.id.factory.internal.DefaultIdentifierGeneratorFactory.injectServices(DefaultIdentifierGeneratorFactory.java:175)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.injectDependencies(AbstractServiceRegistryImpl.java:286)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:243)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:214)
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.<init>(InFlightMetadataCollectorImpl.java:173)
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:127)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.metadata(EntityManagerFactoryBuilderImpl.java:1460)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1494)
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:58)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:365)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:409)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:396)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:341)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1863)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1800)
+	... 16 common frames omitted
+Caused by: org.hibernate.HibernateException: Access to DialectResolutionInfo cannot be null when 'hibernate.dialect' not set
+	at org.hibernate.engine.jdbc.dialect.internal.DialectFactoryImpl.determineDialect(DialectFactoryImpl.java:100)
+	at org.hibernate.engine.jdbc.dialect.internal.DialectFactoryImpl.buildDialect(DialectFactoryImpl.java:54)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:138)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:35)
+	at org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.initiateService(StandardServiceRegistryImpl.java:101)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.createService(AbstractServiceRegistryImpl.java:263)
+	... 33 common frames omitted
+2023-08-01 10-43-19.507 DEBUG [main] c.e.atv.SmokeManagementApplication [SmokeManagementApplication.java : 19] Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Invocation of init method failed; nested exception is org.hibernate.service.spi.ServiceException: Unable to create requested service [org.hibernate.engine.jdbc.env.spi.JdbcEnvironment]
+2023-08-01 10-43-34.751 INFO [main] c.e.atv.SmokeManagementApplication [StartupInfoLogger.java : 55] Starting SmokeManagementApplication using Java 1.8.0_352 on yanxinzhaodeMacBook-Pro.local with PID 79442 (/Users/yanxinzhao/Desktop/atv-qu/smokeManagement/target/classes started by yanxinzhao in /Users/yanxinzhao/Desktop/atv-qu/smokeManagement)
+2023-08-01 10-43-34.753 DEBUG [main] c.e.atv.SmokeManagementApplication [StartupInfoLogger.java : 56] Running with Spring Boot v2.7.4, Spring v5.3.23
+2023-08-01 10-43-34.754 INFO [main] c.e.atv.SmokeManagementApplication [SpringApplication.java : 634] No active profile set, falling back to 1 default profile: "default"
+2023-08-01 10-43-35.527 INFO [main] o.a.coyote.http11.Http11NioProtocol [DirectJDKLog.java : 173] Initializing ProtocolHandler ["http-nio-80"]
+2023-08-01 10-43-35.527 INFO [main] o.a.catalina.core.StandardService [DirectJDKLog.java : 173] Starting service [Tomcat]
+2023-08-01 10-43-35.527 INFO [main] o.a.catalina.core.StandardEngine [DirectJDKLog.java : 173] Starting Servlet engine: [Apache Tomcat/9.0.65]
+2023-08-01 10-43-35.597 INFO [main] o.a.c.c.C.[Tomcat].[localhost].[/] [DirectJDKLog.java : 173] Initializing Spring embedded WebApplicationContext
+2023-08-01 10-43-35.682 INFO [main] com.zaxxer.hikari.HikariDataSource [HikariDataSource.java : 110] HikariPool-1 - Starting...
+2023-08-01 10-43-35.841 INFO [main] com.zaxxer.hikari.HikariDataSource [HikariDataSource.java : 123] HikariPool-1 - Start completed.
+2023-08-01 10-43-35.869 INFO [main] o.h.jpa.internal.util.LogHelper [LogHelper.java : 31] HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-08-01 10-43-35.899 INFO [main] org.hibernate.Version [Version.java : 44] HHH000412: Hibernate ORM core version 5.6.11.Final
+2023-08-01 10-43-35.979 INFO [main] o.h.annotations.common.Version [JavaReflectionManager.java : 56] HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2023-08-01 10-43-36.040 INFO [main] org.hibernate.dialect.Dialect [Dialect.java : 175] HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2023-08-01 10-43-36.139 INFO [main] o.h.e.t.j.p.i.JtaPlatformInitiator [JtaPlatformInitiator.java : 52] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-08-01 10-43-36.234 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.CommunityBasic".
+2023-08-01 10-43-36.238 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.CommunityBasic ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-08-01 10-43-36.316 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.Community".
+2023-08-01 10-43-36.316 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.Community ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-08-01 10-43-36.339 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.CourtBasic".
+2023-08-01 10-43-36.339 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.CourtBasic ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-08-01 10-43-36.358 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.Indicator".
+2023-08-01 10-43-36.359 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.Indicator ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-08-01 10-43-36.375 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.IndicatorValue".
+2023-08-01 10-43-36.375 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.IndicatorValue ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-08-01 10-43-36.391 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.User".
+2023-08-01 10-43-36.391 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.User ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-08-01 10-43-36.406 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.BuildBasic".
+2023-08-01 10-43-36.406 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.BuildBasic ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-08-01 10-43-36.420 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.IndicatorValueBuild".
+2023-08-01 10-43-36.420 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.IndicatorValueBuild ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-08-01 10-43-36.560 WARN [main] o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration [JpaBaseConfiguration.java : 219] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-08-01 10-43-36.659 INFO [main] s.d.s.w.PropertySourcedRequestMappingHandlerMapping [PropertySourcedRequestMappingHandlerMapping.java : 69] Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2023-08-01 10-43-36.826 INFO [main] o.a.coyote.http11.Http11NioProtocol [DirectJDKLog.java : 173] Starting ProtocolHandler ["http-nio-80"]
+2023-08-01 10-43-36.842 INFO [main] s.d.s.w.p.DocumentationPluginsBootstrapper [DocumentationPluginsBootstrapper.java : 160] Context refreshed
+2023-08-01 10-43-36.853 INFO [main] s.d.s.w.p.DocumentationPluginsBootstrapper [DocumentationPluginsBootstrapper.java : 163] Found 1 custom documentation plugin(s)
+2023-08-01 10-43-36.870 INFO [main] s.d.s.w.s.ApiListingReferenceScanner [ApiListingReferenceScanner.java : 41] Scanning for api listing references
+2023-08-01 10-43-36.938 INFO [main] s.d.s.w.r.o.CachingOperationNameGenerator [CachingOperationNameGenerator.java : 40] Generating unique operation named: allInfoUsingGET_1
+2023-08-01 10-43-37.004 INFO [main] c.e.atv.SmokeManagementApplication [StartupInfoLogger.java : 61] Started SmokeManagementApplication in 2.478 seconds (JVM running for 2.955)
+2023-08-01 10-43-45.536 INFO [http-nio-80-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/] [DirectJDKLog.java : 173] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-08-01 10-44-42.295 DEBUG [http-nio-80-exec-8] c.e.a.d.mapper.AtvService.uploadImg [BaseJdbcLogger.java : 137] ==>  Preparing: insert into build_photo(photo_id,build_number,indicator_id,court_name,community_id,photo_file,photo_path) values (?,?,?,?,?,?,?)
+2023-08-01 10-44-42.306 DEBUG [http-nio-80-exec-8] c.e.a.d.mapper.AtvService.uploadImg [BaseJdbcLogger.java : 137] ==> Parameters: c9be57f2-70b0-4133-b137-977b37d142ec(String), q1(String), 2.1(String), q1(String), q1(String), (String), http://tjm.caupdcloud.com/img/c9be57f2-70b0-4133-b137-977b37d142ec.jpg(String)
+2023-08-01 10-44-42.318 DEBUG [http-nio-80-exec-8] c.e.a.d.mapper.AtvService.uploadImg [BaseJdbcLogger.java : 137] <==    Updates: 1
+2023-08-01 10-46-08.561 INFO [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource [HikariDataSource.java : 350] HikariPool-1 - Shutdown initiated...
+2023-08-01 10-46-08.567 INFO [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource [HikariDataSource.java : 352] HikariPool-1 - Shutdown completed.
+2023-08-01 10-46-11.784 INFO [main] c.e.atv.SmokeManagementApplication [StartupInfoLogger.java : 55] Starting SmokeManagementApplication using Java 1.8.0_352 on yanxinzhaodeMacBook-Pro.local with PID 79742 (/Users/yanxinzhao/Desktop/atv-qu/smokeManagement/target/classes started by yanxinzhao in /Users/yanxinzhao/Desktop/atv-qu/smokeManagement)
+2023-08-01 10-46-11.786 DEBUG [main] c.e.atv.SmokeManagementApplication [StartupInfoLogger.java : 56] Running with Spring Boot v2.7.4, Spring v5.3.23
+2023-08-01 10-46-11.786 INFO [main] c.e.atv.SmokeManagementApplication [SpringApplication.java : 634] No active profile set, falling back to 1 default profile: "default"
+2023-08-01 10-46-12.531 INFO [main] o.a.coyote.http11.Http11NioProtocol [DirectJDKLog.java : 173] Initializing ProtocolHandler ["http-nio-80"]
+2023-08-01 10-46-12.532 INFO [main] o.a.catalina.core.StandardService [DirectJDKLog.java : 173] Starting service [Tomcat]
+2023-08-01 10-46-12.532 INFO [main] o.a.catalina.core.StandardEngine [DirectJDKLog.java : 173] Starting Servlet engine: [Apache Tomcat/9.0.65]
+2023-08-01 10-46-12.584 INFO [main] o.a.c.c.C.[Tomcat].[localhost].[/] [DirectJDKLog.java : 173] Initializing Spring embedded WebApplicationContext
+2023-08-01 10-46-12.659 INFO [main] com.zaxxer.hikari.HikariDataSource [HikariDataSource.java : 110] HikariPool-1 - Starting...
+2023-08-01 10-46-12.817 INFO [main] com.zaxxer.hikari.HikariDataSource [HikariDataSource.java : 123] HikariPool-1 - Start completed.
+2023-08-01 10-46-12.841 INFO [main] o.h.jpa.internal.util.LogHelper [LogHelper.java : 31] HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-08-01 10-46-12.865 INFO [main] org.hibernate.Version [Version.java : 44] HHH000412: Hibernate ORM core version 5.6.11.Final
+2023-08-01 10-46-12.933 INFO [main] o.h.annotations.common.Version [JavaReflectionManager.java : 56] HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2023-08-01 10-46-12.989 INFO [main] org.hibernate.dialect.Dialect [Dialect.java : 175] HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2023-08-01 10-46-13.075 INFO [main] o.h.e.t.j.p.i.JtaPlatformInitiator [JtaPlatformInitiator.java : 52] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-08-01 10-46-13.160 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.CommunityBasic".
+2023-08-01 10-46-13.163 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.CommunityBasic ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-08-01 10-46-13.241 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.Community".
+2023-08-01 10-46-13.242 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.Community ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-08-01 10-46-13.265 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.CourtBasic".
+2023-08-01 10-46-13.265 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.CourtBasic ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-08-01 10-46-13.285 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.Indicator".
+2023-08-01 10-46-13.285 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.Indicator ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-08-01 10-46-13.302 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.IndicatorValue".
+2023-08-01 10-46-13.302 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.IndicatorValue ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-08-01 10-46-13.318 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.User".
+2023-08-01 10-46-13.318 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.User ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-08-01 10-46-13.334 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.BuildBasic".
+2023-08-01 10-46-13.335 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.BuildBasic ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-08-01 10-46-13.351 WARN [main] c.b.m.core.metadata.TableInfoHelper [TableInfoHelper.java : 342] Can not find table primary key in Class: "com.example.atv.generatetor.entity.IndicatorValueBuild".
+2023-08-01 10-46-13.351 WARN [main] c.b.m.c.injector.DefaultSqlInjector [DefaultSqlInjector.java : 56] class com.example.atv.generatetor.entity.IndicatorValueBuild ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2023-08-01 10-46-13.497 WARN [main] o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration [JpaBaseConfiguration.java : 219] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-08-01 10-46-13.578 INFO [main] s.d.s.w.PropertySourcedRequestMappingHandlerMapping [PropertySourcedRequestMappingHandlerMapping.java : 69] Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2023-08-01 10-46-13.736 INFO [main] o.a.coyote.http11.Http11NioProtocol [DirectJDKLog.java : 173] Starting ProtocolHandler ["http-nio-80"]
+2023-08-01 10-46-13.750 INFO [main] s.d.s.w.p.DocumentationPluginsBootstrapper [DocumentationPluginsBootstrapper.java : 160] Context refreshed
+2023-08-01 10-46-13.760 INFO [main] s.d.s.w.p.DocumentationPluginsBootstrapper [DocumentationPluginsBootstrapper.java : 163] Found 1 custom documentation plugin(s)
+2023-08-01 10-46-13.776 INFO [main] s.d.s.w.s.ApiListingReferenceScanner [ApiListingReferenceScanner.java : 41] Scanning for api listing references
+2023-08-01 10-46-13.836 INFO [main] s.d.s.w.r.o.CachingOperationNameGenerator [CachingOperationNameGenerator.java : 40] Generating unique operation named: allInfoUsingGET_1
+2023-08-01 10-46-13.899 INFO [main] c.e.atv.SmokeManagementApplication [StartupInfoLogger.java : 61] Started SmokeManagementApplication in 2.323 seconds (JVM running for 2.708)
+2023-08-01 10-46-17.349 INFO [http-nio-80-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/] [DirectJDKLog.java : 173] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-08-01 10-46-18.871 DEBUG [http-nio-80-exec-1] c.e.a.d.mapper.AtvService.uploadImg [BaseJdbcLogger.java : 137] ==>  Preparing: insert into build_photo(photo_id,build_number,indicator_id,court_name,community_id,photo_file,photo_path) values (?,?,?,?,?,?,?)
+2023-08-01 10-46-18.888 DEBUG [http-nio-80-exec-1] c.e.a.d.mapper.AtvService.uploadImg [BaseJdbcLogger.java : 137] ==> Parameters: 21a3ae6e-9749-402f-8099-d5f2ba47e781(String), q1(String), 2.1(String), q1(String), q1(String), (String), http://tjm.caupdcloud.com/img/21a3ae6e-9749-402f-8099-d5f2ba47e781.jpg(String)
+2023-08-01 10-46-18.892 DEBUG [http-nio-80-exec-1] c.e.a.d.mapper.AtvService.uploadImg [BaseJdbcLogger.java : 137] <==    Updates: 1

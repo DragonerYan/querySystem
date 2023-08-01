@@ -36,7 +36,7 @@ logging:
 
   
 ## local-imgUrl
-#imgPath=/Users/yanxinzhao/Desktop/atv-qu/smokeManagement/img/
+#imgPath: /Users/yanxinzhao/Desktop/atv-qu/smokeManagement/img/
   
 ## linux-imgUrl
 imgPath: /home/img/
