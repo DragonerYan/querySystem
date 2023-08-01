@@ -47,8 +47,8 @@
     </delete>
 
     <select id="initPhotoData" parameterType="map" resultType="map">
-        select bb.province,bb.city,bb.county,bb.street,build_photo.photo_path as photoPath,build_photo.community_id as communityId,
-               build_photo.court_name as courtName,build_photo.build_number as buildNumber,ivb.description,i.indicator_name as indicatorName  from build_photo left join indicator i on build_photo.indicator_id = i.indicator_id
+        select bb.province,bb.city,bb.county,bb.street,bb.community_name as communityName build_photo.photo_path as photoPath,build_photo.community_id as communityId,
+               build_photo.court_name as courtName,build_photo.build_number as buildNumber,ivb.description,i.indicator_name as indicatorName  from build_photo left join indicator i on build_photo.indicator_id = trim(i.indicator_id)
                                                                                                                   left join indicator_value_build ivb on build_photo.indicator_id = ivb.indicator_id
             and build_photo.build_number=ivb.build_number
             and ivb.court_name=build_photo.court_name
@@ -88,7 +88,7 @@
              ,community_basic.province,community_basic.city,community_basic.county,community_basic.street
         from indicator_value left join community_basic
                                        on community_basic.community_id=indicator_value.community_id
-                             left join indicator i on indicator_value.indicator_id = i.indicator_id
+                             left join indicator i on indicator_value.indicator_id = trim(i.indicator_id)
         where indicator_value.court_name='' and indicator_value.location is not null
         <if test="communityId!=null and communityId!=''">
             and indicator_value.community_id=#{communityId}

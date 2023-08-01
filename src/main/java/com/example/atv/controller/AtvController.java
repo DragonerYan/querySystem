@@ -1002,6 +1002,9 @@ public class AtvController {
             // 将数据库中记录的数据进行更新
             indicatorValueBuildList.forEach(indicatorValueBuild -> {
                 fillData.put(indicatorValueBuild.getIndicatorId(),indicatorValueBuild.getIndicatorValue());
+                if(indicatorValueBuild.getIndicatorId()==null || Objects.equals(indicatorValueBuild.getIndicatorValue(), "")){
+                    fillData.put(indicatorValueBuild.getIndicatorId(),0);
+                }
             });
             fillDatas.add(fillData);
         });
