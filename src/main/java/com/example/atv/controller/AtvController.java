@@ -822,6 +822,7 @@ public class AtvController {
             map_query.put("city",city);
             map_query.put("county",county);
             map_query.put("street",street);
+            map_query.put("state",state);
             switch (type){
                 case "community":
                     excelName="communityExcel";
