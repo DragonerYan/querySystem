@@ -67,16 +67,16 @@
                 and build_photo.build_number=#{buildNumber}
             </if>
             <if test="province!=null and province!=''">
-                and build_basic.province=#{province}
+                and bb.province=#{province}
             </if>
             <if test="city!=null and city!=''">
-                and build_basic.city=#{city}
+                and bb.city=#{city}
             </if>
             <if test="county!=null and county!=''">
-                and build_basic.county=#{county}
+                and bb.county=#{county}
             </if>
             <if test="street!=null and street!=''">
-                and build_basic.street=#{street}
+                and bb.street=#{street}
             </if>
         </where>
     </select>
