@@ -66,6 +66,18 @@
             <if test="buildNumber!=null and buildNumber!=''">
                 and build_photo.build_number=#{buildNumber}
             </if>
+            <if test="province!=null and province!=''">
+                and build_basic.province=#{province}
+            </if>
+            <if test="city!=null and city!=''">
+                and build_basic.city=#{city}
+            </if>
+            <if test="county!=null and county!=''">
+                and build_basic.county=#{county}
+            </if>
+            <if test="street!=null and street!=''">
+                and build_basic.street=#{street}
+            </if>
         </where>
     </select>
     <select id="initLocationData" parameterType="map" resultType="map">
@@ -74,9 +86,21 @@
         from indicator_value left join community_basic
                                        on community_basic.community_id=indicator_value.community_id
                              left join indicator i on indicator_value.indicator_id = i.indicator_id
-        where court_name=''
+        where indicator_value.court_name=''
         <if test="communityId!=null and communityId!=''">
             and indicator_value.community_id=#{communityId}
+        </if>
+        <if test="province!=null and province!=''">
+            and community_basic.province=#{province}
+        </if>
+        <if test="city!=null and city!=''">
+            and community_basic.city=#{city}
+        </if>
+        <if test="county!=null and county!=''">
+        and community_basic.county=#{county}
+        </if>
+        <if test="street!=null and street!=''">
+        and community_basic.street=#{street}
         </if>
     </select>
 

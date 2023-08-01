@@ -817,8 +817,10 @@ public class AtvController {
 
             Map<String,String> map_query=new HashMap<>();
             map_query.put("communityId",communityId);
-            map_query.put("courtName",courtName);
-            map_query.put("buildNumber",buildNumber);
+            map_query.put("province",province);
+            map_query.put("city",city);
+            map_query.put("county",county);
+            map_query.put("street",street);
             switch (type){
                 case "community":
                     excelName="communityExcel";
@@ -829,6 +831,8 @@ public class AtvController {
                     fillDatas=initCourtData(wrapper_basic); break;
                 default:
                     excelName="buildExcel";
+                    map_query.put("courtName",courtName);
+                    map_query.put("buildNumber",buildNumber);
                     photoDatas=initPhotoData(map_query);
                     fillDatas=initBuildData(wrapper_basic);break;
 
@@ -843,7 +847,7 @@ public class AtvController {
             if(Objects.equals(city, "宁波市")){
                 templateFile=type+"_export_nb.xlsx" ;
             }
-            templateFile="/home/querySystem/"+templateFile;
+            //templateFile="/home/querySystem/"+templateFile;
             ServletOutputStream outputStream=response.getOutputStream();
             // 使用 EasyExcel 构造 ExcelWriter
             final ExcelWriter writer = EasyExcel.write(outputStream)
