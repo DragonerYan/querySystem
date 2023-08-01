@@ -78,6 +78,9 @@
             <if test="street!=null and street!=''">
                 and bb.street=#{street}
             </if>
+            <if test="state!=null and state!=''">
+                and bb.state=#{state}
+            </if>
         </where>
     </select>
     <select id="initLocationData" parameterType="map" resultType="map">
@@ -101,6 +104,9 @@
         </if>
         <if test="street!=null and street!=''">
         and community_basic.street=#{street}
+        </if>
+        <if test="state!=null and state!=''">
+        and community_basic.state=#{state}
         </if>
     </select>
 
