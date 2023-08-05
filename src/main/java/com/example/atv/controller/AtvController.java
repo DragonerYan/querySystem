@@ -9,6 +9,7 @@ import com.alibaba.excel.write.metadata.fill.FillConfig;
 import com.alibaba.excel.write.style.column.LongestMatchColumnWidthStyleStrategy;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.atv.constant.ModelOfExcel;
@@ -910,7 +911,7 @@ public class AtvController {
             List<IndicatorValueBuild> indicatorValueBuildList=iIndicatorValueBuildService.list(wrapper_indicator);
 
             // 实体类转换为Map
-            Map<String,Object> fillData = JSON.parseObject(JSON.toJSONString(buildBasic), Map.class);
+            Map<String,Object> fillData = JSON.parseObject(JSON.toJSONString(buildBasic,SerializerFeature.WriteMapNullValue), Map.class);
 
             // 先将所有指标信息存进去，所有值均存0
             QueryWrapper<Indicator> queryWrapper_indicator =new QueryWrapper<>();
@@ -950,7 +951,7 @@ public class AtvController {
             List<IndicatorValue> indicatorValueBuildList=iIndicatorValueService.list(wrapper_indicator);
 
             // 实体类转换为Map
-            Map<String,Object> fillData = JSON.parseObject(JSON.toJSONString(courtBasic), Map.class);
+            Map<String,Object> fillData = JSON.parseObject(JSON.toJSONString(courtBasic,SerializerFeature.WriteMapNullValue), Map.class);
 
             // 先将所有指标信息存进去，所有值均存0
             QueryWrapper<Indicator> queryWrapper_indicator =new QueryWrapper<>();
@@ -990,7 +991,7 @@ public class AtvController {
             List<IndicatorValue> indicatorValueBuildList=iIndicatorValueService.list(wrapper_indicator);
 
             // 实体类转换为Map
-            Map<String,Object> fillData = JSON.parseObject(JSON.toJSONString(communityBasic), Map.class);
+            Map<String,Object> fillData = JSON.parseObject(JSON.toJSONString(communityBasic, SerializerFeature.WriteMapNullValue), Map.class);
 
             // 先将所有指标信息存进去，所有值均存0
             QueryWrapper<Indicator> queryWrapper_indicator =new QueryWrapper<>();
