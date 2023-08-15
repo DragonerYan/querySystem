@@ -2,29 +2,27 @@ package com.example.atv.controller;
 
 import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.ExcelWriter;
-import com.alibaba.excel.write.builder.ExcelWriterBuilder;
-import com.alibaba.excel.write.builder.ExcelWriterSheetBuilder;
 import com.alibaba.excel.write.metadata.WriteSheet;
-import com.alibaba.excel.write.metadata.fill.FillConfig;
-import com.alibaba.excel.write.style.column.LongestMatchColumnWidthStyleStrategy;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.example.atv.constant.ModelOfExcel;
 import com.example.atv.constant.Result;
 import com.example.atv.dao.mapper.AtvService;
 import com.example.atv.generatetor.entity.*;
 import com.example.atv.generatetor.service.*;
 import com.example.atv.util.MD5Util;
+import com.jcraft.jsch.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import net.coobird.thumbnailator.Thumbnails;
+import org.apache.commons.net.ftp.FTP;
+import org.apache.commons.net.ftp.FTPClient;
+import org.apache.commons.net.ftp.FTPReply;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -33,7 +31,11 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.rowset.serial.SerialBlob;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.sql.Blob;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
@@ -72,6 +74,24 @@ public class AtvController {
 
     @Value("${imgHost}")
     private String imgHost;
+
+    @Value("${host}")
+    protected String host;
+    /**
+     * ssh端口
+     */
+    @Value("${sshport}")
+    protected int sshPort;
+    /**
+     * 用户名
+     */
+    @Value("${username}")
+    protected String username;
+    /**
+     * 密码
+     */
+    @Value("${password}")
+    protected String password;
 
 
     /**
@@ -1082,6 +1102,183 @@ public class AtvController {
         atvService.uploadImg(map);
 
         return Result.success("修改成功");
+    }
+
+    /**
+     * (方法暂时不使用)
+     * 图片上传-保存到图片服务器
+     */
+    public Result uploadImageServer(@RequestParam("file") MultipartFile file,
+                                   @RequestParam(name = "buildNumber") String buildNumber,
+                                   @RequestParam(name = "indicatorId") String indicatorId,
+                                   @RequestParam(name = "courtName") String courtName,
+                                   @RequestParam(name = "communityId") String communityId,
+                                   @RequestParam(name = "photoPath") String photoPath) throws SftpException, JSchException, IOException {
+
+        String photoId= UUID.randomUUID().toString();
+
+        FTPClient ftpClient = new FTPClient();
+        ftpClient.setControlEncoding("utf-8");
+
+        try {
+            log.debug(file.getSize()+":原始图片大小");
+
+            //对图片进行压缩，先将图片压缩保存在本地之后，然后从本地读取存储到图片服务器
+            File dest = new File("/Users/yanxinzhao/Desktop/atv-qu/smokeManagement/img/temp.jpg");
+            Thumbnails.of(file.getInputStream())
+                    .scale(1f)
+                    .outputQuality(0.1f)
+                    .toFile(dest);
+            log.debug("文件压缩成功");
+
+
+            //图片存储到图片服务器
+            log.debug("connecting...ftp服务器:" + host + ":" + sshPort);
+            ftpClient.connect(host, sshPort);
+
+            // 连接ftp服务器
+            ftpClient.login(username, password);
+
+
+            int replyCode = ftpClient.getReplyCode();
+            if (!FTPReply.isPositiveCompletion(replyCode)) {
+                log.debug("connect failed...ftp服务器:" + host + ":" + sshPort);
+            }
+
+            ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
+            ftpClient.enterLocalPassiveMode();
+
+            boolean boo = ftpClient.changeWorkingDirectory("/home/img/");
+            if (boo) {
+                ftpClient.makeDirectory("/home/test");
+                log.debug("进入文件夹成功");
+            }
+            String fileName=photoId+".jpg";
+            InputStream inputStream = new FileInputStream(dest);
+            boolean res=ftpClient.storeFile(new String(fileName.getBytes(StandardCharsets.UTF_8)), file.getInputStream());
+            ftpClient.logout();
+            System.out.println(res);
+
+            //图片信息存储
+            Map<String,Object> map=new HashMap<>();
+            map.put("photo_id",photoId);
+            map.put("build_number",buildNumber);
+            map.put("indicator_id",indicatorId);
+            map.put("court_name",courtName);
+            map.put("community_id",communityId);
+            map.put("photo_path",imgHost+photoId+".jpg");
+            map.put("photo_file","");
+
+            atvService.uploadImg(map);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            log.debug("文件上传"+e+"异常");
+        }finally {
+            if (ftpClient.isConnected()){
+                ftpClient.disconnect();
+            }
+        }
+
+        Map<String,String> map=new HashMap<>();
+        map.put("photoId",photoId);
+        map.put("photoPath",photoId+".jpg");
+        return Result.success("success",map);
+    }
+
+
+    @ApiOperation(value = "图片上传-保存到图片服务器Sftp")
+    @ResponseBody
+    @RequestMapping(value = "/uploadImageServerSftp",method = RequestMethod.POST)
+    public Result uploadImageServerSftp(@RequestParam("file") MultipartFile file,
+                                    @RequestParam(name = "buildNumber") String buildNumber,
+                                    @RequestParam(name = "indicatorId") String indicatorId,
+                                    @RequestParam(name = "courtName") String courtName,
+                                    @RequestParam(name = "communityId") String communityId,
+                                    @RequestParam(name = "photoPath") String photoPath) throws SftpException, JSchException, IOException {
+
+        String photoId= UUID.randomUUID().toString();
+
+        ChannelSftp sftp = null;
+
+        try {
+            log.debug(file.getSize()+":原始图片大小");
+
+            //对图片进行压缩，先将图片压缩保存在本地之后，然后从本地读取存储到图片服务器
+            File dest = new File("/home/temp.jpg");
+            Thumbnails.of(file.getInputStream())
+                    .scale(1f)
+                    .outputQuality(0.1f)
+                    .toFile(dest);
+            log.debug("文件压缩成功");
+
+            //建立连接
+            sftp = this.connect(this.host, this.sshPort, this.username, this.password);
+            // 进入文件夹内
+            sftp.cd("/home/img");
+            // 创建文件
+            InputStream inputStream= Files.newInputStream(dest.toPath());
+            sftp.put(inputStream, photoId+".jpg");
+            inputStream.close();
+
+            //图片信息存储
+            Map<String,Object> map=new HashMap<>();
+            map.put("photo_id",photoId);
+            map.put("build_number",buildNumber);
+            map.put("indicator_id",indicatorId);
+            map.put("court_name",courtName);
+            map.put("community_id",communityId);
+            map.put("photo_path",imgHost+photoId+".jpg");
+            map.put("photo_file","");
+
+            atvService.uploadImg(map);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            log.debug("文件上传"+e+"异常");
+        }finally {
+            assert sftp != null;
+            if(sftp.isConnected()){
+                sftp.disconnect();
+                sftp.getSession().disconnect();
+            }
+
+        }
+
+        Map<String,String> map=new HashMap<>();
+        map.put("photoId",photoId);
+        map.put("photoPath",photoId+".jpg");
+        return Result.success("success",map);
+    }
+
+    /**
+     * 建立连接
+     *
+     * @param host     主机
+     * @param port     端口
+     * @param username 用户名
+     * @param password 密码
+     * @return
+     */
+    public ChannelSftp connect(String host, int port, String username,
+                               String password) {
+        ChannelSftp sftp = null;
+        try {
+            JSch jsch = new JSch();
+            jsch.getSession(username, host, port);
+            Session sshSession = jsch.getSession(username, host, port);
+            sshSession.setPassword(password);
+            Properties sshConfig = new Properties();
+            sshConfig.put("StrictHostKeyChecking", "no");
+            sshSession.setConfig(sshConfig);
+            sshSession.connect();
+            Channel channel = sshSession.openChannel("sftp");
+            channel.connect();
+            sftp = (ChannelSftp) channel;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return sftp;
     }
 
     /**
