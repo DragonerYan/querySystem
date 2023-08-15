@@ -45,7 +45,7 @@ imgPath: /home/img/
 imgHost: http://tjm.caupdcloud.com/img/
 
 ## image-server
-host: 124.70.51.96
+host: 192.168.12.45
 sshport: 22
 username: ftpuser
 password: ftpuser12
