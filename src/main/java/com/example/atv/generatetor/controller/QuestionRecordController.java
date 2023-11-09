@@ -14,8 +14,8 @@ import org.springframework.stereotype.Controller;
  * @since 2023-11-09
  */
 @Controller
-@RequestMapping("/generatetor/user")
-public class UserController {
+@RequestMapping("/generatetor/questionRecord")
+public class QuestionRecordController {
 
 }
 

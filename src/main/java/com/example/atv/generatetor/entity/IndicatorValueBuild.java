@@ -11,7 +11,7 @@ import io.swagger.annotations.ApiModelProperty;
  * </p>
  *
  * @author yxz
- * @since 2023-07-30
+ * @since 2023-11-09
  */
 @TableName("indicator_value_build")
 @ApiModel(value = "IndicatorValueBuild对象", description = "")

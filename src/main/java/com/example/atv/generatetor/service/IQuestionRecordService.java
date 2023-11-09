@@ -1,6 +1,6 @@
 package com.example.atv.generatetor.service;
 
-import com.example.atv.generatetor.entity.User;
+import com.example.atv.generatetor.entity.QuestionRecord;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @author yxz
  * @since 2023-11-09
  */
-public interface IUserService extends IService<User> {
+public interface IQuestionRecordService extends IService<QuestionRecord> {
 
 }

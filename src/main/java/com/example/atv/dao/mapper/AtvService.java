@@ -17,4 +17,6 @@ public interface AtvService {
     List<Map<String,Object>> initLocationData(Map  map);
 
     void deleteImg(Map map);
+
+    List<Map<String,Object>> compute(String city,String indicator);
 }

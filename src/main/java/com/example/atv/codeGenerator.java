@@ -16,7 +16,7 @@ public class codeGenerator {
                     builder.author("yxz") // 设置作者
                             .enableSwagger() // 开启 swagger 模式
                             .fileOverride() // 覆盖已生成文件
-                            .outputDir("/Users/yanxinzhao/Desktop/atv-qu/smokeManagement/src/main/java/"); // 指定输出目录
+                            .outputDir("/Users/yanxinzhao/Desktop/atv-qu/querySystem/src/main/java/"); // 指定输出目录
                 })
                 .strategyConfig(builder -> {
                     builder.addInclude("user");
@@ -34,6 +34,8 @@ public class codeGenerator {
                     builder.addInclude("indicator_value_build");
                 }).strategyConfig(builder->{
                     builder.addInclude("build_basic");
+                }).strategyConfig(builder->{
+                    builder.addInclude("question_record");
                 })
                 .packageConfig(builder -> {
                     builder.parent("com.example.atv") // 设置父包名

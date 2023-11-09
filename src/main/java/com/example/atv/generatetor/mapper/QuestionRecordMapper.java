@@ -1,6 +1,6 @@
 package com.example.atv.generatetor.mapper;
 
-import com.example.atv.generatetor.entity.IndicatorValue;
+import com.example.atv.generatetor.entity.QuestionRecord;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @author yxz
  * @since 2023-11-09
  */
-public interface IndicatorValueMapper extends BaseMapper<IndicatorValue> {
+public interface QuestionRecordMapper extends BaseMapper<QuestionRecord> {
 
 }

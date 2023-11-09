@@ -49,6 +49,14 @@
 		</dependency>
 
 
+		<!--redis相关的依赖-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-redis</artifactId>
+		</dependency>
+
+
+
 		<!-- mybatis-plus相关依赖项的引入，包括代码生成器-->
 		<dependency>
 		<groupId>com.baomidou</groupId>

@@ -8,6 +8,7 @@ import com.alibaba.fastjson.TypeReference;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.example.atv.config.RedisUtils;
 import com.example.atv.constant.Result;
 import com.example.atv.dao.mapper.AtvService;
 import com.example.atv.generatetor.entity.*;
@@ -23,10 +24,12 @@ import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPReply;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.Resource;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.rowset.serial.SerialBlob;
@@ -42,7 +45,7 @@ import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
-@Api(description = "atv接口")
+@Api("atv接口")
 @Slf4j
 @CrossOrigin
 @Controller
@@ -66,8 +69,13 @@ public class AtvController {
     @Autowired
     private IIndicatorValueBuildService iIndicatorValueBuildService;
 
-    @Autowired(required = false)
+    @Resource
+    private RedisUtils  redisUtils;
+
+    @Resource
     private AtvService atvService;
+
+
 
     @Value("${imgPath}")
     private  String imgBasePath;
@@ -119,7 +127,13 @@ public class AtvController {
         List<Community> communityList;
 
         try{
-            communityList=iCommunityService.list();
+            if(!redisUtils.containsKey("community_list:cache")){
+                communityList=iCommunityService.list();
+                redisUtils.cacheValue("community_list:cache",JSON.toJSON(communityList).toString(),600000);
+            }else {
+                communityList= JSON.parseArray(redisUtils.getValue("community_list:cache").toString(), Community.class);
+            }
+
             return Result.success(communityList);
         }catch (Exception e){
             log.debug(e.getMessage());

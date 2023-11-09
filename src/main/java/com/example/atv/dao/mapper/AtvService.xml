@@ -110,4 +110,15 @@
         </if>
     </select>
 
+    <select id="compute" resultType="map" parameterType="String">
+        select c.community_id as commuityId,court_name as courtName,
+               build_number as buildNumber,max(report_year) as reportYear,max(c.city) as city
+        from indicator_value_build
+                 left join community c
+                           on indicator_value_build.community_id = c.community_id
+        where c.city=#{city} and indicator_id like '${indicator}%' and indicator_value>0
+        group by c.community_id,court_name,build_number
+        having count(indicator_value)>0;
+    </select>
+
 </mapper>
