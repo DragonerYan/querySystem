@@ -11,7 +11,7 @@ import org.springframework.stereotype.Controller;
  * </p>
  *
  * @author yxz
- * @since 2023-11-09
+ * @since 2023-11-21
  */
 @Controller
 @RequestMapping("/generatetor/indicatorValue")

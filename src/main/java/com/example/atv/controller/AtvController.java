@@ -753,6 +753,7 @@ public class AtvController {
         map.put("userId",user.getUserId());
         map.put("userName",user.getUsername());
         map.put("communityId",user.getCommunityId());
+        map.put("exportFlag",user.getExportFlag().toString());
         return Result.success("登陆成功！",map);
     }
 

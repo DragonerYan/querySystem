@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
  * </p>
  *
  * @author yxz
- * @since 2023-11-09
+ * @since 2023-11-21
  */
 @Service
 public class CommunityBasicServiceImpl extends ServiceImpl<CommunityBasicMapper, CommunityBasic> implements ICommunityBasicService {

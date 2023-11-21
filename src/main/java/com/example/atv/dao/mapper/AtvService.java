@@ -19,4 +19,7 @@ public interface AtvService {
     void deleteImg(Map map);
 
     List<Map<String,Object>> compute(String city,String indicator);
+
+    List<Map<String,Object>> buildProblem(String communityId,String courtName,String indicator);
+    List<Map<String,Object>> searchPhoto(String courtName,String indicatorId,String communityId,String buildNumber);
 }

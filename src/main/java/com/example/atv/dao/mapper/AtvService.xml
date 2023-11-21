@@ -121,4 +121,27 @@
         having count(indicator_value)>0;
     </select>
 
+    <select id="buildProblem" parameterType="String" resultType="map">
+        select max(c.community_name) as communityName,max(c.street) as street,max(c.county) as county,c.community_id as commuityId,court_name as courtName,
+               build_number as buildNumber,max(report_year) as reportYear,max(c.city) as city
+        from indicator_value_build
+                 left join community c
+                           on indicator_value_build.community_id = c.community_id
+        where <if test="courtName!=null and courtName!=''">court_name=#{courtName} and</if>
+            <if test="communityId!=null and communityId!=''">c.community_id=#{communityId} and</if>
+            indicator_id like '${indicator}%' and
+            indicator_value>0
+        group by c.community_id,court_name,build_number
+        having count(indicator_value)>0;
+    </select>
+
+    <select id="searchPhoto" parameterType="String" resultType="map">
+        select * from build_photo where build_number=#{buildNumber}
+                                    and court_name=#{courtName}
+                                    and community_id=#{communityId}
+                                    and indicator_id like '${indicatorId}%'
+    </select>
+
+
+
 </mapper>

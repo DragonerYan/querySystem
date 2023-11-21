@@ -10,7 +10,7 @@ import io.swagger.annotations.ApiModelProperty;
  * </p>
  *
  * @author yxz
- * @since 2023-11-09
+ * @since 2023-11-21
  */
 @ApiModel(value = "User对象", description = "")
 public class User implements Serializable {
@@ -36,6 +36,8 @@ public class User implements Serializable {
     private String userId;
 
     private String communityName;
+
+    private Integer exportFlag;
 
 
     public String getProvince() {
@@ -118,6 +120,14 @@ public class User implements Serializable {
         this.communityName = communityName;
     }
 
+    public Integer getExportFlag() {
+        return exportFlag;
+    }
+
+    public void setExportFlag(Integer exportFlag) {
+        this.exportFlag = exportFlag;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -131,6 +141,7 @@ public class User implements Serializable {
         ", password=" + password +
         ", userId=" + userId +
         ", communityName=" + communityName +
+        ", exportFlag=" + exportFlag +
         "}";
     }
 }
