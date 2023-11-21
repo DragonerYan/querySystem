@@ -90,7 +90,11 @@ public class ZhibiaoController implements CommandLineRunner {
     @ApiOperation(value = "存在问题的住房楼栋")
     @ResponseBody
     @PostMapping(value = "problemCourt")
-    public Result problemCourt(@RequestParam(required = false) String communityId,@RequestParam(required = false) String courtName,@RequestBody(required = false) List<String> indicatorList){
+    public Result problemCourt(@RequestParam(required = false) String communityId
+            ,@RequestParam(required = false) String courtName
+            ,@RequestBody(required = false) List<String> indicatorList,
+            @RequestParam(name = "pageSize",required = false,defaultValue = "1000000") Long pageSize,
+            @RequestParam(name = "offset",required = false,defaultValue = "1") Long offset){
         //根据小区名获取list
         List<Map<String,Object>> l = new ArrayList<>();
         List<Map<String,Object>> l_t;
@@ -123,7 +127,11 @@ public class ZhibiaoController implements CommandLineRunner {
                 res.add(rr);
             }
         });
-        return Result.success(res);
+        //手动分页 --狗头--
+        List<Map<String,String>> res_page;
+        res_page=res.subList((int) (pageSize*(offset-1)), (int) (pageSize*offset));
+
+        return Result.success(res_page);
     }
 
     /**
@@ -162,7 +170,11 @@ public class ZhibiaoController implements CommandLineRunner {
     @ApiOperation(value = "查询楼栋的问题清单")
     @ResponseBody
     @PostMapping(value = "problmCourtDetail")
-    public Result problmCourtDetail(@RequestParam(required = false) String communityId,@RequestParam(required = false) String courtName,@RequestParam(required = false) String indcatorId){
+    public Result problmCourtDetail(@RequestParam(required = false) String communityId,
+                                    @RequestParam(required = false) String courtName,
+                                    @RequestParam(required = false) String indcatorId,
+                                    @RequestParam(name = "pageSize",required = false,defaultValue = "1000000") Long pageSize,
+                                    @RequestParam(name = "offset",required = false,defaultValue = "1") Long offset){
         //根据小区名获取list
         List<Map<String,Object>> l = new ArrayList<>();
         List<Map<String,Object>> l_t;
@@ -200,12 +212,16 @@ public class ZhibiaoController implements CommandLineRunner {
                 res.add(ll);
             }
         });
-        return Result.success(res);
+        //手动分页
+        List<Map<String,Object>> res_page;
+        res_page=res.subList((int) (pageSize*(offset-1)), (int) (pageSize*offset));
+
+        return Result.success(res_page);
 
     }
 
     @Override
     public void run(String... args) throws Exception {
-        log.debug("QQQQQQQQQQQQQQQ");
+        log.debug("数据采集系统启动");
     }
 }

@@ -122,7 +122,7 @@
     </select>
 
     <select id="buildProblem" parameterType="String" resultType="map">
-        select max(c.community_name) as communityName,max(c.street) as street,max(c.county) as county,c.community_id as commuityId,court_name as courtName,
+        select max(c.community_name) as communityName,max(c.street) as street,max(c.county) as county,c.community_id as communityId,court_name as courtName,
                build_number as buildNumber,max(report_year) as reportYear,max(c.city) as city
         from indicator_value_build
                  left join community c
