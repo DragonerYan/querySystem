@@ -961,6 +961,17 @@ public class AtvController {
                 fillData.put(indicatorValueBuild.getIndicatorId(),indicatorValueBuild.getIndicatorValue());
             });
 
+            //将楼栋的点位信息（在indicator_value_build表的2.1.1信息中）加入到数据列表中
+            QueryWrapper<IndicatorValueBuild> wrapper_indicator_location=new QueryWrapper<>();
+            wrapper_indicator_location.eq("community_id",buildBasic.getCommunityId());
+            wrapper_indicator_location.eq("court_name",buildBasic.getCourtName());
+            wrapper_indicator_location.eq("build_number",buildBasic.getBuildNumber());
+            wrapper_indicator_location.eq("indicator_id","2.1.1");
+            List<IndicatorValueBuild> indicatorValueBuild=iIndicatorValueBuildService.list(wrapper_indicator_location);
+            if(indicatorValueBuild.size()>0){
+                fillData.put("location",indicatorValueBuild.get(0).getLocation());
+            }
+
 
             fillDatas.add(fillData);
         });

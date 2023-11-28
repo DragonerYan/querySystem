@@ -116,9 +116,64 @@
         from indicator_value_build
                  left join community c
                            on indicator_value_build.community_id = c.community_id
-        where c.city=#{city} and indicator_id like '${indicator}%' and indicator_value>0
+        where c.city=#{city} and indicator_id like '${indicator}%' and indicator_value>0 and report_year=#{reportYear}
         group by c.community_id,court_name,build_number
         having count(indicator_value)>0;
+    </select>
+
+    <select id="computeTotal" resultType="int" parameterType="String">
+        select count(*) from (select c.community_id as commuityId,court_name as courtName,
+               build_number as buildNumber,max(report_year) as reportYear,max(c.city) as city
+        from indicator_value_build
+                 left join community c
+                           on indicator_value_build.community_id = c.community_id
+        where c.city=#{city} and indicator_id like '${indicator}%' and report_year=#{reportYear}
+        group by c.community_id,court_name,build_number) as t
+
+    </select>
+
+    <select id="computeCountyPercent" resultType="map" parameterType="String">
+        select max(city) as city,county,count(*) as num from (select c.community_id as commuityId,court_name as courtName,
+                                     build_number as buildNumber,max(report_year) as reportYear,max(c.city) as city,max(county) as county
+                              from indicator_value_build
+                                       left join community c
+                                                 on indicator_value_build.community_id = c.community_id
+                              where c.city=#{city} and indicator_id like '${indicator}%' and indicator_value>0 and report_year=#{reportYear}
+                              group by c.community_id,court_name,build_number having count(indicator_value)>0) as t group by county
+
+    </select>
+
+    <select id="computeCountyTotal" resultType="int" parameterType="String">
+        select count(*) as num from (select c.community_id as commuityId,
+                                               court_name as courtName,
+                                               build_number as buildNumber,
+                                               max(report_year) as reportYear,
+                                               max(c.city) as city,
+                                               max(county) as county,
+                                               max(street) as street
+                                        from indicator_value_build
+                                                 left join community c
+                                                           on indicator_value_build.community_id = c.community_id
+                                        where c.county=#{county} and c.city=#{city} and indicator_id like '${indicator}%' and indicator_value>0 and report_year=#{reportYear}
+                                        group by c.community_id,court_name,build_number having count(indicator_value)>0) as t
+
+    </select>
+
+    <select id="computeStreetPercent" resultType="map" parameterType="String">
+        select max(city) as city,max(county) as county,street,count(*) as num
+        from (select c.community_id as commuityId,
+                   court_name as courtName,
+                   build_number as buildNumber,
+                   max(report_year) as reportYear,
+                   max(c.city) as city,
+                   max(county) as county,
+                   max(street) as street
+            from indicator_value_build
+                     left join community c
+                               on indicator_value_build.community_id = c.community_id
+            where c.county=#{county} and c.city=#{city} and indicator_id like '${indicator}%' and indicator_value>0 and report_year=#{reportYear}
+            group by c.community_id,court_name,build_number having count(indicator_value)>0) as t group by street
+
     </select>
 
     <select id="buildProblem" parameterType="String" resultType="map">

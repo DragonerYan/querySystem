@@ -18,7 +18,13 @@ public interface AtvService {
 
     void deleteImg(Map map);
 
-    List<Map<String,Object>> compute(String city,String indicator);
+    List<Map<String,Object>> compute(String reportYear,String city,String indicator);
+    int computeTotal(String reportYear,String city,String indicator);
+    List<Map<String,Object>> computeCountyPercent(String reportYear,String city,String indicator);
+
+    List<Map<String,Object>> computeStreetPercent(String reportYear,String city,String county,String indicator);
+
+    int computeCountyTotal(String reportYear,String city,String county,String indicator);
 
     List<Map<String,Object>> buildProblem(String communityId,String courtName,String indicator);
     List<Map<String,Object>> searchPhoto(String courtName,String indicatorId,String communityId,String buildNumber);

@@ -7,14 +7,14 @@ spring:
     #type: com.alibaba.druid.pool.DruidDataSource
     #druid:
     driver-class-name: com.mysql.jdbc.Driver
-    #url: jdbc:mysql://192.168.12.45:3306/bjtu_atv?useSSL=false&characterEncoding=UTF-8&serverTimezone=GMT%2B8&allowPublicKeyRetrieval=true
+#    url: jdbc:mysql://192.168.12.45:3306/bjtu_atv?useSSL=false&characterEncoding=UTF-8&serverTimezone=GMT%2B8&allowPublicKeyRetrieval=true
     url: jdbc:mysql://127.0.0.1:3306/bjtu_atv?useSSL=false&characterEncoding=UTF-8&serverTimezone=GMT%2B8&allowPublicKeyRetrieval=true&zeroDateTimeBehavior=convertToNull
     username: root
-    password:
+    password: Ggtbj2023!
   redis:
-    host: 127.0.0.1
+    host: 192.168.12.45
     port: 6379
-    password:
+    password: 123456
 
   servlet:
     multipart:
