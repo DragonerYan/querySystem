@@ -966,7 +966,7 @@ public class AtvController {
             wrapper_indicator_location.eq("community_id",buildBasic.getCommunityId());
             wrapper_indicator_location.eq("court_name",buildBasic.getCourtName());
             wrapper_indicator_location.eq("build_number",buildBasic.getBuildNumber());
-            wrapper_indicator_location.eq("indicator_id","2.1.1");
+            wrapper_indicator_location.eq("indicator_id","2.3.1");
             List<IndicatorValueBuild> indicatorValueBuild=iIndicatorValueBuildService.list(wrapper_indicator_location);
             if(indicatorValueBuild.size()>0){
                 fillData.put("location",indicatorValueBuild.get(0).getLocation());
