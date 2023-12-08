@@ -49,6 +49,15 @@
 		</dependency>
 
 
+<!--		&lt;!&ndash;postgresql 驱动&ndash;&gt;-->
+<!--		<dependency>-->
+<!--			<groupId>org.postgresql</groupId>-->
+<!--			<artifactId>postgresql</artifactId>-->
+<!--			<scope>runtime</scope>-->
+<!--		</dependency>-->
+
+
+
 		<!--redis相关的依赖-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

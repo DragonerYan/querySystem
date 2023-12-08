@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.atv.dao.mapper.ZhibiaoService">
+
+
+    <select id="compute3_1_1" parameterType="String" resultType="int">
+        select count(t.communityId) from
+            (select iv.community_id as communityId,
+                    sum(if(indicator_id='3.1.1.1',indicator_value,null)) as 3_1_1_1,
+                    sum(if(indicator_id='3.1.1.2',indicator_value,null)) as 3_1_1_2
+             from indicator_value iv
+                      left join community c
+                                on iv.community_id = c.community_id
+             where c.city=#{city} and iv.report_year=#{reportYear} and indicator_id like '3.1.1.%' group by iv.community_id) as t
+        where t.3_1_1_1=0 or (t.3_1_1_1=1 and t.3_1_1_2=0)
+    </select>
+
+    <select id="compute3_1_2" parameterType="String" resultType="int">
+        select count(t.communityId) from
+            (select iv.community_id as communityId,
+                    sum(if(indicator_id='3.1.2.1',indicator_value,null)) as 3_1_2_1,
+                    sum(if(indicator_id='3.1.2.2',indicator_value,null)) as 3_1_2_2
+             from indicator_value iv
+                      left join community c
+                                on iv.community_id = c.community_id
+             where c.city=#{city} and iv.report_year=#{reportYear} and indicator_id like '3.1.2.%' group by iv.community_id) as t
+        where t.3_1_2_1=0 or (t.3_1_2_1=1 and t.3_1_2_2=0)
+    </select>
+
+    <select id="compute3_1_3" parameterType="String" resultType="int">
+        select count(t.communityId) from
+            (select iv.community_id as communityId,
+                    sum(if(indicator_id='3.1.3.1',indicator_value,null)) as 3_1_3_1,
+                    sum(if(indicator_id='3.1.3.2',indicator_value,null)) as 3_1_3_2
+             from indicator_value iv
+                      left join community c
+                                on iv.community_id = c.community_id
+             where c.city=#{city} and iv.report_year=#{reportYear} and indicator_id like '3.1.3.%' group by iv.community_id) as t
+        where t.3_1_3_1=0 or (t.3_1_3_1=1 and t.3_1_3_2=0)
+    </select>
+
+    <select id="compute3_1_4" parameterType="String" resultType="Object">
+        select sum(indicator_value)  from indicator_value iv
+               left join community c on iv.community_id = c.community_id
+        where c.city=#{city} and iv.report_year=#{reportYear} and indicator_id='3.1.4.1'
+    </select>
+    <select id="compute3_1_5" parameterType="String" resultType="Object">
+        select sum(indicator_value)  from indicator_value iv
+               left join community c on iv.community_id = c.community_id
+        where c.city=#{city} and iv.report_year=#{reportYear} and indicator_id='3.1.5.1'
+    </select>
+    <select id="compute3_1_6" parameterType="String" resultType="Object">
+        select sum(indicator_value)  from indicator_value iv
+            left join community c on iv.community_id = c.community_id
+        where c.city=#{city} and iv.report_year=#{reportYear} and indicator_id='3.1.6.1'
+    </select>
+
+    <select id="compute3_2_7" parameterType="String" resultType="int">
+        select count(t.community_id) from
+           (select
+                 iv.community_id as community_id,
+                 sum(if(indicator_id='3.2.7.1',indicator_value,null)) as 3_2_7_1,
+                 sum(if(indicator_id='3.2.7.2',indicator_value,null)) as 3_2_7_2
+             from indicator_value iv
+                      left join community c
+                                on iv.community_id = c.community_id
+             where c.city=#{city} and iv.report_year=#{reportYear}
+             group by community_id)
+                as t where t.3_2_7_1 != '1' or t.3_2_7_2 !='1'
+    </select>
+
+    <select id="compute3_2_8" parameterType="String" resultType="Object">
+        select sum(indicator_value)  from indicator_value iv
+            left join community c on iv.community_id = c.community_id
+        where c.city=#{city} and iv.report_year=#{reportYear}  and indicator_id='3.2.8.2'
+    </select>
+
+    <select id="compute3_2_9" parameterType="String" resultType="Object">
+        select sum(indicator_value)  from indicator_value iv
+            left join community c on iv.community_id = c.community_id
+        where c.city=#{city} and iv.report_year=#{reportYear} and indicator_id='3.2.9.2'
+    </select>
+
+</mapper>

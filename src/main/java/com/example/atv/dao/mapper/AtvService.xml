@@ -186,6 +186,9 @@
             <if test="communityId!=null and communityId!=''">c.community_id=#{communityId} and</if>
             indicator_id like '${indicator}%' and
             indicator_value>0
+          and c.city=#{city}
+        <if test="county!=null and county!=''">and c.county=#{county}</if>
+        <if test="street!=null and street!=''">and c.street=#{street}</if>
         group by c.community_id,court_name,build_number
         having count(indicator_value)>0;
     </select>

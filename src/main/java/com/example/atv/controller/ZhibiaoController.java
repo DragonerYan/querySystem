@@ -3,13 +3,13 @@ package com.example.atv.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.atv.constant.Result;
 import com.example.atv.dao.mapper.AtvService;
+import com.example.atv.dao.mapper.ZhibiaoService;
 import com.example.atv.generatetor.entity.QuestionRecord;
 import com.example.atv.generatetor.service.IQuestionRecordService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import javafx.beans.binding.DoubleExpression;
 import lombok.extern.slf4j.Slf4j;
-import org.hibernate.annotations.Parameter;
+import org.apache.commons.collections4.Get;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
@@ -29,6 +29,8 @@ public class ZhibiaoController implements CommandLineRunner {
 
     @Resource
     private AtvService atvService;
+    @Resource
+    private ZhibiaoService zhibiaoService;
 
     @Resource
     private IQuestionRecordService iQuestionRecordService;
@@ -48,7 +50,7 @@ public class ZhibiaoController implements CommandLineRunner {
     }
 
     /**
-     * 计算地市大指标下问题楼栋的数量
+     * 计算地市大指标下问题楼栋的数量（楼栋）
      */
     @ApiOperation(value = "问题指标计算")
     @ResponseBody
@@ -94,7 +96,12 @@ public class ZhibiaoController implements CommandLineRunner {
     @ApiOperation(value = "存在问题的住房楼栋")
     @ResponseBody
     @PostMapping(value = "problemCourt")
-    public Result problemCourt(@RequestParam(required = false) String communityId
+    public Result problemCourt(
+            @RequestParam(required = false) String reportYear,
+            @RequestParam() String city,
+            @RequestParam(required = false) String street,
+            @RequestParam(required = false) String county,
+            @RequestParam(required = false) String communityId
             ,@RequestParam(required = false) String courtName
             ,@RequestBody(required = false) List<String> indicatorList,
             @RequestParam(name = "pageSize",required = false,defaultValue = "1000000") Long pageSize,
@@ -104,9 +111,9 @@ public class ZhibiaoController implements CommandLineRunner {
         List<Map<String,Object>> l_t;
         for (int i=1;i<=10;i++) {
             if(i==2||i==9){
-                l_t=atvService.buildProblem(communityId,courtName,"2."+i);
+                l_t=atvService.buildProblem(communityId,courtName,"2."+i,city,county,street,reportYear);
             }else{
-                l_t=atvService.buildProblem(communityId,courtName,"2."+i+".");
+                l_t=atvService.buildProblem(communityId,courtName,"2."+i+".",city,county,street,reportYear);
             }
 
             int finalI = i;
@@ -185,7 +192,12 @@ public class ZhibiaoController implements CommandLineRunner {
     @ApiOperation(value = "查询楼栋的问题清单")
     @ResponseBody
     @PostMapping(value = "problmCourtDetail")
-    public Result problmCourtDetail(@RequestParam(required = false) String communityId,
+    public Result problmCourtDetail(
+                                    @RequestParam(required = false) String reportYear,
+                                    @RequestParam() String city,
+                                    @RequestParam(required = false) String street,
+                                    @RequestParam(required = false) String county,
+                                    @RequestParam(required = false) String communityId,
                                     @RequestParam(required = false) String courtName,
                                     @RequestParam(required = false) String indcatorId,
                                     @RequestParam(name = "pageSize",required = false,defaultValue = "1000000") Long pageSize,
@@ -195,9 +207,9 @@ public class ZhibiaoController implements CommandLineRunner {
         List<Map<String,Object>> l_t;
         for (int i=1;i<=10;i++) {
             if(i==2||i==9){
-                l_t=atvService.buildProblem(communityId,courtName,"2."+i);
+                l_t=atvService.buildProblem(communityId,courtName,"2."+i,city,county,street,reportYear);
             }else{
-                l_t=atvService.buildProblem(communityId,courtName,"2."+i+".");
+                l_t=atvService.buildProblem(communityId,courtName,"2."+i+".",city,county,street,reportYear);
             }
             int finalI = i;
             l_t.forEach(m->{
@@ -212,7 +224,7 @@ public class ZhibiaoController implements CommandLineRunner {
             String communityId_s= (String) ll.get("communityId");
             String courtName_s= (String) ll.get("courtName");
             //进行图片数据查询
-            List<Map<String,Object>> p_l=atvService.searchPhoto(courtName_s,indicatorId,communityId_s,buildNumber);
+            List<Map<String,Object>> p_l=atvService.searchPhoto(courtName_s,indicatorId,communityId_s,buildNumber,reportYear);
 
             ll.put("photoList",p_l);
         });
@@ -279,16 +291,18 @@ public class ZhibiaoController implements CommandLineRunner {
         //地市中所有有问题的总数
         List<Map<String, Object>> list = atvService.compute(reportYear,city, indicatorId);
         int total=list.size();
-        Set<Map<String,String>> s= new TreeSet<>(Comparator.comparingDouble(a -> Double.parseDouble(a.get("percent"))));
+        List<Map<String,String>> s= new ArrayList<>();
         mapList.forEach(m->{
             Map<String,String> t =new HashMap<>();
             t.put("city", (String) m.get("city"));
             t.put("county", (String) m.get("county"));
-            Double percent= Double.parseDouble(String.valueOf(m.get("num")))/total;
+            double percent= Double.parseDouble(String.valueOf(m.get("num")))/total;
+            percent=Math.round(percent*100)*0.01;
             t.put("percent", String.format("%.2f", percent));
             t.put("percentString", m.get("num")+"/"+total);
             s.add(t);
         });
+        s.sort(Comparator.comparingDouble(a -> Double.parseDouble(a.get("percent"))));
         return Result.success(s);
     }
 
@@ -303,18 +317,72 @@ public class ZhibiaoController implements CommandLineRunner {
         List<Map<String, Object>> mapList = atvService.computeStreetPercent(reportYear,city,county, indicatorId);
         //区县中所有有问题的总数
         int total = atvService.computeCountyTotal(reportYear,city,county, indicatorId);
-        Set<Map<String,String>> s= new TreeSet<>(Comparator.comparingDouble(a -> Double.parseDouble(a.get("percent"))));
+        List<Map<String,String>> s= new ArrayList<>();
         mapList.forEach(m->{
             Map<String,String> t =new HashMap<>();
             t.put("city", (String) m.get("city"));
             t.put("county", (String) m.get("county"));
             t.put("street", (String) m.get("street"));
-            Double percent= Double.parseDouble(String.valueOf(m.get("num")))/total;
+            double percent= Double.parseDouble(String.valueOf(m.get("num")))/total;
+            percent=Math.round(percent*100)*0.01;
             t.put("percent", String.format("%.2f", percent));
             t.put("percentString", m.get("num")+"/"+total);
             s.add(t);
         });
+        s.sort(Comparator.comparingDouble(a -> Double.parseDouble(a.get("percent"))));
         return Result.success(s);
+    }
+
+    /**
+     * 计算社区的指标计算部分
+     */
+    @ApiOperation("计算社区的指标计算部分")
+    @PostMapping(value = "indicatorComputeCommunity")
+    @ResponseBody
+    public Result indicatorComputeCommunity(@RequestParam()String city,@RequestBody List<String> indicatorList,@RequestParam String reportYear){
+        Map<String,String> res=new HashMap<>();
+        try {
+            indicatorList.forEach(indicator->{
+                Object r=0;
+                switch (indicator){
+                    case "3.1.1":
+                        r=zhibiaoService.compute3_1_1(city,reportYear);
+                        break;
+                    case "3.1.2":
+                        r= zhibiaoService.compute3_1_2(city,reportYear);
+                        break;
+                    case "3.1.3":
+                        r= zhibiaoService.compute3_1_3(city,reportYear);
+                        break;
+                    case "3.1.4":
+                        r= zhibiaoService.compute3_1_4(city,reportYear);
+                        break;
+                    case "3.1.5":
+                        r= zhibiaoService.compute3_1_5(city,reportYear);
+                        break;
+                    case "3.1.6":
+                        r= zhibiaoService.compute3_1_6(city,reportYear);
+                        break;
+                    case "3.2.7":
+                        r= zhibiaoService.compute3_2_7(city,reportYear);
+                        break;
+                    case "3.2.8":
+                        r= zhibiaoService.compute3_2_8(city,reportYear);
+                        break;
+                    case "3.2.9":
+                        r= zhibiaoService.compute3_2_9(city,reportYear);
+                        break;
+                    default:
+                        break;
+                }
+                res.put(indicator,String.valueOf(r==null?0:r));
+            });
+        }catch (Exception e){
+            e.printStackTrace();
+            log.error(e.getMessage());
+        }
+
+        return Result.success(res);
     }
 
 
