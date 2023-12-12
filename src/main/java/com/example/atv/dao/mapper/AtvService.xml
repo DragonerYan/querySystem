@@ -187,6 +187,7 @@
             indicator_id like '${indicator}%' and
             indicator_value>0
           and c.city=#{city}
+          and indicator_value_build.report_year=#{reportYear}
         <if test="county!=null and county!=''">and c.county=#{county}</if>
         <if test="street!=null and street!=''">and c.street=#{street}</if>
         group by c.community_id,court_name,build_number

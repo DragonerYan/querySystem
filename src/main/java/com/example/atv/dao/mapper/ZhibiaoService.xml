@@ -11,7 +11,11 @@
              from indicator_value iv
                       left join community c
                                 on iv.community_id = c.community_id
-             where c.city=#{city} and iv.report_year=#{reportYear} and indicator_id like '3.1.1.%' group by iv.community_id) as t
+             where c.city=#{city} and iv.report_year=#{reportYear}
+                <if test="communityId!=null and communityId!=''">
+                    and c.community_id=#{communityId}
+                </if>
+               and indicator_id like '3.1.1.%' group by iv.community_id) as t
         where t.3_1_1_1=0 or (t.3_1_1_1=1 and t.3_1_1_2=0)
     </select>
 
@@ -23,7 +27,11 @@
              from indicator_value iv
                       left join community c
                                 on iv.community_id = c.community_id
-             where c.city=#{city} and iv.report_year=#{reportYear} and indicator_id like '3.1.2.%' group by iv.community_id) as t
+             where c.city=#{city} and iv.report_year=#{reportYear}
+                <if test="communityId!=null and communityId!=''">
+                    and c.community_id=#{communityId}
+                </if>
+               and indicator_id like '3.1.2.%' group by iv.community_id) as t
         where t.3_1_2_1=0 or (t.3_1_2_1=1 and t.3_1_2_2=0)
     </select>
 
@@ -35,24 +43,40 @@
              from indicator_value iv
                       left join community c
                                 on iv.community_id = c.community_id
-             where c.city=#{city} and iv.report_year=#{reportYear} and indicator_id like '3.1.3.%' group by iv.community_id) as t
+             where c.city=#{city} and iv.report_year=#{reportYear}
+                <if test="communityId!=null and communityId!=''">
+                    and c.community_id=#{communityId}
+                </if>
+               and indicator_id like '3.1.3.%' group by iv.community_id) as t
         where t.3_1_3_1=0 or (t.3_1_3_1=1 and t.3_1_3_2=0)
     </select>
 
     <select id="compute3_1_4" parameterType="String" resultType="Object">
         select sum(indicator_value)  from indicator_value iv
                left join community c on iv.community_id = c.community_id
-        where c.city=#{city} and iv.report_year=#{reportYear} and indicator_id='3.1.4.1'
+        where c.city=#{city} and iv.report_year=#{reportYear}
+                <if test="communityId!=null and communityId!=''">
+                    and c.community_id=#{communityId}
+                </if>
+          and indicator_id='3.1.4.1'
     </select>
     <select id="compute3_1_5" parameterType="String" resultType="Object">
         select sum(indicator_value)  from indicator_value iv
                left join community c on iv.community_id = c.community_id
-        where c.city=#{city} and iv.report_year=#{reportYear} and indicator_id='3.1.5.1'
+        where c.city=#{city} and iv.report_year=#{reportYear}
+                <if test="communityId!=null and communityId!=''">
+                    and c.community_id=#{communityId}
+                </if>
+          and indicator_id='3.1.5.1'
     </select>
     <select id="compute3_1_6" parameterType="String" resultType="Object">
         select sum(indicator_value)  from indicator_value iv
             left join community c on iv.community_id = c.community_id
-        where c.city=#{city} and iv.report_year=#{reportYear} and indicator_id='3.1.6.1'
+        where c.city=#{city} and iv.report_year=#{reportYear}
+                <if test="communityId!=null and communityId!=''">
+                    and c.community_id=#{communityId}
+                </if>
+          and indicator_id='3.1.6.1'
     </select>
 
     <select id="compute3_2_7" parameterType="String" resultType="int">
@@ -65,6 +89,9 @@
                       left join community c
                                 on iv.community_id = c.community_id
              where c.city=#{city} and iv.report_year=#{reportYear}
+                <if test="communityId!=null and communityId!=''">
+                    and c.community_id=#{communityId}
+                </if>
              group by community_id)
                 as t where t.3_2_7_1 != '1' or t.3_2_7_2 !='1'
     </select>
@@ -72,13 +99,385 @@
     <select id="compute3_2_8" parameterType="String" resultType="Object">
         select sum(indicator_value)  from indicator_value iv
             left join community c on iv.community_id = c.community_id
-        where c.city=#{city} and iv.report_year=#{reportYear}  and indicator_id='3.2.8.2'
+        where c.city=#{city} and iv.report_year=#{reportYear}
+                <if test="communityId!=null and communityId!=''">
+                    and c.community_id=#{communityId}
+                </if>
+          and indicator_id='3.2.8.2'
     </select>
 
     <select id="compute3_2_9" parameterType="String" resultType="Object">
         select sum(indicator_value)  from indicator_value iv
             left join community c on iv.community_id = c.community_id
-        where c.city=#{city} and iv.report_year=#{reportYear} and indicator_id='3.2.9.2'
+        where c.city=#{city} and iv.report_year=#{reportYear}
+                <if test="communityId!=null and communityId!=''">
+                    and c.community_id=#{communityId}
+                </if>
+          and indicator_id='3.2.9.2'
     </select>
+
+    <select id="computeCounty3_1_1" parameterType="String" resultType="map">
+        select count(t.communityId) as num,county from
+            (select iv.community_id as communityId,
+                    sum(if(indicator_id='3.1.1.1',indicator_value,null)) as 3_1_1_1,
+                    sum(if(indicator_id='3.1.1.2',indicator_value,null)) as 3_1_1_2,
+                    max(c.county) as county
+             from indicator_value iv
+                      left join community c
+                                on iv.community_id = c.community_id
+             where c.city=#{city}
+        <if test="county!=null and county!=''">
+            and c.county=#{county}
+               </if>
+               and iv.report_year=#{reportYear} and indicator_id like '3.1.1.%' group by iv.community_id) as t
+        where t.3_1_1_1=0 or (t.3_1_1_1=1 and t.3_1_1_2=0) group by county
+    </select>
+
+    <select id="computeCounty3_1_2" parameterType="String" resultType="map">
+        select count(t.communityId) as num,county from
+            (select iv.community_id as communityId,
+                    sum(if(indicator_id='3.1.2.1',indicator_value,null)) as 3_1_2_1,
+                    sum(if(indicator_id='3.1.2.2',indicator_value,null)) as 3_1_2_2,
+                    max(c.county) as county
+             from indicator_value iv
+                      left join community c
+                                on iv.community_id = c.community_id
+             where c.city=#{city}
+        <if test="county!=null and county!=''">
+            and c.county=#{county}
+        </if>
+               and iv.report_year=#{reportYear} and indicator_id like '3.1.2.%' group by iv.community_id) as t
+        where t.3_1_2_1=0 or (t.3_1_2_1=1 and t.3_1_2_2=0) group by county
+    </select>
+
+    <select id="computeCounty3_1_3" parameterType="String" resultType="map">
+        select count(t.communityId) as num,county from
+            (select iv.community_id as communityId,
+                    sum(if(indicator_id='3.1.3.1',indicator_value,null)) as 3_1_3_1,
+                    sum(if(indicator_id='3.1.3.2',indicator_value,null)) as 3_1_3_2,
+                    max(c.county) as county
+             from indicator_value iv
+                      left join community c
+                                on iv.community_id = c.community_id
+             where c.city=#{city}
+        <if test="county!=null and county!=''">
+            and c.county=#{county}
+        </if>
+               and iv.report_year=#{reportYear} and indicator_id like '3.1.3.%' group by iv.community_id) as t
+        where t.3_1_3_1=0 or (t.3_1_3_1=1 and t.3_1_3_2=0) group by county
+    </select>
+
+    <select id="computeCounty3_1_4" parameterType="String" resultType="map">
+        select sum(indicator_value) as num ,c.county as county   from indicator_value iv
+                                                                          left join community c on iv.community_id = c.community_id
+        where c.city=#{city}
+        <if test="county!=null and county!=''">
+            and c.county=#{county}
+        </if>
+          and iv.report_year=#{reportYear} and indicator_id='3.1.4.1' group by c.county
+    </select>
+    <select id="computeCounty3_1_5" parameterType="String" resultType="map">
+        select sum(indicator_value) as num,c.county as county  from indicator_value iv
+                                                                        left join community c on iv.community_id = c.community_id
+        where c.city=#{city}
+        <if test="county!=null and county!=''">
+            and c.county=#{county}
+        </if>
+          and iv.report_year=#{reportYear} and indicator_id='3.1.5.1' group by c.county
+    </select>
+    <select id="computeCounty3_1_6" parameterType="String" resultType="map">
+        select sum(indicator_value) as num ,c.county as county  from indicator_value iv
+                                                                         left join community c on iv.community_id = c.community_id
+        where c.city=#{city}
+        <if test="county!=null and county!=''">
+            and c.county=#{county}
+        </if>
+          and iv.report_year=#{reportYear} and indicator_id='3.1.6.1' group by county
+    </select>
+
+    <select id="computeCounty3_2_7" parameterType="String" resultType="map">
+        select count(t.community_id) as num,county from
+            (select
+                 iv.community_id as community_id,
+                 sum(if(indicator_id='3.2.7.1',indicator_value,null)) as 3_2_7_1,
+                 sum(if(indicator_id='3.2.7.2',indicator_value,null)) as 3_2_7_2,
+                 max(c.county) as county
+             from indicator_value iv
+                      left join community c
+                                on iv.community_id = c.community_id
+             where c.city=#{city} and iv.report_year=#{reportYear}
+        <if test="county!=null and county!=''">
+            and c.county=#{county}
+        </if>
+             group by community_id)
+                as t where t.3_2_7_1 != '1' or t.3_2_7_2 !='1' group by county
+    </select>
+
+    <select id="computeCounty3_2_8" parameterType="String" resultType="map">
+        select sum(indicator_value) as num ,c.county as county  from indicator_value iv
+                                                                         left join community c on iv.community_id = c.community_id
+        where c.city=#{city}
+        <if test="county!=null and county!=''">
+            and c.county=#{county}
+        </if>
+          and iv.report_year=#{reportYear}  and indicator_id='3.2.8.2' group by county
+    </select>
+
+    <select id="computeCounty3_2_9" parameterType="String" resultType="map">
+        select sum(indicator_value) as num,c.county as county  from indicator_value iv
+                                                                        left join community c on iv.community_id = c.community_id
+        where c.city=#{city}
+        <if test="county!=null and county!=''">
+            and c.county=#{county}
+        </if>
+          and iv.report_year=#{reportYear} and indicator_id='3.2.9.2' group by county
+    </select>
+
+
+
+
+    <select id="computeStreet3_1_1" parameterType="String" resultType="map">
+        select count(t.communityId) as num,street from
+            (select iv.community_id as communityId,
+                    sum(if(indicator_id='3.1.1.1',indicator_value,null)) as 3_1_1_1,
+                    sum(if(indicator_id='3.1.1.2',indicator_value,null)) as 3_1_1_2,
+                    max(c.street) as street
+             from indicator_value iv
+                      left join community c
+                                on iv.community_id = c.community_id
+             where c.city=#{city}
+              and c.county=#{county}
+                   and iv.report_year=#{reportYear} and indicator_id like '3.1.1.%' group by iv.community_id) as t
+        where t.3_1_1_1=0 or (t.3_1_1_1=1 and t.3_1_1_2=0) group by street
+    </select>
+
+    <select id="computeStreet3_1_2" parameterType="String" resultType="map">
+        select count(t.communityId) as num,street from
+            (select iv.community_id as communityId,
+                    sum(if(indicator_id='3.1.2.1',indicator_value,null)) as 3_1_2_1,
+                    sum(if(indicator_id='3.1.2.2',indicator_value,null)) as 3_1_2_2,
+                    max(c.street) as street
+             from indicator_value iv
+                      left join community c
+                                on iv.community_id = c.community_id
+             where c.city=#{city}
+                and c.county=#{county}
+                and iv.report_year=#{reportYear} and indicator_id like '3.1.2.%' group by iv.community_id) as t
+        where t.3_1_2_1=0 or (t.3_1_2_1=1 and t.3_1_2_2=0) group by street
+    </select>
+
+    <select id="computeStreet3_1_3" parameterType="String" resultType="map">
+        select count(t.communityId) as num,street from
+            (select iv.community_id as communityId,
+                    sum(if(indicator_id='3.1.3.1',indicator_value,null)) as 3_1_3_1,
+                    sum(if(indicator_id='3.1.3.2',indicator_value,null)) as 3_1_3_2,
+                    max(c.street) as street
+             from indicator_value iv
+                      left join community c
+                                on iv.community_id = c.community_id
+             where c.city=#{city}
+            and c.county=#{county}
+            and iv.report_year=#{reportYear} and indicator_id like '3.1.3.%' group by iv.community_id) as t
+        where t.3_1_3_1=0 or (t.3_1_3_1=1 and t.3_1_3_2=0) group by street
+    </select>
+
+    <select id="computeStreet3_1_4" parameterType="String" resultType="map">
+        select sum(indicator_value) as num ,c.street as street   from indicator_value iv
+                                              left join community c on iv.community_id = c.community_id
+        where c.city=#{city}
+        and c.county=#{county}
+        and iv.report_year=#{reportYear} and indicator_id='3.1.4.1' group by c.street
+    </select>
+    <select id="computeStreet3_1_5" parameterType="String" resultType="map">
+        select sum(indicator_value) as num,c.street as street  from indicator_value iv
+                                              left join community c on iv.community_id = c.community_id
+        where c.city=#{city}
+        and c.county=#{county}
+        and iv.report_year=#{reportYear} and indicator_id='3.1.5.1' group by c.street
+    </select>
+    <select id="computeStreet3_1_6" parameterType="String" resultType="map">
+        select sum(indicator_value) as num ,c.street as street  from indicator_value iv
+                                              left join community c on iv.community_id = c.community_id
+        where c.city=#{city}
+        and c.county=#{county}
+          and iv.report_year=#{reportYear} and indicator_id='3.1.6.1' group by street
+    </select>
+
+    <select id="computeStreet3_2_7" parameterType="String" resultType="map">
+        select count(t.community_id) as num,street from
+            (select
+                 iv.community_id as community_id,
+                 sum(if(indicator_id='3.2.7.1',indicator_value,null)) as 3_2_7_1,
+                 sum(if(indicator_id='3.2.7.2',indicator_value,null)) as 3_2_7_2,
+                 max(c.street) as street
+             from indicator_value iv
+                      left join community c
+                                on iv.community_id = c.community_id
+             where c.city=#{city} and iv.report_year=#{reportYear}
+            and c.county=#{county}
+             group by community_id)
+                as t where t.3_2_7_1 != '1' or t.3_2_7_2 !='1' group by street
+    </select>
+
+    <select id="computeStreet3_2_8" parameterType="String" resultType="map">
+        select sum(indicator_value) as num ,c.street as street  from indicator_value iv
+                                              left join community c on iv.community_id = c.community_id
+        where c.city=#{city}
+        and c.county=#{county}
+          and iv.report_year=#{reportYear}  and indicator_id='3.2.8.2' group by street
+    </select>
+
+    <select id="computeStreet3_2_9" parameterType="String" resultType="map">
+        select sum(indicator_value) as num,c.street as street  from indicator_value iv
+                                              left join community c on iv.community_id = c.community_id
+        where c.city=#{city}
+        and c.county=#{county}
+          and iv.report_year=#{reportYear} and indicator_id='3.2.9.2' group by street
+    </select>
+
+    <select id="problemCommunity" resultType="map" parameterType="String">
+        select c.community_id as communityId,
+               max(c.county) as county,
+               max(c.street) as street,
+               max(c.community_name) as communityName,
+               max(cb.area) as area,
+               max(cb.number_court) as numberCourt,
+               max(cb.number_people) as numberPeople,
+               max(cb.number_family) as numberFamily
+        from indicator_value iv
+                 left join community c
+                           on iv.community_id = c.community_id
+                 right join community_basic cb
+                           on c.community_id = cb.community_id
+        where c.city=#{city}
+                and iv.report_year=#{reportYear}
+            <if test="county!=null and county!=''">
+                and c.county=#{county}
+            </if>
+            <if test="street!=null and street!=''">
+                and c.street=#{street}
+            </if>
+            <if test="communityId!=null and communityId!=''">
+                and c.community_id=#{communityId}
+            </if>
+        group by c.community_id
+    </select>
+
+
+    <select id="communityProblemDetail3_1_1" parameterType="String" resultType="map">
+        select
+            max(if(iv.indicator_id='3.1.1.3.1' ,i.indicator_name,'')) as '3_1_1_3_1',
+                max(if(iv.indicator_id='3.1.1.3.2' and iv.indicator_value='1',i.indicator_name,'')) as '3_1_1_3_2',
+                max(if(iv.indicator_id='3.1.1.3.3' and iv.indicator_value='1',i.indicator_name,'')) as '3_1_1_3_3',
+                max(if(iv.indicator_id='3.1.1.3.4' and iv.indicator_value='1',i.indicator_name,'')) as '3_1_1_3_4',
+                max(if(iv.indicator_id='3.1.1.3.5' and iv.indicator_value='1',i.indicator_name,'')) as '3_1_1_3_5',
+                max(if(iv.indicator_id='3.1.1.3.6' and iv.indicator_value='1',iv.meno,'')) as '3_1_1_3_6',
+                max(if(iv.indicator_id='3.1.1.3.7' and iv.indicator_value='1',i.indicator_name,'')) as '3_1_1_3_7'
+        from indicator_value iv
+                 left join indicator i
+                           on iv.indicator_id = i.indicator_id
+                 left join community c on iv.community_id = c.community_id
+        where iv.indicator_id like '3.1.1.3.%' and iv.indicator_value='1'
+          and iv.community_id=#{communityId} and iv.report_year=#{reportYear}
+        group by iv.community_id;
+    </select>
+    <select id="communityProblemDetail3_1_2" parameterType="String" resultType="map">
+        select
+                max(if(iv.indicator_id='3.1.2.3.1',iv.meno,'')) as '3_1_2_3_1'
+        from indicator_value iv
+                 left join indicator i
+                           on iv.indicator_id = i.indicator_id
+                 left join community c on iv.community_id = c.community_id
+        where iv.indicator_id like '3.1.2.3.%' and iv.indicator_value='1'
+          and iv.community_id=#{communityId} and iv.report_year=#{reportYear}
+        group by iv.community_id;
+    </select>
+    <select id="communityProblemDetail3_1_3" parameterType="String" resultType="map">
+        select
+            max(if(iv.indicator_id='3.1.3.3.1',iv.meno,'')) as '3_1_3_3_1'
+        from indicator_value iv
+                 left join indicator i
+                           on iv.indicator_id = i.indicator_id
+                 left join community c on iv.community_id = c.community_id
+        where iv.indicator_id like '3.1.3.3.%' and iv.indicator_value='1'
+          and iv.community_id=#{communityId} and iv.report_year=#{reportYear}
+        group by iv.community_id;
+    </select>
+    <select id="communityProblemDetail3_1_5" parameterType="String" resultType="map">
+        select
+            max(if(iv.indicator_id='3.1.5.2.1',i.indicator_name,'')) as '3_1_5_2_1',
+            max(if(iv.indicator_id='3.1.5.2.2',iv.meno,'')) as '3_1_5_2_2'
+        from indicator_value iv
+                 left join indicator i
+                           on iv.indicator_id = i.indicator_id
+                 left join community c on iv.community_id = c.community_id
+        where iv.indicator_id like '3.1.5.2.%' and iv.indicator_value='1'
+          and iv.community_id=#{communityId} and iv.report_year=#{reportYear}
+        group by iv.community_id;
+    </select>
+    <select id="communityProblemDetail3_1_6" parameterType="String" resultType="map">
+        select
+            max(if(iv.indicator_id='3.1.6.2.1',iv.meno,'')) as '3_1_6_2_1',
+                max(if(iv.indicator_id='3.1.6.2.2',iv.meno,'')) as '3_1_6_2_2'
+        from indicator_value iv
+                 left join indicator i
+                           on iv.indicator_id = i.indicator_id
+                 left join community c on iv.community_id = c.community_id
+        where iv.indicator_id like '3.1.6.2.%' and iv.indicator_value='1'
+          and iv.community_id=#{communityId} and iv.report_year=#{reportYear}
+        group by iv.community_id;
+    </select>
+
+    <select id="communityProblemDetail3_2_7" parameterType="String" resultType="map">
+        select
+            max(if(iv.indicator_id='3.2.7.3.1' ,i.indicator_name,'')) as '3_2_7_3_1',
+                max(if(iv.indicator_id='3.2.7.3.2' and iv.indicator_value='1',i.indicator_name,'')) as '3_2_7_3_2',
+                max(if(iv.indicator_id='3.2.7.3.3' and iv.indicator_value='1',i.indicator_name,'')) as '3_2_7_3_3',
+                max(if(iv.indicator_id='3.2.7.3.4' and iv.indicator_value='1',i.indicator_name,'')) as '3_2_7_3_4',
+                max(if(iv.indicator_id='3.2.7.3.5' and iv.indicator_value='1',i.indicator_name,'')) as '3_2_7_3_5',
+                max(if(iv.indicator_id='3.2.7.3.6' and iv.indicator_value='1',iv.meno,'')) as '3_2_7_3_6'
+        from indicator_value iv
+                 left join indicator i
+                           on iv.indicator_id = i.indicator_id
+                 left join community c on iv.community_id = c.community_id
+        where iv.indicator_id like '3.2.7.3.%' and iv.indicator_value='1'
+          and iv.community_id=#{communityId} and iv.report_year=#{reportYear}
+        group by iv.community_id;
+    </select>
+
+    <select id="communityProblemDetail3_2_8" parameterType="String" resultType="map">
+        select
+            max(if(iv.indicator_id='3.2.8.3.1' ,i.indicator_name,'')) as '3_2_8_3_1',
+                max(if(iv.indicator_id='3.2.8.3.2' and iv.indicator_value='1',i.indicator_name,'')) as '3_2_8_3_2',
+                max(if(iv.indicator_id='3.2.8.3.3' and iv.indicator_value='1',i.indicator_name,'')) as '3_2_8_3_3',
+                max(if(iv.indicator_id='3.2.8.3.4' and iv.indicator_value='1',i.indicator_name,'')) as '3_2_8_3_4',
+                max(if(iv.indicator_id='3.2.8.3.5' and iv.indicator_value='1',i.indicator_name,'')) as '3_2_8_3_5',
+                max(if(iv.indicator_id='3.2.8.3.6' and iv.indicator_value='1',i.indicator_name,'')) as '3_2_8_3_6',
+                max(if(iv.indicator_id='3.2.8.3.7' and iv.indicator_value='1',i.indicator_name,'')) as '3_2_8_3_7',
+                max(if(iv.indicator_id='3.2.8.3.8' and iv.indicator_value='1',iv.meno,'')) as '3_2_8_3_8'
+        from indicator_value iv
+                 left join indicator i
+                           on iv.indicator_id = i.indicator_id
+                 left join community c on iv.community_id = c.community_id
+        where iv.indicator_id like '3.2.8.3.%' and iv.indicator_value='1'
+          and iv.community_id=#{communityId} and iv.report_year=#{reportYear}
+        group by iv.community_id;
+    </select>
+
+    <select id="communityProblemDetail3_2_9" parameterType="String" resultType="map">
+        select
+            max(if(iv.indicator_id='3.2.9.3.1' ,i.indicator_name,'')) as '3_2_9_3_1',
+                max(if(iv.indicator_id='3.2.9.3.2' and iv.indicator_value='1',i.indicator_name,'')) as '3_2_9_3_2',
+                max(if(iv.indicator_id='3.2.9.3.3' and iv.indicator_value='1',iv.meno,'')) as '3_2_9_3_3'
+        from indicator_value iv
+                 left join indicator i
+                           on iv.indicator_id = i.indicator_id
+                 left join community c on iv.community_id = c.community_id
+        where iv.indicator_id like '3.2.9.3.%' and iv.indicator_value='1'
+          and iv.community_id=#{communityId} and iv.report_year=#{reportYear}
+        group by iv.community_id;
+    </select>
+
+
 
 </mapper>
