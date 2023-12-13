@@ -91,4 +91,11 @@ public interface ZhibiaoService {
     Map<String,Object> communityProblemDetail3_2_8(String communityId,String reportYear);
     Map<String,Object> communityProblemDetail3_2_9(String communityId,String reportYear);
 
+
+    List<Map<String,Object>> problemCourtReal(String city,String county,String street,String communityId,
+                                                String courtType,String remodel,String management,
+                                              String bTime,String eTime,
+                                              String bPeople,String ePeople,
+                                              String b60People,String e60People);
+
 }

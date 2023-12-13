@@ -479,5 +479,37 @@
     </select>
 
 
+    <select id="problemCourtReal" resultType="map" parameterType="String">
+        select * from  court_basic where city=#{city}
+        <if test="county!=null and county!=''">
+            and county=#{county}
+        </if>
+        <if test="street!=null and street!=''">
+            and street=#{street}
+        </if>
+        <if test="communityId!=null and communityId!=''">
+            and community_id=#{communityId}
+        </if>
+        <if test="courtType!=null and courtType!=''">
+            and court_type=#{courtType}
+        </if>
+        <if test="remodel!=null and remodel!=''">
+            and remodel=#{remodel}
+        </if>
+        <if test="management!=null and management!=''">
+            cast(#{management} as signed int)
+        </if>
+        <if test="bTime!=null and bTime!='' and eTime!=null and eTime!=null">
+            and build_time between cast(#{bTime} as signed int) and cast(#{eTime} as signed int)
+        </if>
+        <if test="b60People!=null and b60People!='' and e60People!=null and e60People!=null">
+            and number_over60_people between cast(#{b60People} as signed int) and cast(#{e60People} as signed int)
+        </if>
+        <if test="bPeople!=null and bPeople!='' and ePeople!=null and ePeople!=null">
+            and number_people between cast(#{bPeople} as signed int) and cast(#{ePeople} as signed int)
+        </if>
+
+    </select>
+
 
 </mapper>

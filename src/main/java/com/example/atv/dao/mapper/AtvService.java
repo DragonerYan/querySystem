@@ -26,6 +26,11 @@ public interface AtvService {
 
     int computeCountyTotal(String reportYear,String city,String county,String indicator);
 
-    List<Map<String,Object>> buildProblem(String communityId,String courtName,String indicator,String city,String county,String street,String reportYear);
+    List<Map<String,Object>> buildProblem(String communityId,String courtName,String indicator,String city,
+                                          String county,String street,String reportYear,
+                                            String bTime,String eTime,
+                                          String bPeople,String ePeople,
+                                          String b60People,String e60People,
+                                            String bUnits,String eUnits);
     List<Map<String,Object>> searchPhoto(String courtName,String indicatorId,String communityId,String buildNumber,String reportYear);
 }

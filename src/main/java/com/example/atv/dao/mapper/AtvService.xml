@@ -177,11 +177,19 @@
     </select>
 
     <select id="buildProblem" parameterType="String" resultType="map">
-        select max(c.community_name) as communityName,max(c.street) as street,max(c.county) as county,c.community_id as communityId,court_name as courtName,
-               build_number as buildNumber,max(report_year) as reportYear,max(c.city) as city
+        select max(bb.build_time) as buildTime,max(bb.number_people) as numberPeople,
+               max(bb.number_over60_people) as numberOver60People,
+               max(bb.units_number) as unitsNumber,
+               max(c.community_name) as communityName,max(c.street) as street,max(c.county) as county,
+               c.community_id as communityId,indicator_value_build.court_name as courtName,
+        indicator_value_build.build_number as buildNumber,max(indicator_value_build.report_year) as reportYear,max(c.city) as city
+        ,max(bb.number_people) as numberPeople,max(bb.build_time) as buildTime,max(bb.number_over60_people) as numberOver60People
+        ,max(bb.units_number) as unitsNumber
         from indicator_value_build
                  left join community c
                            on indicator_value_build.community_id = c.community_id
+        left join build_basic bb
+        on indicator_value_build.community_id=bb.community_id
         where <if test="courtName!=null and courtName!=''">court_name=#{courtName} and</if>
             <if test="communityId!=null and communityId!=''">c.community_id=#{communityId} and</if>
             indicator_id like '${indicator}%' and
@@ -190,7 +198,19 @@
           and indicator_value_build.report_year=#{reportYear}
         <if test="county!=null and county!=''">and c.county=#{county}</if>
         <if test="street!=null and street!=''">and c.street=#{street}</if>
-        group by c.community_id,court_name,build_number
+        <if test="bTime!=null and bTime!='' and eTime!=null and eTime!=null">
+            and bb.build_time between cast(#{bTime} as signed int) and cast(#{eTime} as signed int)
+        </if>
+        <if test="b60People!=null and b60People!='' and e60People!=null and e60People!=null">
+            and bb.number_over60_people between cast(#{b60People} as signed int) and cast(#{e60People} as signed int)
+        </if>
+        <if test="bPeople!=null and bPeople!='' and ePeople!=null and ePeople!=null">
+            and bb.number_people between cast(#{bPeople} as signed int) and cast(#{ePeople} as signed int)
+        </if>
+        <if test="bUnits!=null and bUnits!='' and eUnits!=null and eUnits!=null">
+            and bb.units_number between cast(#{bUnits} as signed int) and cast(#{eUnits} as signed int)
+        </if>
+        group by c.community_id,indicator_value_build.court_name,indicator_value_build.build_number
         having count(indicator_value)>0;
     </select>
 

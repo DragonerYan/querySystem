@@ -105,6 +105,14 @@ public class ZhibiaoController implements CommandLineRunner {
             @RequestParam(required = false) String communityId
             ,@RequestParam(required = false) String courtName
             ,@RequestBody(required = false) List<String> indicatorList,
+            @RequestParam(required = false,defaultValue = "")String bTime,
+            @RequestParam(required = false,defaultValue = "")String eTime,
+            @RequestParam(required = false,defaultValue = "")String bPeople,
+            @RequestParam(required = false,defaultValue = "")String ePeople,
+            @RequestParam(required = false,defaultValue = "")String b60People,
+            @RequestParam(required = false,defaultValue = "")String e60People,
+            @RequestParam(required = false,defaultValue = "")String bUnits,
+            @RequestParam(required = false,defaultValue = "")String eUnits,
             @RequestParam(name = "pageSize",required = false,defaultValue = "1000000") Long pageSize,
             @RequestParam(name = "offset",required = false,defaultValue = "1") Long offset){
         //根据小区名获取list
@@ -112,9 +120,11 @@ public class ZhibiaoController implements CommandLineRunner {
         List<Map<String,Object>> l_t;
         for (int i=1;i<=10;i++) {
             if(i==2||i==9){
-                l_t=atvService.buildProblem(communityId,courtName,"2."+i,city,county,street,reportYear);
+                l_t=atvService.buildProblem(communityId,courtName,"2."+i,city,county,street,reportYear,
+                        bTime,eTime,bPeople,ePeople,b60People,e60People,bUnits,eUnits);
             }else{
-                l_t=atvService.buildProblem(communityId,courtName,"2."+i+".",city,county,street,reportYear);
+                l_t=atvService.buildProblem(communityId,courtName,"2."+i+".",city,county,street,reportYear,
+                        bTime,eTime,bPeople,ePeople,b60People,e60People,bUnits,eUnits);
             }
 
             int finalI = i;
@@ -181,7 +191,11 @@ public class ZhibiaoController implements CommandLineRunner {
             t_m.put("communityName", (String) m.get("communityName"));
             t_m.put("communityId", (String) m.get("communityId"));
             t_m.put("courtName", (String) m.get("courtName"));
-            t_m.put("buildNumber", (String) m.get("buildNumber"));
+            t_m.put("buildNumber", String.valueOf(m.get("buildNumber")));
+            t_m.put("numberPeople", String.valueOf(m.get("numberPeople")));
+            t_m.put("buildTime", String.valueOf(m.get("buildTime")));
+            t_m.put("numberOver60People", String.valueOf(m.get("numberOver60People")));
+            t_m.put("unitsNumber", String.valueOf(m.get("unitsNumber")));
             t_m.put((String) m.get("indicatorId"),"是");
             r.add(t_m);
         }
@@ -201,6 +215,14 @@ public class ZhibiaoController implements CommandLineRunner {
                                     @RequestParam(required = false) String communityId,
                                     @RequestParam(required = false) String courtName,
                                     @RequestParam(required = false) String indcatorId,
+                                    @RequestParam(required = false,defaultValue = "")String bTime,
+                                    @RequestParam(required = false,defaultValue = "")String eTime,
+                                    @RequestParam(required = false,defaultValue = "")String bPeople,
+                                    @RequestParam(required = false,defaultValue = "")String ePeople,
+                                    @RequestParam(required = false,defaultValue = "")String b60People,
+                                    @RequestParam(required = false,defaultValue = "")String e60People,
+                                    @RequestParam(required = false,defaultValue = "")String bUnits,
+                                    @RequestParam(required = false,defaultValue = "")String eUnits,
                                     @RequestParam(name = "pageSize",required = false,defaultValue = "1000000") Long pageSize,
                                     @RequestParam(name = "offset",required = false,defaultValue = "1") Long offset){
         //根据小区名获取list
@@ -208,9 +230,11 @@ public class ZhibiaoController implements CommandLineRunner {
         List<Map<String,Object>> l_t;
         for (int i=1;i<=10;i++) {
             if(i==2||i==9){
-                l_t=atvService.buildProblem(communityId,courtName,"2."+i,city,county,street,reportYear);
+                l_t=atvService.buildProblem(communityId,courtName,"2."+i,city,county,street,reportYear,
+                        bTime,eTime,bPeople,ePeople,b60People,e60People,bUnits,eUnits);
             }else{
-                l_t=atvService.buildProblem(communityId,courtName,"2."+i+".",city,county,street,reportYear);
+                l_t=atvService.buildProblem(communityId,courtName,"2."+i+".",city,county,street,reportYear,
+                        bTime,eTime,bPeople,ePeople,b60People,e60People,bUnits,eUnits);
             }
             int finalI = i;
             l_t.forEach(m->{
@@ -579,8 +603,25 @@ public class ZhibiaoController implements CommandLineRunner {
     @ApiOperation(value = "存在问题的小区")
     @ResponseBody
     @PostMapping(value ="problemCourtReal" )
-    public Result problemCourtReal(){
-        return Result.success();
+    public Result problemCourtReal(@RequestParam() String city,
+                                   @RequestParam(required = false,defaultValue = "")String county,
+                                   @RequestParam(required = false,defaultValue = "")String street,
+                                   @RequestParam(required = false,defaultValue = "")String communityId,
+                                   @RequestParam(required = false,defaultValue = "")String courtType,
+                                   @RequestParam(required = false,defaultValue = "")String remodel,
+                                   @RequestParam(required = false,defaultValue = "")String management,
+                                   @RequestParam(required = false,defaultValue = "")String bTime,
+                                   @RequestParam(required = false,defaultValue = "")String eTime,
+                                   @RequestParam(required = false,defaultValue = "")String bPeople,
+                                   @RequestParam(required = false,defaultValue = "")String ePeople,
+                                   @RequestParam(required = false,defaultValue = "")String b60People,
+                                   @RequestParam(required = false,defaultValue = "")String e60People){
+        List<Map<String,Object>> l=zhibiaoService.problemCourtReal(city,county,street,communityId,
+                courtType,remodel,management,
+                bTime,eTime,
+                bPeople,ePeople,
+                b60People,e60People);
+        return Result.success(l);
     }
 
     /**
@@ -612,6 +653,7 @@ public class ZhibiaoController implements CommandLineRunner {
             map.forEach((key, value) -> {
                 Map<String,Object> t=new HashMap<>(l);
                 t.put(key,value);
+                t.put("indicatorId",key);
                 //根据社区id和indicatorId取出现问题的详细描述
                 String problemStr=communityProblemDetail(communityIdF,city,key,reportYear);
                 t.put("problemConcat",problemStr);
