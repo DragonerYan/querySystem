@@ -347,7 +347,7 @@
         from indicator_value iv
                  left join community c
                            on iv.community_id = c.community_id
-                 right join community_basic cb
+                 inner join community_basic cb
                            on c.community_id = cb.community_id
         where c.city=#{city}
                 and iv.report_year=#{reportYear}
@@ -447,33 +447,33 @@
 
     <select id="communityProblemDetail3_2_8" parameterType="String" resultType="map">
         select
-            max(if(iv.indicator_id='3.2.8.3.1' ,i.indicator_name,'')) as '3_2_8_3_1',
-                max(if(iv.indicator_id='3.2.8.3.2' and iv.indicator_value='1',i.indicator_name,'')) as '3_2_8_3_2',
-                max(if(iv.indicator_id='3.2.8.3.3' and iv.indicator_value='1',i.indicator_name,'')) as '3_2_8_3_3',
-                max(if(iv.indicator_id='3.2.8.3.4' and iv.indicator_value='1',i.indicator_name,'')) as '3_2_8_3_4',
-                max(if(iv.indicator_id='3.2.8.3.5' and iv.indicator_value='1',i.indicator_name,'')) as '3_2_8_3_5',
-                max(if(iv.indicator_id='3.2.8.3.6' and iv.indicator_value='1',i.indicator_name,'')) as '3_2_8_3_6',
-                max(if(iv.indicator_id='3.2.8.3.7' and iv.indicator_value='1',i.indicator_name,'')) as '3_2_8_3_7',
-                max(if(iv.indicator_id='3.2.8.3.8' and iv.indicator_value='1',iv.meno,'')) as '3_2_8_3_8'
+            max(if(iv.indicator_id='3.2.8.1.1' ,i.indicator_name,'')) as '3_2_8_1_1',
+                max(if(iv.indicator_id='3.2.8.1.2' and iv.indicator_value='1',i.indicator_name,'')) as '3_2_8_1_2',
+                max(if(iv.indicator_id='3.2.8.1.3' and iv.indicator_value='1',i.indicator_name,'')) as '3_2_8_1_3',
+                max(if(iv.indicator_id='3.2.8.1.4' and iv.indicator_value='1',i.indicator_name,'')) as '3_2_8_1_4',
+                max(if(iv.indicator_id='3.2.8.1.5' and iv.indicator_value='1',i.indicator_name,'')) as '3_2_8_1_5',
+                max(if(iv.indicator_id='3.2.8.1.6' and iv.indicator_value='1',i.indicator_name,'')) as '3_2_8_1_6',
+                max(if(iv.indicator_id='3.2.8.1.7' and iv.indicator_value='1',i.indicator_name,'')) as '3_2_8_1_7',
+                max(if(iv.indicator_id='3.2.8.1.8' and iv.indicator_value='1',iv.meno,'')) as '3_2_8_3_8'
         from indicator_value iv
                  left join indicator i
                            on iv.indicator_id = i.indicator_id
                  left join community c on iv.community_id = c.community_id
-        where iv.indicator_id like '3.2.8.3.%' and iv.indicator_value='1'
+        where iv.indicator_id like '3.2.8.1.%' and iv.indicator_value='1'
           and iv.community_id=#{communityId} and iv.report_year=#{reportYear}
         group by iv.community_id;
     </select>
 
     <select id="communityProblemDetail3_2_9" parameterType="String" resultType="map">
         select
-            max(if(iv.indicator_id='3.2.9.3.1' ,i.indicator_name,'')) as '3_2_9_3_1',
-                max(if(iv.indicator_id='3.2.9.3.2' and iv.indicator_value='1',i.indicator_name,'')) as '3_2_9_3_2',
-                max(if(iv.indicator_id='3.2.9.3.3' and iv.indicator_value='1',iv.meno,'')) as '3_2_9_3_3'
+            max(if(iv.indicator_id='3.2.9.1.1' ,i.indicator_name,'')) as '3_2_9_1_1',
+                max(if(iv.indicator_id='3.2.9.1.2' and iv.indicator_value='1',i.indicator_name,'')) as '3_2_9_1_2',
+                max(if(iv.indicator_id='3.2.9.1.3' and iv.indicator_value='1',iv.meno,'')) as '3_2_9_1_3'
         from indicator_value iv
                  left join indicator i
                            on iv.indicator_id = i.indicator_id
                  left join community c on iv.community_id = c.community_id
-        where iv.indicator_id like '3.2.9.3.%' and iv.indicator_value='1'
+        where iv.indicator_id like '3.2.9.1.%' and iv.indicator_value='1'
           and iv.community_id=#{communityId} and iv.report_year=#{reportYear}
         group by iv.community_id;
     </select>

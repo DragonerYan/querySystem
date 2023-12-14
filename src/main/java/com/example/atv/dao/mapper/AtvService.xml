@@ -207,8 +207,8 @@
         <if test="bPeople!=null and bPeople!='' and ePeople!=null and ePeople!=null">
             and bb.number_people between cast(#{bPeople} as signed int) and cast(#{ePeople} as signed int)
         </if>
-        <if test="bUnits!=null and bUnits!='' and eUnits!=null and eUnits!=null">
-            and bb.units_number between cast(#{bUnits} as signed int) and cast(#{eUnits} as signed int)
+        <if test="bDepartment!=null and bDepartment!='' and eDepartment!=null and eDepartment!=null">
+            and bb.units_number between cast(#{bDepartment} as signed int) and cast(#{eDepartment} as signed int)
         </if>
         group by c.community_id,indicator_value_build.court_name,indicator_value_build.build_number
         having count(indicator_value)>0;

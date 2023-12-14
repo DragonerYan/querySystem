@@ -111,8 +111,8 @@ public class ZhibiaoController implements CommandLineRunner {
             @RequestParam(required = false,defaultValue = "")String ePeople,
             @RequestParam(required = false,defaultValue = "")String b60People,
             @RequestParam(required = false,defaultValue = "")String e60People,
-            @RequestParam(required = false,defaultValue = "")String bUnits,
-            @RequestParam(required = false,defaultValue = "")String eUnits,
+            @RequestParam(required = false,defaultValue = "")String bDepartment,
+            @RequestParam(required = false,defaultValue = "")String eDepartment,
             @RequestParam(name = "pageSize",required = false,defaultValue = "1000000") Long pageSize,
             @RequestParam(name = "offset",required = false,defaultValue = "1") Long offset){
         //根据小区名获取list
@@ -121,10 +121,10 @@ public class ZhibiaoController implements CommandLineRunner {
         for (int i=1;i<=10;i++) {
             if(i==2||i==9){
                 l_t=atvService.buildProblem(communityId,courtName,"2."+i,city,county,street,reportYear,
-                        bTime,eTime,bPeople,ePeople,b60People,e60People,bUnits,eUnits);
+                        bTime,eTime,bPeople,ePeople,b60People,e60People,bDepartment,eDepartment);
             }else{
                 l_t=atvService.buildProblem(communityId,courtName,"2."+i+".",city,county,street,reportYear,
-                        bTime,eTime,bPeople,ePeople,b60People,e60People,bUnits,eUnits);
+                        bTime,eTime,bPeople,ePeople,b60People,e60People,bDepartment,eDepartment);
             }
 
             int finalI = i;
@@ -221,8 +221,8 @@ public class ZhibiaoController implements CommandLineRunner {
                                     @RequestParam(required = false,defaultValue = "")String ePeople,
                                     @RequestParam(required = false,defaultValue = "")String b60People,
                                     @RequestParam(required = false,defaultValue = "")String e60People,
-                                    @RequestParam(required = false,defaultValue = "")String bUnits,
-                                    @RequestParam(required = false,defaultValue = "")String eUnits,
+                                    @RequestParam(required = false,defaultValue = "")String bDepartment,
+                                    @RequestParam(required = false,defaultValue = "")String eDepartment,
                                     @RequestParam(name = "pageSize",required = false,defaultValue = "1000000") Long pageSize,
                                     @RequestParam(name = "offset",required = false,defaultValue = "1") Long offset){
         //根据小区名获取list
@@ -231,10 +231,10 @@ public class ZhibiaoController implements CommandLineRunner {
         for (int i=1;i<=10;i++) {
             if(i==2||i==9){
                 l_t=atvService.buildProblem(communityId,courtName,"2."+i,city,county,street,reportYear,
-                        bTime,eTime,bPeople,ePeople,b60People,e60People,bUnits,eUnits);
+                        bTime,eTime,bPeople,ePeople,b60People,e60People,bDepartment,eDepartment);
             }else{
                 l_t=atvService.buildProblem(communityId,courtName,"2."+i+".",city,county,street,reportYear,
-                        bTime,eTime,bPeople,ePeople,b60People,e60People,bUnits,eUnits);
+                        bTime,eTime,bPeople,ePeople,b60People,e60People,bDepartment,eDepartment);
             }
             int finalI = i;
             l_t.forEach(m->{
@@ -615,13 +615,25 @@ public class ZhibiaoController implements CommandLineRunner {
                                    @RequestParam(required = false,defaultValue = "")String bPeople,
                                    @RequestParam(required = false,defaultValue = "")String ePeople,
                                    @RequestParam(required = false,defaultValue = "")String b60People,
-                                   @RequestParam(required = false,defaultValue = "")String e60People){
+                                   @RequestParam(required = false,defaultValue = "")String e60People,
+                                   @RequestParam(name = "pageSize",required = false,defaultValue = "1000000") Long pageSize,
+                                   @RequestParam(name = "offset",required = false,defaultValue = "1") Long offset){
         List<Map<String,Object>> l=zhibiaoService.problemCourtReal(city,county,street,communityId,
                 courtType,remodel,management,
                 bTime,eTime,
                 bPeople,ePeople,
                 b60People,e60People);
-        return Result.success(l);
+
+        //手动分页
+        List<Map<String,Object>> res_page;
+        long endNum=pageSize*offset>l.size()?l.size():pageSize*offset;
+        res_page=l.subList((int) (pageSize*(offset-1)), (int) endNum);
+
+        //将数据和总数一起放到返回结果中
+        Map<String,Object> res_map=new HashMap<>();
+        res_map.put("res_page",res_page);
+        res_map.put("totalNum",l.size());
+        return Result.success(res_map);
     }
 
     /**
@@ -657,7 +669,9 @@ public class ZhibiaoController implements CommandLineRunner {
                 //根据社区id和indicatorId取出现问题的详细描述
                 String problemStr=communityProblemDetail(communityIdF,city,key,reportYear);
                 t.put("problemConcat",problemStr);
-                res.add(t);
+                //因为3.1.4中并没有问题，所以这条记录并不返回给前段
+                if(!key.equals("3.1.4"))
+                    res.add(t);
             });
         });
         //手动分页

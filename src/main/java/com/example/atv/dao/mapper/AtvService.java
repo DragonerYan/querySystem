@@ -31,6 +31,6 @@ public interface AtvService {
                                             String bTime,String eTime,
                                           String bPeople,String ePeople,
                                           String b60People,String e60People,
-                                            String bUnits,String eUnits);
+                                            String bDepartment,String eDepartment);
     List<Map<String,Object>> searchPhoto(String courtName,String indicatorId,String communityId,String buildNumber,String reportYear);
 }
