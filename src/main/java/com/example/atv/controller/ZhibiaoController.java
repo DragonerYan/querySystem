@@ -196,6 +196,7 @@ public class ZhibiaoController implements CommandLineRunner {
             t_m.put("buildTime", String.valueOf(m.get("buildTime")));
             t_m.put("numberOver60People", String.valueOf(m.get("numberOver60People")));
             t_m.put("unitsNumber", String.valueOf(m.get("unitsNumber")));
+            t_m.put("numberDepartment", String.valueOf(m.get("numberDepartment")));
             t_m.put((String) m.get("indicatorId"),"是");
             r.add(t_m);
         }
