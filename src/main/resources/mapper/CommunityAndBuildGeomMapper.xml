@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.atv.generatetor.mapper.CommunityAndBuildGeomMapper">
+    <select id="selectAllCommunityGeom" resultType="net.sf.json.JSONObject">
+        select street,community_name,ST_AsGeoJSON(geom),community_id,city,province,county
+        from community_gloc
+        where 1=1 ;
+    </select>
+</mapper>

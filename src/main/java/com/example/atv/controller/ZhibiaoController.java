@@ -196,6 +196,7 @@ public class ZhibiaoController implements CommandLineRunner {
             t_m.put("buildTime", String.valueOf(m.get("buildTime")));
             t_m.put("numberOver60People", String.valueOf(m.get("numberOver60People")));
             t_m.put("unitsNumber", String.valueOf(m.get("unitsNumber")));
+            t_m.put("numberDepartment", String.valueOf(m.get("numberDepartment")));
             t_m.put((String) m.get("indicatorId"),"是");
             r.add(t_m);
         }
@@ -669,9 +670,19 @@ public class ZhibiaoController implements CommandLineRunner {
                 //根据社区id和indicatorId取出现问题的详细描述
                 String problemStr=communityProblemDetail(communityIdF,city,key,reportYear);
                 t.put("problemConcat",problemStr);
+                if(key.equals("3.1.2") && problemStr!=null && !problemStr.equals("")){
+                    t.put("indicatorDetail","3.1.2.3.1");
+                }
+                if(key.equals("3.1.3") && problemStr!=null && !problemStr.equals("")){
+                    t.put("indicatorDetail","3.1.3.3.1");
+                }
+                if(key.equals("3.1.6") && problemStr!=null && !problemStr.equals("")){
+                    t.put("indicatorDetail","3.1.6.2.1");
+                }
                 //因为3.1.4中并没有问题，所以这条记录并不返回给前段
                 if(!key.equals("3.1.4"))
                     res.add(t);
+
             });
         });
         //手动分页

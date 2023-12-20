@@ -4,13 +4,21 @@ server:
 
 spring:
   datasource:
-    #type: com.alibaba.druid.pool.DruidDataSource
-    #druid:
-    driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://192.168.12.45:3306/bjtu_atv?useSSL=false&characterEncoding=UTF-8&serverTimezone=GMT%2B8&allowPublicKeyRetrieval=true
-#    url: jdbc:mysql://127.0.0.1:3306/bjtu_atv?useSSL=false&characterEncoding=UTF-8&serverTimezone=GMT%2B8&allowPublicKeyRetrieval=true&zeroDateTimeBehavior=convertToNull
-    username: root
-    password: Ggtbj2023!
+    druid:
+      #mysql数据源，主数据源
+      master:
+        driver-class-name: com.mysql.jdbc.Driver
+#        url: jdbc:mysql://192.168.12.45:3306/bjtu_atv?useSSL=false&characterEncoding=UTF-8&serverTimezone=GMT%2B8&allowPublicKeyRetrieval=true
+        url: jdbc:mysql://101.254.248.181:3306/bjtu_atv?useSSL=false&characterEncoding=UTF-8&serverTimezone=GMT%2B8&allowPublicKeyRetrieval=true
+        username: root
+        password: Ggtbj2023!
+      #postgreSQL数据源，图形数据源
+      slave:
+        driver-class-name: org.postgresql.Driver
+        url: jdbc:postgresql://101.254.248.181:6543/bjtu_atv_gloc
+        username: postgres
+        password: Caupd@12345
+
   redis:
     host: 192.168.12.45
     port: 6379
@@ -39,13 +47,13 @@ logging:
     com:
       example: debug
 
-  
-## local-imgUrl
-#imgPath: /Users/yanxinzhao/Desktop/atv-qu/smokeManagement/img/
-  
+
+  ## local-imgUrl
+  #imgPath: /Users/yanxinzhao/Desktop/atv-qu/smokeManagement/img/
+
 ## linux-imgUrl
 imgPath: /home/img/
-  
+
 ## linux-imgHost
 imgHost: http://tjm.caupdcloud.com/img/
 

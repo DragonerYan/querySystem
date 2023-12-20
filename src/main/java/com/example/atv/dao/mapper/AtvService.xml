@@ -184,7 +184,7 @@
                c.community_id as communityId,indicator_value_build.court_name as courtName,
         indicator_value_build.build_number as buildNumber,max(indicator_value_build.report_year) as reportYear,max(c.city) as city
         ,max(bb.number_people) as numberPeople,max(bb.build_time) as buildTime,max(bb.number_over60_people) as numberOver60People
-        ,max(bb.units_number) as unitsNumber
+        ,max(bb.number_department) as numberDepartment
         from indicator_value_build
                  left join community c
                            on indicator_value_build.community_id = c.community_id
@@ -208,7 +208,7 @@
             and bb.number_people between cast(#{bPeople} as signed int) and cast(#{ePeople} as signed int)
         </if>
         <if test="bDepartment!=null and bDepartment!='' and eDepartment!=null and eDepartment!=null">
-            and bb.units_number between cast(#{bDepartment} as signed int) and cast(#{eDepartment} as signed int)
+            and bb.number_department between cast(#{bDepartment} as signed int) and cast(#{eDepartment} as signed int)
         </if>
         group by c.community_id,indicator_value_build.court_name,indicator_value_build.build_number
         having count(indicator_value)>0;
