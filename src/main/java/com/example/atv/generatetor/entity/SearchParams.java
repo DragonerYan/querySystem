@@ -18,11 +18,17 @@ public class SearchParams {
      */
     private List<String> communitiesIds;
     /**
+     * 社区指标id
+     */
+    private List<String> communityIndicatorIds;
+    /**
      *  社区idstr
      */
     private String communitiesIdsStr;
 
     private String city;
+    private String province;
+    private String year;
     private String county;
     private String street;
     private String communityName;
