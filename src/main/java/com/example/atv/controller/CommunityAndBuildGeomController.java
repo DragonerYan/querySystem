@@ -7,8 +7,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 /**
  * @ProjectName: querySystem
  * @ClassName: com.example.atv.controller.CommunityPGController
@@ -43,14 +41,17 @@ public class CommunityAndBuildGeomController {
      */
     @PostMapping("communityIndicatorDiagnosis")
     public Result communityIndicatorDiagnosisGeom(@ModelAttribute SearchParams searchParams) {
-
         Result result = communityAndBuildGeomService.communityIndicatorDiagnosisGeom(searchParams);
-
         return result;
     }
 
-    public Result selectBuildGeom() {
-        return null;
+    /**
+     * @return
+     */
+    @PostMapping("buildIndicatorDiagnosis")
+    public Result buildIndicatorDiagnosis(@ModelAttribute SearchParams searchParams) {
+        Result result = communityAndBuildGeomService.buildIndicatorDiagnosis(searchParams);
+        return result;
     }
 
     /**

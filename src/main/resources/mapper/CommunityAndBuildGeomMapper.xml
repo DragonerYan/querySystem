@@ -41,6 +41,40 @@
             and city = #{city}
         </if>
     </select>
+
+    <select id="buildIndicatorDiagnosis" parameterType="string" resultType="net.sf.json.JSONObject">
+        SELECT county,
+               street,
+               community_name,
+               question_table.commuityId,
+               question_table.courtName,
+               question_table.buildNumber,
+               ST_ASGEOJSON(question_table.geom) geom,
+               report_year,
+               build_time
+        from (select c.community_id as commuityId,
+                     court_name     as courtName,
+                     build_number   as buildNumber,
+                     geom,
+                     report_year
+              from indicator_value_build
+                       left join community c
+                                 on indicator_value_build.community_id = c.community_id
+              where c.city = #{city}
+                and c.province = #{province}
+                and indicator_id like '${indicator}%'
+                and indicator_value > 0
+                and report_year = #{year}
+              group by c.community_id, court_name, build_number, geom, report_year
+              having count(indicator_value) > 0) question_table
+                 left join community
+                           on community.community_id = question_table.commuityId
+                 LEFT join (select community_id, court_name, build_number, build_time from build_basic where 1 = 1) build_basic
+                           on build_basic.community_id = community.community_id
+                               and question_table.courtName = build_basic.court_name
+                               and question_table.buildNumber = build_basic.build_number
+    </select>
+
     <select id="selectAuxiliaryLayer" resultType="map" parameterType="string">
         select * from auxiliary_layer where 1=1
         <if test="province!=null and province!=''">

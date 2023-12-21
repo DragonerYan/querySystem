@@ -32,7 +32,10 @@ public interface CommunityAndBuildGeomMapper {
      *
      * @return
      */
-    JSONObject selectBuildGeom();
+    List<JSONObject> buildIndicatorDiagnosis(@Param("province") String province,
+                                             @Param("city") String city,
+                                             @Param("indicator") String indicator,
+                                             @Param("year") String year);
 
     List<Map<String, Object>> selectAuxiliaryLayer(@Param("province") String province,
                                                     @Param("city") String city);

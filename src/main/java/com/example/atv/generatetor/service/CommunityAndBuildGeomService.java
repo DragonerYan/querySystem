@@ -2,6 +2,7 @@ package com.example.atv.generatetor.service;
 
 import com.example.atv.constant.Result;
 import com.example.atv.generatetor.entity.SearchParams;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
 /**
  * @ProjectName: querySystem
@@ -29,7 +30,7 @@ public interface CommunityAndBuildGeomService {
      *
      * @return
      */
-    Result selectBuildGeom();
+    Result buildIndicatorDiagnosis( SearchParams searchParams);
 
     /**
      * 查询辅助图层
