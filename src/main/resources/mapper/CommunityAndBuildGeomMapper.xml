@@ -21,11 +21,11 @@
         where 1=1
         and community_id!='' and community_id is not null
         <if test="communitiesIds!=null">
-            and community_id in (
-            <foreach collection="communitiesIds" index="index" item="item" separator=",">
+            and community_id in
+            <foreach collection="communitiesIds" index="index" item="item" separator="," open="(" close=")">
                 #{item}
             </foreach>
-            )
+
         </if>
     </select>
 
@@ -46,13 +46,13 @@
         SELECT county,
                street,
                community_name,
-               question_table.commuityId,
+               question_table.community_id,
                question_table.courtName,
                question_table.buildNumber,
                ST_ASGEOJSON(question_table.geom) geom,
                report_year,
                build_time
-        from (select c.community_id as commuityId,
+        from (select c.community_id as community_id,
                      court_name     as courtName,
                      build_number   as buildNumber,
                      geom,
@@ -73,6 +73,23 @@
                            on build_basic.community_id = community.community_id
                                and question_table.courtName = build_basic.court_name
                                and question_table.buildNumber = build_basic.build_number
+    </select>
+
+    <select id="buildGeomInfo" resultType="net.sf.json.JSONObject" parameterType="map">
+        SELECT build_temp.community_id, court_name, build_number, geom, community_name, street, county
+        from (SELECT community_id, court_name, build_number, ST_ASGEOJSON(geom) geom
+        from indicator_value_build
+        <where>
+            <foreach collection="buildSimpleInfo" separator="or" item="item" index="index">
+                (community_id = #{item.community_id}
+                and court_name = #{item.court_name}
+                and build_number = #{item.build_number})
+            </foreach>
+        </where>
+        and report_year = #{year}
+        GROUP by community_id, court_name, build_number, ST_ASGEOJSON(geom)) build_temp
+        left join community c
+        on build_temp.community_id = c.community_id
     </select>
 
     <select id="selectAuxiliaryLayer" resultType="map" parameterType="string">

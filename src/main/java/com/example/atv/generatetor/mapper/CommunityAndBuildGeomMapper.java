@@ -6,7 +6,6 @@ import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 /**
  * @ProjectName: querySystem
@@ -25,7 +24,7 @@ public interface CommunityAndBuildGeomMapper {
     List<net.sf.json.JSONObject> selectAllCommunityGeom(SearchParams searchParams);
 
     List<JSONObject> selectAllCountyGeom(@Param("province") String province,
-                                          @Param("city") String city);
+                                         @Param("city") String city);
 
     /**
      * 获取楼栋 坐标等信息
@@ -37,8 +36,17 @@ public interface CommunityAndBuildGeomMapper {
                                              @Param("indicator") String indicator,
                                              @Param("year") String year);
 
+    /**
+     * 楼栋台账地图展示
+     *
+     * @param buildSimpleInfo
+     * @return
+     */
+    List<JSONObject> buildGeomInfo(@Param("buildSimpleInfo") List<Map> buildSimpleInfo,
+                                   @Param("year") String year);
+
     List<Map<String, Object>> selectAuxiliaryLayer(@Param("province") String province,
-                                                    @Param("city") String city);
+                                                   @Param("city") String city);
 
     List<Map<String, Object>> communityIndicator_311(SearchParams searchParams);
 }

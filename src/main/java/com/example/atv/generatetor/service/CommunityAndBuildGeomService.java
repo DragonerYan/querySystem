@@ -2,7 +2,9 @@ package com.example.atv.generatetor.service;
 
 import com.example.atv.constant.Result;
 import com.example.atv.generatetor.entity.SearchParams;
-import org.springframework.web.bind.annotation.ModelAttribute;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * @ProjectName: querySystem
@@ -18,8 +20,10 @@ public interface CommunityAndBuildGeomService {
      * @return
      */
     Result selectAllCommunityGeom(SearchParams searchParams);
+
     /**
      * 社区指标诊断，地图
+     *
      * @param searchParams
      * @return
      */
@@ -30,7 +34,9 @@ public interface CommunityAndBuildGeomService {
      *
      * @return
      */
-    Result buildIndicatorDiagnosis( SearchParams searchParams);
+    Result buildIndicatorDiagnosis(SearchParams searchParams);
+
+    Result buildGeomInfo(List<Map> buildSimpleInfo,String year);
 
     /**
      * 查询辅助图层

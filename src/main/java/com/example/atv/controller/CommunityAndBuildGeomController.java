@@ -1,11 +1,15 @@
 package com.example.atv.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.example.atv.constant.Result;
 import com.example.atv.generatetor.entity.SearchParams;
 import com.example.atv.generatetor.service.CommunityAndBuildGeomService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * @ProjectName: querySystem
@@ -46,11 +50,27 @@ public class CommunityAndBuildGeomController {
     }
 
     /**
+     * 住房指标真毒地图信息
+     *
      * @return
      */
     @PostMapping("buildIndicatorDiagnosis")
     public Result buildIndicatorDiagnosis(@ModelAttribute SearchParams searchParams) {
         Result result = communityAndBuildGeomService.buildIndicatorDiagnosis(searchParams);
+        return result;
+    }
+
+    /**
+     * 住房台账地图展示
+     *
+     * @param jsonObject
+     * @return
+     */
+    @PostMapping("buildGeomInfo")
+    public Result buildGeomInfo(@RequestBody JSONObject jsonObject) {
+        List<Map> buildSimpleInfo = jsonObject.getObject("buildSimpleInfo",List.class);
+        String year = jsonObject.getString("year");
+        Result result = communityAndBuildGeomService.buildGeomInfo(buildSimpleInfo, year);
         return result;
     }
 
