@@ -575,10 +575,10 @@ public class ZhibiaoController implements CommandLineRunner {
             @RequestParam(required = false,defaultValue = "")String e3_1_5,
             @RequestParam(required = false,defaultValue = "")String b3_1_6,
             @RequestParam(required = false,defaultValue = "")String e3_1_6,
-            @RequestParam(required = false,defaultValue = "")String b3_1_8,
-            @RequestParam(required = false,defaultValue = "")String e3_1_8,
-            @RequestParam(required = false,defaultValue = "")String b3_1_9,
-            @RequestParam(required = false,defaultValue = "")String e3_1_9,
+            @RequestParam(required = false,defaultValue = "")String b3_2_8,
+            @RequestParam(required = false,defaultValue = "")String e3_2_8,
+            @RequestParam(required = false,defaultValue = "")String b3_2_9,
+            @RequestParam(required = false,defaultValue = "")String e3_2_9,
             @RequestParam(name = "pageSize",required = false,defaultValue = "1000000") Long pageSize,
             @RequestParam(name = "offset",required = false,defaultValue = "1") Long offset){
         List<String> indicatorTotal= new ArrayList<>(Arrays.asList("3.1.1","3.1.2","3.1.3","3.1.4","3.1.5","3.1.6","3.2.7","3.2.8","3.2.9"));
@@ -638,10 +638,10 @@ public class ZhibiaoController implements CommandLineRunner {
             list.addAll(tList);
         }
         //筛选3_1_8的问题，停车泊位缺口数
-        if(b3_1_8!=null && !b3_1_8.equals("") && e3_1_8!=null && !e3_1_8.equals("")){
+        if(b3_2_8!=null && !b3_2_8.equals("") && e3_2_8!=null && !e3_2_8.equals("")){
             List<Map<String,Object>> tList=new ArrayList<>();
             list.forEach(rr->{
-                if(rr.containsKey("3.1.8") && Double.parseDouble((String) rr.get("3.1.8"))>=Double.parseDouble(b3_1_8) && Double.parseDouble((String) rr.get("3.1.8"))<=Double.parseDouble(e3_1_8)){
+                if(rr.containsKey("3.2.8") && Double.parseDouble((String) rr.get("3.2.8"))>=Double.parseDouble(b3_2_8) && Double.parseDouble((String) rr.get("3.2.8"))<=Double.parseDouble(e3_2_8)){
                     tList.add(rr);
                 }
             });
@@ -649,10 +649,10 @@ public class ZhibiaoController implements CommandLineRunner {
             list.addAll(tList);
         }
         //筛选3_1_9的问题，未实施生活垃圾分类
-        if(b3_1_9!=null && !b3_1_9.equals("") && e3_1_9!=null && !e3_1_9.equals("")){
+        if(b3_2_9!=null && !b3_2_9.equals("") && e3_2_9!=null && !e3_2_9.equals("")){
             List<Map<String,Object>> tList=new ArrayList<>();
             list.forEach(rr->{
-                if(rr.containsKey("3.1.9") && Double.parseDouble((String) rr.get("3.1.9"))>=Double.parseDouble(b3_1_9) && Double.parseDouble((String) rr.get("3.1.9"))<=Double.parseDouble(e3_1_9)){
+                if(rr.containsKey("3.2.9") && Double.parseDouble((String) rr.get("3.2.9"))>=Double.parseDouble(b3_2_9) && Double.parseDouble((String) rr.get("3.2.9"))<=Double.parseDouble(e3_2_9)){
                     tList.add(rr);
                 }
             });

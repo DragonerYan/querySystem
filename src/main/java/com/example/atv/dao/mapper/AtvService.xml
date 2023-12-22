@@ -188,8 +188,8 @@
          max(bb.build_time) as buildTime,
          max(bb.number_over60_people) as numberOver60People
         ,max(bb.number_department) as numberDepartment
-        ,max(indicator_value_build.indicator_id) as indicatorIdDetail,
-         max(indicator_value_build.description) as description
+        ,GROUP_CONCAT(distinct indicator_value_build.indicator_id) as indicatorIdDetail,
+        GROUP_CONCAT(distinct indicator_value_build.description) as description
         from indicator_value_build
                  left join community c
                            on indicator_value_build.community_id = c.community_id
