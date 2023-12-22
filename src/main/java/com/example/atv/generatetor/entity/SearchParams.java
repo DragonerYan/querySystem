@@ -34,5 +34,12 @@ public class SearchParams {
     private String communityName;
     private String buildName;
     private String buildsIdsStr;
+    /**
+     * 楼栋id
+     */
     private List<String> buildsIds;
+    /**
+     * 楼栋指标计算ids
+     */
+    private List<String> buildIndicatorIds;
 }
