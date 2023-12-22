@@ -490,6 +490,9 @@
         <if test="communityId!=null and communityId!=''">
             and community_id=#{communityId}
         </if>
+        <if test="communityName!=null and communityName!=''">
+            and community_name=#{communityName}
+        </if>
         <if test="courtType!=null and courtType!=''">
             and court_type=#{courtType}
         </if>
@@ -497,7 +500,7 @@
             and remodel=#{remodel}
         </if>
         <if test="management!=null and management!=''">
-            cast(#{management} as signed int)
+           and management=cast(#{management} as signed int)
         </if>
         <if test="bTime!=null and bTime!='' and eTime!=null and eTime!=null">
             and build_time between cast(#{bTime} as signed int) and cast(#{eTime} as signed int)
