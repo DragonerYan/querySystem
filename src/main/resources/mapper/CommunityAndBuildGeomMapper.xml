@@ -68,7 +68,7 @@
               group by c.community_id, court_name, build_number, geom, report_year
               having count(indicator_value) > 0) question_table
                  left join community
-                           on community.community_id = question_table.commuityId
+                           on community.community_id = question_table.community_id
                  LEFT join (select community_id, court_name, build_number, build_time from build_basic where 1 = 1) build_basic
                            on build_basic.community_id = community.community_id
                                and question_table.courtName = build_basic.court_name
