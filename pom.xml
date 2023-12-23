@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -18,6 +18,12 @@
 	</properties>
 	<dependencies>
 		<!-- spring核心依赖性-->
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter</artifactId>
@@ -49,12 +55,36 @@
 		</dependency>
 
 
-<!--		&lt;!&ndash;postgresql 驱动&ndash;&gt;-->
-<!--		<dependency>-->
-<!--			<groupId>org.postgresql</groupId>-->
-<!--			<artifactId>postgresql</artifactId>-->
-<!--			<scope>runtime</scope>-->
-<!--		</dependency>-->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid-spring-boot-starter</artifactId>
+			<version>1.1.9</version>
+		</dependency>
+
+		<dependency>
+			<groupId>net.sf.json-lib</groupId>
+			<artifactId>json-lib</artifactId>
+			<version>2.4</version>
+			<classifier>jdk15</classifier>
+			<exclusions>
+				<exclusion>
+					<artifactId>commons-logging</artifactId>
+					<groupId>commons-logging</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<!-- AOP使用 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-aop</artifactId>
+		</dependency>
+
+		<!--		&lt;!&ndash;postgresql 驱动&ndash;&gt;-->
+		<!--		<dependency>-->
+		<!--			<groupId>org.postgresql</groupId>-->
+		<!--			<artifactId>postgresql</artifactId>-->
+		<!--			<scope>runtime</scope>-->
+		<!--		</dependency>-->
 
 
 
@@ -68,9 +98,9 @@
 
 		<!-- mybatis-plus相关依赖项的引入，包括代码生成器-->
 		<dependency>
-		<groupId>com.baomidou</groupId>
-		<artifactId>mybatis-plus-boot-starter</artifactId>
-		<version>3.5.1</version>
+			<groupId>com.baomidou</groupId>
+			<artifactId>mybatis-plus-boot-starter</artifactId>
+			<version>3.5.1</version>
 		</dependency>
 
 		<dependency>
@@ -131,11 +161,11 @@
 		</dependency>
 
 		<!-- alibaba的druid数据库连接池 -->
-<!--		<dependency>-->
-<!--			<groupId>com.alibaba</groupId>-->
-<!--			<artifactId>druid-spring-boot-starter</artifactId>-->
-<!--			<version>1.1.9</version>-->
-<!--		</dependency>-->
+		<!--		<dependency>-->
+		<!--			<groupId>com.alibaba</groupId>-->
+		<!--			<artifactId>druid-spring-boot-starter</artifactId>-->
+		<!--			<version>1.1.9</version>-->
+		<!--		</dependency>-->
 
 		<!-- 表格导出-->
 		<dependency>
@@ -199,15 +229,15 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>8</source>
-                    <target>8</target>
-                </configuration>
-            </plugin>
-        </plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>8</source>
+					<target>8</target>
+				</configuration>
+			</plugin>
+		</plugins>
 		<resources>
 			<resource>
 				<directory>src/main/java</directory>

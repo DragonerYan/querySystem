@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.atv.generatetor.mapper.CommunityAndBuildGeomMapper">
+
+<!--    <resultMap id="CommunityGeomInfoMap" type="com.example.atv.generatetor.entity.CountyGeomInfo">-->
+<!--        <result column="county" property="county"></result>-->
+<!--        <result column="community_geom" property="countyGeom"></result>-->
+<!--        <collection property="communityInfoList" ofType="com.example.atv.generatetor.entity.CountyGeomInfo$CommunityInfo">-->
+<!--            <result column="street" property="street"></result>-->
+<!--            <result column="community_id" property="communityId"></result>-->
+<!--            <result column="community_name" property="communityName"></result>-->
+<!--            <result column="community_geom" property="communityGeom"></result>-->
+<!--        </collection>-->
+<!--    </resultMap>-->
+
+    <select id="selectAllCommunityGeom" resultType="net.sf.json.JSONObject">
+        select street,community_name,ST_AsGeoJSON(geom) community_geom,community_id,community_gloc.county
+        from community_gloc
+        left join county_geom
+        on community_gloc.county  =county_geom."county"
+        where 1=1
+        and community_id!='' and community_id is not null
+        <if test="communitiesIds!=null">
+            and community_id in
+            <foreach collection="communitiesIds" index="index" item="item" separator="," open="(" close=")">
+                #{item}
+            </foreach>
+
+        </if>
+    </select>
+
+    <select id="selectAllCountyGeom" parameterType="string" resultType="net.sf.json.JSONObject">
+        select
+        county,ST_AsGeoJSON(county_geom) county_geom from
+        county_geom
+        where 1=1 and county_geom!='' and county_geom is not null
+        <if test="province!=null and province!=''">
+            and province = #{province}
+        </if>
+        <if test="city!=null and city!=''">
+            and city = #{city}
+        </if>
+    </select>
+
+    <select id="buildIndicatorDiagnosis" parameterType="string" resultType="net.sf.json.JSONObject">
+        SELECT county,
+               street,
+               community_name,
+               question_table.community_id,
+               question_table.courtName,
+               question_table.buildNumber,
+               ST_ASGEOJSON(question_table.geom) geom,
+               report_year,
+               build_time
+        from (select c.community_id as community_id,
+                     court_name     as courtName,
+                     build_number   as buildNumber,
+                     geom,
+                     report_year
+              from indicator_value_build
+                       left join community c
+                                 on indicator_value_build.community_id = c.community_id
+              where c.city = #{city}
+                and c.province = #{province}
+                and indicator_id like '${indicator}%'
+                and indicator_value > 0
+                and report_year = #{year}
+              group by c.community_id, court_name, build_number, geom, report_year
+              having count(indicator_value) > 0) question_table
+                 left join community
+                           on community.community_id = question_table.commuityId
+                 LEFT join (select community_id, court_name, build_number, build_time from build_basic where 1 = 1) build_basic
+                           on build_basic.community_id = community.community_id
+                               and question_table.courtName = build_basic.court_name
+                               and question_table.buildNumber = build_basic.build_number
+    </select>
+
+    <select id="buildGeomInfo" resultType="net.sf.json.JSONObject" parameterType="map">
+        SELECT build_temp.community_id, court_name, build_number, geom, community_name, street, county
+        from (SELECT community_id, court_name, build_number, ST_ASGEOJSON(geom) geom
+        from indicator_value_build
+        <where>
+            <foreach collection="buildSimpleInfo" separator="or" item="item" index="index">
+                (community_id = #{item.community_id}
+                and court_name = #{item.court_name}
+                and build_number = #{item.build_number})
+            </foreach>
+        </where>
+        and report_year = #{year}
+        GROUP by community_id, court_name, build_number, ST_ASGEOJSON(geom)) build_temp
+        left join community c
+        on build_temp.community_id = c.community_id
+    </select>
+
+    <select id="selectAuxiliaryLayer" resultType="map" parameterType="string">
+        select * from auxiliary_layer where 1=1
+        <if test="province!=null and province!=''">
+            and province = #{province}
+        </if>
+        <if test="city!=null and city!=''">
+            and city = #{city}
+        </if>
+    </select>
+
+    <select id="communityIndicator_311" resultType="map" parameterType="com.example.atv.generatetor.entity.SearchParams">
+        select * from
+            (select c.province,c.county ,c.community_name ,c.street,iv.community_id as communityId,
+                    sum(if(indicator_id='3.1.1.1',indicator_value,null)) as 3_1_1_1,
+                    sum(if(indicator_id='3.1.1.2',indicator_value,null)) as 3_1_1_2
+             from indicator_value iv
+                      left join community c
+                                on iv.community_id = c.community_id
+             where c.city=#{city} and iv.report_year=#{year}
+               and c.province=#{province}
+               and indicator_id like '3.1.1.%' group by iv.community_id
+                                                      ,c.county ,c.community_name ,c.street,c.province) as t
+        where t.3_1_1_1=0 or (t.3_1_1_1=1 and t.3_1_1_2=0)
+    </select>
+</mapper>
