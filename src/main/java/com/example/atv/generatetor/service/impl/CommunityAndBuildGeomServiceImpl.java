@@ -7,6 +7,7 @@ import com.example.atv.generatetor.entity.SearchParams;
 import com.example.atv.generatetor.mapper.CommunityAndBuildGeomMapper;
 import com.example.atv.generatetor.service.CommunityAndBuildGeomService;
 import net.sf.json.JSONObject;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -71,35 +72,54 @@ public class CommunityAndBuildGeomServiceImpl implements CommunityAndBuildGeomSe
         Result result = null;
         List<String> communityIndicatorIds = searchParams.getCommunityIndicatorIds();
         for (String indicatorId : communityIndicatorIds) {
+            List<Map<String, Object>> questionCommuntiyList = null;
             switch (indicatorId) {
                 case "3.1.1":
                     //获取问题社区清单
-                    List<Map<String, Object>> questionCommuntiyList =
-                            communityAndBuildGeomMapper.communityIndicator_311(searchParams);
-                    result = dataFormatInfo_community(searchParams, questionCommuntiyList, result);
+                    questionCommuntiyList = communityAndBuildGeomMapper.communityIndicator_311(searchParams);
+
+                    result = dataFormatInfo_community(searchParams, questionCommuntiyList, result, indicatorId);
                     break;
                 case "3.1.2":
-
+                    questionCommuntiyList =
+                            communityAndBuildGeomMapper.communityIndicator_312(searchParams);
+                    result = dataFormatInfo_community(searchParams, questionCommuntiyList, result, indicatorId);
                     break;
                 case "3.1.3":
-
+                    questionCommuntiyList =
+                            communityAndBuildGeomMapper.communityIndicator_313(searchParams);
+                    result = dataFormatInfo_community(searchParams, questionCommuntiyList, result, indicatorId);
                     break;
                 case "3.1.4":
-
+                    questionCommuntiyList =
+                            communityAndBuildGeomMapper.communityIndicator_314(searchParams);
+                    result = dataFormatInfo_community(searchParams, questionCommuntiyList, result, indicatorId);
                     break;
                 case "3.1.5":
-
+                    questionCommuntiyList =
+                            communityAndBuildGeomMapper.communityIndicator_315(searchParams);
+                    result = dataFormatInfo_community(searchParams, questionCommuntiyList, result, indicatorId);
                     break;
                 case "3.1.6":
-
+                    questionCommuntiyList =
+                            communityAndBuildGeomMapper.communityIndicator_316(searchParams);
+                    result = dataFormatInfo_community(searchParams, questionCommuntiyList, result, indicatorId);
                     break;
                 case "3.2.7":
+                    questionCommuntiyList =
+                            communityAndBuildGeomMapper.communityIndicator_327(searchParams);
+                    result = dataFormatInfo_community(searchParams, questionCommuntiyList, result, indicatorId);
 
                     break;
                 case "3.2.8":
-
+                    questionCommuntiyList =
+                            communityAndBuildGeomMapper.communityIndicator_328(searchParams);
+                    result = dataFormatInfo_community(searchParams, questionCommuntiyList, result, indicatorId);
                     break;
                 case "3.2.9":
+                    questionCommuntiyList =
+                            communityAndBuildGeomMapper.communityIndicator_329(searchParams);
+                    result = dataFormatInfo_community(searchParams, questionCommuntiyList, result, indicatorId);
 
                     break;
                 default:
@@ -117,7 +137,7 @@ public class CommunityAndBuildGeomServiceImpl implements CommunityAndBuildGeomSe
      * @return
      */
     private Result dataFormatInfo_community(SearchParams searchParams, List<Map<String, Object>> questionCommuntiyList,
-                                            Result result) {
+                                            Result result, String indicatorId) {
         List<String> communityIds = new ArrayList();
         questionCommuntiyList.forEach(qc -> {
             communityIds.add(qc.get("communityId").toString());
@@ -126,11 +146,38 @@ public class CommunityAndBuildGeomServiceImpl implements CommunityAndBuildGeomSe
         DataSourceContextHolder.setDataSource("slave");
         //获取问题社区边界和区县边界
         List<JSONObject> communityList = communityAndBuildGeomMapper.selectAllCommunityGeom(searchParams);
+
         List<JSONObject> countyGeomInfoList =
                 communityAndBuildGeomMapper.selectAllCountyGeom(searchParams.getProvince(),
                         searchParams.getCity());
+        //以下2个指标不是求的个数
+        double indicator_value_max = 0;
+        if (!StringUtils.isBlank(indicatorId) && indicatorId.equals("3.2.8")
+//                || indicatorId.equals("3.2.7")
+        ) {
+            questionCommuntiyList.forEach(qc -> {
+                communityList.forEach(c -> {
+                    if (c.getString("community_id").equals(qc.get("communityId"))) {
+                        c.put("indicator_value", qc.get("indicator_value"));
+                    }
+                });
+                countyGeomInfoList.forEach(cg -> {
+                    if (cg.getString("county").equals(qc.get("county").toString())) {
+                        if (cg.containsKey("indicator_value")) {
+                            cg.put("indicator_value", cg.getDouble("indicator_value") + Double.parseDouble(qc.get(
+                                    "indicator_value").toString()));
+                        } else {
+                            cg.put("indicator_value", Double.parseDouble(qc.get("indicator_value").toString()));
+                        }
+                    }
+
+                });
+            });
+        }
+
         double max = 0;
         for (JSONObject countyGeomInfo : countyGeomInfoList) {
+
             List temp = new ArrayList();
             for (JSONObject communityJson : communityList) {
                 if (countyGeomInfo.get("county").equals(communityJson.get("county"))) {
@@ -138,8 +185,20 @@ public class CommunityAndBuildGeomServiceImpl implements CommunityAndBuildGeomSe
                 }
             }
             countyGeomInfo.put("communityInfoList", temp);
-            max = max >= temp.size() ? max : temp.size();
-            countyGeomInfo.put("countNum", temp.size());
+            if (!StringUtils.isBlank(indicatorId) && indicatorId.equals("3.2.8")
+//                    || indicatorId.equals("3.2.7")
+            ) {
+                if (countyGeomInfo.containsKey("indicator_value")){
+                    max = max >= Double.parseDouble(countyGeomInfo.getString("indicator_value").toString()) ? max :
+                            Double.parseDouble(countyGeomInfo.getString("indicator_value").toString());
+                    countyGeomInfo.put("countNum", countyGeomInfo.getDouble("indicator_value"));
+                }else {
+                    countyGeomInfo.put("countNum",0);
+                }
+            } else {
+                max = max >= temp.size() ? max : temp.size();
+                countyGeomInfo.put("countNum", temp.size());
+            }
         }
         Map<String, Object> resultMap = new HashMap<>();
         resultMap.put("data", countyGeomInfoList);
@@ -214,7 +273,7 @@ public class CommunityAndBuildGeomServiceImpl implements CommunityAndBuildGeomSe
         }
         Map<String, Object> resultMap = new HashMap<>();
         //没有社区匹配的楼栋点位
-        if (buildGeomInfoList.size()>0){
+        if (buildGeomInfoList.size() > 0) {
             JSONObject communityJsonNull = new JSONObject();
             communityJsonNull.put("street", "其他");
             communityJsonNull.put("community_name", "其他");
