@@ -2,6 +2,7 @@ package com.example.atv.generatetor.service;
 
 import com.example.atv.constant.Result;
 import com.example.atv.generatetor.entity.SearchParams;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.Map;
@@ -46,5 +47,7 @@ public interface CommunityAndBuildGeomService {
      * @return
      */
     Result selectAuxiliaryLayer(String county, String city);
+
+    Result getCountyCenterPoint( String province,  String city);
 
 }

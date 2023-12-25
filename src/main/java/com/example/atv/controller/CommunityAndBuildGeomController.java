@@ -68,7 +68,7 @@ public class CommunityAndBuildGeomController {
      */
     @PostMapping("buildGeomInfo")
     public Result buildGeomInfo(@RequestBody JSONObject jsonObject) {
-        List<Map> buildSimpleInfo = jsonObject.getObject("buildSimpleInfo",List.class);
+        List<Map> buildSimpleInfo = jsonObject.getObject("buildSimpleInfo", List.class);
         String year = jsonObject.getString("year");
         Result result = communityAndBuildGeomService.buildGeomInfo(buildSimpleInfo, year);
         return result;
@@ -84,6 +84,19 @@ public class CommunityAndBuildGeomController {
     @PostMapping("getAuxiliaryLayer")
     public Result selectAuxiliaryLayer(@RequestParam String province, @RequestParam String city) {
         Result result = communityAndBuildGeomService.selectAuxiliaryLayer(province, city);
+        return result;
+    }
+
+    /**
+     * 获取各区县中心坐标
+     *
+     * @param province
+     * @param city
+     * @return
+     */
+    @PostMapping("getCountyCenterPoint")
+    public Result getCountyCenterPoint(@RequestParam String province, @RequestParam String city) {
+        Result result = communityAndBuildGeomService.getCountyCenterPoint(province, city);
         return result;
     }
 }
