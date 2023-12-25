@@ -102,6 +102,16 @@
         </if>
     </select>
 
+    <select id="getCountyCenterPoint" parameterType="string" resultType="net.sf.json.JSONObject">
+        select county,
+               ST_AsGeoJSON(st_centroid(county_geom)) as "centerPoint"
+        from county_geom
+        where city = #{city}
+          and province = #{province}
+          and county_geom notnull
+    </select>
+
+
     <select id="communityIndicator_311" resultType="map" parameterType="com.example.atv.generatetor.entity.SearchParams">
         select * from
             (select c.province,c.county ,c.community_name ,c.street,iv.community_id as communityId,

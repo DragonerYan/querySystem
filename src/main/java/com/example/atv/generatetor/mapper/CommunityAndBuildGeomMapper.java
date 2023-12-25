@@ -48,6 +48,9 @@ public interface CommunityAndBuildGeomMapper {
     List<Map<String, Object>> selectAuxiliaryLayer(@Param("province") String province,
                                                    @Param("city") String city);
 
+    List<JSONObject> getCountyCenterPoint(@Param("province") String province,
+                                                     @Param("city") String city);
+
     List<Map<String, Object>> communityIndicator_311(SearchParams searchParams);
     List<Map<String, Object>> communityIndicator_312(SearchParams searchParams);
     List<Map<String, Object>> communityIndicator_313(SearchParams searchParams);

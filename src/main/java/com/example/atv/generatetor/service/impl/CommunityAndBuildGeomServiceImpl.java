@@ -309,4 +309,11 @@ public class CommunityAndBuildGeomServiceImpl implements CommunityAndBuildGeomSe
         List<Map<String, Object>> maps = communityAndBuildGeomMapper.selectAuxiliaryLayer(province, city);
         return Result.success(maps);
     }
+
+    @Override
+    @DataSourceSet("slave")
+    public Result getCountyCenterPoint(String province, String city) {
+        List<JSONObject> countyCenterPoint = communityAndBuildGeomMapper.getCountyCenterPoint(province, city);
+        return Result.success(countyCenterPoint);
+    }
 }
