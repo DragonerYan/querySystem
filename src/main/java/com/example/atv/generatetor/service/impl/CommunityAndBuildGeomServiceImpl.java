@@ -68,6 +68,7 @@ public class CommunityAndBuildGeomServiceImpl implements CommunityAndBuildGeomSe
     }
 
     @Override
+    @DataSourceSet("master")
     public Result communityIndicatorDiagnosisGeom(SearchParams searchParams) {
         Result result = null;
         List<String> communityIndicatorIds = searchParams.getCommunityIndicatorIds();
@@ -212,10 +213,12 @@ public class CommunityAndBuildGeomServiceImpl implements CommunityAndBuildGeomSe
         table.add(max);
         resultMap.put("table", table);
         result = Result.success(resultMap);
+        DataSourceContextHolder.removeDataSource();
         return result;
     }
 
     @Override
+    @DataSourceSet("master")
     public Result buildIndicatorDiagnosis(SearchParams searchParams) {
         List<String> buildIndicatorIds = searchParams.getBuildIndicatorIds();
         Result result = null;
@@ -228,7 +231,6 @@ public class CommunityAndBuildGeomServiceImpl implements CommunityAndBuildGeomSe
             buildGeomInfoList.forEach(bg -> {
                 communityIds.add(bg.getString("community_id"));
             });
-            DataSourceContextHolder.setDataSource("slave");
             searchParams.setCommunitiesIds(communityIds);
             //通过问题楼栋所在的社区id获取社区信息
             result = dataFormatInfo_build(buildGeomInfoList, searchParams, result);
@@ -241,17 +243,20 @@ public class CommunityAndBuildGeomServiceImpl implements CommunityAndBuildGeomSe
         Result result = null;
         if (buildSimpleInfo == null || buildSimpleInfo.size() == 0)
             return Result.fail("查询楼栋为空，无数据");
+        DataSourceContextHolder.setDataSource("master");
         List<JSONObject> buildGeomInfoList = communityAndBuildGeomMapper.buildGeomInfo(buildSimpleInfo, year);
         List<String> communitIdList =
                 buildGeomInfoList.stream().map(build -> build.getString("community_id")).collect(Collectors.toList());
         SearchParams searchParams = new SearchParams();
         searchParams.setCommunitiesIds(communitIdList);
-        DataSourceContextHolder.setDataSource("slave");
+
         result = dataFormatInfo_build(buildGeomInfoList, searchParams, result);
+        DataSourceContextHolder.removeDataSource();
         return result;
     }
 
     private Result dataFormatInfo_build(List<JSONObject> buildGeomInfoList, SearchParams searchParams, Result result) {
+        DataSourceContextHolder.setDataSource("slave");
         if (buildGeomInfoList == null || buildGeomInfoList.size() == 0)
             return Result.success("数据为空", null);
         List<JSONObject> communityGeomList = communityAndBuildGeomMapper.selectAllCommunityGeom(searchParams);
@@ -294,6 +299,7 @@ public class CommunityAndBuildGeomServiceImpl implements CommunityAndBuildGeomSe
         table.add(Double.parseDouble(format.format(max * 0.8)));
         table.add(max);
         resultMap.put("table", table);
+        DataSourceContextHolder.removeDataSource();
         return result;
     }
 
