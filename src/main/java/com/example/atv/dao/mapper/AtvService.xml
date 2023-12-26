@@ -182,15 +182,20 @@
                max(bb.units_number) as unitsNumber,
                max(c.community_name) as communityName,max(c.street) as street,max(c.county) as county,
                c.community_id as communityId,indicator_value_build.court_name as courtName,
-        indicator_value_build.build_number as buildNumber,max(indicator_value_build.report_year) as reportYear,max(c.city) as city
-        ,max(bb.number_people) as numberPeople,max(bb.build_time) as buildTime,max(bb.number_over60_people) as numberOver60People
+        indicator_value_build.build_number as buildNumber,
+        max(indicator_value_build.report_year) as reportYear,max(c.city) as city
+        ,max(bb.number_people) as numberPeople,
+         max(bb.build_time) as buildTime,
+         max(bb.number_over60_people) as numberOver60People
         ,max(bb.number_department) as numberDepartment
+        ,GROUP_CONCAT(distinct indicator_value_build.indicator_id) as indicatorIdDetail,
+        GROUP_CONCAT(distinct indicator_value_build.description) as description
         from indicator_value_build
                  left join community c
                            on indicator_value_build.community_id = c.community_id
         left join build_basic bb
         on indicator_value_build.community_id=bb.community_id
-        where <if test="courtName!=null and courtName!=''">court_name=#{courtName} and</if>
+        where <if test="courtName!=null and courtName!=''">bb.court_name=#{courtName} and</if>
             <if test="communityId!=null and communityId!=''">c.community_id=#{communityId} and</if>
             indicator_id like '${indicator}%' and
             indicator_value>0

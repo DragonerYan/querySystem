@@ -9,6 +9,7 @@ import com.example.atv.generatetor.service.IQuestionRecordService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.poi.util.Internal;
 import org.apache.poi.util.StringUtil;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -17,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.concurrent.atomic.AtomicReference;
+import java.util.stream.Collectors;
 
 
 @Api("atv指标计算接口")
@@ -251,8 +252,9 @@ public class ZhibiaoController implements CommandLineRunner {
             String courtName_s= (String) ll.get("courtName");
             //进行图片数据查询
             List<Map<String,Object>> p_l=atvService.searchPhoto(courtName_s,indicatorId,communityId_s,buildNumber,reportYear);
-
-            ll.put("photoList",p_l);
+            //将上面图片中的图片连接拿出来
+            List<String> p_ll= p_l.stream().map(m->m.get("photo_path").toString()).collect(Collectors.toList());
+            ll.put("photoList",p_ll);
         });
 
         if(Objects.equals(indcatorId, "") || indcatorId==null)
@@ -326,6 +328,7 @@ public class ZhibiaoController implements CommandLineRunner {
             percent=Math.round(percent*100)*0.01;
             t.put("percent", String.format("%.2f", percent));
             t.put("percentString", m.get("num")+"/"+total);
+            t.put("num", String.valueOf(m.get("num")));
             s.add(t);
         });
         s.sort(Comparator.comparingDouble(a -> Double.parseDouble(a.get("percent"))));
@@ -353,6 +356,7 @@ public class ZhibiaoController implements CommandLineRunner {
             percent=Math.round(percent*100)*0.01;
             t.put("percent", String.format("%.2f", percent));
             t.put("percentString", m.get("num")+"/"+total);
+            t.put("num", String.valueOf(m.get("num")));
             s.add(t);
         });
         s.sort(Comparator.comparingDouble(a -> Double.parseDouble(a.get("percent"))));
@@ -466,6 +470,7 @@ public class ZhibiaoController implements CommandLineRunner {
                 t.put("countyName", (String) rr.get("county"));
                 t.put("percent",String.format("%.0f",num)+"/"+String.format("%.0f",totalNum));
                 t.put("percentNum",String.format("%.2f",Math.round(num /totalNum*100)*0.01));
+                t.put("num", String.valueOf(rr.get("num")));
                 res.add(t);
             });
             res.sort(Comparator.comparingDouble(a -> Double.parseDouble(a.get("percentNum"))));
@@ -538,6 +543,7 @@ public class ZhibiaoController implements CommandLineRunner {
                 t.put("countyName", (String) rr.get("street"));
                 t.put("percent",String.format("%.0f",num)+"/"+String.format("%.0f",totalNum));
                 t.put("percentNum",String.format("%.2f",Math.round(num /totalNum*100)*0.01));
+                t.put("num", String.valueOf(rr.get("num")));
                 res.add(t);
             });
             res.sort(Comparator.comparingDouble(a -> Double.parseDouble(a.get("percentNum"))));
@@ -563,6 +569,16 @@ public class ZhibiaoController implements CommandLineRunner {
             @RequestParam(required = false) String county,
             @RequestParam(required = false) String communityId
             ,@RequestBody(required = false) List<String> indicatorList,
+            @RequestParam(required = false,defaultValue = "")String b3_1_4,
+            @RequestParam(required = false,defaultValue = "")String e3_1_4,
+            @RequestParam(required = false,defaultValue = "")String b3_1_5,
+            @RequestParam(required = false,defaultValue = "")String e3_1_5,
+            @RequestParam(required = false,defaultValue = "")String b3_1_6,
+            @RequestParam(required = false,defaultValue = "")String e3_1_6,
+            @RequestParam(required = false,defaultValue = "")String b3_2_8,
+            @RequestParam(required = false,defaultValue = "")String e3_2_8,
+            @RequestParam(required = false,defaultValue = "")String b3_2_9,
+            @RequestParam(required = false,defaultValue = "")String e3_2_9,
             @RequestParam(name = "pageSize",required = false,defaultValue = "1000000") Long pageSize,
             @RequestParam(name = "offset",required = false,defaultValue = "1") Long offset){
         List<String> indicatorTotal= new ArrayList<>(Arrays.asList("3.1.1","3.1.2","3.1.3","3.1.4","3.1.5","3.1.6","3.2.7","3.2.8","3.2.9"));
@@ -582,6 +598,61 @@ public class ZhibiaoController implements CommandLineRunner {
                     if(rr.containsKey(indicator) && Double.parseDouble((String) rr.get(indicator))>0)flag++;
                 }
                 if(flag==indicatorList.size()){
+                    tList.add(rr);
+                }
+            });
+            list.clear();
+            list.addAll(tList);
+        }
+        //筛选3_1_4的问题，小学学位缺口数
+        if(b3_1_4!=null && !b3_1_4.equals("") && e3_1_4!=null && !e3_1_4.equals("")){
+            List<Map<String,Object>> tList=new ArrayList<>();
+            list.forEach(rr->{
+                if(rr.containsKey("3.1.4") && Double.parseDouble((String) rr.get("3.1.4"))>=Double.parseDouble(b3_1_4) && Double.parseDouble((String) rr.get("3.1.4"))<=Double.parseDouble(e3_1_4)){
+                    tList.add(rr);
+                }
+            });
+            list.clear();
+            list.addAll(tList);
+        }
+        //筛选3_1_5的问题，停车泊位缺口数
+        if(b3_1_5!=null && !b3_1_5.equals("") && e3_1_5!=null && !e3_1_5.equals("")){
+            List<Map<String,Object>> tList=new ArrayList<>();
+            list.forEach(rr->{
+                if(rr.containsKey("3.1.5") && Double.parseDouble((String) rr.get("3.1.5"))>=Double.parseDouble(b3_1_5) && Double.parseDouble((String) rr.get("3.1.5"))<=Double.parseDouble(e3_1_5)){
+                    tList.add(rr);
+                }
+            });
+            list.clear();
+            list.addAll(tList);
+        }
+        //筛选3_1_6的问题，新能源汽车充电桩缺口数
+        if(b3_1_6!=null && !b3_1_6.equals("") && e3_1_6!=null && !e3_1_6.equals("")){
+            List<Map<String,Object>> tList=new ArrayList<>();
+            list.forEach(rr->{
+                if(rr.containsKey("3.1.6") && Double.parseDouble((String) rr.get("3.1.6"))>=Double.parseDouble(b3_1_6) && Double.parseDouble((String) rr.get("3.1.6"))<=Double.parseDouble(e3_1_6)){
+                    tList.add(rr);
+                }
+            });
+            list.clear();
+            list.addAll(tList);
+        }
+        //筛选3_1_8的问题，停车泊位缺口数
+        if(b3_2_8!=null && !b3_2_8.equals("") && e3_2_8!=null && !e3_2_8.equals("")){
+            List<Map<String,Object>> tList=new ArrayList<>();
+            list.forEach(rr->{
+                if(rr.containsKey("3.2.8") && Double.parseDouble((String) rr.get("3.2.8"))>=Double.parseDouble(b3_2_8) && Double.parseDouble((String) rr.get("3.2.8"))<=Double.parseDouble(e3_2_8)){
+                    tList.add(rr);
+                }
+            });
+            list.clear();
+            list.addAll(tList);
+        }
+        //筛选3_1_9的问题，未实施生活垃圾分类
+        if(b3_2_9!=null && !b3_2_9.equals("") && e3_2_9!=null && !e3_2_9.equals("")){
+            List<Map<String,Object>> tList=new ArrayList<>();
+            list.forEach(rr->{
+                if(rr.containsKey("3.2.9") && Double.parseDouble((String) rr.get("3.2.9"))>=Double.parseDouble(b3_2_9) && Double.parseDouble((String) rr.get("3.2.9"))<=Double.parseDouble(e3_2_9)){
                     tList.add(rr);
                 }
             });
@@ -608,6 +679,7 @@ public class ZhibiaoController implements CommandLineRunner {
                                    @RequestParam(required = false,defaultValue = "")String county,
                                    @RequestParam(required = false,defaultValue = "")String street,
                                    @RequestParam(required = false,defaultValue = "")String communityId,
+                                   @RequestParam(required = false,defaultValue = "")String communityName,
                                    @RequestParam(required = false,defaultValue = "")String courtType,
                                    @RequestParam(required = false,defaultValue = "")String remodel,
                                    @RequestParam(required = false,defaultValue = "")String management,
@@ -619,7 +691,7 @@ public class ZhibiaoController implements CommandLineRunner {
                                    @RequestParam(required = false,defaultValue = "")String e60People,
                                    @RequestParam(name = "pageSize",required = false,defaultValue = "1000000") Long pageSize,
                                    @RequestParam(name = "offset",required = false,defaultValue = "1") Long offset){
-        List<Map<String,Object>> l=zhibiaoService.problemCourtReal(city,county,street,communityId,
+        List<Map<String,Object>> l=zhibiaoService.problemCourtReal(city,county,street,communityId,communityName,
                 courtType,remodel,management,
                 bTime,eTime,
                 bPeople,ePeople,
