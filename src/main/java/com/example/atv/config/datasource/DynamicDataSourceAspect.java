@@ -36,7 +36,6 @@ public class DynamicDataSourceAspect {
             return point.proceed();
         } finally {
             DataSourceContextHolder.removeDataSource();
-            DataSourceContextHolder.setDataSource("master");
         }
     }
 
