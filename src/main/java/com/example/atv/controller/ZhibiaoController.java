@@ -322,6 +322,7 @@ public class ZhibiaoController implements CommandLineRunner {
         List<Map<String,String>> s= new ArrayList<>();
         mapList.forEach(m->{
             Map<String,String> t =new HashMap<>();
+            t.put("communityId", (String) m.get("communityId"));
             t.put("city", (String) m.get("city"));
             t.put("county", (String) m.get("county"));
             double percent= Double.parseDouble(String.valueOf(m.get("num")))/total;
@@ -331,7 +332,7 @@ public class ZhibiaoController implements CommandLineRunner {
             t.put("num", String.valueOf(m.get("num")));
             s.add(t);
         });
-        s.sort(Comparator.comparingDouble(a -> Double.parseDouble(a.get("percent"))));
+        s.sort(Comparator.comparingDouble(a -> Double.parseDouble(a.get("communityId"))));
         return Result.success(s);
     }
 
@@ -349,6 +350,7 @@ public class ZhibiaoController implements CommandLineRunner {
         List<Map<String,String>> s= new ArrayList<>();
         mapList.forEach(m->{
             Map<String,String> t =new HashMap<>();
+            t.put("communityId", (String) m.get("communityId"));
             t.put("city", (String) m.get("city"));
             t.put("county", (String) m.get("county"));
             t.put("street", (String) m.get("street"));
@@ -359,7 +361,7 @@ public class ZhibiaoController implements CommandLineRunner {
             t.put("num", String.valueOf(m.get("num")));
             s.add(t);
         });
-        s.sort(Comparator.comparingDouble(a -> Double.parseDouble(a.get("percent"))));
+        s.sort(Comparator.comparingDouble(a -> Double.parseDouble(a.get("communityId"))));
         return Result.success(s);
     }
 
@@ -467,13 +469,14 @@ public class ZhibiaoController implements CommandLineRunner {
             r.forEach(rr->{
                 double num= Double.parseDouble(String.valueOf(rr.get("num")));
                 Map<String,String> t=new HashMap<>();
+                t.put("communityId", (String) rr.get("communityId"));
                 t.put("countyName", (String) rr.get("county"));
                 t.put("percent",String.format("%.0f",num)+"/"+String.format("%.0f",totalNum));
                 t.put("percentNum",String.format("%.2f",Math.round(num /totalNum*100)*0.01));
                 t.put("num", String.valueOf(rr.get("num")));
                 res.add(t);
             });
-            res.sort(Comparator.comparingDouble(a -> Double.parseDouble(a.get("percentNum"))));
+            res.sort(Comparator.comparingDouble(a -> Double.parseDouble(a.get("communityId"))));
         }catch (Exception e){
             log.debug(e.getMessage());
             e.printStackTrace();
@@ -540,13 +543,14 @@ public class ZhibiaoController implements CommandLineRunner {
                 String num_t= String.valueOf(rr.get("num"));
                 double num= Double.parseDouble(num_t) ;
                 Map<String,String> t=new HashMap<>();
+                t.put("communityId", (String) rr.get("communityId"));
                 t.put("countyName", (String) rr.get("street"));
                 t.put("percent",String.format("%.0f",num)+"/"+String.format("%.0f",totalNum));
                 t.put("percentNum",String.format("%.2f",Math.round(num /totalNum*100)*0.01));
                 t.put("num", String.valueOf(rr.get("num")));
                 res.add(t);
             });
-            res.sort(Comparator.comparingDouble(a -> Double.parseDouble(a.get("percentNum"))));
+            res.sort(Comparator.comparingDouble(a -> Double.parseDouble(a.get("communityId"))));
         }catch (Exception e){
             e.printStackTrace();
             log.debug(e.getMessage());
