@@ -178,27 +178,32 @@ public class CommunityAndBuildGeomServiceImpl implements CommunityAndBuildGeomSe
 
         double max = 0;
         for (JSONObject countyGeomInfo : countyGeomInfoList) {
-
             List temp = new ArrayList();
             for (JSONObject communityJson : communityList) {
                 if (countyGeomInfo.get("county").equals(communityJson.get("county"))) {
                     temp.add(communityJson);
                 }
             }
+            double tempNum = 0;
+            for (Map questionCommuntiy : questionCommuntiyList) {
+                if (countyGeomInfo.get("county").equals(questionCommuntiy.get("county"))) {
+                    tempNum++;
+                }
+            }
             countyGeomInfo.put("communityInfoList", temp);
             if (!StringUtils.isBlank(indicatorId) && indicatorId.equals("3.2.8")
 //                    || indicatorId.equals("3.2.7")
             ) {
-                if (countyGeomInfo.containsKey("indicator_value")){
+                if (countyGeomInfo.containsKey("indicator_value")) {
                     max = max >= Double.parseDouble(countyGeomInfo.getString("indicator_value").toString()) ? max :
                             Double.parseDouble(countyGeomInfo.getString("indicator_value").toString());
                     countyGeomInfo.put("countNum", countyGeomInfo.getDouble("indicator_value"));
-                }else {
-                    countyGeomInfo.put("countNum",0);
+                } else {
+                    countyGeomInfo.put("countNum", 0);
                 }
             } else {
-                max = max >= temp.size() ? max : temp.size();
-                countyGeomInfo.put("countNum", temp.size());
+                max = max >= tempNum ? max : tempNum;
+                countyGeomInfo.put("countNum", tempNum);
             }
         }
         Map<String, Object> resultMap = new HashMap<>();
