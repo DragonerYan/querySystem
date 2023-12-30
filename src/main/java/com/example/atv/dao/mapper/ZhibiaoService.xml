@@ -125,7 +125,7 @@
              from indicator_value iv
                       left join community c
                                 on iv.community_id = c.community_id
-             where c.city=#{city}
+             where LENGTH(c.community_id)=12 and c.city=#{city}
         <if test="county!=null and county!=''">
             and c.county=#{county}
                </if>
@@ -142,7 +142,7 @@
              from indicator_value iv
                       left join community c
                                 on iv.community_id = c.community_id
-             where c.city=#{city}
+             where LENGTH(c.community_id)=12 and c.city=#{city}
         <if test="county!=null and county!=''">
             and c.county=#{county}
         </if>
@@ -159,7 +159,7 @@
              from indicator_value iv
                       left join community c
                                 on iv.community_id = c.community_id
-             where c.city=#{city}
+             where LENGTH(c.community_id)=12 and c.city=#{city}
         <if test="county!=null and county!=''">
             and c.county=#{county}
         </if>
@@ -171,7 +171,7 @@
         select sum(indicator_value) as num ,c.county as county,max(c.community_id) as communityId
         from indicator_value iv
             left join community c on iv.community_id = c.community_id
-        where c.city=#{city}
+        where LENGTH(c.community_id)=12 and c.city=#{city}
         <if test="county!=null and county!=''">
             and c.county=#{county}
         </if>
@@ -181,7 +181,7 @@
         select sum(indicator_value) as num,c.county as county ,max(c.community_id) as communityId
         from indicator_value iv
         left join community c on iv.community_id = c.community_id
-        where c.city=#{city}
+        where LENGTH(c.community_id)=12 and c.city=#{city}
         <if test="county!=null and county!=''">
             and c.county=#{county}
         </if>
@@ -208,7 +208,7 @@
              from indicator_value iv
                       left join community c
                                 on iv.community_id = c.community_id
-             where c.city=#{city} and iv.report_year=#{reportYear}
+             where LENGTH(c.community_id)=12 and c.city=#{city} and iv.report_year=#{reportYear}
         <if test="county!=null and county!=''">
             and c.county=#{county}
         </if>
@@ -220,7 +220,7 @@
         select sum(indicator_value) as num ,c.county as county,max(c.community_id) as communityId
         from indicator_value iv
         left join community c on iv.community_id = c.community_id
-        where c.city=#{city}
+        where LENGTH(c.community_id)=12 and c.city=#{city}
         <if test="county!=null and county!=''">
             and c.county=#{county}
         </if>
@@ -231,7 +231,7 @@
         select sum(indicator_value) as num,c.county as county,max(c.community_id) as communityId
         from indicator_value iv
         left join community c on iv.community_id = c.community_id
-        where c.city=#{city}
+        where LENGTH(c.community_id)=12 and c.city=#{city}
         <if test="county!=null and county!=''">
             and c.county=#{county}
         </if>
@@ -250,7 +250,7 @@
              from indicator_value iv
                       left join community c
                                 on iv.community_id = c.community_id
-             where c.city=#{city}
+             where LENGTH(c.community_id)=12 and c.city=#{city}
               and c.county=#{county}
                    and iv.report_year=#{reportYear} and indicator_id like '3.1.1.%' group by iv.community_id) as t
         where t.3_1_1_1=0 or (t.3_1_1_1=1 and t.3_1_1_2=0) group by street
@@ -265,7 +265,7 @@
              from indicator_value iv
                       left join community c
                                 on iv.community_id = c.community_id
-             where c.city=#{city}
+             where LENGTH(c.community_id)=12 and c.city=#{city}
                 and c.county=#{county}
                 and iv.report_year=#{reportYear} and indicator_id like '3.1.2.%' group by iv.community_id) as t
         where t.3_1_2_1=0 or (t.3_1_2_1=1 and t.3_1_2_2=0) group by street
@@ -280,7 +280,7 @@
              from indicator_value iv
                       left join community c
                                 on iv.community_id = c.community_id
-             where c.city=#{city}
+             where LENGTH(c.community_id)=12 and c.city=#{city}
             and c.county=#{county}
             and iv.report_year=#{reportYear} and indicator_id like '3.1.3.%' group by iv.community_id) as t
         where t.3_1_3_1=0 or (t.3_1_3_1=1 and t.3_1_3_2=0) group by street
@@ -290,7 +290,7 @@
         select sum(indicator_value) as num ,c.street as street,max(c.community_id) as communityId
         from indicator_value iv
         left join community c on iv.community_id = c.community_id
-        where c.city=#{city}
+        where LENGTH(c.community_id)=12 and c.city=#{city}
         and c.county=#{county}
         and iv.report_year=#{reportYear} and indicator_id='3.1.4.1' group by c.street
     </select>
@@ -298,7 +298,7 @@
         select sum(indicator_value) as num,c.street as street,max(c.community_id) as communityId
         from indicator_value iv
         left join community c on iv.community_id = c.community_id
-        where c.city=#{city}
+        where LENGTH(c.community_id)=12 and c.city=#{city}
         and c.county=#{county}
         and iv.report_year=#{reportYear} and indicator_id='3.1.5.1' group by c.street
     </select>
@@ -306,7 +306,7 @@
         select sum(indicator_value) as num ,c.street as street,max(c.community_id) as communityId
         from indicator_value iv
         left join community c on iv.community_id = c.community_id
-        where c.city=#{city}
+        where LENGTH(c.community_id)=12 and c.city=#{city}
         and c.county=#{county}
           and iv.report_year=#{reportYear} and indicator_id='3.1.6.1' group by street
     </select>
@@ -321,7 +321,7 @@
              from indicator_value iv
                       left join community c
                                 on iv.community_id = c.community_id
-             where c.city=#{city} and iv.report_year=#{reportYear}
+             where LENGTH(c.community_id)=12 and c.city=#{city} and iv.report_year=#{reportYear}
             and c.county=#{county}
              group by communityId)
                 as t where t.3_2_7_1 != '1' or t.3_2_7_2 !='1' group by street
@@ -331,7 +331,7 @@
         select sum(indicator_value) as num ,c.street as street,max(c.community_id) as communityId
         from indicator_value iv
         left join community c on iv.community_id = c.community_id
-        where c.city=#{city}
+        where LENGTH(c.community_id)=12 and c.city=#{city}
         and c.county=#{county}
           and iv.report_year=#{reportYear}  and indicator_id='3.2.8.2' group by street
     </select>
@@ -340,7 +340,7 @@
         select sum(indicator_value) as num,c.street as street,max(c.community_id) as communityId
         from indicator_value iv
         left join community c on iv.community_id = c.community_id
-        where c.city=#{city}
+        where LENGTH(c.community_id)=12 and c.city=#{city}
         and c.county=#{county}
           and iv.report_year=#{reportYear} and indicator_id='3.2.9.2' group by street
     </select>
