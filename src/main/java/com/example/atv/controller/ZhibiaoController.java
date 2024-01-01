@@ -693,13 +693,14 @@ public class ZhibiaoController implements CommandLineRunner {
                                    @RequestParam(required = false,defaultValue = "")String ePeople,
                                    @RequestParam(required = false,defaultValue = "")String b60People,
                                    @RequestParam(required = false,defaultValue = "")String e60People,
+                                   @RequestParam(required = false,defaultValue = "")String reportYear,
                                    @RequestParam(name = "pageSize",required = false,defaultValue = "1000000") Long pageSize,
                                    @RequestParam(name = "offset",required = false,defaultValue = "1") Long offset){
         List<Map<String,Object>> l=zhibiaoService.problemCourtReal(city,county,street,communityId,communityName,
                 courtType,remodel,management,
                 bTime,eTime,
                 bPeople,ePeople,
-                b60People,e60People);
+                b60People,e60People,reportYear);
 
         //手动分页
         List<Map<String,Object>> res_page;

@@ -96,6 +96,6 @@ public interface ZhibiaoService {
                                                 String courtType,String remodel,String management,
                                               String bTime,String eTime,
                                               String bPeople,String ePeople,
-                                              String b60People,String e60People);
+                                              String b60People,String e60People,String reportYear);
 
 }

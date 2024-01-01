@@ -491,6 +491,9 @@
 
     <select id="problemCourtReal" resultType="map" parameterType="String">
         select * from  court_basic where city=#{city}
+        <if test="reportYear!=null and reportYear!=''">
+            and report_year=#{reportYear}
+        </if>
         <if test="county!=null and county!=''">
             and county=#{county}
         </if>
